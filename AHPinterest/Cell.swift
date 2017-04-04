@@ -48,16 +48,20 @@ extension Cell{
                 let bgView = UIView(frame: self.bounds)
                 bgView.layer.cornerRadius = 10
                 bgView.backgroundColor = UIColor.lightGray
+                bgView.alpha = 0.7
                 self.insertSubview(bgView, belowSubview: self.contentView)
+                self.contentView.layer.anchorPoint = .init(x: 0.5, y: 0.0)
                 UIView.animateKeyframes(withDuration: 0.65, delay: 0.0, options: UIViewKeyframeAnimationOptions.calculationModeCubic, animations: {
                     
                     UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.2, animations: {
                         self.contentView.transform = .init(scaleX: 0.98, y: 0.98)
                         bgView.transform = .init(scaleX: 1.02, y: 1.02)
+                        bgView.alpha = 0.4
                     })
                     UIView.addKeyframe(withRelativeStartTime: 0.4, relativeDuration: 0.15, animations: {
                         self.contentView.transform = .identity
                         bgView.transform = .identity
+                        bgView.alpha = 0.0
                     })
                     
                     }, completion: { (_) in
