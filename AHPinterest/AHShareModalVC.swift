@@ -12,15 +12,12 @@ class AHShareModalVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("viewDidLoad")
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("viewWillAppear")
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touchesEnded")
         dismiss(animated: true, completion: nil)
     }
 
@@ -33,7 +30,6 @@ extension AHShareModalVC {
     }
     
     func ended(point: CGPoint) {
-        print("ended point:\(point)")
         dismiss(animated: true, completion: nil)
     }
 }
