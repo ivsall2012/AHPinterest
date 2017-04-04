@@ -54,7 +54,7 @@ class AHLayout: UICollectionViewLayout {
             let cellW = columnWidth - 2 * cellPadding
             let photoHeight = delegate.collectionView(collectionView: collectionView!, heightForPhotoAt: indexPath, with: cellW)
             let annotationHeight = delegate.collectionView(collectionView: collectionView!, heightForAnnotationAt: indexPath, with: cellW)
-            let totalH = cellPadding + photoHeight + annotationHeight + cellPadding + 10
+            let totalH = cellPadding + photoHeight + annotationHeight + cellPadding
             
             
             let attr = AHLayoutAttributes(forCellWith: indexPath)

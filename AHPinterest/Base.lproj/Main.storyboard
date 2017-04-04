@@ -10,14 +10,14 @@
         <scene sceneID="enQ-85-2xx">
             <objects>
                 <collectionViewController id="XkY-Cr-uNs" customClass="ViewController" customModule="AHPinterest" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" prefetchingEnabled="NO" id="SKe-Ye-ww8">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" prefetchingEnabled="NO" id="SKe-Ye-ww8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewLayout key="collectionViewLayout" id="CHa-ZH-jP1" customClass="AHLayout" customModule="AHPinterest" customModuleProvider="target"/>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="Ra4-ZS-FeX" customClass="Cell" customModule="AHPinterest" customModuleProvider="target">
-                                <rect key="frame" x="5" y="0.0" width="366" height="311"/>
+                                <rect key="frame" x="4.5" y="0.0" width="366" height="311"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="366" height="311"/>
@@ -44,7 +44,6 @@
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="LFR-Ad-wvO" secondAttribute="bottom" id="0Pi-Iu-vhg"/>
                                     <constraint firstItem="mV9-F5-arN" firstAttribute="leading" secondItem="Ra4-ZS-FeX" secondAttribute="leading" id="7zP-IG-5md"/>
                                     <constraint firstItem="njM-ub-3T6" firstAttribute="top" secondItem="Ra4-ZS-FeX" secondAttribute="top" id="CvP-mu-LUB"/>
                                     <constraint firstItem="mV9-F5-arN" firstAttribute="top" secondItem="njM-ub-3T6" secondAttribute="bottom" constant="4" id="CxZ-Eq-z8e"/>

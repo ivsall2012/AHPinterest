@@ -72,6 +72,7 @@ class Cell: UICollectionViewCell {
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         if let attr = layoutAttributes as? AHLayoutAttributes{
+
             photoViewHeightConstraint.constant = attr.photoHeight
         }
         
