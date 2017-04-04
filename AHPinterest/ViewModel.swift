@@ -15,7 +15,7 @@ class ViewModel: NSObject {
     var layout: AHLayout?
     var photos: [Photo]
     var reusableCellID: String
-    
+    weak var mainVC: UIViewController?
     init(collectionView: UICollectionView, reusableCellID: String) {
         self.collectionView = collectionView
         self.reusableCellID = reusableCellID
@@ -65,7 +65,7 @@ extension ViewModel : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableCellID, for: indexPath) as! Cell
-        
+        cell.mainVC = mainVC
         cell.photo = photos[indexPath.item]
         return cell
     }

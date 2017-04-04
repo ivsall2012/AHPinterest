@@ -16,6 +16,7 @@ class ViewController: UICollectionViewController {
         collectionView?.backgroundColor = UIColor.clear
         collectionView?.contentInset = .init(top: 23, left: 5, bottom: 10, right: 5)
         viewModel = ViewModel(collectionView: collectionView!, reusableCellID: "cell")
+        viewModel?.mainVC = self
         viewModel?.setup()
     }
 

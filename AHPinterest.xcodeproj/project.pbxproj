@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A15C0B591E9369F600B35BE1 /* AHShareAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C0B581E9369F600B35BE1 /* AHShareAnimator.swift */; };
+		A15C0B5C1E9372B900B35BE1 /* AHShareModalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C0B5A1E9372B900B35BE1 /* AHShareModalVC.swift */; };
+		A15C0B5D1E9372B900B35BE1 /* AHShareModalVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C0B5B1E9372B900B35BE1 /* AHShareModalVC.xib */; };
 		A168BFDA1E888DDD00A87E03 /* AHPinterestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A168BFD91E888DDD00A87E03 /* AHPinterestTests.swift */; };
 		A168BFE21E8890E500A87E03 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A168BFE11E8890E500A87E03 /* Cell.swift */; };
 		A168BFE41E88930200A87E03 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A168BFE31E88930200A87E03 /* ViewModel.swift */; };
@@ -34,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A15C0B581E9369F600B35BE1 /* AHShareAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHShareAnimator.swift; sourceTree = "<group>"; };
+		A15C0B5A1E9372B900B35BE1 /* AHShareModalVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHShareModalVC.swift; sourceTree = "<group>"; };
+		A15C0B5B1E9372B900B35BE1 /* AHShareModalVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AHShareModalVC.xib; sourceTree = "<group>"; };
 		A168BFD71E888DDD00A87E03 /* AHPinterestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AHPinterestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A168BFD91E888DDD00A87E03 /* AHPinterestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AHPinterestTests.swift; sourceTree = "<group>"; };
 		A168BFDB1E888DDD00A87E03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -163,6 +169,8 @@
 			isa = PBXGroup;
 			children = (
 				A17377281E887F9600462EE1 /* AppDelegate.swift */,
+				A15C0B5A1E9372B900B35BE1 /* AHShareModalVC.swift */,
+				A15C0B5B1E9372B900B35BE1 /* AHShareModalVC.xib */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -188,6 +196,7 @@
 		A17377451E88822E00462EE1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A15C0B581E9369F600B35BE1 /* AHShareAnimator.swift */,
 				A168BFE11E8890E500A87E03 /* Cell.swift */,
 			);
 			name = Views;
@@ -289,6 +298,7 @@
 				A17377331E887F9600462EE1 /* LaunchScreen.storyboard in Resources */,
 				A17377301E887F9600462EE1 /* Assets.xcassets in Resources */,
 				A173772E1E887F9600462EE1 /* Main.storyboard in Resources */,
+				A15C0B5D1E9372B900B35BE1 /* AHShareModalVC.xib in Resources */,
 				A173774B1E8885EE00462EE1 /* Photos.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,8 +322,10 @@
 				A168BFEA1E88B89800A87E03 /* AHLayoutAttributes.swift in Sources */,
 				A17377471E88825100462EE1 /* Photo.swift in Sources */,
 				A168BFE21E8890E500A87E03 /* Cell.swift in Sources */,
+				A15C0B5C1E9372B900B35BE1 /* AHShareModalVC.swift in Sources */,
 				A168BFE81E889B6400A87E03 /* AHLayout.swift in Sources */,
 				A168BFE61E889ABB00A87E03 /* UIImage+Extension.swift in Sources */,
+				A15C0B591E9369F600B35BE1 /* AHShareAnimator.swift in Sources */,
 				A173772B1E887F9600462EE1 /* ViewController.swift in Sources */,
 				A17377291E887F9600462EE1 /* AppDelegate.swift in Sources */,
 			);
