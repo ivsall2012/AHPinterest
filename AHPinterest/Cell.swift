@@ -37,23 +37,22 @@ class Cell: UICollectionViewCell {
         bgView.alpha = 0.7
         self.insertSubview(bgView, belowSubview: contentView)
         self.contentView.layer.anchorPoint = .init(x: 0.5, y: 0.0)
-        UIView.animateKeyframes(withDuration: 0.5, delay: 0.0, options: UIViewKeyframeAnimationOptions.calculationModeCubic, animations: {
-            
-            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.2, animations: {
-                self.contentView.transform = .init(scaleX: 0.98, y: 0.98)
-                bgView.transform = .init(scaleX: 1.02, y: 1.02)
-                bgView.alpha = 0.4
-            })
-            UIView.addKeyframe(withRelativeStartTime: 0.35, relativeDuration: 0.5, animations: {
-                self.contentView.transform = .identity
-                bgView.transform = .identity
-                bgView.alpha = 0.0
-            })
-            
+        
+        UIView.animate(withDuration: 0.35, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, options: [], animations: { 
+            self.contentView.transform = .init(scaleX: 0.98, y: 0.98)
+            bgView.transform = .init(scaleX: 1.02, y: 1.02)
+            bgView.alpha = 0.4
+            }) { (_) in
+                
+            }
+        
+        UIView.animate(withDuration: 0.2, delay: 0.35, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.0, options: [], animations: {
+            self.contentView.transform = .identity
+            bgView.transform = .identity
+            bgView.alpha = 0.0
             }, completion: { (_) in
                 self.clipsToBounds = true
                 bgView.removeFromSuperview()
-                
         })
     }
     

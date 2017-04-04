@@ -9,16 +9,13 @@
 import UIKit
 
 class AHShareModalVC: UIViewController {
-    
+    var startingPoint: CGPoint?
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    }
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        dismiss(animated: true, completion: nil)
     }
 
 }
