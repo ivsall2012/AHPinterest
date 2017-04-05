@@ -72,7 +72,7 @@ extension AHShareAnimator : UIViewControllerAnimatedTransitioning {
         
         let fromViewSnapshot = fromView.snapshotView(afterScreenUpdates: true)
         fromViewSnapshot?.frame = fromView.convert(fromViewSnapshot!.frame, to: toView)
-        fromViewSnapshot?.alpha = 0.8
+        fromViewSnapshot?.alpha = 0.4
         context.containerView.addSubview(toView)
         context.containerView.addSubview(fromViewSnapshot!)
         toView.backgroundColor = UIColor.white.withAlphaComponent(0.0)

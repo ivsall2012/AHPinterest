@@ -40,7 +40,7 @@ class ViewModel: NSObject {
                 guard let item = collectionView.cellForItem(at: indexPath) else{
                     return
                 }
-                longPressAnimation(item: item as! Cell)
+                longPressAnimation(item: item as! Cell, startingPoint: pt)
                 
             }
         case .changed:
@@ -51,11 +51,12 @@ class ViewModel: NSObject {
             modalVC.ended(point: point)
         }
     }
-    func longPressAnimation(item: Cell) {
+    func longPressAnimation(item: Cell,startingPoint: CGPoint) {
         // either self.layer.masksToBounds = false or self.clipsToBounds = false will allow bgView goes out of bounds
         if !item.isSelected {
             self.modalVC.transitioningDelegate = self.animator
             self.animator.fromView = item
+            self.modalVC.startingPoint = collectionView.convert(startingPoint, to: self.modalVC.view)
             self.modalVC.modalPresentationStyle = .custom
             self.mainVC?.present(self.modalVC, animated: true, completion: nil)
         }
