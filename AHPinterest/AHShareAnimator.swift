@@ -63,31 +63,30 @@ extension AHShareAnimator : UIViewControllerAnimatedTransitioning {
     func animationTransitionForPresenting(using context: UIViewControllerContextTransitioning){
         let fromViewByKey = context.view(forKey: UITransitionContextViewKey.from)
         
-        guard let fromView = fromViewByKey == nil ? self.fromView: fromViewByKey else {
-            return
-        }
-        guard let toView = context.view(forKey: UITransitionContextViewKey.to) else {
-            return
-        }
+        guard let fromView = fromViewByKey == nil ? self.fromView: fromViewByKey else { return }
+        guard let toView = context.view(forKey: UITransitionContextViewKey.to) else { return}
+        
+        guard let toVC = context.viewController(forKey: UITransitionContextViewControllerKey.to) as? AHShareModalVC else { return }
         
         let fromViewSnapshot = fromView.snapshotView(afterScreenUpdates: true)
         fromViewSnapshot?.frame = fromView.convert(fromViewSnapshot!.frame, to: toView)
-        fromViewSnapshot?.alpha = 0.4
-        context.containerView.addSubview(toView)
+        fromViewSnapshot?.alpha = 1.0
         context.containerView.addSubview(fromViewSnapshot!)
+        context.containerView.addSubview(toView)
         toView.backgroundColor = UIColor.white.withAlphaComponent(0.0)
         UIView.animate(withDuration: 0.2, animations: {
             toView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
             }, completion: { (_) in
                 context.completeTransition(true)
+                toVC.buttonAnimation()
         })
 
     }
         
-        
-        
-    }
-    /// For dismissing animation
+}
+
+
+/// For dismissing animation
     func animationTransitionForDismissing(using context: UIViewControllerContextTransitioning){
         
         // get presentedView by UITransitionContextViewKey.from
