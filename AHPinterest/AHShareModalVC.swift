@@ -12,7 +12,8 @@ fileprivate let minimumRingFollowDistance: CGFloat = 100.0
 fileprivate let radius: CGFloat = 80.0
 fileprivate let btnSize: CGSize = CGSize(width: 55, height: 55)
 fileprivate let fingerRingSize:CGSize = CGSize(width: 60, height: 60)
-
+// triggerDistance will be used agaist the distance between the touch point to btn.center in buttonSelectionAnimation and maybe buttonPushAnimation
+fileprivate let triggerDistance = radius * 0.7
 
 class AHShareModalVC: UIViewController {
     let btnLeft = UIButton(type: .custom)
@@ -109,14 +110,14 @@ extension AHShareModalVC {
 
 }
 
-///MARK:- Hooks for longPress
+///MARK:- Hooks called by VC's longPress gesture
 extension AHShareModalVC {
     func changed(point: CGPoint){
         guard let startingPoint = startingPoint else {
             return
         }
         fingerRingAnimation(point, startingPoint)
-        buttonsAnimation(point, startingPoint)
+        buttonsAnimation(point)
         
     }
     
@@ -143,33 +144,72 @@ extension AHShareModalVC {
 }
 
 
-///MARK:- Helper Functions
+///MARK:- Animations
 extension AHShareModalVC {
-    func buttonsAnimation(_ point: CGPoint, _ startingPoint: CGPoint) {
+    func buttonsAnimation(_ point: CGPoint) {
         guard let allButtons = allButtons else {
             return
         }
         
-        let trigerDistance = radius * 0.7
+        if let targetBtn = buttonSelectionAnimations(point, allButtons) {
+            buttonPushAnimation(point, targetBtn)
+        }
+        
+        
+        
+        
+    }
+    /// return if there's a(only) btn selected
+    func buttonSelectionAnimations(_ point: CGPoint,_ allButtons: [UIButton]) -> UIButton? {
         var min: CGFloat = CGFloat(FLT_MAX)
         var targetBtn: UIButton? = nil
         for btn in allButtons {
+            // from touch point to btn, find min(closest one)
             let delta = calculateDistance(pointA: point, PointB: btn.center)
-            if delta < min && delta <= trigerDistance {
+            if delta < min && delta <= triggerDistance {
                 min = delta
                 targetBtn = btn
             }
-            btn.isSelected = false
+            UIView.animate(withDuration: 0.2, animations: { 
+                btn.isSelected = false
+                btn.transform = .identity
+            })
+            
         }
         
         if targetBtn != nil {
             targetBtn!.isSelected = true
         }
-        
-        
-        
+        return targetBtn
     }
+    
+    func buttonPushAnimation(_ point: CGPoint, _ targetBtn: UIButton) {
+        guard let startingPoint = startingPoint else {
+            return
+        }
+        // this distance will be not be greater than trigerDistance since selectionAnimation already filtered out touch points based on triggerDistance which is also the touch point to btn.center, like below.
+        let distance = calculateDistance(pointA: point, PointB: targetBtn.center)
+        let ratio = distance / triggerDistance
+        
+        
+        let enlargeScale = ratio * 0.2
+        // enlargeScale will be [1.0, 1.2]
+        let scaleTransform = CGAffineTransform(scaleX: 1 + enlargeScale, y: 1 + enlargeScale)
 
+        
+        // movement will be [1, 1.2] * radius, from starting point
+        let maxMovement = radius * 0.1
+        let movement = ratio * maxMovement
+        // btn alway moves along from: startingPoint, to: point
+        let unitVector = findUnitVector(from: startingPoint, to: point)
+        let newPoint = newPosition(forMovement: movement, withUnitVector: unitVector)
+        let movementTransform = CGAffineTransform(translationX: newPoint.x, y: newPoint.y)
+        let newTransform: CGAffineTransform = movementTransform.concatenating(scaleTransform)
+        UIView.animate(withDuration: 0.2, animations: {
+            targetBtn.transform = newTransform
+            }, completion: nil)
+    }
+    
     func fingerRingAnimation(_ point: CGPoint, _ startingPoint: CGPoint) {
         let distanceToStarting = calculateDistance(pointA: point, PointB: startingPoint)
         if distanceToStarting > minimumRingFollowDistance {
@@ -198,6 +238,25 @@ extension AHShareModalVC {
         let xDist = pointA.x - PointB.x
         let yDist = pointA.y - PointB.y
         return CGFloat(sqrt((xDist * xDist) + (yDist * yDist)))
+    }
+    
+    func findUnitVector(from pointA: CGPoint, to pointB: CGPoint) -> CGPoint{
+        // 1. construct vector AB
+        let vector = CGPoint(x: pointB.x - pointA.x, y: pointB.y - pointA.y)
+        
+        // 2. find magnitude of AB
+        let magnitude = CGFloat(sqrt((vector.x * vector.x) + (vector.y * vector.y)))
+        
+        // 3. calculate unit vector for AB
+        let unitVectorX = vector.x / magnitude
+        let unitVectorY = vector.y / magnitude
+        
+        return CGPoint(x: unitVectorX, y: unitVectorY)
+        
+    }
+    
+    func newPosition(forMovement distance: CGFloat, withUnitVector point: CGPoint) -> CGPoint {
+        return CGPoint(x: distance * point.x, y: distance * point.y)
     }
 }
 
