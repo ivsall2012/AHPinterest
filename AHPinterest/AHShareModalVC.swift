@@ -47,6 +47,7 @@ class AHShareModalVC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        // transition animator will handler removing all subviews when dismissing
         setupButtons()
     }
     func setupButtons() {
@@ -134,12 +135,10 @@ extension AHShareModalVC {
             }
         }
         if targetBtn == nil {
-            btnLeft.removeFromSuperview()
-            btnMiddle.removeFromSuperview()
-            btnRight.removeFromSuperview()
             dismiss(animated: true, completion: nil)
         }
     }
+    
     
 }
 

@@ -59,7 +59,7 @@ extension AHShareAnimator : UIViewControllerAnimatedTransitioning {
             break
         }
     }
-    // for presenting aniamtion
+    // for presenting aniamtion, will be called just before viewWillAppear:
     func animationTransitionForPresenting(using context: UIViewControllerContextTransitioning){
         let fromViewByKey = context.view(forKey: UITransitionContextViewKey.from)
         
@@ -70,14 +70,18 @@ extension AHShareAnimator : UIViewControllerAnimatedTransitioning {
         
         let fromViewSnapshot = fromView.snapshotView(afterScreenUpdates: true)
         fromViewSnapshot?.frame = fromView.convert(fromViewSnapshot!.frame, to: toView)
-        fromViewSnapshot?.alpha = 1.0
-        context.containerView.addSubview(fromViewSnapshot!)
+        fromViewSnapshot?.alpha = 0.6
         context.containerView.addSubview(toView)
+        toView.insertSubview(fromViewSnapshot!, at: 0)
+        
         toView.backgroundColor = UIColor.white.withAlphaComponent(0.0)
         UIView.animate(withDuration: 0.2, animations: {
             toView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
             }, completion: { (_) in
+                // the following will tell the VC to display views and call viewDidAppear:
                 context.completeTransition(true)
+                
+                // this button animation has to be called after VC's viewDidAppear:
                 toVC.buttonAnimation()
         })
 
@@ -92,6 +96,7 @@ extension AHShareAnimator : UIViewControllerAnimatedTransitioning {
         // get presentedView by UITransitionContextViewKey.from
         if let fromView = context.view(forKey: UITransitionContextViewKey.from) {
             fromView.removeFromSuperview()
+            fromView.subviews.map({$0.removeFromSuperview()})
             context.completeTransition(true)
         }
         
