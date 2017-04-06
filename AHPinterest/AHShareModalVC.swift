@@ -9,11 +9,16 @@
 import UIKit
 
 fileprivate let minimumRingFollowDistance: CGFloat = 100.0
+
 fileprivate let radius: CGFloat = 80.0
+
 fileprivate let btnSize: CGSize = CGSize(width: 55, height: 55)
+
 fileprivate let fingerRingSize:CGSize = CGSize(width: 60, height: 60)
-// triggerDistance will be used agaist the distance between the touch point to btn.center in buttonSelectionAnimation and maybe buttonPushAnimation
+
+/// triggerDistance will be used agaist the distance between the touch point to btn.center used in buttonSelectionAnimation and maybe buttonPushAnimation
 fileprivate let triggerDistance = radius * 0.7
+
 
 class AHShareModalVC: UIViewController {
     let btnLeft = UIButton(type: .custom)
@@ -50,6 +55,22 @@ class AHShareModalVC: UIViewController {
         // transition animator will handler removing all subviews when dismissing
         setupButtons()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        btnLeft.alpha = 0.0
+        btnMiddle.alpha = 0.0
+        btnRight.alpha = 0.0
+        self.view.addSubview(btnLeft)
+        self.view.addSubview(btnMiddle)
+        self.view.addSubview(btnRight)
+    }
+    
+    
+}
+
+// MARK: Setup Functions
+extension AHShareModalVC {
     func setupButtons() {
         btnLeft.setImage(#imageLiteral(resourceName: "pin-btn-normal"), for: .normal)
         btnLeft.setImage(#imageLiteral(resourceName: "pin-btn-selected"), for: .selected)
@@ -66,35 +87,10 @@ class AHShareModalVC: UIViewController {
         
         allButtons = [btnLeft,btnMiddle,btnRight]
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        btnLeft.alpha = 0.0
-        btnMiddle.alpha = 0.0
-        btnRight.alpha = 0.0
-        self.view.addSubview(btnLeft)
-        self.view.addSubview(btnMiddle)
-        self.view.addSubview(btnRight)
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
-    /// This function is called only by the transition animator
-    func buttonAnimation() {
-        if let buttonsPositions = buttonsPositions {
-            UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, options: [], animations: {
-                self.btnLeft.center = buttonsPositions.left
-                self.btnMiddle.center = buttonsPositions.middle
-                self.btnRight.center = buttonsPositions.right
-                self.btnLeft.alpha = 1.0
-                self.btnMiddle.alpha = 1.0
-                self.btnRight.alpha = 1.0
-                }, completion: nil)
-        }
-    }
 }
 
-///MARK:- Handler Events
+
+// MARK: Handler Events
 extension AHShareModalVC {
     func pinBtnTapped(_ sender: UIButton){
         print("pinBtnTapped")
@@ -111,7 +107,7 @@ extension AHShareModalVC {
 
 }
 
-///MARK:- Hooks called by VC's longPress gesture
+// MARK: Hooks Called by Outside Object
 extension AHShareModalVC {
     func changed(point: CGPoint){
         guard let startingPoint = startingPoint else {
@@ -139,11 +135,24 @@ extension AHShareModalVC {
         }
     }
     
+    /// This function is called only by the transition animator
+    func buttonAnimation() {
+        if let buttonsPositions = buttonsPositions {
+            UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, options: [], animations: {
+                self.btnLeft.center = buttonsPositions.left
+                self.btnMiddle.center = buttonsPositions.middle
+                self.btnRight.center = buttonsPositions.right
+                self.btnLeft.alpha = 1.0
+                self.btnMiddle.alpha = 1.0
+                self.btnRight.alpha = 1.0
+                }, completion: nil)
+        }
+    }
     
 }
 
 
-///MARK:- Animations
+// MARK:- Animations
 extension AHShareModalVC {
     func buttonsAnimation(_ point: CGPoint) {
         guard let allButtons = allButtons else {
@@ -153,8 +162,6 @@ extension AHShareModalVC {
         if let targetBtn = buttonSelectionAnimations(point, allButtons) {
             buttonPushAnimation(point, targetBtn)
         }
-        
-        
         
         
     }
@@ -261,7 +268,7 @@ extension AHShareModalVC {
 
 
 
-
+// MARK:- Convenient Struct
 struct ButtonsPositions {
     var left:CGPoint = .zero
     var middle:CGPoint = .zero
@@ -334,7 +341,7 @@ struct ButtonsPositions {
     
 }
 
-///MARK:- Helper functions for positioning the coordinates of the buttons
+// MARK:  Calculations For Buttons
 extension ButtonsPositions {
     /// middle btn pointing zero(0) radian relative to anchor.y, o is button, 0 is anchor
     //    o
