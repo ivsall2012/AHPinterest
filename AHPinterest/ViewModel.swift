@@ -52,10 +52,10 @@ extension ViewModel {
         case .began:
             let pt = sender.location(in: collectionView)
             if let indexPath = collectionView.indexPathForItem(at: pt){
-                guard let item = collectionView.cellForItem(at: indexPath) else{
+                guard let cell = collectionView.cellForItem(at: indexPath) else{
                     return
                 }
-                longPressAnimation(item: item as! PinCell, startingPoint: pt)
+                longPressAnimation(cell: cell as! PinCell, startingPoint: pt)
                 
             }
         case .changed:
@@ -66,17 +66,19 @@ extension ViewModel {
             modalVC.ended(point: point)
         }
     }
-    func longPressAnimation(item: PinCell,startingPoint: CGPoint) {
+    func longPressAnimation(cell: PinCell,startingPoint: CGPoint) {
         // either self.layer.masksToBounds = false or self.clipsToBounds = false will allow bgView goes out of bounds
-        if !item.isSelected {
+        if !cell.isSelected {
             self.modalVC.transitioningDelegate = self.animator
-            self.animator.fromView = item
+            self.animator.delegate = self.modalVC
+            self.animator.preparePresenting(fromView: cell)
             self.modalVC.startingPoint = collectionView.convert(startingPoint, to: self.modalVC.view)
             self.modalVC.modalPresentationStyle = .custom
             self.mainVC?.present(self.modalVC, animated: true, completion: nil)
         }
     }
 }
+
 
 
 extension ViewModel: UICollectionViewDelegateFlowLayout {

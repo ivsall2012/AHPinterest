@@ -41,6 +41,7 @@ class AHLayout: UICollectionViewLayout {
     
     
     override func prepare() {
+        super.prepare()
         guard cache.isEmpty else {
             return
         }
@@ -106,8 +107,7 @@ class AHLayout: UICollectionViewLayout {
         }
         return arr
         
-    }
-//    
+    }   
 //    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
 //        let attr = super.layoutAttributesForItem(at: indexPath) as! AHLayoutAttributes
 //        if cache.contains(attr) {

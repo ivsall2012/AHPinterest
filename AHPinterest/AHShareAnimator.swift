@@ -8,37 +8,37 @@
 
 import UIKit
 
-enum AHShareAnimatorState {
+fileprivate enum AHShareAnimatorState {
     case none
     case presenting
     case dismissing
 }
 
 protocol AHAnimatorDelegate: NSObjectProtocol {
-    
+    // The presented VC should comfirm to this function. You should do the VC related animation here, such as the share buttons popping out after finishing transition.
+    func AHAnimatorDidFinishPresentingTransition()
 }
 
 class AHShareAnimator: NSObject {
     weak var delegate: AHAnimatorDelegate?
     weak var fromView: UIView?
-    var state: AHShareAnimatorState = .none
+    fileprivate var state: AHShareAnimatorState = .none
+    fileprivate weak var fromViewSnapshot: UIView?
+
+    // You should pass the long pressed cell into this function
+    func preparePresenting(fromView: UIView) {
+        self.fromView = fromView
+    }
 }
 
 
 extension AHShareAnimator : UIViewControllerTransitioningDelegate{
-//    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-//        
-//        let presentationVC =  AHPresentationVC(presentedViewController: presented, presenting: presenting)
-//        presentationVC.presentedViewFrame = presentedViewFrame
-//        return presentationVC
-//    }
-    
-    // wil animate
+    // callecd when presenting
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         state = .presenting
         return self
     }
-    // did animate
+    // called when dismissing
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         state = .dismissing
         return self
@@ -61,14 +61,19 @@ extension AHShareAnimator : UIViewControllerAnimatedTransitioning {
     }
     // for presenting aniamtion, will be called just before viewWillAppear:
     func animationTransitionForPresenting(using context: UIViewControllerContextTransitioning){
-        let fromViewByKey = context.view(forKey: UITransitionContextViewKey.from)
         
-        guard let fromView = fromViewByKey == nil ? self.fromView: fromViewByKey else { return }
-        guard let toView = context.view(forKey: UITransitionContextViewKey.to) else { return}
+        // Can't not obtain the cell view here!!!
+//        let fromViewByKey = context.view(forKey: UITransitionContextViewKey.from)
+
         
-        guard let toVC = context.viewController(forKey: UITransitionContextViewControllerKey.to) as? AHShareModalVC else { return }
+        guard
+            let toView = context.view(forKey: UITransitionContextViewKey.to),
+            let fromView = fromView
+        else { return}
+
         
-        let fromViewSnapshot = fromView.snapshotView(afterScreenUpdates: true)
+        // setup the snapshot and put it on the bottom of the toView
+        fromViewSnapshot = fromView.snapshotView(afterScreenUpdates: true)
         fromViewSnapshot?.frame = fromView.convert(fromViewSnapshot!.frame, to: toView)
         fromViewSnapshot?.alpha = 0.6
         context.containerView.addSubview(toView)
@@ -81,66 +86,27 @@ extension AHShareAnimator : UIViewControllerAnimatedTransitioning {
                 // the following will tell the VC to display views and call viewDidAppear:
                 context.completeTransition(true)
                 
-                // this button animation has to be called after VC's viewDidAppear:
-                toVC.buttonAnimation()
+                // this animation has to be called after VC's viewDidAppear: in order to do VC related animation
+                self.delegate?.AHAnimatorDidFinishPresentingTransition()
         })
 
     }
-        
-}
-
-
-/// For dismissing animation
+    
+    /// For dismissing animation
     func animationTransitionForDismissing(using context: UIViewControllerContextTransitioning){
         
         // get presentedView by UITransitionContextViewKey.from
         if let fromView = context.view(forKey: UITransitionContextViewKey.from) {
             fromView.removeFromSuperview()
-            fromView.subviews.forEach({$0.removeFromSuperview()})
+            fromViewSnapshot?.removeFromSuperview()
             context.completeTransition(true)
         }
         
         
     }
-
-
-
-
-
-
-class AHPresentationVC: UIPresentationController {
-    fileprivate lazy var maskView = UIView()
-    var presentedViewFrame = CGRect.zero
-    override func containerViewWillLayoutSubviews() {
-        super.containerViewDidLayoutSubviews()
-        // adjust presentedView position
-        presentedView?.frame = presentedViewFrame
         
-        // setup mask
-//        setupBackgroundMask()
-    }
 }
 
-
-// MARK:- setup UI
-//extension AHPresentationVC {
-//    fileprivate func setupBackgroundMask() {
-//        containerView?.insertSubview(maskView, at: 0)
-//        
-//        maskView.frame = (containerView?.bounds)!
-//        maskView.backgroundColor = UIColor.clear
-//        maskView.backgroundColor = UIColor(white: 0.8, alpha: 0.2)
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(maskTapped(_:)))
-//        maskView.addGestureRecognizer(tapGesture)
-//    }
-//}
-//
-//// MARK:- Events
-//extension AHPresentationVC {
-//    @objc fileprivate func maskTapped(_ sender: UIGestureRecognizer){
-//        presentedViewController.dismiss(animated: true, completion: nil)
-//    }
-//}
 
 
 

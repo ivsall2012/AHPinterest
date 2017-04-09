@@ -135,7 +135,7 @@ extension AHShareModalVC {
         }
     }
     
-    /// This function is called only by the transition animator
+    
     func buttonAnimation() {
         if let buttonsPositions = buttonsPositions {
             UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, options: [], animations: {
@@ -153,7 +153,11 @@ extension AHShareModalVC {
 
 
 // MARK:- Animations
-extension AHShareModalVC {
+extension AHShareModalVC: AHAnimatorDelegate {
+    func AHAnimatorDidFinishPresentingTransition() {
+        buttonAnimation()
+    }
+    
     func buttonsAnimation(_ point: CGPoint) {
         guard let allButtons = allButtons else {
             return
@@ -189,6 +193,7 @@ extension AHShareModalVC {
         return targetBtn
     }
     
+    /// Animate when touch approaches the button
     func buttonPushAnimation(_ point: CGPoint, _ targetBtn: UIButton) {
         guard let startingPoint = startingPoint else {
             return
@@ -216,6 +221,7 @@ extension AHShareModalVC {
             }, completion: nil)
     }
     
+    /// Animate when the touch approach to the press ring
     func fingerRingAnimation(_ point: CGPoint, _ startingPoint: CGPoint) {
         let distanceToStarting = calculateDistance(pointA: point, PointB: startingPoint)
         if distanceToStarting > minimumRingFollowDistance {
