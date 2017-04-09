@@ -12,12 +12,20 @@ class ViewController: UICollectionViewController {
     var viewModel: ViewModel?
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "Pattern"))
-        collectionView?.backgroundColor = UIColor.clear
         collectionView?.contentInset = .init(top: 23, left: 5, bottom: 10, right: 5)
-        viewModel = ViewModel(collectionView: collectionView!, reusableCellID: "cell")
+        viewModel = ViewModel(collectionView: collectionView!, reusablePinCellID: "PinCell")
         viewModel?.mainVC = self
-        viewModel?.setup()
+        viewModel?.loadNewData(completion: { (success) in
+            if success {
+                // dismiss refresh control
+            }else{
+                // do something about it and dismiss refresh control too
+            }
+        })
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        collectionView?.reloadData()
     }
 
 }

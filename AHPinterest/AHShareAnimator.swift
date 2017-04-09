@@ -96,7 +96,7 @@ extension AHShareAnimator : UIViewControllerAnimatedTransitioning {
         // get presentedView by UITransitionContextViewKey.from
         if let fromView = context.view(forKey: UITransitionContextViewKey.from) {
             fromView.removeFromSuperview()
-            fromView.subviews.map({$0.removeFromSuperview()})
+            fromView.subviews.forEach({$0.removeFromSuperview()})
             context.completeTransition(true)
         }
         

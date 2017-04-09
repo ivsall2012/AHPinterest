@@ -9,16 +9,18 @@
 import UIKit
 
 class AHLayoutAttributes: UICollectionViewLayoutAttributes {
-    var photoHeight: CGFloat = 0.0
+    var imageHeight: CGFloat = 0.0
+    var noteHeight: CGFloat = 0.0
+    
     override func copy(with zone: NSZone? = nil) -> Any {
         let copy = super.copy(with: zone) as! AHLayoutAttributes
-        copy.photoHeight = self.photoHeight
+        copy.imageHeight = self.imageHeight
         return copy
     }
     
     override func isEqual(_ object: Any?) -> Bool {
         if let otherObj = object as? AHLayoutAttributes{
-            if otherObj.photoHeight == photoHeight {
+            if otherObj.imageHeight == self.imageHeight && otherObj.noteHeight == self.noteHeight{
                 return super.isEqual(otherObj)
             }
         }else{

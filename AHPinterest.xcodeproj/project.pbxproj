@@ -10,7 +10,7 @@
 		A15C0B591E9369F600B35BE1 /* AHShareAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C0B581E9369F600B35BE1 /* AHShareAnimator.swift */; };
 		A15C0B5C1E9372B900B35BE1 /* AHShareModalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C0B5A1E9372B900B35BE1 /* AHShareModalVC.swift */; };
 		A168BFDA1E888DDD00A87E03 /* AHPinterestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A168BFD91E888DDD00A87E03 /* AHPinterestTests.swift */; };
-		A168BFE21E8890E500A87E03 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A168BFE11E8890E500A87E03 /* Cell.swift */; };
+		A168BFE21E8890E500A87E03 /* PinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A168BFE11E8890E500A87E03 /* PinCell.swift */; };
 		A168BFE41E88930200A87E03 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A168BFE31E88930200A87E03 /* ViewModel.swift */; };
 		A168BFE61E889ABB00A87E03 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A168BFE51E889ABB00A87E03 /* UIImage+Extension.swift */; };
 		A168BFE81E889B6400A87E03 /* AHLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A168BFE71E889B6400A87E03 /* AHLayout.swift */; };
@@ -21,8 +21,12 @@
 		A17377301E887F9600462EE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A173772F1E887F9600462EE1 /* Assets.xcassets */; };
 		A17377331E887F9600462EE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A17377311E887F9600462EE1 /* LaunchScreen.storyboard */; };
 		A173773B1E8881A200462EE1 /* Photo.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A173773A1E8881A200462EE1 /* Photo.xcassets */; };
-		A17377471E88825100462EE1 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17377461E88825100462EE1 /* Photo.swift */; };
-		A173774B1E8885EE00462EE1 /* Photos.plist in Resources */ = {isa = PBXBuildFile; fileRef = A173774A1E8885EE00462EE1 /* Photos.plist */; };
+		A17377471E88825100462EE1 /* PinDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17377461E88825100462EE1 /* PinDataModel.swift */; };
+		A19EC4491E99D99700B6D7C4 /* AHPinDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19EC4481E99D99700B6D7C4 /* AHPinDataGenerator.swift */; };
+		A19EC44B1E99DFBF00B6D7C4 /* AHNetowrkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19EC44A1E99DFBF00B6D7C4 /* AHNetowrkTool.swift */; };
+		A19EC44D1E99EC0000B6D7C4 /* PinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19EC44C1E99EC0000B6D7C4 /* PinViewModel.swift */; };
+		A1A074AB1E9A2AB600FEC153 /* UIImageView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A074AA1E9A2AB600FEC153 /* UIImageView+extension.swift */; };
+		A1CE93541E9A17A5002A8738 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CE93531E9A17A5002A8738 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +45,7 @@
 		A168BFD71E888DDD00A87E03 /* AHPinterestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AHPinterestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A168BFD91E888DDD00A87E03 /* AHPinterestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AHPinterestTests.swift; sourceTree = "<group>"; };
 		A168BFDB1E888DDD00A87E03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A168BFE11E8890E500A87E03 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		A168BFE11E8890E500A87E03 /* PinCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinCell.swift; sourceTree = "<group>"; };
 		A168BFE31E88930200A87E03 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		A168BFE51E889ABB00A87E03 /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		A168BFE71E889B6400A87E03 /* AHLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHLayout.swift; sourceTree = "<group>"; };
@@ -54,8 +58,12 @@
 		A17377321E887F9600462EE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A17377341E887F9600462EE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A173773A1E8881A200462EE1 /* Photo.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Photo.xcassets; sourceTree = "<group>"; };
-		A17377461E88825100462EE1 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
-		A173774A1E8885EE00462EE1 /* Photos.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Photos.plist; sourceTree = "<group>"; };
+		A17377461E88825100462EE1 /* PinDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinDataModel.swift; sourceTree = "<group>"; };
+		A19EC4481E99D99700B6D7C4 /* AHPinDataGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinDataGenerator.swift; sourceTree = "<group>"; };
+		A19EC44A1E99DFBF00B6D7C4 /* AHNetowrkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHNetowrkTool.swift; sourceTree = "<group>"; };
+		A19EC44C1E99EC0000B6D7C4 /* PinViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinViewModel.swift; sourceTree = "<group>"; };
+		A1A074AA1E9A2AB600FEC153 /* UIImageView+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+extension.swift"; sourceTree = "<group>"; };
+		A1CE93531E9A17A5002A8738 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,7 +130,6 @@
 		A173773D1E8881C600462EE1 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				A173774A1E8885EE00462EE1 /* Photos.plist */,
 				A173772F1E887F9600462EE1 /* Assets.xcassets */,
 				A173773A1E8881A200462EE1 /* Photo.xcassets */,
 			);
@@ -141,6 +148,7 @@
 		A173773F1E8881E000462EE1 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				A1A074AA1E9A2AB600FEC153 /* UIImageView+extension.swift */,
 				A168BFE51E889ABB00A87E03 /* UIImage+Extension.swift */,
 			);
 			name = Extensions;
@@ -158,7 +166,8 @@
 		A17377411E8881EF00462EE1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A17377461E88825100462EE1 /* Photo.swift */,
+				A17377461E88825100462EE1 /* PinDataModel.swift */,
+				A19EC44C1E99EC0000B6D7C4 /* PinViewModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -166,8 +175,11 @@
 		A17377421E8881FD00462EE1 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				A19EC44A1E99DFBF00B6D7C4 /* AHNetowrkTool.swift */,
+				A19EC4481E99D99700B6D7C4 /* AHPinDataGenerator.swift */,
 				A17377281E887F9600462EE1 /* AppDelegate.swift */,
 				A15C0B5A1E9372B900B35BE1 /* AHShareModalVC.swift */,
+				A1CE93531E9A17A5002A8738 /* Constants.swift */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -194,7 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				A15C0B581E9369F600B35BE1 /* AHShareAnimator.swift */,
-				A168BFE11E8890E500A87E03 /* Cell.swift */,
+				A168BFE11E8890E500A87E03 /* PinCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -295,7 +307,6 @@
 				A17377331E887F9600462EE1 /* LaunchScreen.storyboard in Resources */,
 				A17377301E887F9600462EE1 /* Assets.xcassets in Resources */,
 				A173772E1E887F9600462EE1 /* Main.storyboard in Resources */,
-				A173774B1E8885EE00462EE1 /* Photos.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,12 +327,17 @@
 			files = (
 				A168BFE41E88930200A87E03 /* ViewModel.swift in Sources */,
 				A168BFEA1E88B89800A87E03 /* AHLayoutAttributes.swift in Sources */,
-				A17377471E88825100462EE1 /* Photo.swift in Sources */,
-				A168BFE21E8890E500A87E03 /* Cell.swift in Sources */,
+				A17377471E88825100462EE1 /* PinDataModel.swift in Sources */,
+				A19EC44B1E99DFBF00B6D7C4 /* AHNetowrkTool.swift in Sources */,
+				A168BFE21E8890E500A87E03 /* PinCell.swift in Sources */,
 				A15C0B5C1E9372B900B35BE1 /* AHShareModalVC.swift in Sources */,
 				A168BFE81E889B6400A87E03 /* AHLayout.swift in Sources */,
 				A168BFE61E889ABB00A87E03 /* UIImage+Extension.swift in Sources */,
+				A19EC44D1E99EC0000B6D7C4 /* PinViewModel.swift in Sources */,
 				A15C0B591E9369F600B35BE1 /* AHShareAnimator.swift in Sources */,
+				A1A074AB1E9A2AB600FEC153 /* UIImageView+extension.swift in Sources */,
+				A19EC4491E99D99700B6D7C4 /* AHPinDataGenerator.swift in Sources */,
+				A1CE93541E9A17A5002A8738 /* Constants.swift in Sources */,
 				A173772B1E887F9600462EE1 /* ViewController.swift in Sources */,
 				A17377291E887F9600462EE1 /* AppDelegate.swift in Sources */,
 			);

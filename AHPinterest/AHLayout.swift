@@ -8,18 +8,23 @@
 
 import UIKit
 
+
+
 protocol AHLayoutDelegate {
-    func collectionView(collectionView: UICollectionView, heightForPhotoAt indexPath: IndexPath, with width: CGFloat) -> CGFloat
+    func AHLayoutHeightForPhotoAt(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat
     
-    func collectionView(collectionView: UICollectionView, heightForAnnotationAt indexPath: IndexPath,with width: CGFloat) -> CGFloat
+    func AHLayoutHeightForNote(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat
+    
+    func AHLayoutHeightForUserAvatar(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat
+    
+    
 }
 
 
 class AHLayout: UICollectionViewLayout {
     var delegate: AHLayoutDelegate!
     
-    var numberOfColumns: Int = 2
-    var cellPadding : CGFloat = 6.0
+
     
     
     private var cache = [AHLayoutAttributes]()
@@ -51,10 +56,15 @@ class AHLayout: UICollectionViewLayout {
         for i in 0..<collectionView!.numberOfItems(inSection: 0) {
             let indexPath = IndexPath(item: i, section: 0)
             
-            let cellW = columnWidth - 2 * cellPadding
-            let photoHeight = delegate.collectionView(collectionView: collectionView!, heightForPhotoAt: indexPath, with: cellW)
-            let annotationHeight = delegate.collectionView(collectionView: collectionView!, heightForAnnotationAt: indexPath, with: cellW)
-            let totalH = cellPadding + photoHeight + annotationHeight + cellPadding
+            let cellWidth = columnWidth - 2 * cellPadding
+            let imageHeight = delegate.AHLayoutHeightForPhotoAt(indexPath: indexPath, width: cellWidth, collectionView: collectionView!)
+            
+            let noteHeight = delegate.AHLayoutHeightForNote(indexPath: indexPath, width: cellWidth, collectionView: collectionView!)
+
+            
+            let userAvatarHeight = delegate.AHLayoutHeightForUserAvatar(indexPath: indexPath, width: cellWidth, collectionView: collectionView!)
+            
+            let totalH = cellPadding + imageHeight + noteHeight + cellPadding + userAvatarHeight + cellPadding
             
             
             let attr = AHLayoutAttributes(forCellWith: indexPath)
@@ -64,7 +74,8 @@ class AHLayout: UICollectionViewLayout {
             let frame = CGRect(x: cellX, y: cellY, width: columnWidth, height: totalH)
             let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
             attr.frame = insetFrame
-            attr.photoHeight = photoHeight
+            attr.imageHeight = imageHeight
+            attr.noteHeight = noteHeight
             cache.append(attr)
             
             let previousYOffSet = yOffsets[column]
@@ -97,15 +108,6 @@ class AHLayout: UICollectionViewLayout {
         
     }
     
-    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        let attr = super.layoutAttributesForItem(at: indexPath) as! AHLayoutAttributes
-        if cache.contains(attr) {
-            print("ok")
-        }
-        
-        
-        return attr
-    }
     
 }
 
