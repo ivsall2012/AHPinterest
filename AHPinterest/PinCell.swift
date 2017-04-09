@@ -32,9 +32,9 @@ class PinCell: UICollectionViewCell {
                 let model = pinVM.pinModel
                 self.note.text = model.note
                 self.userName.text = model.userName
-                self.userAvatar.AH_setImage(urlStr: model.userName)
+                self.userAvatar.AH_setImage(urlStr: model.avatarURL)
                 self.imageView.AH_setImage(urlStr: model.imageURL)
-                
+                layoutIfNeeded()
             }
         }
     }
@@ -48,6 +48,13 @@ class PinCell: UICollectionViewCell {
         }
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.userName.text = nil
+        self.imageView.image = nil
+        self.note.text = nil
+        self.userAvatar.image = nil
+    }
     
 //    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
 //        return super.preferredLayoutAttributesFitting(layoutAttributes)
@@ -57,6 +64,7 @@ class PinCell: UICollectionViewCell {
         if let attr = layoutAttributes as? AHLayoutAttributes{
             imageViewHeightConstraint.constant = attr.imageHeight
             noteHeightConstraint.constant = attr.noteHeight
+            layoutIfNeeded()
         }
         
     }

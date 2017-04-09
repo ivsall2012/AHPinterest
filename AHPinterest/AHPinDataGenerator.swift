@@ -62,7 +62,7 @@ extension AHPinDataGenerator{
     func randomPin() -> [String: Any]{
         var dict = [String: Any]()
         
-        let smalText = random(0, 3)
+        let smalText = random(1, 3)
         let bigText = random(3, 5)
         // it has 60% chance to have smal text
         let manyWords = randomPercentChance(percent: 60) ? smalText : bigText
@@ -74,8 +74,8 @@ extension AHPinDataGenerator{
         
         
         
-        let width = 100 * random(1, 6)
-        let height = 100 * random(1, 6)
+        let width = 100 * random(3, 6)
+        let height = 100 * random(3, 6)
         let imageUrlA = "http://lorempixel.com/\(width)/\(height)"
         let imageUrlC = "https://placeimg.com/\(width)/\(height)/any"
         let images = [imageUrlA,imageUrlC]
@@ -89,6 +89,7 @@ extension AHPinDataGenerator{
         
         let userAvatar = userAvatars[random(userAvatars.count)]
         dict["avatarURL"] = userAvatar
+        
         
         
         return dict

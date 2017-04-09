@@ -15,12 +15,13 @@ class AHLayoutAttributes: UICollectionViewLayoutAttributes {
     override func copy(with zone: NSZone? = nil) -> Any {
         let copy = super.copy(with: zone) as! AHLayoutAttributes
         copy.imageHeight = self.imageHeight
+        copy.noteHeight = self.noteHeight
         return copy
     }
     
     override func isEqual(_ object: Any?) -> Bool {
         if let otherObj = object as? AHLayoutAttributes{
-            if otherObj.imageHeight == self.imageHeight && otherObj.noteHeight == self.noteHeight{
+            if (otherObj.imageHeight - self.imageHeight) < 0.01 && (otherObj.noteHeight - self.noteHeight) < 0.01{
                 return super.isEqual(otherObj)
             }
         }else{

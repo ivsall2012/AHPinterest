@@ -64,7 +64,7 @@ class AHLayout: UICollectionViewLayout {
             
             let userAvatarHeight = delegate.AHLayoutHeightForUserAvatar(indexPath: indexPath, width: cellWidth, collectionView: collectionView!)
             
-            let totalH = cellPadding + imageHeight + noteHeight + cellPadding + userAvatarHeight + cellPadding
+            let totalH = cellPadding + imageHeight + noteHeight + cellPadding + userAvatarHeight + cellPadding + cellPadding
             
             
             let attr = AHLayoutAttributes(forCellWith: indexPath)
@@ -107,7 +107,18 @@ class AHLayout: UICollectionViewLayout {
         return arr
         
     }
-    
+//    
+//    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+//        let attr = super.layoutAttributesForItem(at: indexPath) as! AHLayoutAttributes
+//        if cache.contains(attr) {
+//            print("ok")
+//        }else{
+//            print("not ok")
+//        }
+//        
+//        
+//        return attr
+//    }
     
 }
 
