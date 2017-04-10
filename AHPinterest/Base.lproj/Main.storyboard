@@ -15,10 +15,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewLayout key="collectionViewLayout" id="CHa-ZH-jP1" customClass="AHLayout" customModule="AHPinterest" customModuleProvider="target"/>
+                        <collectionViewLayout key="collectionViewLayout" id="lTY-Mv-pIN"/>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PinCell" id="Ra4-ZS-FeX" customClass="PinCell" customModule="AHPinterest" customModuleProvider="target">
-                                <rect key="frame" x="4.5" y="0.0" width="366" height="311"/>
+                                <rect key="frame" x="5" y="0.0" width="366" height="311"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="366" height="311"/>

@@ -27,6 +27,7 @@
 		A19EC44D1E99EC0000B6D7C4 /* PinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19EC44C1E99EC0000B6D7C4 /* PinViewModel.swift */; };
 		A1A074AB1E9A2AB600FEC153 /* UIImageView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A074AA1E9A2AB600FEC153 /* UIImageView+extension.swift */; };
 		A1CE93541E9A17A5002A8738 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CE93531E9A17A5002A8738 /* Constants.swift */; };
+		A1F70F0C1E9B54EB00FF2C91 /* AHCollectionRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F70F0B1E9B54EB00FF2C91 /* AHCollectionRefreshHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		A19EC44C1E99EC0000B6D7C4 /* PinViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinViewModel.swift; sourceTree = "<group>"; };
 		A1A074AA1E9A2AB600FEC153 /* UIImageView+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+extension.swift"; sourceTree = "<group>"; };
 		A1CE93531E9A17A5002A8738 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A1F70F0B1E9B54EB00FF2C91 /* AHCollectionRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHCollectionRefreshHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,6 +209,7 @@
 			children = (
 				A15C0B581E9369F600B35BE1 /* AHShareAnimator.swift */,
 				A168BFE11E8890E500A87E03 /* PinCell.swift */,
+				A1F70F0B1E9B54EB00FF2C91 /* AHCollectionRefreshHeader.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				A168BFE21E8890E500A87E03 /* PinCell.swift in Sources */,
 				A15C0B5C1E9372B900B35BE1 /* AHShareModalVC.swift in Sources */,
 				A168BFE81E889B6400A87E03 /* AHLayout.swift in Sources */,
+				A1F70F0C1E9B54EB00FF2C91 /* AHCollectionRefreshHeader.swift in Sources */,
 				A168BFE61E889ABB00A87E03 /* UIImage+Extension.swift in Sources */,
 				A19EC44D1E99EC0000B6D7C4 /* PinViewModel.swift in Sources */,
 				A15C0B591E9369F600B35BE1 /* AHShareAnimator.swift in Sources */,

@@ -12,7 +12,6 @@ class ViewController: UICollectionViewController {
     var viewModel: ViewModel?
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView?.contentInset = .init(top: 23, left: 5, bottom: 10, right: 5)
         viewModel = ViewModel(collectionView: collectionView!, reusablePinCellID: "PinCell")
         viewModel?.mainVC = self
         viewModel?.loadNewData(completion: { (success) in

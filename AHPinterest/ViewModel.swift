@@ -24,10 +24,13 @@ class ViewModel: NSObject {
         self.reusablePinCellID = reusablePinCellID
         super.init()
         
+        collectionView.contentInset = .init(top: 23, left: 5, bottom: 10, right: 5)
+        collectionView.register(AHCollectionRefreshHeader.self, forSupplementaryViewOfKind: AHCollectionRefreshHeaderKind, withReuseIdentifier: "AHCollectionRefreshHeaderKind")
         collectionView.dataSource = self
         collectionView.delegate = self
-        layout = (collectionView.collectionViewLayout as! AHLayout)
-        layout?.delegate = self
+        let layout = AHLayout()
+        collectionView.setCollectionViewLayout(layout, animated: false)
+        layout.delegate = self
         
         collectionView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longPressHandler(_:))))
     }
@@ -39,8 +42,7 @@ class ViewModel: NSObject {
             completion(true)
         }
     }
-    
-    
+
     
 }
 
@@ -81,7 +83,7 @@ extension ViewModel {
 
 
 
-extension ViewModel: UICollectionViewDelegateFlowLayout {
+extension ViewModel: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("didSelected")
         collectionView.deselectItem(at: indexPath, animated: false)
@@ -89,7 +91,21 @@ extension ViewModel: UICollectionViewDelegateFlowLayout {
 }
 
 extension ViewModel: AHLayoutDelegate {
-    internal func AHLayoutHeightForUserAvatar(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat {
+    func AHLayoutSizeForHeaderView() -> CGSize {
+        return CGSize(width: 0.0, height: 300)
+    }
+
+    func AHLayoutForHeaderView() -> UIView {
+        let view = UIView(frame: .init(x: 0, y: 0, width: 200, height: 400))
+        return view
+    }
+    
+    func AHLayoutForFooterView() -> UIView {
+        let view = UIView(frame: .init(x: 0, y: 0, width: 200, height: 400))
+        return view
+    }
+    
+    func AHLayoutHeightForUserAvatar(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat {
         return userAvatarHeight
     }
 
@@ -138,7 +154,10 @@ extension ViewModel : UICollectionViewDataSource {
         return PinCell
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: AHCollectionRefreshHeaderKind, withReuseIdentifier: AHCollectionRefreshHeaderKind, for: indexPath)
+        return header
+    }
     
     
 }

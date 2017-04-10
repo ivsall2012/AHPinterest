@@ -12,3 +12,4 @@ let numberOfColumns: Int = 2
 let cellPadding : CGFloat = 8.0
 let noteFont: UIFont = UIFont.boldSystemFont(ofSize: 15.0)
 let userAvatarHeight: CGFloat = 50.0
+let AHCollectionRefreshHeaderKind: String = "AHCollectionRefreshHeaderKind"
