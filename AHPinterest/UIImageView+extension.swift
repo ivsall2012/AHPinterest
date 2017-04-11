@@ -12,8 +12,13 @@ extension UIImageView {
     func AH_setImage(urlStr: String, completion: ((_ image: UIImage?) -> Swift.Void)?){
         AHNetowrkTool.tool.requestImage(urlStr: urlStr) { (image) in
             if image != nil {
-                self.image = image
-                completion?(image)
+                if completion != nil {
+                    // if there's a completion, then let the end user to decide how to use the image
+                    completion!(image)
+                }else {
+                    self.image = image!
+                }
+                
                 return
             }
             completion?(nil)

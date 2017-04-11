@@ -80,11 +80,11 @@ class AHCollectionRefreshHeader: UICollectionReusableView {
     }
     
     override func prepareForReuse() {
-        print("header prepareForReuse")
+        endRefersh()
     }
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
-        print("header received attr")
+
     }
     
     
