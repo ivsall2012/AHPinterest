@@ -22,45 +22,43 @@ class AHCollectionRefreshHeader: UICollectionReusableView {
     
     private func setup() {
         refreshControl.bounds.size = AHHeaderRefreshControlSize
-        self.addSubview(refreshControl)
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        resetToInitial()
-    }
-    func resetToInitial() {
         let x = self.bounds.width * 0.5
         let y = self.bounds.height - AHHeaderRefreshControlSize.height * 0.5
+        self.layer.anchorPoint = .init(x: 0.5, y: 0.5)
+        refreshControl.layer.anchorPoint = .init(x: 0.5, y: 0.5)
         refreshControl.center = .init(x: x, y: y)
         refreshControl.alpha = 0.3
         refreshControl.transform = .init(scaleX: 0.3, y: 0.3)
-    }
-    
-    func resetToFinal() {
-        let x = self.bounds.width * 0.5
-        let y = self.bounds.height * 0.5
-        refreshControl.center = .init(x: x, y: y)
-        refreshControl.alpha = 1.0
-        refreshControl.transform = .init(scaleX: 1.0, y: 1.0)
+        self.addSubview(refreshControl)
     }
     
     func transformRefreshControl(absOffset: CGFloat) {
         guard absOffset >= 0.0 else {
             return
         }
-        resetToFinal()
-        layoutIfNeeded()
-        return
         let ratio = absOffset / self.bounds.height * 0.5
         if ratio >= 1.0 {
             // should do aniamtion and notify to make network call
             return
         }else{
+            // using adjustedRatio because alpha and transformScale are initially 0.3
             let adjustedRatio = ratio + 0.3
-            print("ratio:\(ratio)")
-            refreshControl.alpha = ratio
-            refreshControl.transform = .identity
+            
+            // using ratio because moving from bottom to centerY needs the ratio from 0.0 to 1.0
+            let delta = ratio * self.bounds.height * 0.5
+            // an extra angle to make the end angle in transform, exactly faced-up
+            let angleOffset = CGFloat(M_PI_4) * 0.1
+            refreshControl.alpha = adjustedRatio
+            let transformScale = CGAffineTransform(scaleX: adjustedRatio, y: adjustedRatio)
+            let transformCenter = CGAffineTransform(translationX: 0.0, y: -delta)
+            let transformAngle = CGAffineTransform(rotationAngle: 2 * CGFloat(M_PI) * ratio + angleOffset)
+            
+            // transformAngle has to come first!!
+            refreshControl.transform = transformAngle.concatenating(transformCenter).concatenating(transformScale)
+            
+            if ratio >= 0.7 {
+                // need to do animation and networking
+            }
         }
     }
     

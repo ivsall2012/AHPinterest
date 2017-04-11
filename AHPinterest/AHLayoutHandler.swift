@@ -18,7 +18,8 @@ extension AHLayoutHandler: AHLayoutDelegate {
     func AHLayoutNotifyScroll(collectionView: UICollectionView, contentSize: CGSize) {
         let yOffset = collectionView.contentOffset.y
         let topInset = collectionView.contentInset.top
-        if yOffset < -topInset {
+        // the following extra -10 is to make the refreshControl hide "faster"
+        if yOffset < -topInset - 10 {
             headerCell?.isHidden = false
             headerCell?.transformRefreshControl(absOffset: abs(yOffset))
         }else{
@@ -27,7 +28,7 @@ extension AHLayoutHandler: AHLayoutDelegate {
     }
 
     func AHLayoutSizeForHeaderView() -> CGSize {
-        return CGSize(width: 0.0, height: 150)
+        return CGSize(width: 0.0, height: AHHeaderViewHeight)
     }
     
     func AHLayoutForHeaderView() -> UIView {
