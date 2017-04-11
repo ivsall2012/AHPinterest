@@ -32,7 +32,6 @@ class AHCollectionRefreshHeader: UICollectionReusableView {
     func resetToInitial() {
         let x = self.bounds.width * 0.5
         let y = self.bounds.height - AHHeaderRefreshControlSize.height * 0.5
-        refreshControl.frame = .init(x: 0, y: 0, width: AHHeaderRefreshControlSize.width, height: AHHeaderRefreshControlSize.height)
         refreshControl.center = .init(x: x, y: y)
         refreshControl.alpha = 0.3
         refreshControl.transform = .init(scaleX: 0.3, y: 0.3)
@@ -44,6 +43,25 @@ class AHCollectionRefreshHeader: UICollectionReusableView {
         refreshControl.center = .init(x: x, y: y)
         refreshControl.alpha = 1.0
         refreshControl.transform = .init(scaleX: 1.0, y: 1.0)
+    }
+    
+    func transformRefreshControl(absOffset: CGFloat) {
+        guard absOffset >= 0.0 else {
+            return
+        }
+        resetToFinal()
+        layoutIfNeeded()
+        return
+        let ratio = absOffset / self.bounds.height * 0.5
+        if ratio >= 1.0 {
+            // should do aniamtion and notify to make network call
+            return
+        }else{
+            let adjustedRatio = ratio + 0.3
+            print("ratio:\(ratio)")
+            refreshControl.alpha = ratio
+            refreshControl.transform = .identity
+        }
     }
     
     override func prepareForReuse() {

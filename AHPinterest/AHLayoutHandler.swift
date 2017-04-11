@@ -20,6 +20,7 @@ extension AHLayoutHandler: AHLayoutDelegate {
         let topInset = collectionView.contentInset.top
         if yOffset < -topInset {
             headerCell?.isHidden = false
+            headerCell?.transformRefreshControl(absOffset: abs(yOffset))
         }else{
             headerCell?.isHidden = true
         }
