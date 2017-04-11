@@ -57,7 +57,6 @@ class AHCollectionRefreshHeader: UICollectionReusableView {
             return
         }
         self.ratio = ratio
-        print("pulling")
         // using adjustedRatio because alpha and transformScale are initially 0.3
         let adjustedRatio = ratio + 0.3
         
@@ -74,7 +73,9 @@ class AHCollectionRefreshHeader: UICollectionReusableView {
         refreshControl.transform = transformAngle.concatenating(transformCenter).concatenating(transformScale)
     }
     func endRefersh() {
+        ratio = 0.0
         isSpinning = false
+        setup()
         refreshControl.layer.removeAnimation(forKey: "refreshSpinning")
     }
     

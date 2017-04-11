@@ -22,7 +22,7 @@ class AHNetowrkTool: NSObject {
 extension AHNetowrkTool {
     func loadNewData(completion: @escaping ([PinViewModel]) -> Swift.Void) {
         // fake networking:)
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(0)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
             let arr = AHPinDataGenerator.generator.randomData()
             completion(arr)
         }

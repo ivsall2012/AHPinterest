@@ -136,9 +136,28 @@ extension ViewModel: UICollectionViewDelegate {
         }
         if headerCell.ratio >= AHHeaderShouldRefreshRatio {
             headerCell.refresh()
-            UIView.animate(withDuration: 0.25) {
+            UIView.animate(withDuration: 0.25, animations: { 
                 scrollView.contentInset.top = headerCell.bounds.height
-            }
+                }, completion: { (_) in
+                    AHNetowrkTool.tool.loadNewData(completion: { (newPinVMs) in
+                        headerCell.endRefersh()
+                        UIView.animate(withDuration: 0.25, animations: { 
+                            scrollView.contentInset = AHCollectionViewInset
+                        })
+                        
+                        
+                        if self.pinVMs == nil {
+                            self.pinVMs = newPinVMs
+                            return
+                        }
+                        
+                        var newPinVMs = newPinVMs
+                        newPinVMs.append(contentsOf: self.pinVMs!)
+                        print("count:\(newPinVMs.count)")
+                        self.pinVMs = newPinVMs
+                        self.collectionView.reloadData()
+                    })
+            })
         }
         
     }
