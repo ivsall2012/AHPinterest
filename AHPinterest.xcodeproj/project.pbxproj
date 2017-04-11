@@ -28,6 +28,7 @@
 		A1CE93541E9A17A5002A8738 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CE93531E9A17A5002A8738 /* Constants.swift */; };
 		A1F70F0C1E9B54EB00FF2C91 /* AHCollectionRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F70F0B1E9B54EB00FF2C91 /* AHCollectionRefreshHeader.swift */; };
 		A1F70F121E9C57CB00FF2C91 /* AHLayoutHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F70F111E9C57CB00FF2C91 /* AHLayoutHandler.swift */; };
+		A1F70F161E9CC21A00FF2C91 /* AHRefershUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F70F151E9CC21A00FF2C91 /* AHRefershUI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		A1CE93531E9A17A5002A8738 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A1F70F0B1E9B54EB00FF2C91 /* AHCollectionRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHCollectionRefreshHeader.swift; sourceTree = "<group>"; };
 		A1F70F111E9C57CB00FF2C91 /* AHLayoutHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHLayoutHandler.swift; sourceTree = "<group>"; };
+		A1F70F151E9CC21A00FF2C91 /* AHRefershUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHRefershUI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +212,7 @@
 				A15C0B581E9369F600B35BE1 /* AHShareAnimator.swift */,
 				A168BFE11E8890E500A87E03 /* PinCell.swift */,
 				A1F70F0B1E9B54EB00FF2C91 /* AHCollectionRefreshHeader.swift */,
+				A1F70F151E9CC21A00FF2C91 /* AHRefershUI.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				A19EC4491E99D99700B6D7C4 /* AHPinDataGenerator.swift in Sources */,
 				A1CE93541E9A17A5002A8738 /* Constants.swift in Sources */,
 				A173772B1E887F9600462EE1 /* ViewController.swift in Sources */,
+				A1F70F161E9CC21A00FF2C91 /* AHRefershUI.swift in Sources */,
 				A17377291E887F9600462EE1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
