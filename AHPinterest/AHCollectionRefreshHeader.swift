@@ -10,6 +10,8 @@ import UIKit
 
 class AHCollectionRefreshHeader: UICollectionReusableView {
     fileprivate var refreshControl: UIImageView = UIImageView(image: #imageLiteral(resourceName: "refresh-control"))
+    fileprivate var isSpinning: Bool = false
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -36,11 +38,27 @@ class AHCollectionRefreshHeader: UICollectionReusableView {
         guard absOffset >= 0.0 else {
             return
         }
+        guard !isSpinning else {
+            return
+        }
         let ratio = absOffset / self.bounds.height * 0.5
         if ratio >= 1.0 {
             // should do aniamtion and notify to make network call
             return
         }else{
+            if !isSpinning && ratio >= 0.7 {
+                isSpinning = true
+                print("ratio:\(ratio)")
+                // need to do animation and networking
+                let animation = CABasicAnimation(keyPath: "transform.rotation.z")
+                animation.fromValue = 0.0
+                animation.toValue = 2 * CGFloat(M_PI)
+                animation.duration = 1.0;
+                animation.repeatCount = FLT_MAX;
+                refreshControl.layer.add(animation, forKey: "refreshSpinning")
+                return
+            }
+            
             // using adjustedRatio because alpha and transformScale are initially 0.3
             let adjustedRatio = ratio + 0.3
             
@@ -56,10 +74,12 @@ class AHCollectionRefreshHeader: UICollectionReusableView {
             // transformAngle has to come first!!
             refreshControl.transform = transformAngle.concatenating(transformCenter).concatenating(transformScale)
             
-            if ratio >= 0.7 {
-                // need to do animation and networking
-            }
         }
+    }
+    
+    func endRefersh() {
+        isSpinning = false
+        refreshControl.layer.removeAnimation(forKey: "refreshSpinning")
     }
     
     override func prepareForReuse() {
