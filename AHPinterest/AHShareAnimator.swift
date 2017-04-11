@@ -23,7 +23,7 @@ class AHShareAnimator: NSObject {
     weak var delegate: AHAnimatorDelegate?
     weak var fromView: UIView?
     fileprivate var state: AHShareAnimatorState = .none
-    fileprivate weak var fromViewSnapshot: UIView?
+    fileprivate var fromViewSnapshot: UIView?
 
     // You should pass the long pressed cell into this function
     func preparePresenting(fromView: UIView) {
