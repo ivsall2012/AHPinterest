@@ -7,16 +7,22 @@
 //
 
 import UIKit
-import AVFoundation
 
 
 class ViewModel: NSObject {
     var collectionView: UICollectionView
     var layout: AHLayout?
-    var pinVMs: [PinViewModel]?
+    var pinVMs: [PinViewModel]? {
+        didSet {
+            if let pinVMs = pinVMs {
+                self.layoutHandler.pinVMs = pinVMs
+            }
+        }
+    }
     var reusablePinCellID: String
     let animator: AHShareAnimator = AHShareAnimator()
     var modalVC: AHShareModalVC = AHShareModalVC()
+    var layoutHandler: AHLayoutHandler = AHLayoutHandler()
     weak var mainVC: UIViewController?
     
     init(collectionView: UICollectionView, reusablePinCellID: String) {
@@ -24,13 +30,13 @@ class ViewModel: NSObject {
         self.reusablePinCellID = reusablePinCellID
         super.init()
         
-        collectionView.contentInset = .init(top: 23, left: 5, bottom: 10, right: 5)
+        collectionView.contentInset = AHCollectionViewInset
         collectionView.register(AHCollectionRefreshHeader.self, forSupplementaryViewOfKind: AHCollectionRefreshHeaderKind, withReuseIdentifier: "AHCollectionRefreshHeaderKind")
         collectionView.dataSource = self
         collectionView.delegate = self
         let layout = AHLayout()
         collectionView.setCollectionViewLayout(layout, animated: false)
-        layout.delegate = self
+        layout.delegate = layoutHandler
         
         collectionView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longPressHandler(_:))))
     }
@@ -83,50 +89,14 @@ extension ViewModel {
 
 
 
+
+
+
 extension ViewModel: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("didSelected")
         collectionView.deselectItem(at: indexPath, animated: false)
     }
-}
-
-extension ViewModel: AHLayoutDelegate {
-    func AHLayoutSizeForHeaderView() -> CGSize {
-        return CGSize(width: 0.0, height: 300)
-    }
-
-    func AHLayoutForHeaderView() -> UIView {
-        let view = UIView(frame: .init(x: 0, y: 0, width: 200, height: 400))
-        return view
-    }
-    
-    func AHLayoutForFooterView() -> UIView {
-        let view = UIView(frame: .init(x: 0, y: 0, width: 200, height: 400))
-        return view
-    }
-    
-    func AHLayoutHeightForUserAvatar(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat {
-        return userAvatarHeight
-    }
-
-    func AHLayoutHeightForPhotoAt(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat {
-        guard let pinVM = pinVMs?[indexPath.item] else {
-            return 0.0
-        }
-        
-        let pin = pinVM.pinModel
-        let boundRect = CGRect(x: 0, y: 0, width: width, height: CGFloat(DBL_MAX))
-        let rect = AVMakeRect(aspectRatio: pin.imageSize , insideRect: boundRect)
-        return rect.height
-    }
-    
-    func AHLayoutHeightForNote(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat {
-        guard let pinVM = pinVMs?[indexPath.item] else {
-            return 0.0
-        }
-        return pinVM.heightForNote(font: noteFont, width: width)
-    }
-    
 }
 
 extension ViewModel : UICollectionViewDataSource {
@@ -155,7 +125,8 @@ extension ViewModel : UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: AHCollectionRefreshHeaderKind, withReuseIdentifier: AHCollectionRefreshHeaderKind, for: indexPath)
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: AHCollectionRefreshHeaderKind, withReuseIdentifier: AHCollectionRefreshHeaderKind, for: indexPath) as! AHCollectionRefreshHeader
+        layoutHandler.headerCell = header
         return header
     }
     

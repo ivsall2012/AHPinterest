@@ -22,7 +22,14 @@ class AHCollectionRefreshHeader: UICollectionReusableView {
     override func prepareForReuse() {
         print("header prepareForReuse")
     }
+    
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         print("header received attr")
     }
+    
+    
+//    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+//        print("preferredLayoutAttributesFitting :\(layoutAttributes)")
+//        return super.preferredLayoutAttributesFitting(layoutAttributes)
+//    }
 }

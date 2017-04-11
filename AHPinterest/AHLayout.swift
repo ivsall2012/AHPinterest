@@ -19,6 +19,9 @@ protocol AHLayoutDelegate {
     
     func AHLayoutSizeForHeaderView() -> CGSize
     
+    /// Cand do refresh control animations here
+    func AHLayoutNotifyScroll(collectionView: UICollectionView, contentSize: CGSize)
+    
 }
 
 
@@ -123,6 +126,11 @@ class AHLayout: UICollectionViewLayout {
             if isIntercept(attr: attr, rect: rect) {
                 arr.append(attr)
             }
+        }
+        
+        if let collectionView = collectionView {
+            let size = self.collectionViewContentSize
+            delegate.AHLayoutNotifyScroll(collectionView: collectionView, contentSize: size)
         }
         
         return arr
