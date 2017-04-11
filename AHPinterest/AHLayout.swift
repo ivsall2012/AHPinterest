@@ -45,11 +45,11 @@ class AHLayout: UICollectionViewLayout {
         if isHeaderSetup {
             return
         }
+        let inset = collectionView?.contentInset
         let headerSize = delegate.AHLayoutSizeForHeaderView()
-        let origin = CGPoint(x: 0.0, y: -headerSize.height)
-        let size = CGSize(width: (collectionView?.bounds.width)!, height: headerSize.height)
+        let origin = CGPoint(x: 0.0, y: -headerSize.height + inset!.top)
+        let size = CGSize(width: contentWidth, height: headerSize.height)
         headerAttr.frame = .init(origin: origin, size: size)
-        
         isHeaderSetup = true
     }
     

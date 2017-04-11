@@ -31,7 +31,7 @@ class ViewModel: NSObject {
         super.init()
         
         collectionView.contentInset = AHCollectionViewInset
-        collectionView.register(AHCollectionRefreshHeader.self, forSupplementaryViewOfKind: AHCollectionRefreshHeaderKind, withReuseIdentifier: "AHCollectionRefreshHeaderKind")
+        collectionView.register(AHCollectionRefreshHeader.self, forSupplementaryViewOfKind: AHCollectionRefreshHeaderKind, withReuseIdentifier: AHCollectionRefreshHeaderKind)
         collectionView.dataSource = self
         collectionView.delegate = self
         let layout = AHLayout()

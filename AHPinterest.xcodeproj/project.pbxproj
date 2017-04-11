@@ -20,7 +20,6 @@
 		A173772E1E887F9600462EE1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A173772C1E887F9600462EE1 /* Main.storyboard */; };
 		A17377301E887F9600462EE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A173772F1E887F9600462EE1 /* Assets.xcassets */; };
 		A17377331E887F9600462EE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A17377311E887F9600462EE1 /* LaunchScreen.storyboard */; };
-		A173773B1E8881A200462EE1 /* Photo.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A173773A1E8881A200462EE1 /* Photo.xcassets */; };
 		A17377471E88825100462EE1 /* PinDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17377461E88825100462EE1 /* PinDataModel.swift */; };
 		A19EC4491E99D99700B6D7C4 /* AHPinDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19EC4481E99D99700B6D7C4 /* AHPinDataGenerator.swift */; };
 		A19EC44B1E99DFBF00B6D7C4 /* AHNetowrkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19EC44A1E99DFBF00B6D7C4 /* AHNetowrkTool.swift */; };
@@ -59,7 +58,6 @@
 		A173772F1E887F9600462EE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A17377321E887F9600462EE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A17377341E887F9600462EE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A173773A1E8881A200462EE1 /* Photo.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Photo.xcassets; sourceTree = "<group>"; };
 		A17377461E88825100462EE1 /* PinDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinDataModel.swift; sourceTree = "<group>"; };
 		A19EC4481E99D99700B6D7C4 /* AHPinDataGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinDataGenerator.swift; sourceTree = "<group>"; };
 		A19EC44A1E99DFBF00B6D7C4 /* AHNetowrkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHNetowrkTool.swift; sourceTree = "<group>"; };
@@ -135,7 +133,6 @@
 			isa = PBXGroup;
 			children = (
 				A173772F1E887F9600462EE1 /* Assets.xcassets */,
-				A173773A1E8881A200462EE1 /* Photo.xcassets */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -309,7 +306,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A173773B1E8881A200462EE1 /* Photo.xcassets in Resources */,
 				A17377331E887F9600462EE1 /* LaunchScreen.storyboard in Resources */,
 				A17377301E887F9600462EE1 /* Assets.xcassets in Resources */,
 				A173772E1E887F9600462EE1 /* Main.storyboard in Resources */,
