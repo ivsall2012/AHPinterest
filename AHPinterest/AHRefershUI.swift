@@ -31,7 +31,6 @@ class AHRefershUI: NSObject {
     }
     
     fileprivate class func startAnimateRefresh() {
-        print("A")
         // need to do animation and networking
         let rotaton = CABasicAnimation(keyPath: "transform.rotation.z")
         rotaton.fromValue = 0.0

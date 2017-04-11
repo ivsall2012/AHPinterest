@@ -29,6 +29,7 @@
 		A1F70F0C1E9B54EB00FF2C91 /* AHCollectionRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F70F0B1E9B54EB00FF2C91 /* AHCollectionRefreshHeader.swift */; };
 		A1F70F121E9C57CB00FF2C91 /* AHLayoutHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F70F111E9C57CB00FF2C91 /* AHLayoutHandler.swift */; };
 		A1F70F161E9CC21A00FF2C91 /* AHRefershUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F70F151E9CC21A00FF2C91 /* AHRefershUI.swift */; };
+		A1F70F181E9D962F00FF2C91 /* AHRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F70F171E9D962F00FF2C91 /* AHRefreshControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		A1F70F0B1E9B54EB00FF2C91 /* AHCollectionRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHCollectionRefreshHeader.swift; sourceTree = "<group>"; };
 		A1F70F111E9C57CB00FF2C91 /* AHLayoutHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHLayoutHandler.swift; sourceTree = "<group>"; };
 		A1F70F151E9CC21A00FF2C91 /* AHRefershUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHRefershUI.swift; sourceTree = "<group>"; };
+		A1F70F171E9D962F00FF2C91 /* AHRefreshControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHRefreshControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 				A173772A1E887F9600462EE1 /* ViewController.swift */,
 				A168BFE31E88930200A87E03 /* ViewModel.swift */,
 				A1F70F111E9C57CB00FF2C91 /* AHLayoutHandler.swift */,
+				A1F70F171E9D962F00FF2C91 /* AHRefreshControl.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				A17377471E88825100462EE1 /* PinDataModel.swift in Sources */,
 				A19EC44B1E99DFBF00B6D7C4 /* AHNetowrkTool.swift in Sources */,
 				A168BFE21E8890E500A87E03 /* PinCell.swift in Sources */,
+				A1F70F181E9D962F00FF2C91 /* AHRefreshControl.swift in Sources */,
 				A15C0B5C1E9372B900B35BE1 /* AHShareModalVC.swift in Sources */,
 				A168BFE81E889B6400A87E03 /* AHLayout.swift in Sources */,
 				A1F70F0C1E9B54EB00FF2C91 /* AHCollectionRefreshHeader.swift in Sources */,

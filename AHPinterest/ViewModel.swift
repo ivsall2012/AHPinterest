@@ -24,6 +24,7 @@ class ViewModel: NSObject {
     let animator: AHShareAnimator = AHShareAnimator()
     var modalVC: AHShareModalVC = AHShareModalVC()
     var layoutHandler: AHLayoutHandler = AHLayoutHandler()
+    var refreshController = AHRefreshControl()
     weak var mainVC: UIViewController?
     
     init(collectionView: UICollectionView, reusablePinCellID: String) {
@@ -39,14 +40,26 @@ class ViewModel: NSObject {
         collectionView.setCollectionViewLayout(layout, animated: false)
         layout.delegate = layoutHandler
         
+        
         collectionView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longPressHandler(_:))))
+        
+        refreshController.viewModel = self
+        
     }
     
-    func loadNewData(completion: @escaping (_ success: Bool)->Swift.Void) {
-        AHNetowrkTool.tool.loadNewData { (pinVMs) in
-            self.pinVMs = pinVMs
+    func loadNewData(completion: ((_ success: Bool)->Swift.Void)? ){
+        AHNetowrkTool.tool.loadNewData { (newPinVMs) in
+            if self.pinVMs == nil {
+                self.pinVMs = newPinVMs
+            }else{
+                var newPinVMs = newPinVMs
+                newPinVMs.append(contentsOf: self.pinVMs!)
+                self.pinVMs = newPinVMs
+            }
+            
+            print("count:\(self.pinVMs!.count)")
             self.collectionView.reloadData()
-            completion(true)
+            completion?(true)
         }
     }
 
@@ -100,65 +113,11 @@ extension ViewModel: UICollectionViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard let headerCell = headerCell else {
-            return
-        }
-        guard !headerCell.isSpinning else {
-            return
-        }
-        
-        let yOffset = scrollView.contentOffset.y
-        let topInset = scrollView.contentInset.top
-        // the following extra -10 is to make the refreshControl hide "faster"
-        if yOffset < -topInset - 10 {
-            headerCell.isHidden = false
-            showingRefreshControl(yOffset: abs(yOffset), headerCell: headerCell)
-        }else{
-            headerCell.isHidden = true
-        }
-    }
-    func showingRefreshControl(yOffset: CGFloat, headerCell: AHCollectionRefreshHeader) {
-        guard yOffset >= 0.0 else {
-            return
-        }
-        let ratio = yOffset / headerCell.bounds.height * 0.5
-        if ratio <= 1.0 {
-            headerCell.pulling(ratio: ratio)
-        }
+        refreshController.scrollViewDidScroll(scrollView)
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        guard let headerCell = headerCell else {
-            return
-        }
-        guard !headerCell.isSpinning else {
-            return
-        }
-        if headerCell.ratio >= AHHeaderShouldRefreshRatio {
-            headerCell.refresh()
-            UIView.animate(withDuration: 0.25, animations: { 
-                scrollView.contentInset.top = headerCell.bounds.height
-                }, completion: { (_) in
-                    AHNetowrkTool.tool.loadNewData(completion: { (newPinVMs) in
-                        headerCell.endRefersh()
-                        UIView.animate(withDuration: 0.25, animations: { 
-                            scrollView.contentInset = AHCollectionViewInset
-                        })
-                        
-                        
-                        if self.pinVMs == nil {
-                            self.pinVMs = newPinVMs
-                            return
-                        }
-                        
-                        var newPinVMs = newPinVMs
-                        newPinVMs.append(contentsOf: self.pinVMs!)
-                        print("count:\(newPinVMs.count)")
-                        self.pinVMs = newPinVMs
-                        self.collectionView.reloadData()
-                    })
-            })
-        }
+        refreshController.scrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
         
     }
 }
@@ -191,7 +150,7 @@ extension ViewModel : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: AHCollectionRefreshHeaderKind, withReuseIdentifier: AHCollectionRefreshHeaderKind, for: indexPath) as! AHCollectionRefreshHeader
         header.isHidden = true
-        self.headerCell = header
+        refreshController.headerCell = header
         return header
     }
     
