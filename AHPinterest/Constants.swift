@@ -16,3 +16,4 @@ let AHCollectionRefreshHeaderKind: String = "AHCollectionRefreshHeaderKind"
 let AHCollectionViewInset: UIEdgeInsets = UIEdgeInsets(top: 23, left: 5, bottom: 10, right: 5)
 let AHHeaderRefreshControlSize: CGSize = CGSize(width: 40, height: 40)
 let AHHeaderViewHeight: CGFloat = 80
+let AHHeaderShouldRefreshRatio: CGFloat = 0.7
