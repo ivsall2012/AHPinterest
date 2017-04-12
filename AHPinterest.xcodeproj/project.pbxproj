@@ -146,8 +146,8 @@
 			children = (
 				A173772A1E887F9600462EE1 /* ViewController.swift */,
 				A168BFE31E88930200A87E03 /* ViewModel.swift */,
-				A1F70F111E9C57CB00FF2C91 /* AHLayoutHandler.swift */,
 				A1F70F171E9D962F00FF2C91 /* AHRefreshControl.swift */,
+				A1F70F111E9C57CB00FF2C91 /* AHLayoutHandler.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
