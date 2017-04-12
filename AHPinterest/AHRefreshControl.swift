@@ -40,12 +40,12 @@ extension AHRefreshControl {
         guard yOffset > 0.0 &&  delta > 0.0 else {
             return
         }
-        return
         if delta < screenHeight{
             if !isLoading {
                 isLoading = true
                 print("loading....")
                 viewModel?.loadOlderData(completion: { (_) in
+                    self.isLoading = false
                     print("finished loading!")
                 })
             }

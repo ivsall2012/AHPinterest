@@ -47,19 +47,22 @@ extension AHPinDataGenerator{
     
     func randomCardBatch() -> [PinDataModel] {
         var data = [PinDataModel]()
-//        for _ in 0..<20 {
-//            let dict = randomPin()
-//            if let pinData = PinDataModel(dict: dict) {
-//                data.append(pinData)
-//            }
-//            
-//        }
-        let dicts = generatePinArr(specific: [400.0, 50.0, 100.0, 50.0])
-        for dict in dicts {
+        for _ in 0..<10 {
+            let dict = randomPin()
             if let pinData = PinDataModel(dict: dict) {
                 data.append(pinData)
             }
+            
         }
+        
+//        let dicts = generatePinArr(specific: [400.0, 50.0, 100.0, 50.0])
+//        for dict in dicts {
+//            if let pinData = PinDataModel(dict: dict) {
+//                data.append(pinData)
+//            }
+//        }
+        
+        
         return data
     }
     
@@ -67,7 +70,7 @@ extension AHPinDataGenerator{
     func randomPin() -> [String: Any]{
         var dict = [String: Any]()
         
-        let smalText = random(1, 3)
+        let smalText = random(0, 3)
         let bigText = random(3, 5)
         // it has 60% chance to have smal text
         let manyWords = randomPercentChance(percent: 60) ? smalText : bigText
@@ -79,8 +82,8 @@ extension AHPinDataGenerator{
         
         
         
-        let width = 100 * random(1, 2)
-        let height = 100 * random(1, 4)
+        let width = 100 * random(1, 3)
+        let height = 100 * random(1, 3)
         let imageUrlA = "http://lorempixel.com/\(width)/\(height)"
         let imageUrlC = "https://placeimg.com/\(width)/\(height)/any"
         let images = [imageUrlA,imageUrlC]
