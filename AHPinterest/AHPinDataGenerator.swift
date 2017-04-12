@@ -25,8 +25,7 @@ public class AHPinDataGenerator: NSObject {
     "https://firebasestorage.googleapis.com/v0/b/localfun-c9f46.appspot.com/o/internal-user-icons%2Fuser-icon-102-done.png?alt=media&token=0acb9659-4c19-49f7-a9d3-cc7ea595a4e4",
     "https://firebasestorage.googleapis.com/v0/b/localfun-c9f46.appspot.com/o/internal-user-icons%2Fuser-icon-101-done.png?alt=media&token=f2ca4770-47b4-45f5-9765-d5fbfd2b558a",
     "https://firebasestorage.googleapis.com/v0/b/localfun-c9f46.appspot.com/o/internal-user-icons%2Fuser-icon-103-done.png?alt=media&token=afad647c-b482-41b6-9cd7-441c5c1f958d"]
-    
-    let picGallery = ["Alaska", "California", "Colorado", "Utah", "Washington","California", "Colorado", "Alaska", "California"]
+
     
     
     
@@ -47,7 +46,7 @@ extension AHPinDataGenerator{
     
     func randomCardBatch() -> [PinDataModel] {
         var data = [PinDataModel]()
-        for _ in 0..<10 {
+        for _ in 0..<20 {
             let dict = randomPin()
             if let pinData = PinDataModel(dict: dict) {
                 data.append(pinData)

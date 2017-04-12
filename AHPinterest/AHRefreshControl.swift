@@ -42,7 +42,7 @@ extension AHRefreshControl {
 // the following confition will be satisfied first since scrollView reaches the bottom first. And we do networking first too before the user sees footerCell refreshes.
         if yOffset > 0.0 &&  deltaLeft > 0.0 {
             // we load older pins when there's only one screen height left to scroll
-            if deltaLeft < screenHeight * 1.5{
+            if deltaLeft < screenHeight * 2{
                 // at this point, the footerCell has not being dequeued from collectionView yet. Thus self.footerCell is nil
                 if !isLoading {
                     // isLoading = true as an indicator for footerCell?.refresh() later

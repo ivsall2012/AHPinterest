@@ -100,7 +100,6 @@ class AHLayout: UICollectionViewLayout {
     
     
     override func prepare() {
-        print("prepare()")
         super.prepare()
         guard cache.isEmpty else {
             return
