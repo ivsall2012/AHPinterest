@@ -56,10 +56,37 @@ class ViewModel: NSObject {
                 newPinVMs.append(contentsOf: self.pinVMs!)
                 self.pinVMs = newPinVMs
             }
-            
-            print("count:\(self.pinVMs!.count)")
+        
             self.collectionView.reloadData()
             completion?(true)
+        }
+    }
+    
+    func loadOlderData(completion: ((_ success: Bool)->Swift.Void)? ){
+        AHNetowrkTool.tool.loadNewData { (newPinVMs) in
+            if self.pinVMs == nil {
+                self.pinVMs = newPinVMs
+                self.collectionView.reloadData()
+                completion?(true)
+            }else{
+                var starter = self.pinVMs!.count
+                var indexPaths = [IndexPath]()
+                
+                for _ in newPinVMs {
+                    let indexPath = IndexPath(item: starter, section: 0)
+                    indexPaths.append(indexPath)
+                    starter += 1
+                }
+                
+                self.pinVMs!.append(contentsOf: newPinVMs)
+                
+                self.collectionView.performBatchUpdates({
+                    self.collectionView.insertItems(at: indexPaths)
+                    }, completion: { (_) in
+                        completion?(true)
+                })
+            }
+            
         }
     }
 

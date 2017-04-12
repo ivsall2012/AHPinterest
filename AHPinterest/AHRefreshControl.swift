@@ -11,23 +11,52 @@ import UIKit
 class AHRefreshControl: NSObject {
     weak var headerCell: AHCollectionRefreshHeader?
     weak var viewModel: ViewModel?
-    
+    var isLoading = false
 }
 
 extension AHRefreshControl {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         handlerPullToRefresh(scrollView, didEndDragging: false)
+        handlePullUpLoad(scrollView, didEndDragging: false)
     }
     
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         handlerPullToRefresh(scrollView, didEndDragging: true)
-        
+        handlePullUpLoad(scrollView, didEndDragging: true)
+    }
+}
+
+// MARK:- Pull-Up-to-Load old stuff
+extension AHRefreshControl {
+    func handlePullUpLoad(_ scrollView: UIScrollView, didEndDragging: Bool) {
+        let contentSize = scrollView.contentSize
+        let yOffset = scrollView.contentOffset.y
+        let screenHeight = UIScreen.main.bounds.height
+        // yOffset + screenHeight is the current bottom y position
+        // we load older pins when there's only one screen height left to scroll
+        let delta = contentSize.height - (yOffset + screenHeight)
+
+        guard yOffset > 0.0 &&  delta > 0.0 else {
+            return
+        }
+        return
+        if delta < screenHeight{
+            if !isLoading {
+                isLoading = true
+                print("loading....")
+                viewModel?.loadOlderData(completion: { (_) in
+                    print("finished loading!")
+                })
+            }
+        }
     }
 }
 
 
-// MARK:- For Pull-to-Refresh stuff
+
+
+// MARK:- Pull-to-Refresh stuff
 extension AHRefreshControl {
     func handlerPullToRefresh(_ scrollView: UIScrollView, didEndDragging: Bool) {
         guard let headerCell = headerCell else {

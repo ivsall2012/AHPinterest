@@ -59,7 +59,7 @@ class AHLayout: UICollectionViewLayout {
         
         var column: Int = 0
         var yOffsets = [CGFloat](repeating: 0.0, count: numberOfColumns)
-        var previousHeight: CGFloat = 0.0
+        var currentMaxYOffset: CGFloat = 0.0
         for i in 0..<collectionView!.numberOfItems(inSection: 0) {
             let indexPath = IndexPath(item: i, section: 0)
             
@@ -91,10 +91,13 @@ class AHLayout: UICollectionViewLayout {
             
             // Only change the stacking column when currentYOffSet is greater than previsouHeight, then we switch to next available cloumn
             contentHeight = max(frame.maxY, contentHeight)
-            if previousHeight < currentYOffSet {
-                previousHeight = currentYOffSet
-                column = i % numberOfColumns
+            if currentMaxYOffset < currentYOffSet {
+                currentMaxYOffset = currentYOffSet
+                // update column for next round only when current column is taller than the other one. FYI: column values are only 0,1
+                column = (i + 1) % numberOfColumns
             }
+            
+            // TODO: if there are more than 2 column to display, new pins should be distributed to the shortest yOffset column in order to best even out the heights across all columns
         }
     }
     

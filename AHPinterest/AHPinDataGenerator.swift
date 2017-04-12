@@ -47,13 +47,18 @@ extension AHPinDataGenerator{
     
     func randomCardBatch() -> [PinDataModel] {
         var data = [PinDataModel]()
-//        let numOfCards = random(20)
-        for _ in 0..<20 {
-            let dict = randomPin()
+//        for _ in 0..<20 {
+//            let dict = randomPin()
+//            if let pinData = PinDataModel(dict: dict) {
+//                data.append(pinData)
+//            }
+//            
+//        }
+        let dicts = generatePinArr(specific: [400.0, 50.0, 100.0, 50.0])
+        for dict in dicts {
             if let pinData = PinDataModel(dict: dict) {
                 data.append(pinData)
             }
-            
         }
         return data
     }
@@ -74,8 +79,8 @@ extension AHPinDataGenerator{
         
         
         
-        let width = 100 * random(3, 6)
-        let height = 100 * random(3, 6)
+        let width = 100 * random(1, 2)
+        let height = 100 * random(1, 4)
         let imageUrlA = "http://lorempixel.com/\(width)/\(height)"
         let imageUrlC = "https://placeimg.com/\(width)/\(height)/any"
         let images = [imageUrlA,imageUrlC]
@@ -94,6 +99,51 @@ extension AHPinDataGenerator{
         
         return dict
         
+    }
+    
+    func generatePinArr(specific heights: [NSNumber]) -> [[String: Any]] {
+        var arr = [[String: Any]]()
+        for height in heights {
+            let pinDict = generatePin(specific: height)
+            arr.append(pinDict)
+        }
+        return arr
+    }
+    
+    
+    func generatePin(specific height: NSNumber) -> [String: Any] {
+        var dict = [String: Any]()
+        
+        let smalText = random(1, 3)
+        let bigText = random(3, 5)
+        // it has 60% chance to have smal text
+        let manyWords = randomPercentChance(percent: 60) ? smalText : bigText
+        var note: String = ""
+        for _ in 0..<manyWords {
+            note.append(paragraph)
+        }
+        dict["note"] = note
+        
+        
+        
+        let width = 100 * random(1, 3)
+        let height = height
+        let imageUrlA = "http://lorempixel.com/\(width)/\(height)"
+        let imageUrlC = "https://placeimg.com/\(width)/\(height)/any"
+        let images = [imageUrlA,imageUrlC]
+        let imageUrl = images[random(images.count)]
+        dict["imageSize"] = ["width": CGFloat(width), "height": height]
+        dict["imageURL"] = imageUrl
+        
+        
+        let name = randomName(with: "The Generator")
+        dict["userName"] = name
+        
+        let userAvatar = userAvatars[random(userAvatars.count)]
+        dict["avatarURL"] = userAvatar
+
+        
+        return dict
     }
     
 }
