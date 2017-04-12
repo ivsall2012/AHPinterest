@@ -19,14 +19,18 @@ protocol AHLayoutDelegate {
     
     func AHLayoutSizeForHeaderView() -> CGSize
     
+    func AHLayoutSizeForFooterView() -> CGSize
 }
 
 
 class AHLayout: UICollectionViewLayout {
     var delegate: AHLayoutDelegate!
 
-    fileprivate var isHeaderSetup: Bool = false
+    fileprivate var isRefreshSetup: Bool = false
+    
     fileprivate var headerAttr: UICollectionViewLayoutAttributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: AHCollectionRefreshHeaderKind, with: IndexPath(item: 0, section: 0))
+    fileprivate var footerAttr: UICollectionViewLayoutAttributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: AHCollectionRefreshFooterKind, with: IndexPath(item: 1, section: 0))
+    
     
     fileprivate var currentMaxYOffset: CGFloat = 0.0
     
@@ -67,15 +71,23 @@ class AHLayout: UICollectionViewLayout {
     }
     
     fileprivate func setupHeader() {
-        if isHeaderSetup {
+        if isRefreshSetup {
             return
         }
         let inset = collectionView?.contentInset
-        let headerSize = delegate.AHLayoutSizeForHeaderView()
-        let origin = CGPoint(x: 0.0, y: -headerSize.height + inset!.top)
-        let size = CGSize(width: contentWidth, height: headerSize.height)
-        headerAttr.frame = .init(origin: origin, size: size)
-        isHeaderSetup = true
+        let headerRawSize = delegate.AHLayoutSizeForHeaderView()
+        let headerOrigin = CGPoint(x: 0.0, y: -headerRawSize.height + inset!.top)
+        let headerSize = CGSize(width: contentWidth, height: headerRawSize.height)
+        headerAttr.frame = .init(origin: headerOrigin, size: headerSize)
+        
+        // contentHeight is set alraedy since prepareCell() is called before this func
+        // all cells needed to be calculated in order to obtain contentHeight
+        let footerRawSize = delegate.AHLayoutSizeForFooterView()
+        let footerOrigin = CGPoint(x: 0.0, y: contentHeight)
+        let footerSize = CGSize(width: contentWidth, height: footerRawSize.height)
+        footerAttr.frame = .init(origin: footerOrigin, size: footerSize)
+
+        isRefreshSetup = true
     }
     
     fileprivate func prepareCell() {
@@ -98,6 +110,7 @@ class AHLayout: UICollectionViewLayout {
         // setupHeader has to be called so that headerAttr is at the end of the cache array -- in order to display(weird!)
         setupHeader()
         cache.append(headerAttr)
+        cache.append(footerAttr)
         
     }
     func insertAttributeIntoCache(indexPath: IndexPath) {
@@ -168,6 +181,14 @@ class AHLayout: UICollectionViewLayout {
         return attr
     }
     
+    override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        print("layoutAttributesForSupplementaryView")
+        if elementKind == AHCollectionRefreshHeaderKind {
+            return headerAttr
+        }else{
+            return footerAttr
+        }
+    }
     
     func isIntercept(attr: UICollectionViewLayoutAttributes, rect: CGRect) -> Bool {
         return rect.intersects(attr.frame)
@@ -175,17 +196,10 @@ class AHLayout: UICollectionViewLayout {
     
     
     
-    override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        if elementKind == AHCollectionRefreshHeaderKind {
-            return headerAttr
-        }
-        return nil
-    }
-    
     override func invalidateLayout() {
         super.invalidateLayout()
         cache.removeAll()
-        isHeaderSetup = false
+        isRefreshSetup = false
         reset()
     }
     

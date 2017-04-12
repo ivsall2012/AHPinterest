@@ -13,9 +13,9 @@ class ViewModel: NSObject {
     var collectionView: UICollectionView
     var layout: AHLayout?
     weak var headerCell: AHCollectionRefreshHeader?
+    weak var footerCell: AHCollectionRefreshFooter?
     var pinVMs: [PinViewModel] = [PinViewModel]() {
         didSet {
-            print("new data")
             self.layoutHandler.pinVMs = pinVMs
         }
     }
@@ -33,6 +33,9 @@ class ViewModel: NSObject {
         
         collectionView.contentInset = AHCollectionViewInset
         collectionView.register(AHCollectionRefreshHeader.self, forSupplementaryViewOfKind: AHCollectionRefreshHeaderKind, withReuseIdentifier: AHCollectionRefreshHeaderKind)
+        
+        collectionView.register(AHCollectionRefreshFooter.self, forSupplementaryViewOfKind: AHCollectionRefreshFooterKind, withReuseIdentifier: AHCollectionRefreshFooterKind)
+        
         collectionView.dataSource = self
         collectionView.delegate = self
         let layout = AHLayout()
@@ -163,10 +166,19 @@ extension ViewModel : UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: AHCollectionRefreshHeaderKind, withReuseIdentifier: AHCollectionRefreshHeaderKind, for: indexPath) as! AHCollectionRefreshHeader
-        header.isHidden = true
-        refreshController.headerCell = header
-        return header
+        if kind == AHCollectionRefreshHeaderKind {
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: AHCollectionRefreshHeaderKind, withReuseIdentifier: AHCollectionRefreshHeaderKind, for: indexPath) as! AHCollectionRefreshHeader
+            header.isHidden = true
+            refreshController.headerCell = header
+            return header
+        }else if kind == AHCollectionRefreshFooterKind{
+            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: AHCollectionRefreshFooterKind, withReuseIdentifier: AHCollectionRefreshFooterKind, for: indexPath) as! AHCollectionRefreshFooter
+            footer.isHidden = true
+            refreshController.footerCell = footer
+            return footer
+        }else{
+            return UICollectionReusableView()
+        }
     }
     
     

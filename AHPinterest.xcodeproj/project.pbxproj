@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A12A28361E9E137400F7A36D /* AHCollectionRefreshFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A28351E9E137400F7A36D /* AHCollectionRefreshFooter.swift */; };
 		A15C0B591E9369F600B35BE1 /* AHShareAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C0B581E9369F600B35BE1 /* AHShareAnimator.swift */; };
 		A15C0B5C1E9372B900B35BE1 /* AHShareModalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C0B5A1E9372B900B35BE1 /* AHShareModalVC.swift */; };
 		A168BFDA1E888DDD00A87E03 /* AHPinterestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A168BFD91E888DDD00A87E03 /* AHPinterestTests.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A12A28351E9E137400F7A36D /* AHCollectionRefreshFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHCollectionRefreshFooter.swift; sourceTree = "<group>"; };
 		A15C0B581E9369F600B35BE1 /* AHShareAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHShareAnimator.swift; sourceTree = "<group>"; };
 		A15C0B5A1E9372B900B35BE1 /* AHShareModalVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHShareModalVC.swift; sourceTree = "<group>"; };
 		A168BFD71E888DDD00A87E03 /* AHPinterestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AHPinterestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -216,6 +218,7 @@
 				A168BFE11E8890E500A87E03 /* PinCell.swift */,
 				A1F70F0B1E9B54EB00FF2C91 /* AHCollectionRefreshHeader.swift */,
 				A1F70F151E9CC21A00FF2C91 /* AHRefershUI.swift */,
+				A12A28351E9E137400F7A36D /* AHCollectionRefreshFooter.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				A19EC4491E99D99700B6D7C4 /* AHPinDataGenerator.swift in Sources */,
 				A1CE93541E9A17A5002A8738 /* Constants.swift in Sources */,
 				A173772B1E887F9600462EE1 /* ViewController.swift in Sources */,
+				A12A28361E9E137400F7A36D /* AHCollectionRefreshFooter.swift in Sources */,
 				A1F70F161E9CC21A00FF2C91 /* AHRefershUI.swift in Sources */,
 				A17377291E887F9600462EE1 /* AppDelegate.swift in Sources */,
 			);

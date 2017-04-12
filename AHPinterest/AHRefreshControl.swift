@@ -10,6 +10,7 @@ import UIKit
 
 class AHRefreshControl: NSObject {
     weak var headerCell: AHCollectionRefreshHeader?
+    weak var footerCell: AHCollectionRefreshFooter?
     weak var viewModel: ViewModel?
     var isLoading = false
 }
@@ -17,39 +18,54 @@ class AHRefreshControl: NSObject {
 extension AHRefreshControl {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         handlerPullToRefresh(scrollView, didEndDragging: false)
-        handlePullUpLoad(scrollView, didEndDragging: false)
+        handleAutoLoading(scrollView, didEndDragging: false)
     }
     
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         handlerPullToRefresh(scrollView, didEndDragging: true)
-        handlePullUpLoad(scrollView, didEndDragging: true)
+        handleAutoLoading(scrollView, didEndDragging: true)
     }
 }
 
-// MARK:- Pull-Up-to-Load old stuff
+// MARK:- Auto loading for old pins
 extension AHRefreshControl {
-    func handlePullUpLoad(_ scrollView: UIScrollView, didEndDragging: Bool) {
+    func handleAutoLoading(_ scrollView: UIScrollView, didEndDragging: Bool) {
         let contentSize = scrollView.contentSize
         let yOffset = scrollView.contentOffset.y
+        
         let screenHeight = UIScreen.main.bounds.height
         // yOffset + screenHeight is the current bottom y position
-        // we load older pins when there's only one screen height left to scroll
-        let delta = contentSize.height - (yOffset + screenHeight)
-
-        guard yOffset > 0.0 &&  delta > 0.0 else {
-            return
-        }
-        if delta < screenHeight{
-            if !isLoading {
-                isLoading = true
-                print("loading....")
-                viewModel?.loadOlderData(completion: { (_) in
-                    self.isLoading = false
-                    print("finished loading!")
-                })
+        // deltaLeft represents how long it's left to scroll
+        let deltaLeft = contentSize.height - (yOffset + screenHeight)
+        
+// the following confition will be satisfied first since scrollView reaches the bottom first. And we do networking first too before the user sees footerCell refreshes.
+        if yOffset > 0.0 &&  deltaLeft > 0.0 {
+            // we load older pins when there's only one screen height left to scroll
+            if deltaLeft < screenHeight * 1.5{
+                // at this point, the footerCell has not being dequeued from collectionView yet. Thus self.footerCell is nil
+                if !isLoading {
+                    // isLoading = true as an indicator for footerCell?.refresh() later
+                    isLoading = true
+                    viewModel?.loadOlderData(completion: { (_) in
+                        self.isLoading = false
+                        self.footerCell?.endRefersh()
+                    })
+                }
             }
         }
+        
+// the following condition will be called if the scrolling is really fast cuasing collectionView being pulled up. Then the refreshControl will be shown here
+// deltaLeft being negative means the user is pulling up, no positive space left to scroll, but negative one
+        if deltaLeft <= -AHCollectionViewInset.bottom {
+            if isLoading {
+                // this block can be called mutiple times as user keeps pulling up
+                // but it's ok since footerCell?.refresh() only responses the first call
+                footerCell?.refresh()
+            }
+        }
+        
+        
     }
 }
 

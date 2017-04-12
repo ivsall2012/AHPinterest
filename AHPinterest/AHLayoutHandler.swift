@@ -14,6 +14,10 @@ class AHLayoutHandler: NSObject {
 }
 
 extension AHLayoutHandler: AHLayoutDelegate {
+    func AHLayoutSizeForFooterView() -> CGSize {
+        return CGSize(width: 0.0, height: AHFooterViewHeight)
+    }
+
 
     func AHLayoutSizeForHeaderView() -> CGSize {
         return CGSize(width: 0.0, height: AHHeaderViewHeight)
