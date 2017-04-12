@@ -23,6 +23,11 @@ class AHCollectionRefreshHeader: UICollectionReusableView {
     }
     
     private func setup() {
+        self.addSubview(refreshControl)
+        reset()
+    }
+    
+    fileprivate func reset() {
         refreshControl.bounds.size = AHHeaderRefreshControlSize
         let x = self.bounds.width * 0.5
         let y = self.bounds.height - AHHeaderRefreshControlSize.height * 0.5
@@ -30,9 +35,7 @@ class AHCollectionRefreshHeader: UICollectionReusableView {
         refreshControl.center = .init(x: x, y: y)
         refreshControl.alpha = 0.3
         refreshControl.transform = .init(scaleX: 0.3, y: 0.3)
-        self.addSubview(refreshControl)
     }
-    
     func refresh() {
         if !isSpinning{
             isSpinning = true
@@ -75,7 +78,7 @@ class AHCollectionRefreshHeader: UICollectionReusableView {
     func endRefersh() {
         ratio = 0.0
         isSpinning = false
-        setup()
+        reset()
         refreshControl.layer.removeAnimation(forKey: "refreshSpinning")
     }
     

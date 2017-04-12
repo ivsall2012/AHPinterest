@@ -61,12 +61,12 @@ class AHRefershUI: NSObject {
         let scale = CABasicAnimation(keyPath: "transform.scale")
         scale.fromValue = 1.0
         scale.toValue = 0.0
-        scale.duration = 0.5;
+        scale.duration = 0.35;
         
         refreshControl.layer.add(scale, forKey: "scale")
         refreshControl.layer.add(rotaton, forKey: "ratate")
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5 ) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.35 ) {
             refreshControl.layer.removeAllAnimations()
             refreshControl.isHidden = true
         }
