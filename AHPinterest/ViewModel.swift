@@ -13,11 +13,10 @@ class ViewModel: NSObject {
     var collectionView: UICollectionView
     var layout: AHLayout?
     weak var headerCell: AHCollectionRefreshHeader?
-    var pinVMs: [PinViewModel]? {
+    var pinVMs: [PinViewModel] = [PinViewModel]() {
         didSet {
-            if let pinVMs = pinVMs {
-                self.layoutHandler.pinVMs = pinVMs
-            }
+            print("new data")
+            self.layoutHandler.pinVMs = pinVMs
         }
     }
     var reusablePinCellID: String
@@ -49,14 +48,8 @@ class ViewModel: NSObject {
     
     func loadNewData(completion: ((_ success: Bool)->Swift.Void)? ){
         AHNetowrkTool.tool.loadNewData { (newPinVMs) in
-            if self.pinVMs == nil {
-                self.pinVMs = newPinVMs
-            }else{
-                var newPinVMs = newPinVMs
-                newPinVMs.append(contentsOf: self.pinVMs!)
-                self.pinVMs = newPinVMs
-            }
-        
+            self.pinVMs.removeAll()
+            self.pinVMs.append(contentsOf: newPinVMs)
             self.collectionView.reloadData()
             completion?(true)
         }
@@ -64,12 +57,12 @@ class ViewModel: NSObject {
     
     func loadOlderData(completion: ((_ success: Bool)->Swift.Void)? ){
         AHNetowrkTool.tool.loadNewData { (newPinVMs) in
-            if self.pinVMs == nil {
-                self.pinVMs = newPinVMs
+            if self.pinVMs.count == 0 {
+                self.pinVMs.append(contentsOf: newPinVMs)
                 self.collectionView.reloadData()
                 completion?(true)
             }else{
-                var starter = self.pinVMs!.count
+                var starter = self.pinVMs.count
                 var indexPaths = [IndexPath]()
                 
                 for _ in newPinVMs {
@@ -78,7 +71,7 @@ class ViewModel: NSObject {
                     starter += 1
                 }
                 
-                self.pinVMs!.append(contentsOf: newPinVMs)
+                self.pinVMs.append(contentsOf: newPinVMs)
                 
                 self.collectionView.performBatchUpdates({
                     self.collectionView.insertItems(at: indexPaths)
@@ -155,9 +148,6 @@ extension ViewModel : UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let pinVMs = pinVMs else {
-            return 0
-        }
         return pinVMs.count
     }
     
@@ -165,9 +155,7 @@ extension ViewModel : UICollectionViewDataSource {
     
         let PinCell = collectionView.dequeueReusableCell(withReuseIdentifier: reusablePinCellID, for: indexPath) as! PinCell
         
-        guard let pinVM = pinVMs?[indexPath.item] else {
-            fatalError("pinVM is nil!!")
-        }
+        let pinVM = pinVMs[indexPath.item]
     
         PinCell.mainVC = mainVC
         PinCell.pinVM = pinVM

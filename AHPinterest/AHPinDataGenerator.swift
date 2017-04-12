@@ -82,8 +82,8 @@ extension AHPinDataGenerator{
         
         
         
-        let width = 100 * random(1, 3)
-        let height = 100 * random(1, 3)
+        let width = 100 * random(1, 5)
+        let height = 100 * random(1, 5)
         let imageUrlA = "http://lorempixel.com/\(width)/\(height)"
         let imageUrlC = "https://placeimg.com/\(width)/\(height)/any"
         let images = [imageUrlA,imageUrlC]

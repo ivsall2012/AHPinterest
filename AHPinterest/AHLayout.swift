@@ -52,7 +52,7 @@ class AHLayout: UICollectionViewLayout {
     fileprivate func reset() {
         currentMaxYOffset = 0.0
         currentColumn = 0
-        
+        contentHeight = 0.0
         let inset = collectionView?.contentInset
         contentWidth = collectionView!.bounds.width - (inset!.left + inset!.right)
         
@@ -88,6 +88,7 @@ class AHLayout: UICollectionViewLayout {
     
     
     override func prepare() {
+        print("prepare()")
         super.prepare()
         guard cache.isEmpty else {
             return
@@ -159,6 +160,7 @@ class AHLayout: UICollectionViewLayout {
         return arr
         
     }
+    
     
     
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
