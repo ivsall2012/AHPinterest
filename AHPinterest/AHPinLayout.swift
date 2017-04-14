@@ -46,7 +46,7 @@ protocol AHLayoutDelegate {
 
 class AHPinLayout: UICollectionViewLayout {
     var delegate: AHLayoutDelegate!
-
+    var activateRefreshControl: Bool = false
     fileprivate var isRefreshSetup: Bool = false
     
     fileprivate var headerAttr: UICollectionViewLayoutAttributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: AHHeaderKind, with: IndexPath(item: 0, section: 0))
@@ -95,6 +95,7 @@ class AHPinLayout: UICollectionViewLayout {
         if isRefreshSetup {
             return
         }
+
         let inset = collectionView?.contentInset
         let headerRawSize = delegate.AHLayoutSizeForHeaderView()
         let headerOrigin = CGPoint(x: 0.0, y: -headerRawSize.height + inset!.top)
@@ -108,6 +109,21 @@ class AHPinLayout: UICollectionViewLayout {
         let footerSize = CGSize(width: contentWidth, height: footerRawSize.height)
         footerAttr.frame = .init(origin: footerOrigin, size: footerSize)
 
+        
+        
+        if activateRefreshControl {
+            cache.append(headerAttr)
+            cache.append(footerAttr)
+        }else{
+            cache = cache.filter({ (attr) -> Bool in
+                if attr != headerAttr || attr != footerAttr {
+                    return true
+                }else{
+                    return false
+                }
+            })
+        }
+        
         isRefreshSetup = true
     }
     
@@ -127,10 +143,11 @@ class AHPinLayout: UICollectionViewLayout {
         }
         reset()
         prepareCell()
+        
         // setupHeader has to be called so that headerAttr is at the end of the cache array -- in order to display(weird!)
         setupHeader()
-        cache.append(headerAttr)
-        cache.append(footerAttr)
+        
+        
         
     }
     func insertAttributeIntoCache(indexPath: IndexPath) {

@@ -87,21 +87,21 @@ extension AHDetailVC: UICollectionViewDelegateFlowLayout {
 
 extension AHDetailVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let pinVms = pinVMs else {
+        guard let pinVMs = pinVMs else {
             return 0
         }
 
-        return pinVms.count
+        return pinVMs.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! AHDetailCell
         
-        guard let pinVms = pinVMs else {
+        guard let pinVMs = pinVMs else {
             return cell
         }
         
-        cell.pinVM = pinVms[indexPath.item]
+        cell.pinVM = pinVMs[indexPath.item]
         return cell
     }
 }

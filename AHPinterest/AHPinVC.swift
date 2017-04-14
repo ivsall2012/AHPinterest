@@ -32,24 +32,13 @@ extension AHPinVC {
         super.viewDidLoad()
         collectionView?.contentInset = AHCollectionViewInset
         
-        detailHanlder.pinVC = self
+        // Call mainSetups first
+        mainSetups()
         
-        collectionView?.delegate = pinDelegate
-        pinDelegate.pinVC = self
-        pinDelegate.refreshController = refreshController
-        pinDelegate.detailHandler = detailHanlder
-        
-        collectionView?.dataSource = dataSource
-        dataSource.refreshController = refreshController
-        refreshController.pinVC = self
-        refreshController.collectionView = collectionView
-        
-        let pinLayout = AHPinLayout()
-        collectionView?.setCollectionViewLayout(pinLayout, animated: false)
-        pinLayout.delegate = layoutHandler
-        
-        optionsHandler.pinVC = self
-        optionsHandler.collectionView = collectionView
+        setupDetailHandler()
+        setupRefreshControl()
+        setupOptionsHandler()
+
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -69,6 +58,48 @@ extension AHPinVC {
             }
         })
     }
+}
+
+// MARK:- Setups
+extension AHPinVC {
+    func mainSetups() {
+        setupPinDelegate()
+        setupDataSource()
+        setupLayoutHandler()
+    }
+    
+    func setupDetailHandler(){
+        detailHanlder.pinVC = self
+    }
+    
+    func setupPinDelegate() {
+        collectionView?.delegate = pinDelegate
+        pinDelegate.pinVC = self
+        pinDelegate.refreshController = refreshController
+        pinDelegate.detailHandler = detailHanlder
+    }
+    
+    func setupDataSource() {
+        collectionView?.dataSource = dataSource
+        dataSource.refreshController = refreshController
+    }
+    
+    func setupRefreshControl() {
+        refreshController.pinVC = self
+        refreshController.collectionView = collectionView
+    }
+    
+    func setupLayoutHandler() {
+        let pinLayout = AHPinLayout()
+        collectionView?.setCollectionViewLayout(pinLayout, animated: false)
+        pinLayout.delegate = layoutHandler
+    }
+    
+    func setupOptionsHandler() {
+        optionsHandler.pinVC = self
+        optionsHandler.collectionView = collectionView
+    }
+    
 }
 
 

@@ -12,10 +12,14 @@ class AHRefreshControl: NSObject {
     weak var collectionView: UICollectionView? {
         didSet {
             if let collectionView = collectionView {
+                if let layout = collectionView.collectionViewLayout as? AHPinLayout {
+                    layout.activateRefreshControl = true
+                    
+                    collectionView.register(AHRefreshHeader.self, forSupplementaryViewOfKind: AHHeaderKind, withReuseIdentifier: AHHeaderKind)
+                    
+                    collectionView.register(AHRefreshFooter.self, forSupplementaryViewOfKind: AHFooterKind, withReuseIdentifier: AHFooterKind)
+                }
                 
-                collectionView.register(AHRefreshHeader.self, forSupplementaryViewOfKind: AHHeaderKind, withReuseIdentifier: AHHeaderKind)
-                
-                collectionView.register(AHRefreshFooter.self, forSupplementaryViewOfKind: AHFooterKind, withReuseIdentifier: AHFooterKind)
             }
         }
     }
