@@ -33,22 +33,22 @@ public class AHPinDataGenerator: NSObject {
 
 
 extension AHPinDataGenerator{
-    func randomData() -> [PinViewModel] {
+    func randomData() -> [AHPinViewModel] {
         let pinModels = randomCardBatch()
-        var viewModelArr = [PinViewModel]()
+        var viewModelArr = [AHPinViewModel]()
         for pinModel in pinModels {
-            let viewModel = PinViewModel(pinModel: pinModel)
+            let viewModel = AHPinViewModel(pinModel: pinModel)
             viewModelArr.append(viewModel)
         }
         return viewModelArr
     }
     
     
-    func randomCardBatch() -> [PinDataModel] {
-        var data = [PinDataModel]()
+    func randomCardBatch() -> [AHPinDataModel] {
+        var data = [AHPinDataModel]()
         for _ in 0..<20 {
             let dict = randomPin()
-            if let pinData = PinDataModel(dict: dict) {
+            if let pinData = AHPinDataModel(dict: dict) {
                 data.append(pinData)
             }
             

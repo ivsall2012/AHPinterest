@@ -7,18 +7,18 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--PinVC-->
         <scene sceneID="enQ-85-2xx">
             <objects>
-                <collectionViewController id="XkY-Cr-uNs" customClass="ViewController" customModule="AHPinterest" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="XkY-Cr-uNs" customClass="AHPinVC" customModule="AHPinterest" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" prefetchingEnabled="NO" id="SKe-Ye-ww8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewLayout key="collectionViewLayout" id="lTY-Mv-pIN"/>
+                        <collectionViewLayout key="collectionViewLayout" id="lTY-Mv-pIN" customClass="AHPinLayout" customModule="AHPinterest" customModuleProvider="target"/>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PinCell" id="Ra4-ZS-FeX" customClass="PinCell" customModule="AHPinterest" customModuleProvider="target">
-                                <rect key="frame" x="5" y="0.0" width="366" height="311"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AHPinCell" id="Ra4-ZS-FeX" customClass="AHPinCell" customModule="AHPinterest" customModuleProvider="target">
+                                <rect key="frame" x="4.5" y="0.0" width="366" height="311"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="366" height="311"/>
@@ -79,6 +79,80 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pgC-7f-HaH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-301.60000000000002" y="45.42728635682159"/>
+        </scene>
+        <!--DetailVC-->
+        <scene sceneID="uOb-ve-J2M">
+            <objects>
+                <viewController storyboardIdentifier="AHDetailBrowser" id="jQv-0d-pzv" customClass="AHDetailVC" customModule="AHPinterest" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6wS-ea-2GV"/>
+                        <viewControllerLayoutGuide type="bottom" id="WWY-ep-Gwe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7yU-D8-67r">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4pF-nG-mhj">
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewLayout key="collectionViewLayout" id="sAF-as-MHf" customClass="AHPhotoBrowserLayout" customModule="AHPinterest" customModuleProvider="target"/>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AHDetailCell" id="GwG-2k-NWP" customClass="AHDetailCell" customModule="AHPinterest" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="jQv-0d-pzv" id="E98-mP-LfD"/>
+                                    <outlet property="delegate" destination="jQv-0d-pzv" id="gPo-Ss-Hns"/>
+                                </connections>
+                            </collectionView>
+                            <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BmI-35-qmM" userLabel="Bottom Tool Bar">
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H2j-R7-8mk">
+                                        <frame key="frameInset" minX="9" minY="7" width="63" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Dismiss"/>
+                                        <connections>
+                                            <action selector="dismiss:" destination="jQv-0d-pzv" eventType="touchUpInside" id="Ujy-Ih-jw8"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hHQ-3I-lht">
+                                        <frame key="frameInset" minX="308" minY="7" width="40" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Save"/>
+                                        <connections>
+                                            <action selector="save:" destination="jQv-0d-pzv" eventType="touchUpInside" id="EvJ-F6-ZFs"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.2901960784" green="0.56078431370000004" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="qF0-2f-48z"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="WWY-ep-Gwe" firstAttribute="top" secondItem="BmI-35-qmM" secondAttribute="bottom" id="FzE-Cf-SES"/>
+                            <constraint firstAttribute="trailing" secondItem="BmI-35-qmM" secondAttribute="trailing" id="att-YM-SLS"/>
+                            <constraint firstItem="4pF-nG-mhj" firstAttribute="leading" secondItem="7yU-D8-67r" secondAttribute="leading" id="ec2-QF-Pwx"/>
+                            <constraint firstItem="4pF-nG-mhj" firstAttribute="top" secondItem="7yU-D8-67r" secondAttribute="top" id="i3U-rm-PtQ"/>
+                            <constraint firstAttribute="bottom" secondItem="4pF-nG-mhj" secondAttribute="bottom" id="iad-B9-mSI"/>
+                            <constraint firstAttribute="trailing" secondItem="4pF-nG-mhj" secondAttribute="trailing" id="mlp-sh-20k"/>
+                            <constraint firstItem="BmI-35-qmM" firstAttribute="leading" secondItem="7yU-D8-67r" secondAttribute="leading" id="qWY-nF-NtH"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="4pF-nG-mhj" id="A4P-G9-LSt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zXR-wX-v9z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="726" y="34"/>
         </scene>
     </scenes>
 </document>

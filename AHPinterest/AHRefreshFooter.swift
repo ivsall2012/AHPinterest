@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AHCollectionRefreshFooter: UICollectionReusableView {
+class AHRefreshFooter: UICollectionReusableView {
     fileprivate var refreshControl: UIImageView = UIImageView(image: #imageLiteral(resourceName: "refresh-control"))
     var isSpinning: Bool = false
     override init(frame: CGRect) {
@@ -27,7 +27,7 @@ class AHCollectionRefreshFooter: UICollectionReusableView {
     }
     
     fileprivate func reset() {
-        refreshControl.bounds.size = AHFooterRefreshControlSize
+        refreshControl.bounds.size = AHRefreshFooterSize
         let x: CGFloat = self.bounds.width * 0.5
         let y: CGFloat = 0.0
         refreshControl.layer.anchorPoint = .init(x: 0.5, y: 0.5)
@@ -40,7 +40,7 @@ class AHCollectionRefreshFooter: UICollectionReusableView {
             isSpinning = true
             isHidden = false
             let x = self.bounds.width * 0.5
-            let y = AHFooterRefreshControlSize.height * 0.5
+            let y = AHRefreshFooterSize.height * 0.5
             refreshControl.transform = .identity
             refreshControl.center = .init(x: x, y: y)
             

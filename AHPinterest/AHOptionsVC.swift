@@ -20,14 +20,14 @@ fileprivate let fingerRingSize:CGSize = CGSize(width: 60, height: 60)
 fileprivate let triggerDistance = radius * 0.7
 
 
-class AHShareModalVC: UIViewController {
+class AHOptionsVC: UIViewController {
     let btnLeft = UIButton(type: .custom)
     let btnMiddle = UIButton(type: .custom)
     let btnRight = UIButton(type: .custom)
     var fingerRingView = UIImageView(image: #imageLiteral(resourceName: "finger-ring"))
     var allButtons: [UIButton]?
     
-    var buttonsPositions: ButtonsPositions? = nil {
+    fileprivate var buttonsPositions: ButtonsPositions? = nil {
         didSet {
             if buttonsPositions != nil {
                 btnLeft.center = startingPoint!
@@ -70,7 +70,7 @@ class AHShareModalVC: UIViewController {
 }
 
 // MARK: Setup Functions
-extension AHShareModalVC {
+extension AHOptionsVC {
     func setupButtons() {
         btnLeft.setImage(#imageLiteral(resourceName: "pin-btn-normal"), for: .normal)
         btnLeft.setImage(#imageLiteral(resourceName: "pin-btn-selected"), for: .selected)
@@ -91,7 +91,7 @@ extension AHShareModalVC {
 
 
 // MARK: Handler Events
-extension AHShareModalVC {
+extension AHOptionsVC {
     func pinBtnTapped(_ sender: UIButton){
         print("pinBtnTapped")
         dismiss(animated: true, completion: nil)
@@ -108,7 +108,7 @@ extension AHShareModalVC {
 }
 
 // MARK: Hooks Called by Outside Object
-extension AHShareModalVC {
+extension AHOptionsVC {
     func changed(point: CGPoint){
         guard let startingPoint = startingPoint else {
             return
@@ -153,8 +153,8 @@ extension AHShareModalVC {
 
 
 // MARK:- Animations
-extension AHShareModalVC: AHAnimatorDelegate {
-    func AHAnimatorDidFinishPresentingTransition() {
+extension AHOptionsVC: AHOptionsAnimatorDelegate {
+    func AHOptionsAnimatorDidFinishTransition() {
         buttonAnimation()
     }
     
@@ -275,7 +275,7 @@ extension AHShareModalVC: AHAnimatorDelegate {
 
 
 // MARK:- Convenient Struct
-struct ButtonsPositions {
+fileprivate struct ButtonsPositions {
     var left:CGPoint = .zero
     var middle:CGPoint = .zero
     var right:CGPoint = .zero

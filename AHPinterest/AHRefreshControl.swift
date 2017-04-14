@@ -9,9 +9,31 @@
 import UIKit
 
 class AHRefreshControl: NSObject {
-    weak var headerCell: AHCollectionRefreshHeader?
-    weak var footerCell: AHCollectionRefreshFooter?
-    weak var viewModel: ViewModel?
+    weak var collectionView: UICollectionView? {
+        didSet {
+            if let collectionView = collectionView {
+                
+                collectionView.register(AHRefreshHeader.self, forSupplementaryViewOfKind: AHHeaderKind, withReuseIdentifier: AHHeaderKind)
+                
+                collectionView.register(AHRefreshFooter.self, forSupplementaryViewOfKind: AHFooterKind, withReuseIdentifier: AHFooterKind)
+            }
+        }
+    }
+    var headerCell: AHRefreshHeader?{
+        didSet {
+            if let headerCell = headerCell {
+                headerCell.isHidden = true
+            }
+        }
+    }
+    var footerCell: AHRefreshFooter?{
+        didSet {
+            if let footerCell = footerCell {
+                footerCell.isHidden = true
+            }
+        }
+    }
+    weak var pinVC: AHPinVC?
     var isLoading = false
 }
 
@@ -47,7 +69,7 @@ extension AHRefreshControl {
                 if !isLoading {
                     // isLoading = true as an indicator for footerCell?.refresh() later
                     isLoading = true
-                    viewModel?.loadOlderData(completion: { (_) in
+                    pinVC?.loadOlderData(completion: { (_) in
                         self.isLoading = false
                         self.footerCell?.endRefersh()
                     })
@@ -89,7 +111,7 @@ extension AHRefreshControl {
                 UIView.animate(withDuration: 0.25, animations: {
                     scrollView.contentInset.top = headerCell.bounds.height
                     }, completion: { (_) in
-                        self.viewModel?.loadNewData(completion: { (_) in
+                        self.pinVC?.loadNewData(completion: { (_) in
                             UIView.animate(withDuration: 0.25, animations: {
                                 scrollView.contentInset = AHCollectionViewInset
                             })
@@ -112,7 +134,7 @@ extension AHRefreshControl {
         }
     }
     /// tell the header cell how much to pull down
-    func showingRefreshControl(yOffset: CGFloat, headerCell: AHCollectionRefreshHeader) {
+    func showingRefreshControl(yOffset: CGFloat, headerCell: AHRefreshHeader) {
         guard yOffset >= 0.0 else {
             return
         }

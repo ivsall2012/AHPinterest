@@ -8,21 +8,21 @@
 
 import UIKit
 
-fileprivate enum AHShareAnimatorState {
+fileprivate enum AHOptionsAnimatorState {
     case none
     case presenting
     case dismissing
 }
 
-protocol AHAnimatorDelegate: NSObjectProtocol {
+protocol AHOptionsAnimatorDelegate: NSObjectProtocol {
     // The presented VC should comfirm to this function. You should do the VC related animation here, such as the share buttons popping out after finishing transition.
-    func AHAnimatorDidFinishPresentingTransition()
+    func AHOptionsAnimatorDidFinishTransition()
 }
 
-class AHShareAnimator: NSObject {
-    weak var delegate: AHAnimatorDelegate?
+class AHOptionsAnimator: NSObject {
+    weak var delegate: AHOptionsAnimatorDelegate?
     weak var fromView: UIView?
-    fileprivate var state: AHShareAnimatorState = .none
+    fileprivate var state: AHOptionsAnimatorState = .none
     fileprivate var fromViewSnapshot: UIView?
 
     // You should pass the long pressed cell into this function
@@ -32,7 +32,7 @@ class AHShareAnimator: NSObject {
 }
 
 
-extension AHShareAnimator : UIViewControllerTransitioningDelegate{
+extension AHOptionsAnimator : UIViewControllerTransitioningDelegate{
     // callecd when presenting
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         state = .presenting
@@ -45,7 +45,7 @@ extension AHShareAnimator : UIViewControllerTransitioningDelegate{
     }
 }
 
-extension AHShareAnimator : UIViewControllerAnimatedTransitioning {
+extension AHOptionsAnimator : UIViewControllerAnimatedTransitioning {
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.5
     }
@@ -87,7 +87,7 @@ extension AHShareAnimator : UIViewControllerAnimatedTransitioning {
                 context.completeTransition(true)
                 
                 // this animation has to be called after VC's viewDidAppear: in order to do VC related animation
-                self.delegate?.AHAnimatorDidFinishPresentingTransition()
+                self.delegate?.AHOptionsAnimatorDidFinishTransition()
         })
 
     }

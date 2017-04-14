@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PinCell: UICollectionViewCell {
+class AHPinCell: UICollectionViewCell {
     
     @IBOutlet weak var note: UILabel!
     @IBOutlet weak var imageView: UIImageView!
@@ -16,7 +16,6 @@ class PinCell: UICollectionViewCell {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var noteHeightConstraint: NSLayoutConstraint!
-    weak var mainVC: UIViewController?
 
     
     override func awakeFromNib() {
@@ -26,7 +25,7 @@ class PinCell: UICollectionViewCell {
         self.contentView.layer.masksToBounds = true
     }
     
-    var pinVM: PinViewModel? {
+    var pinVM: AHPinViewModel? {
         didSet{
             if let pinVM = pinVM {
                 let model = pinVM.pinModel
@@ -81,7 +80,7 @@ class PinCell: UICollectionViewCell {
 }
 
 
-extension PinCell {
+extension AHPinCell {
     func highLightAnimation() {
         self.clipsToBounds = false
         let bgView = UIView(frame: self.bounds)

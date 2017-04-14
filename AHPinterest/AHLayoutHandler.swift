@@ -10,31 +10,21 @@ import UIKit
 import AVFoundation
 
 class AHLayoutHandler: NSObject {
-    var pinVMs: [PinViewModel]?
+    var pinVMs: [AHPinViewModel]?
 }
 
 extension AHLayoutHandler: AHLayoutDelegate {
     func AHLayoutSizeForFooterView() -> CGSize {
-        return CGSize(width: 0.0, height: AHFooterViewHeight)
+        return CGSize(width: 0.0, height: AHFooterHeight)
     }
 
 
     func AHLayoutSizeForHeaderView() -> CGSize {
-        return CGSize(width: 0.0, height: AHHeaderViewHeight)
-    }
-    
-    func AHLayoutForHeaderView() -> UIView {
-        let view = UIView(frame: .init(x: 0, y: 0, width: 200, height: 400))
-        return view
-    }
-    
-    func AHLayoutForFooterView() -> UIView {
-        let view = UIView(frame: .init(x: 0, y: 0, width: 200, height: 400))
-        return view
+        return CGSize(width: 0.0, height: AHHeaderHeight)
     }
     
     func AHLayoutHeightForUserAvatar(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat {
-        return userAvatarHeight
+        return AHUserAvatarHeight
     }
     
     func AHLayoutHeightForPhotoAt(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat {
@@ -52,7 +42,7 @@ extension AHLayoutHandler: AHLayoutDelegate {
         guard let pinVM = pinVMs?[indexPath.item] else {
             return 0.0
         }
-        return pinVM.heightForNote(font: noteFont, width: width)
+        return pinVM.heightForNote(font: AHNoteFont, width: width)
     }
     
 }

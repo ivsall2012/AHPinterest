@@ -8,7 +8,28 @@
 
 import UIKit
 
-
+class AHLayoutAttributes: UICollectionViewLayoutAttributes {
+    var imageHeight: CGFloat = 0.0
+    var noteHeight: CGFloat = 0.0
+    
+    override func copy(with zone: NSZone? = nil) -> Any {
+        let copy = super.copy(with: zone) as! AHLayoutAttributes
+        copy.imageHeight = self.imageHeight
+        copy.noteHeight = self.noteHeight
+        return copy
+    }
+    
+    override func isEqual(_ object: Any?) -> Bool {
+        if let otherObj = object as? AHLayoutAttributes{
+            if (otherObj.imageHeight - self.imageHeight) < 0.01 && (otherObj.noteHeight - self.noteHeight) < 0.01{
+                return super.isEqual(otherObj)
+            }
+        }else{
+            return false
+        }
+        return false
+    }
+}
 
 protocol AHLayoutDelegate {
     func AHLayoutHeightForPhotoAt(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat
@@ -23,13 +44,13 @@ protocol AHLayoutDelegate {
 }
 
 
-class AHLayout: UICollectionViewLayout {
+class AHPinLayout: UICollectionViewLayout {
     var delegate: AHLayoutDelegate!
 
     fileprivate var isRefreshSetup: Bool = false
     
-    fileprivate var headerAttr: UICollectionViewLayoutAttributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: AHCollectionRefreshHeaderKind, with: IndexPath(item: 0, section: 0))
-    fileprivate var footerAttr: UICollectionViewLayoutAttributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: AHCollectionRefreshFooterKind, with: IndexPath(item: 1, section: 0))
+    fileprivate var headerAttr: UICollectionViewLayoutAttributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: AHHeaderKind, with: IndexPath(item: 0, section: 0))
+    fileprivate var footerAttr: UICollectionViewLayoutAttributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: AHFooterKind, with: IndexPath(item: 1, section: 0))
     
     
     fileprivate var currentMaxYOffset: CGFloat = 0.0
@@ -40,7 +61,7 @@ class AHLayout: UICollectionViewLayout {
     
     fileprivate var xOffSets = [CGFloat]()
     
-    fileprivate var yOffsets = [CGFloat](repeating: 0.0, count: numberOfColumns)
+    fileprivate var yOffsets = [CGFloat](repeating: 0.0, count: AHNumberOfColumns)
     
     fileprivate var cache = [UICollectionViewLayoutAttributes]()
     
@@ -60,14 +81,14 @@ class AHLayout: UICollectionViewLayout {
         let inset = collectionView?.contentInset
         contentWidth = collectionView!.bounds.width - (inset!.left + inset!.right)
         
-        columnWidth = contentWidth / CGFloat(numberOfColumns)
+        columnWidth = contentWidth / CGFloat(AHNumberOfColumns)
         
         xOffSets.removeAll()
-        for i in 0..<numberOfColumns {
+        for i in 0..<AHNumberOfColumns {
             xOffSets.append(CGFloat(i) * columnWidth)
         }
         
-        yOffsets = [CGFloat](repeating: 0.0, count: numberOfColumns)
+        yOffsets = [CGFloat](repeating: 0.0, count: AHNumberOfColumns)
     }
     
     fileprivate func setupHeader() {
@@ -117,7 +138,7 @@ class AHLayout: UICollectionViewLayout {
             fatalError("There can be only 1 section at this time")
         }
         
-        let cellWidth = columnWidth - 2 * cellPadding
+        let cellWidth = columnWidth - 2 * AHCellPadding
         let imageHeight = delegate.AHLayoutHeightForPhotoAt(indexPath: indexPath, width: cellWidth, collectionView: collectionView!)
         
         let noteHeight = delegate.AHLayoutHeightForNote(indexPath: indexPath, width: cellWidth, collectionView: collectionView!)
@@ -125,7 +146,7 @@ class AHLayout: UICollectionViewLayout {
         
         let userAvatarHeight = delegate.AHLayoutHeightForUserAvatar(indexPath: indexPath, width: cellWidth, collectionView: collectionView!)
         
-        let totalH = cellPadding + imageHeight + noteHeight + cellPadding + userAvatarHeight + cellPadding + cellPadding
+        let totalH = AHCellPadding + imageHeight + noteHeight + AHCellPadding + userAvatarHeight + AHCellPadding + AHCellPadding
         
         
         let attr = AHLayoutAttributes(forCellWith: indexPath)
@@ -133,7 +154,7 @@ class AHLayout: UICollectionViewLayout {
         let cellY = yOffsets[currentColumn]
         
         let frame = CGRect(x: cellX, y: cellY, width: columnWidth, height: totalH)
-        let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
+        let insetFrame = frame.insetBy(dx: AHCellPadding, dy: AHCellPadding)
         attr.frame = insetFrame
         attr.imageHeight = imageHeight
         attr.noteHeight = noteHeight
@@ -149,7 +170,7 @@ class AHLayout: UICollectionViewLayout {
         if currentMaxYOffset < currentYOffSet {
             currentMaxYOffset = currentYOffSet
             // update column for next round only when current column is taller than the other one. FYI: column values are only 0,1
-            currentColumn = (indexPath.item + 1) % numberOfColumns
+            currentColumn = (indexPath.item + 1) % AHNumberOfColumns
         }
         
         // TODO: if there are more than 2 column to display, new pins should be distributed to the shortest yOffset column in order to best even out the heights across all columns
@@ -181,11 +202,12 @@ class AHLayout: UICollectionViewLayout {
     }
     
     override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        print("layoutAttributesForSupplementaryView")
-        if elementKind == AHCollectionRefreshHeaderKind {
+        if elementKind == AHHeaderKind {
             return headerAttr
-        }else{
+        }else if elementKind == AHFooterKind{
             return footerAttr
+        }else{
+            return nil
         }
     }
     
@@ -221,6 +243,10 @@ class AHLayout: UICollectionViewLayout {
 //    }
     
 }
+
+
+
+
 
 
 

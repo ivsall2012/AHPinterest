@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AHCollectionRefreshHeader: UICollectionReusableView {
+class AHRefreshHeader: UICollectionReusableView {
     fileprivate var refreshControl: UIImageView = UIImageView(image: #imageLiteral(resourceName: "refresh-control"))
     var isSpinning: Bool = false
     var ratio: CGFloat = 0.0
@@ -28,9 +28,9 @@ class AHCollectionRefreshHeader: UICollectionReusableView {
     }
     
     fileprivate func reset() {
-        refreshControl.bounds.size = AHHeaderRefreshControlSize
+        refreshControl.bounds.size = AHRefreshHeaderSize
         let x = self.bounds.width * 0.5
-        let y = self.bounds.height - AHHeaderRefreshControlSize.height * 0.5
+        let y = self.bounds.height - AHRefreshHeaderSize.height * 0.5
         refreshControl.layer.anchorPoint = .init(x: 0.5, y: 0.5)
         refreshControl.center = .init(x: x, y: y)
         refreshControl.alpha = 0.3
@@ -41,7 +41,7 @@ class AHCollectionRefreshHeader: UICollectionReusableView {
             isSpinning = true
             
             let x = self.bounds.width * 0.5
-            let y = AHHeaderRefreshControlSize.height * 0.5
+            let y = AHRefreshHeaderSize.height * 0.5
             refreshControl.transform = .identity
             refreshControl.center = .init(x: x, y: y)
             

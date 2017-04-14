@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PinDataModel : NSObject {
+class AHPinDataModel : NSObject {
     
     
     var imageSize: CGSize
