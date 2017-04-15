@@ -9,20 +9,6 @@
 import UIKit
 
 class AHRefreshControl: NSObject {
-    weak var collectionView: UICollectionView? {
-        didSet {
-            if let collectionView = collectionView {
-                if let layout = collectionView.collectionViewLayout as? AHPinLayout {
-                    layout.activateRefreshControl = true
-                    
-                    collectionView.register(AHRefreshHeader.self, forSupplementaryViewOfKind: AHHeaderKind, withReuseIdentifier: AHHeaderKind)
-                    
-                    collectionView.register(AHRefreshFooter.self, forSupplementaryViewOfKind: AHFooterKind, withReuseIdentifier: AHFooterKind)
-                }
-                
-            }
-        }
-    }
     var headerCell: AHRefreshHeader?{
         didSet {
             if let headerCell = headerCell {
@@ -73,7 +59,6 @@ extension AHRefreshControl {
                 if !isLoading {
                     // isLoading = true as an indicator for footerCell?.refresh() later
                     isLoading = true
-                    print("loading...")
                     pinVC?.loadOlderData(completion: { (_) in
                         self.isLoading = false
                         self.footerCell?.endRefersh()

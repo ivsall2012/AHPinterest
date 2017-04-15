@@ -9,6 +9,9 @@
 import UIKit
 
 class AHPinVC: UICollectionViewController {
+    let layoutRouter = AHLayoutRouter()
+    let pinLayout = AHPinLayout()
+    
     let dataSource = AHPinDataSource()
     let refreshController = AHRefreshControl()
     let pinDelegate = AHPinDelegate()
@@ -86,16 +89,18 @@ extension AHPinVC {
     
     func setupRefreshControl() {
         refreshController.pinVC = self
-        refreshController.collectionView = collectionView
     }
     
     func setupLayoutHandler() {
-        let layoutRouter = AHLayoutRouter()
         collectionView?.setCollectionViewLayout(layoutRouter, animated: false)
-        
-        let pinLayout = AHPinLayout()
         layoutRouter.add(layout: pinLayout)
         pinLayout.delegate = layoutHandler
+        
+        
+        pinLayout.activateRefreshControl = true
+        collectionView?.register(AHRefreshHeader.self, forSupplementaryViewOfKind: AHHeaderKind, withReuseIdentifier: AHHeaderKind)
+        
+        collectionView?.register(AHRefreshFooter.self, forSupplementaryViewOfKind: AHFooterKind, withReuseIdentifier: AHFooterKind)
     }
     
     func setupOptionsHandler() {

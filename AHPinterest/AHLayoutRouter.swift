@@ -69,7 +69,7 @@ extension AHLayoutRouter {
     override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         var targetAttr: UICollectionViewLayoutAttributes?
         layoutArr.forEach { (layout) in
-            if targetAttr != nil {
+            if targetAttr == nil {
                 targetAttr = layout.layoutAttributesForSupplementaryView(ofKind: elementKind, at: indexPath)
             }
         }
