@@ -73,6 +73,7 @@ extension AHRefreshControl {
                 if !isLoading {
                     // isLoading = true as an indicator for footerCell?.refresh() later
                     isLoading = true
+                    print("loading...")
                     pinVC?.loadOlderData(completion: { (_) in
                         self.isLoading = false
                         self.footerCell?.endRefersh()

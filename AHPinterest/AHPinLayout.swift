@@ -78,8 +78,10 @@ class AHPinLayout: UICollectionViewLayout {
         currentMaxYOffset = 0.0
         currentColumn = 0
         contentHeight = 0.0
-        let inset = collectionView?.contentInset
-        contentWidth = collectionView!.bounds.width - (inset!.left + inset!.right)
+//        let inset = collectionView?.contentInset
+        let inset = AHCollectionViewInset
+//        contentWidth = collectionView!.bounds.width - (inset!.left + inset!.right)
+        contentWidth = UIScreen.main.bounds.width - (inset.left + inset.right)
         
         columnWidth = contentWidth / CGFloat(AHNumberOfColumns)
         
@@ -137,7 +139,7 @@ class AHPinLayout: UICollectionViewLayout {
     
     
     override func prepare() {
-        super.prepare()
+//        super.prepare()
         guard cache.isEmpty else {
             return
         }
@@ -235,7 +237,7 @@ class AHPinLayout: UICollectionViewLayout {
     
     
     override func invalidateLayout() {
-        super.invalidateLayout()
+//        super.invalidateLayout()
         cache.removeAll()
         isRefreshSetup = false
         reset()

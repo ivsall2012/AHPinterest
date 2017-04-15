@@ -90,8 +90,11 @@ extension AHPinVC {
     }
     
     func setupLayoutHandler() {
+        let layoutRouter = AHLayoutRouter()
+        collectionView?.setCollectionViewLayout(layoutRouter, animated: false)
+        
         let pinLayout = AHPinLayout()
-        collectionView?.setCollectionViewLayout(pinLayout, animated: false)
+        layoutRouter.add(layout: pinLayout)
         pinLayout.delegate = layoutHandler
     }
     
@@ -129,9 +132,7 @@ extension AHPinVC {
                     indexPaths.append(indexPath)
                     starter += 1
                 }
-                
                 self.pinVMs.append(contentsOf: newPinVMs)
-                
                 self.collectionView?.performBatchUpdates({
                     self.collectionView?.insertItems(at: indexPaths)
                     }, completion: { (_) in

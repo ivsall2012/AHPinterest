@@ -32,6 +32,7 @@
 		A19EC44B1E99DFBF00B6D7C4 /* AHNetowrkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19EC44A1E99DFBF00B6D7C4 /* AHNetowrkTool.swift */; };
 		A19EC44D1E99EC0000B6D7C4 /* AHPinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19EC44C1E99EC0000B6D7C4 /* AHPinViewModel.swift */; };
 		A1A074AB1E9A2AB600FEC153 /* UIImageView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A074AA1E9A2AB600FEC153 /* UIImageView+extension.swift */; };
+		A1B115001EA2B29F004D8601 /* AHLayoutRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B114FF1EA2B29F004D8601 /* AHLayoutRouter.swift */; };
 		A1CE93541E9A17A5002A8738 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CE93531E9A17A5002A8738 /* Constants.swift */; };
 		A1F70F0C1E9B54EB00FF2C91 /* AHRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F70F0B1E9B54EB00FF2C91 /* AHRefreshHeader.swift */; };
 		A1F70F121E9C57CB00FF2C91 /* AHLayoutHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F70F111E9C57CB00FF2C91 /* AHLayoutHandler.swift */; };
@@ -79,6 +80,7 @@
 		A19EC44A1E99DFBF00B6D7C4 /* AHNetowrkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHNetowrkTool.swift; sourceTree = "<group>"; };
 		A19EC44C1E99EC0000B6D7C4 /* AHPinViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinViewModel.swift; sourceTree = "<group>"; };
 		A1A074AA1E9A2AB600FEC153 /* UIImageView+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+extension.swift"; sourceTree = "<group>"; };
+		A1B114FF1EA2B29F004D8601 /* AHLayoutRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHLayoutRouter.swift; sourceTree = "<group>"; };
 		A1CE93531E9A17A5002A8738 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A1F70F0B1E9B54EB00FF2C91 /* AHRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHRefreshHeader.swift; sourceTree = "<group>"; };
 		A1F70F111E9C57CB00FF2C91 /* AHLayoutHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHLayoutHandler.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 		A17377401E8881EA00462EE1 /* Layouts */ = {
 			isa = PBXGroup;
 			children = (
+				A1B114FF1EA2B29F004D8601 /* AHLayoutRouter.swift */,
 				A168BFE71E889B6400A87E03 /* AHPinLayout.swift */,
 			);
 			name = Layouts;
@@ -378,6 +381,7 @@
 				A12A283C1E9ECBE500F7A36D /* AHDetailLayout.swift in Sources */,
 				A1F70F181E9D962F00FF2C91 /* AHRefreshControl.swift in Sources */,
 				A15C0B5C1E9372B900B35BE1 /* AHOptionsVC.swift in Sources */,
+				A1B115001EA2B29F004D8601 /* AHLayoutRouter.swift in Sources */,
 				A168BFE81E889B6400A87E03 /* AHPinLayout.swift in Sources */,
 				A1F70F0C1E9B54EB00FF2C91 /* AHRefreshHeader.swift in Sources */,
 				A168BFE61E889ABB00A87E03 /* UIImage+Extension.swift in Sources */,
