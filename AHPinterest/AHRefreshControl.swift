@@ -24,19 +24,35 @@ class AHRefreshControl: NSObject {
         }
     }
     weak var pinVC: AHPinVC?
+    weak var layoutRouter: AHLayoutRouter?
     var isLoading = false
 }
 
 extension AHRefreshControl {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        handlerPullToRefresh(scrollView, didEndDragging: false)
-        handleAutoLoading(scrollView, didEndDragging: false)
+        guard let layoutRouter = layoutRouter else {
+            return
+        }
+        if layoutRouter.enableHeaderRefresh {
+            handlerPullToRefresh(scrollView, didEndDragging: false)
+        }
+        if layoutRouter.enableFooterRefresh {
+            handleAutoLoading(scrollView, didEndDragging: false)
+        }
+        
     }
     
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        handlerPullToRefresh(scrollView, didEndDragging: true)
-        handleAutoLoading(scrollView, didEndDragging: true)
+        guard let layoutRouter = layoutRouter else {
+            return
+        }
+        if layoutRouter.enableHeaderRefresh {
+            handlerPullToRefresh(scrollView, didEndDragging: true)
+        }
+        if layoutRouter.enableFooterRefresh {
+            handleAutoLoading(scrollView, didEndDragging: true)
+        }
     }
 }
 
@@ -61,7 +77,7 @@ extension AHRefreshControl {
                     isLoading = true
                     pinVC?.loadOlderData(completion: { (_) in
                         self.isLoading = false
-                        self.footerCell?.endRefersh()
+//                        self.footerCell?.endRefersh()
                     })
                 }
             }

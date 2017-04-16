@@ -38,23 +38,15 @@ protocol AHPinLayoutDelegate {
     func AHPinLayoutHeightForNote(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat
     
     func AHPinLayoutHeightForUserAvatar(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat
-    
-    func AHPinLayoutSizeForHeaderView() -> CGSize
-    
-    func AHPinLayoutSizeForFooterView() -> CGSize
 }
 
 
 class AHPinLayout: UICollectionViewLayout {
     var delegate: AHPinLayoutDelegate!
-    var activateRefreshControl: Bool = false
     var section: Int = -1
     
     
     fileprivate var isRefreshSetup: Bool = false
-    
-    fileprivate var headerAttr: UICollectionViewLayoutAttributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: AHHeaderKind, with: IndexPath(item: 0, section: 0))
-    fileprivate var footerAttr: UICollectionViewLayoutAttributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: AHFooterKind, with: IndexPath(item: 1, section: 0))
     
     
     fileprivate var currentMaxYOffset: CGFloat = 0.0
@@ -69,7 +61,7 @@ class AHPinLayout: UICollectionViewLayout {
     
     fileprivate var cache = [UICollectionViewLayoutAttributes]()
     
-    var contentHeight: CGFloat = 0.0
+    fileprivate var contentHeight: CGFloat = 0.0
 
     fileprivate var contentWidth: CGFloat = 0.0
     
@@ -79,13 +71,15 @@ class AHPinLayout: UICollectionViewLayout {
     
     
     fileprivate func reset() {
+        guard let collectionView = collectionView else {
+            return
+        }
+        
         currentMaxYOffset = 0.0
         currentColumn = 0
         contentHeight = 0.0
-//        let inset = collectionView?.contentInset
-        let inset = AHCollectionViewInset
-//        contentWidth = collectionView!.bounds.width - (inset!.left + inset!.right)
-        contentWidth = UIScreen.main.bounds.width - (inset.left + inset.right)
+        let inset = collectionView.contentInset
+        contentWidth = collectionView.bounds.width - (inset.left + inset.right)
         
         columnWidth = contentWidth / CGFloat(AHNumberOfColumns)
         
@@ -97,41 +91,7 @@ class AHPinLayout: UICollectionViewLayout {
         yOffsets = [CGFloat](repeating: 0.0, count: AHNumberOfColumns)
     }
     
-    fileprivate func setupHeader() {
-        if isRefreshSetup {
-            return
-        }
-
-        let inset = collectionView?.contentInset
-        let headerRawSize = delegate.AHPinLayoutSizeForHeaderView()
-        let headerOrigin = CGPoint(x: 0.0, y: -headerRawSize.height + inset!.top)
-        let headerSize = CGSize(width: contentWidth, height: headerRawSize.height)
-        headerAttr.frame = .init(origin: headerOrigin, size: headerSize)
-        
-        // contentHeight is set alraedy since prepareCell() is called before this func
-        // all cells needed to be calculated in order to obtain contentHeight
-        let footerRawSize = delegate.AHPinLayoutSizeForFooterView()
-        let footerOrigin = CGPoint(x: 0.0, y: contentHeight)
-        let footerSize = CGSize(width: contentWidth, height: footerRawSize.height)
-        footerAttr.frame = .init(origin: footerOrigin, size: footerSize)
-
-        
-        
-        if activateRefreshControl {
-            cache.append(headerAttr)
-            cache.append(footerAttr)
-        }else{
-            cache = cache.filter({ (attr) -> Bool in
-                if attr != headerAttr || attr != footerAttr {
-                    return true
-                }else{
-                    return false
-                }
-            })
-        }
-        
-        isRefreshSetup = true
-    }
+    
     
     fileprivate func prepareCell() {
         for i in 0..<collectionView!.numberOfItems(inSection: section) {
@@ -150,14 +110,8 @@ class AHPinLayout: UICollectionViewLayout {
         reset()
         prepareCell()
         
-        // setupHeader has to be called so that headerAttr is at the end of the cache array -- in order to display(weird!)
-        setupHeader()
-        
-        
-        
-        
     }
-    func insertAttributeIntoCache(indexPath: IndexPath) {
+    fileprivate func insertAttributeIntoCache(indexPath: IndexPath) {
         
         let cellWidth = columnWidth - 2 * AHCellPadding
         let imageHeight = delegate.AHPinLayoutHeightForPhotoAt(indexPath: indexPath, width: cellWidth, collectionView: collectionView!)
@@ -222,20 +176,6 @@ class AHPinLayout: UICollectionViewLayout {
         return attr
     }
     
-    override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        if elementKind == AHHeaderKind {
-            return headerAttr
-        }else if elementKind == AHFooterKind{
-            return footerAttr
-        }else{
-            return nil
-        }
-    }
-    
-    func isIntercept(attr: UICollectionViewLayoutAttributes, rect: CGRect) -> Bool {
-        return rect.intersects(attr.frame)
-    }
-    
     
     
     override func invalidateLayout() {
@@ -244,24 +184,6 @@ class AHPinLayout: UICollectionViewLayout {
         isRefreshSetup = false
         reset()
     }
-    
-//    override func initialLayoutAttributesForAppearingSupplementaryElement(ofKind elementKind: String, at elementIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-//        print("initialLayoutAttributesForAppearingSupplementaryElement")
-//        return headerAttr
-//    }
-    
-    
-//    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-//        let attr = super.layoutAttributesForItem(at: indexPath) as! AHLayoutAttributes
-//        if cache.contains(attr) {
-//            print("ok")
-//        }else{
-//            print("not ok")
-//        }
-//        
-//        
-//        return attr
-//    }
     
 }
 

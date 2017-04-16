@@ -32,6 +32,8 @@
 		A19EC44B1E99DFBF00B6D7C4 /* AHNetowrkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19EC44A1E99DFBF00B6D7C4 /* AHNetowrkTool.swift */; };
 		A19EC44D1E99EC0000B6D7C4 /* AHPinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19EC44C1E99EC0000B6D7C4 /* AHPinViewModel.swift */; };
 		A1A074AB1E9A2AB600FEC153 /* UIImageView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A074AA1E9A2AB600FEC153 /* UIImageView+extension.swift */; };
+		A1A2272F1EA408FC00527358 /* NSIndexPath+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A2272E1EA408FC00527358 /* NSIndexPath+Extension.swift */; };
+		A1A227311EA4247B00527358 /* UICollectionViewLayout+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A227301EA4247B00527358 /* UICollectionViewLayout+Extension.swift */; };
 		A1B115001EA2B29F004D8601 /* AHLayoutRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B114FF1EA2B29F004D8601 /* AHLayoutRouter.swift */; };
 		A1B115021EA2DAB7004D8601 /* AHPinContentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B115011EA2DAB7004D8601 /* AHPinContentLayout.swift */; };
 		A1B115041EA2DDB9004D8601 /* AHPinContentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B115031EA2DDB9004D8601 /* AHPinContentHandler.swift */; };
@@ -82,6 +84,8 @@
 		A19EC44A1E99DFBF00B6D7C4 /* AHNetowrkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHNetowrkTool.swift; sourceTree = "<group>"; };
 		A19EC44C1E99EC0000B6D7C4 /* AHPinViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinViewModel.swift; sourceTree = "<group>"; };
 		A1A074AA1E9A2AB600FEC153 /* UIImageView+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+extension.swift"; sourceTree = "<group>"; };
+		A1A2272E1EA408FC00527358 /* NSIndexPath+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSIndexPath+Extension.swift"; sourceTree = "<group>"; };
+		A1A227301EA4247B00527358 /* UICollectionViewLayout+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionViewLayout+Extension.swift"; sourceTree = "<group>"; };
 		A1B114FF1EA2B29F004D8601 /* AHLayoutRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHLayoutRouter.swift; sourceTree = "<group>"; };
 		A1B115011EA2DAB7004D8601 /* AHPinContentLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinContentLayout.swift; sourceTree = "<group>"; };
 		A1B115031EA2DDB9004D8601 /* AHPinContentHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinContentHandler.swift; sourceTree = "<group>"; };
@@ -203,6 +207,8 @@
 			children = (
 				A1A074AA1E9A2AB600FEC153 /* UIImageView+extension.swift */,
 				A168BFE51E889ABB00A87E03 /* UIImage+Extension.swift */,
+				A1A2272E1EA408FC00527358 /* NSIndexPath+Extension.swift */,
+				A1A227301EA4247B00527358 /* UICollectionViewLayout+Extension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -391,12 +397,14 @@
 				A1B115001EA2B29F004D8601 /* AHLayoutRouter.swift in Sources */,
 				A168BFE81E889B6400A87E03 /* AHPinLayout.swift in Sources */,
 				A1F70F0C1E9B54EB00FF2C91 /* AHRefreshHeader.swift in Sources */,
+				A1A227311EA4247B00527358 /* UICollectionViewLayout+Extension.swift in Sources */,
 				A168BFE61E889ABB00A87E03 /* UIImage+Extension.swift in Sources */,
 				A12A28381E9ECBA500F7A36D /* AHDetailCell.swift in Sources */,
 				A12A283A1E9ECBAB00F7A36D /* AHDetailVC.swift in Sources */,
 				A12A28411EA0527700F7A36D /* AHPinDataSource.swift in Sources */,
 				A19EC44D1E99EC0000B6D7C4 /* AHPinViewModel.swift in Sources */,
 				A12A283E1E9ECBF800F7A36D /* AHDetailAnimator.swift in Sources */,
+				A1A2272F1EA408FC00527358 /* NSIndexPath+Extension.swift in Sources */,
 				A15C0B591E9369F600B35BE1 /* AHOptionsAnimator.swift in Sources */,
 				A1A074AB1E9A2AB600FEC153 /* UIImageView+extension.swift in Sources */,
 				A19EC4491E99D99700B6D7C4 /* AHPinDataGenerator.swift in Sources */,

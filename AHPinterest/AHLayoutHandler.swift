@@ -12,17 +12,19 @@ import AVFoundation
 class AHLayoutHandler: NSObject {
     var pinVMs: [AHPinViewModel]?
 }
+extension AHLayoutHandler: AHLayoutRouterDelegate {
+    internal func AHLayoutRouterHeaderSize(collectionView: UICollectionView, layoutRouter: AHLayoutRouter) -> CGSize {
+        return CGSize(width: 0.0, height: AHHeaderHeight)
+    }
 
-extension AHLayoutHandler: AHPinLayoutDelegate {
-    func AHPinLayoutSizeForFooterView() -> CGSize {
+    func AHLayoutRouterFooterSize(collectionView: UICollectionView, layoutRouter: AHLayoutRouter) -> CGSize {
         return CGSize(width: 0.0, height: AHFooterHeight)
     }
 
+}
 
-    func AHPinLayoutSizeForHeaderView() -> CGSize {
-        return CGSize(width: 0.0, height: AHHeaderHeight)
-    }
-    
+
+extension AHLayoutHandler: AHPinLayoutDelegate {
     func AHPinLayoutHeightForUserAvatar(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat {
         return AHUserAvatarHeight
     }

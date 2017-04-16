@@ -42,7 +42,7 @@ extension AHPinVC {
         mainSetups()
         
         setupDetailHandler()
-//        setupRefreshControl()
+        setupRefreshControl()
         setupOptionsHandler()
 
         
@@ -92,10 +92,15 @@ extension AHPinVC {
     
     func setupRefreshControl() {
         refreshController.pinVC = self
+        refreshController.layoutRouter = layoutRouter
+        layoutRouter.enableHeaderRefresh = true
+        layoutRouter.enableFooterRefresh = true
     }
     
     func setupLayoutHandler() {
+        layoutRouter.delegate = layoutHandler
         collectionView?.setCollectionViewLayout(layoutRouter, animated: false)
+        
         
         layoutRouter.add(layout: pinContentLayout)
         pinContentLayout.section = 0
@@ -104,8 +109,7 @@ extension AHPinVC {
         layoutRouter.add(layout: pinLayout)
         pinLayout.delegate = layoutHandler
         pinLayout.section = 1
-        
-        pinLayout.activateRefreshControl = false
+
         collectionView?.register(AHRefreshHeader.self, forSupplementaryViewOfKind: AHHeaderKind, withReuseIdentifier: AHHeaderKind)
         
         collectionView?.register(AHRefreshFooter.self, forSupplementaryViewOfKind: AHFooterKind, withReuseIdentifier: AHFooterKind)
@@ -143,7 +147,7 @@ extension AHPinVC {
                 var indexPaths = [IndexPath]()
                 
                 for _ in newPinVMs {
-                    let indexPath = IndexPath(item: starter, section: 0)
+                    let indexPath = IndexPath(item: starter, section: self.pinLayout.section)
                     indexPaths.append(indexPath)
                     starter += 1
                 }
@@ -156,12 +160,5 @@ extension AHPinVC {
             }
             
         }
-    }
-}
-
-
-extension NSIndexPath{
-    open override var description: String {
-        return "indexPath{section: \(self.section), item: \(self.item)}"
     }
 }

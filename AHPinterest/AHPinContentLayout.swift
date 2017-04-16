@@ -15,8 +15,8 @@ protocol AHPinContentDelegate: NSObjectProtocol {
 class AHPinContentLayout: UICollectionViewLayout {
     weak var delegate: AHPinContentDelegate?
     var section: Int = -1
-    var attributes: UICollectionViewLayoutAttributes?
     
+    fileprivate var attributes: UICollectionViewLayoutAttributes?
     fileprivate var contentSize = CGSize.zero
 }
 

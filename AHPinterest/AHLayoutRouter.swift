@@ -8,45 +8,83 @@
 
 import UIKit
 
+protocol AHLayoutRouterDelegate: NSObjectProtocol {
+    func AHLayoutRouterHeaderSize(collectionView: UICollectionView, layoutRouter: AHLayoutRouter) -> CGSize
+    func AHLayoutRouterFooterSize(collectionView: UICollectionView, layoutRouter: AHLayoutRouter) -> CGSize
+}
+
+
 class AHLayoutRouter: UICollectionViewLayout {
-    fileprivate var layoutArr = [UICollectionViewLayout]()
-    var contentSize = CGSize.zero
+    // Public
+    var enableHeaderRefresh = false {
+        didSet {
+            self.invalidateLayout()
+        }
+    }
+    var enableFooterRefresh = false {
+        didSet {
+            self.invalidateLayout()
+        }
+    }
+    weak var delegate: AHLayoutRouterDelegate?
+    
+    
+    // Private
+    fileprivate var layoutArray = [UICollectionViewLayout]()
+    fileprivate var routerAttributes = [UICollectionViewLayoutAttributes]()
+    
+    fileprivate var headerAttr: UICollectionViewLayoutAttributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: AHHeaderKind, with: AHHeaderIndexPath)
+    fileprivate var footerAttr: UICollectionViewLayoutAttributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: AHFooterKind, with: AHFooterIndexPath)
+    
 }
 
 extension AHLayoutRouter {
     func add(layout: UICollectionViewLayout) {
-        layoutArr.append(layout)
+        layoutArray.append(layout)
         layout.setValue(self.collectionView, forKey: "collectionView")
         invalidateLayout()
     }
     
     func remove(layout: UICollectionViewLayout){
-        if let index = layoutArr.index(of: layout) {
-            layoutArr.remove(at: index)
+        if let index = layoutArray.index(of: layout) {
+            layoutArray.remove(at: index)
             invalidateLayout()
         }
     }
+    
 }
 
 extension AHLayoutRouter {
     override func prepare() {
-        layoutArr.forEach { (layout) in
+        layoutArray.forEach { (layout) in
             layout.prepare()
         }
+        
+        setupHeader()
     }
+    
+    /// For now, it only supports vertical direction layout. So the width of a contentSize is ignored
     override var collectionViewContentSize: CGSize {
-        contentSize = CGSize.zero
-        layoutArr.forEach { (layout) in
-            let newSize = CGSize(width: layout.collectionViewContentSize.width + self.contentSize.width, height: layout.collectionViewContentSize.height + self.contentSize.height)
-            self.contentSize = newSize
+        guard let collectionView = collectionView else {
+            return CGSize.zero
         }
-        return self.contentSize
+        var totalHeight: CGFloat = 0.0
+        layoutArray.forEach { (layout) in
+            let height = layout.collectionViewContentSize.height
+            totalHeight += height
+        }
+        let inset = collectionView.contentInset
+        let insetOffset = (inset.left + inset.right)
+        let width = collectionView.bounds.width - insetOffset
+        return CGSize(width: width, height: totalHeight)
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         var attributes = [UICollectionViewLayoutAttributes]()
         var currentOrigin = CGPoint.zero
-        layoutArr.forEach { (layout) in
+        
+        // Loop through layouts and make offset for their attributes
+        layoutArray.forEach { (layout) in
             let newRect = CGRect(x: rect.origin.x, y: currentOrigin.y + rect.origin.y, width: rect.size.width, height: rect.size.height)
             if let attrs = layout.layoutAttributesForElements(in: newRect) {
                 let size = layout.collectionViewContentSize
@@ -59,36 +97,91 @@ extension AHLayoutRouter {
                 attributes.append(contentsOf: newAttrs)
             }
         }
+        
+        attributes.append(contentsOf: routerAttributes)
+        
         return attributes
-    }
-    
-    func recaculateFrames(origin offset: CGPoint, attributes array:[UICollectionViewLayoutAttributes]){
-        for attr in array {
-            attr.frame = mergeOrgins(orgin: offset, normal: attr.frame)
-        }
-    }
-    
-    func mergeOrgins(orgin offset: CGPoint, normal frame:CGRect) -> CGRect {
-        return CGRect(x: frame.origin.x, y: offset.y + frame.origin.y, width: frame.size.width, height: frame.size.height)
     }
     
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         
-        let layout = layoutArr[indexPath.section]
+        let layout = layoutArray[indexPath.section]
         let attr = layout.layoutAttributesForItem(at: indexPath)
         return attr
     }
     
     override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        let layout = layoutArr[indexPath.section]
-        let attr = layout.layoutAttributesForSupplementaryView(ofKind: elementKind, at: indexPath)
-        return attr
+        
+        if elementKind == AHHeaderKind && self.enableHeaderRefresh {
+            return headerAttr
+        }else if elementKind == AHFooterKind && self.enableFooterRefresh{
+            return footerAttr
+        }else{
+            let layout = layoutArray[indexPath.section]
+            let attr = layout.layoutAttributesForSupplementaryView(ofKind: elementKind, at: indexPath)
+             return attr
+        }
+        
     }
+
+    
     override func invalidateLayout() {
         super.invalidateLayout()
-        contentSize = CGSize.zero
-        layoutArr.forEach { (layout) in
+        routerAttributes.removeAll()
+        headerAttr.frame = .zero
+        footerAttr.frame = .zero
+        layoutArray.forEach { (layout) in
             layout.invalidateLayout()
         }
     }
 }
+
+
+
+// MARK:- Private Methods
+extension AHLayoutRouter {
+    fileprivate func recaculateFrames(origin offset: CGPoint, attributes array:[UICollectionViewLayoutAttributes]){
+        for attr in array {
+            attr.frame = mergeOrgins(orgin: offset, normal: attr.frame)
+        }
+    }
+    
+    fileprivate func mergeOrgins(orgin offset: CGPoint, normal frame:CGRect) -> CGRect {
+        return CGRect(x: frame.origin.x, y: offset.y + frame.origin.y, width: frame.size.width, height: frame.size.height)
+    }
+    
+    
+    fileprivate func setupHeader() {
+        guard let delegate = delegate, let collectionView = collectionView else {
+            return
+        }
+        
+        
+        let inset = collectionView.contentInset
+        
+        let headerRawSize = delegate.AHLayoutRouterHeaderSize(collectionView: collectionView, layoutRouter: self)
+        if headerRawSize != CGSize.zero && self.enableHeaderRefresh {
+            let headerOrigin = CGPoint(x: 0.0, y: -headerRawSize.height + inset.top)
+            let headerSize = CGSize(width: collectionViewContentSize.width, height: headerRawSize.height)
+            headerAttr.frame = .init(origin: headerOrigin, size: headerSize)
+            routerAttributes.append(headerAttr)
+        }
+        
+        // contentHeight is set alraedy since prepareCell() is called before this func
+        // all cells needed to be calculated in order to obtain contentHeight
+        let footerRawSize = delegate.AHLayoutRouterFooterSize(collectionView: collectionView, layoutRouter: self)
+        if footerRawSize != CGSize.zero && self.enableFooterRefresh {
+            let footerOrigin = CGPoint(x: 0.0, y: collectionViewContentSize.height)
+            let footerSize = CGSize(width: collectionViewContentSize.width, height: footerRawSize.height)
+            footerAttr.frame = .init(origin: footerOrigin, size: footerSize)
+            routerAttributes.append(footerAttr)
+        }
+
+    
+    }
+}
+
+
+
+
+
