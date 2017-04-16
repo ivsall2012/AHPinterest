@@ -11,6 +11,8 @@ import UIKit
 class AHPinVC: UICollectionViewController {
     let layoutRouter = AHLayoutRouter()
     let pinLayout = AHPinLayout()
+    let pinContentLayout = AHPinContentLayout()
+    
     
     let dataSource = AHPinDataSource()
     let refreshController = AHRefreshControl()
@@ -19,6 +21,7 @@ class AHPinVC: UICollectionViewController {
     let layoutHandler = AHLayoutHandler()
     let optionsHandler = AHOptionsHandler()
     let detailHanlder = AHDetailHandler()
+    let pinContentHandler = AHPinContentHandler()
     var pinVMs = [AHPinViewModel]() {
         didSet {
             self.layoutHandler.pinVMs = pinVMs
@@ -39,7 +42,7 @@ extension AHPinVC {
         mainSetups()
         
         setupDetailHandler()
-        setupRefreshControl()
+//        setupRefreshControl()
         setupOptionsHandler()
 
         
@@ -93,14 +96,21 @@ extension AHPinVC {
     
     func setupLayoutHandler() {
         collectionView?.setCollectionViewLayout(layoutRouter, animated: false)
+        
+        layoutRouter.add(layout: pinContentLayout)
+        pinContentLayout.section = 0
+        pinContentLayout.delegate = pinContentHandler
+        
         layoutRouter.add(layout: pinLayout)
         pinLayout.delegate = layoutHandler
+        pinLayout.section = 1
         
-        
-        pinLayout.activateRefreshControl = true
+        pinLayout.activateRefreshControl = false
         collectionView?.register(AHRefreshHeader.self, forSupplementaryViewOfKind: AHHeaderKind, withReuseIdentifier: AHHeaderKind)
         
         collectionView?.register(AHRefreshFooter.self, forSupplementaryViewOfKind: AHFooterKind, withReuseIdentifier: AHFooterKind)
+        
+        
     }
     
     func setupOptionsHandler() {
@@ -150,4 +160,8 @@ extension AHPinVC {
 }
 
 
-
+extension NSIndexPath{
+    open override var description: String {
+        return "indexPath{section: \(self.section), item: \(self.item)}"
+    }
+}

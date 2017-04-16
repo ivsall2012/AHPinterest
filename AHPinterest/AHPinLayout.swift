@@ -12,6 +12,7 @@ class AHLayoutAttributes: UICollectionViewLayoutAttributes {
     var imageHeight: CGFloat = 0.0
     var noteHeight: CGFloat = 0.0
     
+    
     override func copy(with zone: NSZone? = nil) -> Any {
         let copy = super.copy(with: zone) as! AHLayoutAttributes
         copy.imageHeight = self.imageHeight
@@ -31,22 +32,25 @@ class AHLayoutAttributes: UICollectionViewLayoutAttributes {
     }
 }
 
-protocol AHLayoutDelegate {
-    func AHLayoutHeightForPhotoAt(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat
+protocol AHPinLayoutDelegate {
+    func AHPinLayoutHeightForPhotoAt(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat
     
-    func AHLayoutHeightForNote(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat
+    func AHPinLayoutHeightForNote(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat
     
-    func AHLayoutHeightForUserAvatar(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat
+    func AHPinLayoutHeightForUserAvatar(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat
     
-    func AHLayoutSizeForHeaderView() -> CGSize
+    func AHPinLayoutSizeForHeaderView() -> CGSize
     
-    func AHLayoutSizeForFooterView() -> CGSize
+    func AHPinLayoutSizeForFooterView() -> CGSize
 }
 
 
 class AHPinLayout: UICollectionViewLayout {
-    var delegate: AHLayoutDelegate!
+    var delegate: AHPinLayoutDelegate!
     var activateRefreshControl: Bool = false
+    var section: Int = -1
+    
+    
     fileprivate var isRefreshSetup: Bool = false
     
     fileprivate var headerAttr: UICollectionViewLayoutAttributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: AHHeaderKind, with: IndexPath(item: 0, section: 0))
@@ -65,7 +69,7 @@ class AHPinLayout: UICollectionViewLayout {
     
     fileprivate var cache = [UICollectionViewLayoutAttributes]()
     
-    fileprivate var contentHeight: CGFloat = 0.0
+    var contentHeight: CGFloat = 0.0
 
     fileprivate var contentWidth: CGFloat = 0.0
     
@@ -99,14 +103,14 @@ class AHPinLayout: UICollectionViewLayout {
         }
 
         let inset = collectionView?.contentInset
-        let headerRawSize = delegate.AHLayoutSizeForHeaderView()
+        let headerRawSize = delegate.AHPinLayoutSizeForHeaderView()
         let headerOrigin = CGPoint(x: 0.0, y: -headerRawSize.height + inset!.top)
         let headerSize = CGSize(width: contentWidth, height: headerRawSize.height)
         headerAttr.frame = .init(origin: headerOrigin, size: headerSize)
         
         // contentHeight is set alraedy since prepareCell() is called before this func
         // all cells needed to be calculated in order to obtain contentHeight
-        let footerRawSize = delegate.AHLayoutSizeForFooterView()
+        let footerRawSize = delegate.AHPinLayoutSizeForFooterView()
         let footerOrigin = CGPoint(x: 0.0, y: contentHeight)
         let footerSize = CGSize(width: contentWidth, height: footerRawSize.height)
         footerAttr.frame = .init(origin: footerOrigin, size: footerSize)
@@ -130,13 +134,13 @@ class AHPinLayout: UICollectionViewLayout {
     }
     
     fileprivate func prepareCell() {
-        for i in 0..<collectionView!.numberOfItems(inSection: 0) {
-            let indexPath = IndexPath(item: i, section: 0)
+        for i in 0..<collectionView!.numberOfItems(inSection: section) {
+            let indexPath = IndexPath(item: i, section: section)
             insertAttributeIntoCache(indexPath: indexPath)
             
         }
     }
-    
+        
     
     override func prepare() {
 //        super.prepare()
@@ -151,19 +155,17 @@ class AHPinLayout: UICollectionViewLayout {
         
         
         
+        
     }
     func insertAttributeIntoCache(indexPath: IndexPath) {
-        guard indexPath.section == 0 else {
-            fatalError("There can be only 1 section at this time")
-        }
         
         let cellWidth = columnWidth - 2 * AHCellPadding
-        let imageHeight = delegate.AHLayoutHeightForPhotoAt(indexPath: indexPath, width: cellWidth, collectionView: collectionView!)
+        let imageHeight = delegate.AHPinLayoutHeightForPhotoAt(indexPath: indexPath, width: cellWidth, collectionView: collectionView!)
         
-        let noteHeight = delegate.AHLayoutHeightForNote(indexPath: indexPath, width: cellWidth, collectionView: collectionView!)
+        let noteHeight = delegate.AHPinLayoutHeightForNote(indexPath: indexPath, width: cellWidth, collectionView: collectionView!)
         
         
-        let userAvatarHeight = delegate.AHLayoutHeightForUserAvatar(indexPath: indexPath, width: cellWidth, collectionView: collectionView!)
+        let userAvatarHeight = delegate.AHPinLayoutHeightForUserAvatar(indexPath: indexPath, width: cellWidth, collectionView: collectionView!)
         
         let totalH = AHCellPadding + imageHeight + noteHeight + AHCellPadding + userAvatarHeight + AHCellPadding + AHCellPadding
         

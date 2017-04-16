@@ -11,14 +11,14 @@
         <scene sceneID="enQ-85-2xx">
             <objects>
                 <collectionViewController id="XkY-Cr-uNs" customClass="AHPinVC" customModule="AHPinterest" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" prefetchingEnabled="NO" id="SKe-Ye-ww8">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" prefetchingEnabled="NO" id="SKe-Ye-ww8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewLayout key="collectionViewLayout" id="lTY-Mv-pIN" customClass="AHPinLayout" customModule="AHPinterest" customModuleProvider="target"/>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AHPinCell" id="Ra4-ZS-FeX" customClass="AHPinCell" customModule="AHPinterest" customModuleProvider="target">
-                                <rect key="frame" x="4.5" y="0.0" width="366" height="311"/>
+                                <rect key="frame" x="5" y="0.0" width="366" height="311"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="366" height="311"/>
@@ -73,6 +73,14 @@
                                     <outlet property="userName" destination="6MT-gB-36v" id="2pW-zn-4S0"/>
                                 </connections>
                             </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="slx-Xe-fUB">
+                                <rect key="frame" x="163" y="321" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                            </collectionViewCell>
                         </cells>
                     </collectionView>
                 </collectionViewController>
@@ -93,7 +101,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4pF-nG-mhj">
-                                <collectionViewLayout key="collectionViewLayout" id="sAF-as-MHf" customClass="AHPinLayout" customModule="AHPinterest" customModuleProvider="target"/>
+                                <collectionViewLayout key="collectionViewLayout" id="sAF-as-MHf"/>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AHDetailCell" id="GwG-2k-NWP" customClass="AHDetailCell" customModule="AHPinterest" customModuleProvider="target">
                                         <rect key="frame" x="54" y="0.0" width="267" height="308"/>

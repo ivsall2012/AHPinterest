@@ -13,18 +13,10 @@ class AHDetailCell: UICollectionViewCell {
     
     weak var pinVC: AHPinVC?
     weak var pinVM: AHPinViewModel?
-    var imageView = UIImageView()
 
     override func awakeFromNib() {
-
+        self.backgroundColor = UIColor.blue
     }
-    
-    func tapHanlder(_ sender: UITapGestureRecognizer){
-        if let pinVC = pinVC {
-            pinVC.dismiss(animated: true, completion: nil)
-        }
-    }
-    
     
     
     override func prepareForReuse() {

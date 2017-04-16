@@ -35,7 +35,6 @@ class AHPinCell: UICollectionViewCell {
                 self.imageView.AH_setImage(urlStr: model.imageURL, completion: { (image) in
                     if self.pinVM != nil && self.pinVM! !== pinVM {
                         // this cell is already being reused, not gonna use the image yet. Use it next time when didSet pinVM and that image is already cached by its URL through AHNetworkTool
-                        print("mismatched!!")
                         return
                     }
                     if image != nil {

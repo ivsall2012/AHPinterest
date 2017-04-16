@@ -21,8 +21,10 @@ class AHPinDelegate: NSObject {
 
 extension AHPinDelegate: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("didSelectItem")
-        detailHandler?.collectionView(collectionView, didSelectItemAt: indexPath)
+        print("didSelect item at indexPath:\(indexPath)")
+        if indexPath.section == 1 {
+            detailHandler?.collectionView(collectionView, didSelectItemAt: indexPath)
+        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

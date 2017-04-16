@@ -45,35 +45,44 @@ extension AHLayoutRouter {
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         var attributes = [UICollectionViewLayoutAttributes]()
+        var currentOrigin = CGPoint.zero
         layoutArr.forEach { (layout) in
-            if let attrs = layout.layoutAttributesForElements(in: rect) {
-                attributes.append(contentsOf: attrs)
+            let newRect = CGRect(x: rect.origin.x, y: currentOrigin.y + rect.origin.y, width: rect.size.width, height: rect.size.height)
+            if let attrs = layout.layoutAttributesForElements(in: newRect) {
+                let size = layout.collectionViewContentSize
+                let newAttrs = attrs.map({ (attr) -> UICollectionViewLayoutAttributes in
+                    return attr.copy() as! UICollectionViewLayoutAttributes
+                })
+                
+                recaculateFrames(origin: currentOrigin, attributes: newAttrs)
+                currentOrigin = CGPoint(x: 0.0, y: currentOrigin.y + size.height)
+                attributes.append(contentsOf: newAttrs)
             }
         }
         return attributes
     }
+    
+    func recaculateFrames(origin offset: CGPoint, attributes array:[UICollectionViewLayoutAttributes]){
+        for attr in array {
+            attr.frame = mergeOrgins(orgin: offset, normal: attr.frame)
+        }
+    }
+    
+    func mergeOrgins(orgin offset: CGPoint, normal frame:CGRect) -> CGRect {
+        return CGRect(x: frame.origin.x, y: offset.y + frame.origin.y, width: frame.size.width, height: frame.size.height)
+    }
+    
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         
-        var targetAttr: UICollectionViewLayoutAttributes?
-        layoutArr.forEach { (layout) in
-            if targetAttr == nil {
-                targetAttr = layout.layoutAttributesForItem(at: indexPath)
-            }
-        }
-        if targetAttr == nil {
-            fatalError("targetAttr can't nil")
-        }
-        return targetAttr
+        let layout = layoutArr[indexPath.section]
+        let attr = layout.layoutAttributesForItem(at: indexPath)
+        return attr
     }
     
     override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        var targetAttr: UICollectionViewLayoutAttributes?
-        layoutArr.forEach { (layout) in
-            if targetAttr == nil {
-                targetAttr = layout.layoutAttributesForSupplementaryView(ofKind: elementKind, at: indexPath)
-            }
-        }
-        return targetAttr
+        let layout = layoutArr[indexPath.section]
+        let attr = layout.layoutAttributesForSupplementaryView(ofKind: elementKind, at: indexPath)
+        return attr
     }
     override func invalidateLayout() {
         super.invalidateLayout()

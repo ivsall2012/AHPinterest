@@ -33,6 +33,8 @@
 		A19EC44D1E99EC0000B6D7C4 /* AHPinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19EC44C1E99EC0000B6D7C4 /* AHPinViewModel.swift */; };
 		A1A074AB1E9A2AB600FEC153 /* UIImageView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A074AA1E9A2AB600FEC153 /* UIImageView+extension.swift */; };
 		A1B115001EA2B29F004D8601 /* AHLayoutRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B114FF1EA2B29F004D8601 /* AHLayoutRouter.swift */; };
+		A1B115021EA2DAB7004D8601 /* AHPinContentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B115011EA2DAB7004D8601 /* AHPinContentLayout.swift */; };
+		A1B115041EA2DDB9004D8601 /* AHPinContentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B115031EA2DDB9004D8601 /* AHPinContentHandler.swift */; };
 		A1CE93541E9A17A5002A8738 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CE93531E9A17A5002A8738 /* Constants.swift */; };
 		A1F70F0C1E9B54EB00FF2C91 /* AHRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F70F0B1E9B54EB00FF2C91 /* AHRefreshHeader.swift */; };
 		A1F70F121E9C57CB00FF2C91 /* AHLayoutHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F70F111E9C57CB00FF2C91 /* AHLayoutHandler.swift */; };
@@ -81,6 +83,8 @@
 		A19EC44C1E99EC0000B6D7C4 /* AHPinViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinViewModel.swift; sourceTree = "<group>"; };
 		A1A074AA1E9A2AB600FEC153 /* UIImageView+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+extension.swift"; sourceTree = "<group>"; };
 		A1B114FF1EA2B29F004D8601 /* AHLayoutRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHLayoutRouter.swift; sourceTree = "<group>"; };
+		A1B115011EA2DAB7004D8601 /* AHPinContentLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinContentLayout.swift; sourceTree = "<group>"; };
+		A1B115031EA2DDB9004D8601 /* AHPinContentHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinContentHandler.swift; sourceTree = "<group>"; };
 		A1CE93531E9A17A5002A8738 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A1F70F0B1E9B54EB00FF2C91 /* AHRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHRefreshHeader.swift; sourceTree = "<group>"; };
 		A1F70F111E9C57CB00FF2C91 /* AHLayoutHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHLayoutHandler.swift; sourceTree = "<group>"; };
@@ -189,6 +193,7 @@
 				A12A28401EA0527700F7A36D /* AHPinDataSource.swift */,
 				A12A28431EA07ADB00F7A36D /* AHOptionsHandler.swift */,
 				A12A28451EA082A300F7A36D /* AHDetailHandler.swift */,
+				A1B115031EA2DDB9004D8601 /* AHPinContentHandler.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -207,6 +212,7 @@
 			children = (
 				A1B114FF1EA2B29F004D8601 /* AHLayoutRouter.swift */,
 				A168BFE71E889B6400A87E03 /* AHPinLayout.swift */,
+				A1B115011EA2DAB7004D8601 /* AHPinContentLayout.swift */,
 			);
 			name = Layouts;
 			sourceTree = "<group>";
@@ -373,6 +379,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1B115021EA2DAB7004D8601 /* AHPinContentLayout.swift in Sources */,
 				A1F70F121E9C57CB00FF2C91 /* AHLayoutHandler.swift in Sources */,
 				A168BFE41E88930200A87E03 /* AHPinDelegate.swift in Sources */,
 				A17377471E88825100462EE1 /* AHPinDataModel.swift in Sources */,
@@ -394,6 +401,7 @@
 				A1A074AB1E9A2AB600FEC153 /* UIImageView+extension.swift in Sources */,
 				A19EC4491E99D99700B6D7C4 /* AHPinDataGenerator.swift in Sources */,
 				A1CE93541E9A17A5002A8738 /* Constants.swift in Sources */,
+				A1B115041EA2DDB9004D8601 /* AHPinContentHandler.swift in Sources */,
 				A12A28461EA082A300F7A36D /* AHDetailHandler.swift in Sources */,
 				A173772B1E887F9600462EE1 /* AHPinVC.swift in Sources */,
 				A12A28441EA07ADB00F7A36D /* AHOptionsHandler.swift in Sources */,

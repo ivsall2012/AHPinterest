@@ -17,25 +17,39 @@ class AHPinDataSource: NSObject {
 
 extension AHPinDataSource : UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pinVMs?.count ?? 0
+        if section == 0 {
+            return 1
+        }
+        if section == 1 {
+            return pinVMs?.count ?? 0
+        }
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let pinCell = collectionView.dequeueReusableCell(withReuseIdentifier: AHPinCellIdentifier, for: indexPath) as! AHPinCell
         
-        guard let pinVMs = pinVMs else {
+        
+        if indexPath.section == 0 {
+            let detailCell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+            detailCell.backgroundColor = UIColor.blue
+            return detailCell
+        }else if indexPath.section == 1 {
+            let pinCell = collectionView.dequeueReusableCell(withReuseIdentifier: AHPinCellIdentifier, for: indexPath) as! AHPinCell
+            guard let pinVMs = pinVMs else {
+                return pinCell
+            }
+            
+            let pinVM = pinVMs[indexPath.item]
+            
+            pinCell.pinVM = pinVM
             return pinCell
         }
-        
-        let pinVM = pinVMs[indexPath.item]
-        
-        pinCell.pinVM = pinVM
-        return pinCell
+        return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {

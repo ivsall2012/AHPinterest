@@ -13,21 +13,21 @@ class AHLayoutHandler: NSObject {
     var pinVMs: [AHPinViewModel]?
 }
 
-extension AHLayoutHandler: AHLayoutDelegate {
-    func AHLayoutSizeForFooterView() -> CGSize {
+extension AHLayoutHandler: AHPinLayoutDelegate {
+    func AHPinLayoutSizeForFooterView() -> CGSize {
         return CGSize(width: 0.0, height: AHFooterHeight)
     }
 
 
-    func AHLayoutSizeForHeaderView() -> CGSize {
+    func AHPinLayoutSizeForHeaderView() -> CGSize {
         return CGSize(width: 0.0, height: AHHeaderHeight)
     }
     
-    func AHLayoutHeightForUserAvatar(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat {
+    func AHPinLayoutHeightForUserAvatar(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat {
         return AHUserAvatarHeight
     }
     
-    func AHLayoutHeightForPhotoAt(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat {
+    func AHPinLayoutHeightForPhotoAt(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat {
         guard let pinVM = pinVMs?[indexPath.item] else {
             return 0.0
         }
@@ -38,7 +38,7 @@ extension AHLayoutHandler: AHLayoutDelegate {
         return rect.height
     }
     
-    func AHLayoutHeightForNote(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat {
+    func AHPinLayoutHeightForNote(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat {
         guard let pinVM = pinVMs?[indexPath.item] else {
             return 0.0
         }
