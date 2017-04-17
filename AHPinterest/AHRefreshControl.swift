@@ -77,7 +77,7 @@ extension AHRefreshControl {
                     isLoading = true
                     pinVC?.loadOlderData(completion: { (_) in
                         self.isLoading = false
-//                        self.footerCell?.endRefersh()
+                        self.footerCell?.endRefersh()
                     })
                 }
             }

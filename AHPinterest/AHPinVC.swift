@@ -103,12 +103,10 @@ extension AHPinVC {
         
         
         layoutRouter.add(layout: pinContentLayout)
-        pinContentLayout.section = 0
         pinContentLayout.delegate = pinContentHandler
         
         layoutRouter.add(layout: pinLayout)
         pinLayout.delegate = layoutHandler
-        pinLayout.section = 1
 
         collectionView?.register(AHRefreshHeader.self, forSupplementaryViewOfKind: AHHeaderKind, withReuseIdentifier: AHHeaderKind)
         

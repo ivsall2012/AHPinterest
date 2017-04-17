@@ -36,12 +36,15 @@ class AHLayoutRouter: UICollectionViewLayout {
     fileprivate var headerAttr: UICollectionViewLayoutAttributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: AHHeaderKind, with: AHHeaderIndexPath)
     fileprivate var footerAttr: UICollectionViewLayoutAttributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: AHFooterKind, with: AHFooterIndexPath)
     
+    fileprivate var sectionOffsets = [CGFloat]()
+    
 }
 
 extension AHLayoutRouter {
     func add(layout: UICollectionViewLayout) {
         layoutArray.append(layout)
         layout.setValue(self.collectionView, forKey: "collectionView")
+        layout.setValue(layoutArray.count - 1, forKey: "section")
         invalidateLayout()
     }
     
@@ -65,13 +68,16 @@ extension AHLayoutRouter {
     
     /// For now, it only supports vertical direction layout. So the width of a contentSize is ignored
     override var collectionViewContentSize: CGSize {
-        guard let collectionView = collectionView else {
+        guard let collectionView = collectionView, layoutArray.count > 0 else {
             return CGSize.zero
         }
+        sectionOffsets.removeAll()
         var totalHeight: CGFloat = 0.0
         layoutArray.forEach { (layout) in
+            sectionOffsets.append(totalHeight)
             let height = layout.collectionViewContentSize.height
             totalHeight += height
+            
         }
         let inset = collectionView.contentInset
         let insetOffset = (inset.left + inset.right)
@@ -81,22 +87,22 @@ extension AHLayoutRouter {
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         var attributes = [UICollectionViewLayoutAttributes]()
-        var currentOrigin = CGPoint.zero
+        var currentOffset = CGPoint.zero
         
         // Loop through layouts and make offset for their attributes
         layoutArray.forEach { (layout) in
-            let newRect = CGRect(x: rect.origin.x, y: rect.origin.y - currentOrigin.y, width: rect.size.width, height: rect.size.height)
+            let newRect = CGRect(x: rect.origin.x, y: rect.origin.y - currentOffset.y, width: rect.size.width, height: rect.size.height)
             if let attrs = layout.layoutAttributesForElements(in: newRect) {
                 let newAttrs = attrs.map({ (attr) -> UICollectionViewLayoutAttributes in
                     return attr.copy() as! UICollectionViewLayoutAttributes
                 })
-                
-                recaculateFrames(origin: currentOrigin, attributes: newAttrs)
+
+                normalizeAttributes(offset: currentOffset, attributes: newAttrs)
                 attributes.append(contentsOf: newAttrs)
             }
+            
             let size = layout.collectionViewContentSize
-            currentOrigin = CGPoint(x: 0.0, y: currentOrigin.y + size.height)
-            print("currentOrigin:\(currentOrigin)")
+            currentOffset = CGPoint(x: 0.0, y: currentOffset.y + size.height)
         }
         
         attributes.append(contentsOf: routerAttributes)
@@ -105,10 +111,15 @@ extension AHLayoutRouter {
     }
     
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        
+        let sectionOffset = sectionOffsets[indexPath.section]
+        let offset = CGPoint(x: 0.0, y: sectionOffset)
         let layout = layoutArray[indexPath.section]
-        let attr = layout.layoutAttributesForItem(at: indexPath)
-        return attr
+        if let attr = layout.layoutAttributesForItem(at: indexPath)?.copy() as? UICollectionViewLayoutAttributes {
+            normalizeAttributes(offset: offset, attributes: [attr])
+            return attr
+        }
+        
+        return nil
     }
     
     override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
@@ -128,7 +139,6 @@ extension AHLayoutRouter {
     
     override func invalidateLayout() {
         super.invalidateLayout()
-        routerAttributes.removeAll()
         headerAttr.frame = .zero
         footerAttr.frame = .zero
         layoutArray.forEach { (layout) in
@@ -141,13 +151,14 @@ extension AHLayoutRouter {
 
 // MARK:- Private Methods
 extension AHLayoutRouter {
-    fileprivate func recaculateFrames(origin offset: CGPoint, attributes array:[UICollectionViewLayoutAttributes]){
+    fileprivate func normalizeAttributes(offset: CGPoint, attributes array:[UICollectionViewLayoutAttributes]){
         for attr in array {
-            attr.frame = mergeOrgins(orgin: offset, normal: attr.frame)
+            attr.frame = normalizeAttributes(offset: offset, frame: attr.frame)
+            
         }
     }
     
-    fileprivate func mergeOrgins(orgin offset: CGPoint, normal frame:CGRect) -> CGRect {
+    fileprivate func normalizeAttributes(offset: CGPoint, frame:CGRect) -> CGRect {
         return CGRect(x: frame.origin.x, y: offset.y + frame.origin.y, width: frame.size.width, height: frame.size.height)
     }
     
@@ -156,7 +167,7 @@ extension AHLayoutRouter {
         guard let delegate = delegate, let collectionView = collectionView else {
             return
         }
-        
+        routerAttributes.removeAll()
         
         let inset = collectionView.contentInset
         

@@ -15,6 +15,7 @@ class AHPinDelegate: NSObject {
     weak var detailHandler: AHDetailHandler?
     var pinVMs: [AHPinViewModel]?
     
+    
 }
 
 
@@ -22,7 +23,7 @@ class AHPinDelegate: NSObject {
 extension AHPinDelegate: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("didSelect item at indexPath:\(indexPath)")
-        if indexPath.section == 1 {
+        if indexPath.section == 11 {
             detailHandler?.collectionView(collectionView, didSelectItemAt: indexPath)
         }
     }
