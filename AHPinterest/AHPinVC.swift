@@ -8,8 +8,7 @@
 
 import UIKit
 
-class AHPinVC: UICollectionViewController {
-    let layoutRouter = AHLayoutRouter()
+class AHPinVC: AHCollectionVC {
     let pinLayout = AHPinLayout()
     let pinContentLayout = AHPinContentLayout()
     
@@ -121,6 +120,8 @@ extension AHPinVC {
     }
     
 }
+
+
 
 
 // MARK:- Data Netowrking Related

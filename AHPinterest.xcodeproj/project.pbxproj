@@ -34,6 +34,9 @@
 		A1A074AB1E9A2AB600FEC153 /* UIImageView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A074AA1E9A2AB600FEC153 /* UIImageView+extension.swift */; };
 		A1A2272F1EA408FC00527358 /* NSIndexPath+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A2272E1EA408FC00527358 /* NSIndexPath+Extension.swift */; };
 		A1A227311EA4247B00527358 /* UICollectionViewLayout+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A227301EA4247B00527358 /* UICollectionViewLayout+Extension.swift */; };
+		A1A227331EA48C3D00527358 /* AHCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A227321EA48C3D00527358 /* AHCollectionVC.swift */; };
+		A1A227351EA48DAC00527358 /* AHDelegatesCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A227341EA48DAC00527358 /* AHDelegatesCenter.swift */; };
+		A1A227371EA48DBA00527358 /* AHDataSourceCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A227361EA48DBA00527358 /* AHDataSourceCenter.swift */; };
 		A1B115001EA2B29F004D8601 /* AHLayoutRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B114FF1EA2B29F004D8601 /* AHLayoutRouter.swift */; };
 		A1B115021EA2DAB7004D8601 /* AHPinContentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B115011EA2DAB7004D8601 /* AHPinContentLayout.swift */; };
 		A1B115041EA2DDB9004D8601 /* AHPinContentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B115031EA2DDB9004D8601 /* AHPinContentHandler.swift */; };
@@ -86,6 +89,9 @@
 		A1A074AA1E9A2AB600FEC153 /* UIImageView+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+extension.swift"; sourceTree = "<group>"; };
 		A1A2272E1EA408FC00527358 /* NSIndexPath+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSIndexPath+Extension.swift"; sourceTree = "<group>"; };
 		A1A227301EA4247B00527358 /* UICollectionViewLayout+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionViewLayout+Extension.swift"; sourceTree = "<group>"; };
+		A1A227321EA48C3D00527358 /* AHCollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHCollectionVC.swift; sourceTree = "<group>"; };
+		A1A227341EA48DAC00527358 /* AHDelegatesCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDelegatesCenter.swift; sourceTree = "<group>"; };
+		A1A227361EA48DBA00527358 /* AHDataSourceCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDataSourceCenter.swift; sourceTree = "<group>"; };
 		A1B114FF1EA2B29F004D8601 /* AHLayoutRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHLayoutRouter.swift; sourceTree = "<group>"; };
 		A1B115011EA2DAB7004D8601 /* AHPinContentLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinContentLayout.swift; sourceTree = "<group>"; };
 		A1B115031EA2DDB9004D8601 /* AHPinContentHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinContentHandler.swift; sourceTree = "<group>"; };
@@ -132,6 +138,23 @@
 				A15C0B5A1E9372B900B35BE1 /* AHOptionsVC.swift */,
 			);
 			name = PinOptions;
+			sourceTree = "<group>";
+		};
+		A1640C231EA4A65F000E6EB5 /* AHPinVC */ = {
+			isa = PBXGroup;
+			children = (
+				A173772A1E887F9600462EE1 /* AHPinVC.swift */,
+				A168BFE31E88930200A87E03 /* AHPinDelegate.swift */,
+				A12A28401EA0527700F7A36D /* AHPinDataSource.swift */,
+			);
+			name = AHPinVC;
+			sourceTree = "<group>";
+		};
+		A1640C241EA4AD25000E6EB5 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Test;
 			sourceTree = "<group>";
 		};
 		A168BFD81E888DDD00A87E03 /* AHPinterestTests */ = {
@@ -190,11 +213,11 @@
 		A173773E1E8881D800462EE1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A173772A1E887F9600462EE1 /* AHPinVC.swift */,
-				A168BFE31E88930200A87E03 /* AHPinDelegate.swift */,
+				A1640C241EA4AD25000E6EB5 /* Test */,
+				A1640C231EA4A65F000E6EB5 /* AHPinVC */,
+				A1A227381EA48DC000527358 /* AHCollectionVC */,
 				A1F70F171E9D962F00FF2C91 /* AHRefreshControl.swift */,
 				A1F70F111E9C57CB00FF2C91 /* AHLayoutHandler.swift */,
-				A12A28401EA0527700F7A36D /* AHPinDataSource.swift */,
 				A12A28431EA07ADB00F7A36D /* AHOptionsHandler.swift */,
 				A12A28451EA082A300F7A36D /* AHDetailHandler.swift */,
 				A1B115031EA2DDB9004D8601 /* AHPinContentHandler.swift */,
@@ -270,6 +293,16 @@
 				A1F70F151E9CC21A00FF2C91 /* AHRefershUI.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		A1A227381EA48DC000527358 /* AHCollectionVC */ = {
+			isa = PBXGroup;
+			children = (
+				A1A227321EA48C3D00527358 /* AHCollectionVC.swift */,
+				A1A227341EA48DAC00527358 /* AHDelegatesCenter.swift */,
+				A1A227361EA48DBA00527358 /* AHDataSourceCenter.swift */,
+			);
+			name = AHCollectionVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -395,6 +428,7 @@
 				A1F70F181E9D962F00FF2C91 /* AHRefreshControl.swift in Sources */,
 				A15C0B5C1E9372B900B35BE1 /* AHOptionsVC.swift in Sources */,
 				A1B115001EA2B29F004D8601 /* AHLayoutRouter.swift in Sources */,
+				A1A227351EA48DAC00527358 /* AHDelegatesCenter.swift in Sources */,
 				A168BFE81E889B6400A87E03 /* AHPinLayout.swift in Sources */,
 				A1F70F0C1E9B54EB00FF2C91 /* AHRefreshHeader.swift in Sources */,
 				A1A227311EA4247B00527358 /* UICollectionViewLayout+Extension.swift in Sources */,
@@ -414,6 +448,8 @@
 				A173772B1E887F9600462EE1 /* AHPinVC.swift in Sources */,
 				A12A28441EA07ADB00F7A36D /* AHOptionsHandler.swift in Sources */,
 				A12A28361E9E137400F7A36D /* AHRefreshFooter.swift in Sources */,
+				A1A227371EA48DBA00527358 /* AHDataSourceCenter.swift in Sources */,
+				A1A227331EA48C3D00527358 /* AHCollectionVC.swift in Sources */,
 				A1F70F161E9CC21A00FF2C91 /* AHRefershUI.swift in Sources */,
 				A17377291E887F9600462EE1 /* AppDelegate.swift in Sources */,
 			);

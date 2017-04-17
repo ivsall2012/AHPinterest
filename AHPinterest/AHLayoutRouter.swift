@@ -30,7 +30,7 @@ class AHLayoutRouter: UICollectionViewLayout {
     
     
     // Private
-    fileprivate var layoutArray = [UICollectionViewLayout]()
+    fileprivate(set) var layoutArray = [UICollectionViewLayout]()
     fileprivate var routerAttributes = [UICollectionViewLayoutAttributes]()
     
     fileprivate var headerAttr: UICollectionViewLayoutAttributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: AHHeaderKind, with: AHHeaderIndexPath)
