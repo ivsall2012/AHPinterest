@@ -85,17 +85,18 @@ extension AHLayoutRouter {
         
         // Loop through layouts and make offset for their attributes
         layoutArray.forEach { (layout) in
-            let newRect = CGRect(x: rect.origin.x, y: currentOrigin.y + rect.origin.y, width: rect.size.width, height: rect.size.height)
+            let newRect = CGRect(x: rect.origin.x, y: rect.origin.y - currentOrigin.y, width: rect.size.width, height: rect.size.height)
             if let attrs = layout.layoutAttributesForElements(in: newRect) {
-                let size = layout.collectionViewContentSize
                 let newAttrs = attrs.map({ (attr) -> UICollectionViewLayoutAttributes in
                     return attr.copy() as! UICollectionViewLayoutAttributes
                 })
                 
                 recaculateFrames(origin: currentOrigin, attributes: newAttrs)
-                currentOrigin = CGPoint(x: 0.0, y: currentOrigin.y + size.height)
                 attributes.append(contentsOf: newAttrs)
             }
+            let size = layout.collectionViewContentSize
+            currentOrigin = CGPoint(x: 0.0, y: currentOrigin.y + size.height)
+            print("currentOrigin:\(currentOrigin)")
         }
         
         attributes.append(contentsOf: routerAttributes)
