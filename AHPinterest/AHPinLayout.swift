@@ -93,8 +93,6 @@ class AHPinLayout: AHLayout {
     
     
     fileprivate func prepareCell() {
-        print("layoutSection:\(layoutSection)")
-        print("numberOfItems:\(collectionView!.numberOfItems(inSection: layoutSection))")
         for i in 0..<collectionView!.numberOfItems(inSection: layoutSection) {
             let indexPath = IndexPath(item: i, section: layoutSection)
             insertAttributeIntoCache(indexPath: indexPath)

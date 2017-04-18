@@ -33,9 +33,6 @@ extension AHDelegatesCenter: UICollectionViewDelegate {
         for delegate in collectionVC.delegates {
             delegate.scrollViewDidScroll?(scrollView)
         }
-        for delegate in collectionVC.supplementDelegates {
-            delegate.scrollViewDidScroll?(scrollView)
-        }
         
     }
     
@@ -44,9 +41,6 @@ extension AHDelegatesCenter: UICollectionViewDelegate {
             return
         }
         for delegate in collectionVC.delegates {
-            delegate.scrollViewDidEndDragging?(scrollView, willDecelerate: decelerate)
-        }
-        for delegate in collectionVC.supplementDelegates {
             delegate.scrollViewDidEndDragging?(scrollView, willDecelerate: decelerate)
         }
     }

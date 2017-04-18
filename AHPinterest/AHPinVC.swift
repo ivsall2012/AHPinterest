@@ -32,10 +32,9 @@ extension AHPinVC {
         
         
         
-        setupRefreshLayout()
         setupPinContent()
         setupPinLayout()
-
+        setupRefreshLayout()
         setupOptionsHandler()
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -69,6 +68,8 @@ extension AHPinVC {
         let layoutHanlder = AHRefreshLayoutHandler()
         layoutHanlder.pinVC = self
         refreshLayout.delegate = layoutHanlder
+        refreshLayout.enableFooterRefresh = true
+        refreshLayout.enableHeaderRefresh = true
         addGlobelSupplement(layout: refreshLayout, delegate: layoutHanlder, dataSource: layoutHanlder)
     }
     

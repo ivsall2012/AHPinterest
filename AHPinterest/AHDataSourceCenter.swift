@@ -54,24 +54,14 @@ extension AHDataSourceCenter: UICollectionViewDataSource {
 
     }
     
-    /// All supplement attributes will be delivered here. You can differentiate them by their kinds you registered. And within the kind, indexPaths are all yours.
+    /// All supplement attributes will be delivered here. You can differentiate them by their kinds you registered. 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard collectionVC != nil else {
             fatalError("collectionVC is nil")
         }
 
-        // The supplement view could be from regular layout's supplement attributes
         if indexPath.section < collectionVC!.dataSources.count {
             let dataSource = collectionVC!.dataSources[indexPath.section]
-            if let view = dataSource.collectionView?(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath) {
-                return view
-            }
-        }
-        
-        // Or from independent supplement layout's
-        let normalizedSection = indexPath.section - collectionVC!.dataSources.count
-        if normalizedSection < collectionVC!.supplementDataSources.count {
-            let dataSource = collectionVC!.supplementDataSources[normalizedSection]
             if let view = dataSource.collectionView?(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath) {
                 return view
             }

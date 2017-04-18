@@ -10,6 +10,7 @@ import UIKit
 
 class AHLayout: UICollectionViewLayout {
     private(set) weak var layoutRouter: AHLayoutRouter?
+    var isGlobel = false
     override var collectionView: UICollectionView? {
         return layoutRouter?.collectionView ?? nil
     }

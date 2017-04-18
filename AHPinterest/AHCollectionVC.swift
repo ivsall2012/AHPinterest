@@ -29,8 +29,6 @@ class AHCollectionVC: UICollectionViewController {
     
     fileprivate(set) var delegates = [UICollectionViewDelegate]()
     fileprivate(set) var dataSources = [UICollectionViewDataSource]()
-    fileprivate(set) var supplementDelegates = [UICollectionViewDelegate]()
-    fileprivate(set) var supplementDataSources = [UICollectionViewDataSource]()
     var layoutArray: [UICollectionViewLayout] {
         return self.layoutRouter.layoutArray
     }
@@ -55,9 +53,9 @@ extension AHCollectionVC {
         dataSources.append(dataSource)
     }
     func addGlobelSupplement(layout: AHLayout, delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource){
-        layoutRouter.addGlobelSupplement(layout: layout)
-        supplementDelegates.append(delegate)
-        supplementDataSources.append(dataSource)
+        layoutRouter.addSupplementLayout(layout: layout)
+        delegates.append(delegate)
+        dataSources.append(dataSource)
     }
 }
 

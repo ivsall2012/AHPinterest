@@ -168,13 +168,10 @@ extension AHRefreshLayoutHandler {
 
 
 extension AHRefreshLayoutHandler: UICollectionViewDataSource {
-    
-    // Dummy method won't be called by dataSourceCenter
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 0
     }
-    
-    // Dummy method won't be called by dataSourceCenter
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return UICollectionViewCell()
     }
