@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AHDetailLayout: UICollectionViewFlowLayout {
+class AHDetailVCLayout: UICollectionViewFlowLayout {
     
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true

@@ -9,13 +9,13 @@
 import UIKit
 
 class AHPinVC: AHCollectionVC {
-    let pinContentLayout = AHPinContentLayout()
     let pinLayout = AHPinLayout()
     let refreshLayout = AHRefreshLayout()
     let pinDataSource = AHPinDataSource()
     let optionsHandler = AHOptionsHandler()
     
-    var alreadyAutoRefresh = false
+    // should the VC refreshes data at first loading
+    var initialAutoRefresh = false
 }
 
 
@@ -29,8 +29,6 @@ extension AHPinVC {
         collectionView?.register(AHRefreshFooter.self, forSupplementaryViewOfKind: AHFooterKind, withReuseIdentifier: AHFooterKind)
         
         
-        
-//        setupPinContent()
         setupPinLayout()
         setupRefreshLayout()
         setupOptionsHandler()
@@ -42,8 +40,8 @@ extension AHPinVC {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if !alreadyAutoRefresh {
-            alreadyAutoRefresh = true
+        if !initialAutoRefresh {
+            initialAutoRefresh = true
             AHRefershUI.show()
             pinDataSource.loadNewData(completion: { (success) in
                 AHRefershUI.dismiss()
@@ -60,18 +58,12 @@ extension AHPinVC {
 
 // MARK:- Setups
 extension AHPinVC {
-    func setupPinContent() {
-        let contentHanlder = AHPinContentHandler()
-        pinContentLayout.delegate = contentHanlder
-        addLayout(layout: pinContentLayout, delegate: contentHanlder, dataSource: contentHanlder)
-    }
-    
     func setupRefreshLayout() {
         let layoutHanlder = AHRefreshLayoutHandler()
         layoutHanlder.pinVC = self
         refreshLayout.delegate = layoutHanlder
-//        refreshLayout.enableFooterRefresh = true
-//        refreshLayout.enableHeaderRefresh = true
+        refreshLayout.enableFooterRefresh = true
+        refreshLayout.enableHeaderRefresh = true
         addGlobelSupplement(layout: refreshLayout, delegate: layoutHanlder, dataSource: layoutHanlder)
     }
     
@@ -80,7 +72,7 @@ extension AHPinVC {
         
         let pinDelegate = AHPinDelegate()
         pinDelegate.pinVC = self
-        
+
         let layoutHanlder = AHLayoutHandler()
         layoutHanlder.pinVC = self
         pinLayout.delegate = layoutHanlder

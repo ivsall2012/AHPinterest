@@ -34,13 +34,11 @@ class AHDetailCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         pinVC?.view.frame = self.bounds
-        print("prepareForReuse")
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        pinVC?.view.frame = self.bounds.insetBy(dx: 10, dy: 10)
-        print("layoutSubviews")
+        pinVC?.view.frame = self.bounds
     }
     
 }

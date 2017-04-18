@@ -23,41 +23,63 @@ class AHDetailVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let layout = AHDetailVCLayout()
+        collectionView.setCollectionViewLayout(layout, animated: false)
+        collectionView.reloadData()
+        collectionView.decelerationRate = UIScrollViewDecelerationRateFast
+        layout.scrollDirection = .horizontal
+        
         guard let pinVMs = pinVMs else {
             return
         }
         
         for _ in pinVMs {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "AHPinVC") as! AHPinVC
-            let pinContentLayout = AHPinContentLayout()
-            let contentHanlder = AHPinContentHandler()
-            pinContentLayout.delegate = contentHanlder
-            vc.addLayout(layout: pinContentLayout, delegate: contentHanlder, dataSource: contentHanlder)
-            vc.refreshLayout.enableFooterRefresh = true
-            vc.refreshLayout.enableHeaderRefresh = false
-            vc.willMove(toParentViewController: self)
-            self.addChildViewController(vc)
-            vc.didMove(toParentViewController: self)
-            
+            let vc = createPinVC()
             cellVCs.append(vc)
         }
-        let layout = AHDetailLayout()
-        collectionView.setCollectionViewLayout(layout, animated: false)
-        collectionView.reloadData()
-        collectionView.decelerationRate = UIScrollViewDecelerationRateFast
-        layout.scrollDirection = .horizontal
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // You need to call this before "scrollToItem" in order for collection view to layout its item cells, then scroll.
-        self.view.layoutIfNeeded()
         
-        if let currentIndexPath = currentIndexPath , pinVMs != nil {
-            collectionView.scrollToItem(at: currentIndexPath, at: UICollectionViewScrollPosition.right, animated: false)
-        }
     }
     
+    
+   
+    
+    
+    @IBAction func dismiss(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    @IBAction func save(_ sender: UIButton) {
+        print("saved photo")
+    }
+
+}
+
+// MARK:- Helper Methods
+extension AHDetailVC {
+    func createPinVC() -> AHPinVC {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "AHPinVC") as! AHPinVC
+        
+        // setup layout
+        let pinDetailLayout = AHPinDetailLayout()
+        let pinDetailLayoutHanlder = AHPinDetailLayoutHandler()
+        pinDetailLayout.delegate = pinDetailLayoutHanlder
+        vc.addLayout(layout: pinDetailLayout, delegate: pinDetailLayoutHanlder, dataSource: pinDetailLayoutHanlder)
+        
+        // setup VC related
+        vc.willMove(toParentViewController: self)
+        self.addChildViewController(vc)
+        vc.didMove(toParentViewController: self)
+        
+        // other stuff
+        vc.refreshLayout.enableFooterRefresh = true
+        vc.refreshLayout.enableHeaderRefresh = false
+        
+        return vc
+    }
     
     class func calculateImageSize(image: UIImage) -> CGRect {
         let imgSize = image.size
@@ -75,22 +97,8 @@ class AHDetailVC: UIViewController {
         let newFrame = CGRect(x: newX, y: newY, width: newWidth, height: newHeight)
         return newFrame
     }
-    
-
-    
-    @IBAction func nextBtnTapped(_ sender: AnyObject) {
-//        let indexPath = IndexPath(item: 2, section: 0)
-//        collectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.right, animated: false)
-    }
-    
-    @IBAction func dismiss(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
-    }
-    @IBAction func save(_ sender: UIButton) {
-        print("saved photo")
-    }
-
 }
+
 
 extension AHDetailVC {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {

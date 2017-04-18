@@ -10,7 +10,7 @@
 		A12A28361E9E137400F7A36D /* AHRefreshFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A28351E9E137400F7A36D /* AHRefreshFooter.swift */; };
 		A12A28381E9ECBA500F7A36D /* AHDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A28371E9ECBA500F7A36D /* AHDetailCell.swift */; };
 		A12A283A1E9ECBAB00F7A36D /* AHDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A28391E9ECBAB00F7A36D /* AHDetailVC.swift */; };
-		A12A283C1E9ECBE500F7A36D /* AHDetailLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A283B1E9ECBE500F7A36D /* AHDetailLayout.swift */; };
+		A12A283C1E9ECBE500F7A36D /* AHDetailVCLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A283B1E9ECBE500F7A36D /* AHDetailVCLayout.swift */; };
 		A12A283E1E9ECBF800F7A36D /* AHDetailAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A283D1E9ECBF800F7A36D /* AHDetailAnimator.swift */; };
 		A12A28411EA0527700F7A36D /* AHPinDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A28401EA0527700F7A36D /* AHPinDataSource.swift */; };
 		A12A28441EA07ADB00F7A36D /* AHOptionsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A28431EA07ADB00F7A36D /* AHOptionsHandler.swift */; };
@@ -40,8 +40,8 @@
 		A1A227351EA48DAC00527358 /* AHDelegatesCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A227341EA48DAC00527358 /* AHDelegatesCenter.swift */; };
 		A1A227371EA48DBA00527358 /* AHDataSourceCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A227361EA48DBA00527358 /* AHDataSourceCenter.swift */; };
 		A1B115001EA2B29F004D8601 /* AHLayoutRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B114FF1EA2B29F004D8601 /* AHLayoutRouter.swift */; };
-		A1B115021EA2DAB7004D8601 /* AHPinContentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B115011EA2DAB7004D8601 /* AHPinContentLayout.swift */; };
-		A1B115041EA2DDB9004D8601 /* AHPinContentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B115031EA2DDB9004D8601 /* AHPinContentHandler.swift */; };
+		A1B115021EA2DAB7004D8601 /* AHPinDetailLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B115011EA2DAB7004D8601 /* AHPinDetailLayout.swift */; };
+		A1B115041EA2DDB9004D8601 /* AHPinDetailLayoutHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B115031EA2DDB9004D8601 /* AHPinDetailLayoutHandler.swift */; };
 		A1CE93541E9A17A5002A8738 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CE93531E9A17A5002A8738 /* Constants.swift */; };
 		A1F70F0C1E9B54EB00FF2C91 /* AHRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F70F0B1E9B54EB00FF2C91 /* AHRefreshHeader.swift */; };
 		A1F70F121E9C57CB00FF2C91 /* AHLayoutHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F70F111E9C57CB00FF2C91 /* AHLayoutHandler.swift */; };
@@ -62,7 +62,7 @@
 		A12A28351E9E137400F7A36D /* AHRefreshFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHRefreshFooter.swift; sourceTree = "<group>"; };
 		A12A28371E9ECBA500F7A36D /* AHDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDetailCell.swift; sourceTree = "<group>"; };
 		A12A28391E9ECBAB00F7A36D /* AHDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDetailVC.swift; sourceTree = "<group>"; };
-		A12A283B1E9ECBE500F7A36D /* AHDetailLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDetailLayout.swift; sourceTree = "<group>"; };
+		A12A283B1E9ECBE500F7A36D /* AHDetailVCLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDetailVCLayout.swift; sourceTree = "<group>"; };
 		A12A283D1E9ECBF800F7A36D /* AHDetailAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDetailAnimator.swift; sourceTree = "<group>"; };
 		A12A28401EA0527700F7A36D /* AHPinDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinDataSource.swift; sourceTree = "<group>"; };
 		A12A28431EA07ADB00F7A36D /* AHOptionsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHOptionsHandler.swift; sourceTree = "<group>"; };
@@ -96,8 +96,8 @@
 		A1A227341EA48DAC00527358 /* AHDelegatesCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDelegatesCenter.swift; sourceTree = "<group>"; };
 		A1A227361EA48DBA00527358 /* AHDataSourceCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDataSourceCenter.swift; sourceTree = "<group>"; };
 		A1B114FF1EA2B29F004D8601 /* AHLayoutRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHLayoutRouter.swift; sourceTree = "<group>"; };
-		A1B115011EA2DAB7004D8601 /* AHPinContentLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinContentLayout.swift; sourceTree = "<group>"; };
-		A1B115031EA2DDB9004D8601 /* AHPinContentHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinContentHandler.swift; sourceTree = "<group>"; };
+		A1B115011EA2DAB7004D8601 /* AHPinDetailLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinDetailLayout.swift; sourceTree = "<group>"; };
+		A1B115031EA2DDB9004D8601 /* AHPinDetailLayoutHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinDetailLayoutHandler.swift; sourceTree = "<group>"; };
 		A1CE93531E9A17A5002A8738 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A1F70F0B1E9B54EB00FF2C91 /* AHRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHRefreshHeader.swift; sourceTree = "<group>"; };
 		A1F70F111E9C57CB00FF2C91 /* AHLayoutHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHLayoutHandler.swift; sourceTree = "<group>"; };
@@ -125,52 +125,44 @@
 		A12A283F1E9ECC0300F7A36D /* PinDetail */ = {
 			isa = PBXGroup;
 			children = (
-				A12A283D1E9ECBF800F7A36D /* AHDetailAnimator.swift */,
-				A12A28371E9ECBA500F7A36D /* AHDetailCell.swift */,
-				A12A283B1E9ECBE500F7A36D /* AHDetailLayout.swift */,
-				A12A28391E9ECBAB00F7A36D /* AHDetailVC.swift */,
+				A1E85D9A1EA6CA1A000775FD /* View */,
+				A1E85D991EA6CA14000775FD /* VC */,
+				A1E85D981EA6CA06000775FD /* Animation */,
+				A1640C311EA5A844000E6EB5 /* Pin Detail Layout */,
 			);
 			name = PinDetail;
 			sourceTree = "<group>";
 		};
-		A12A28421EA075C700F7A36D /* PinOptions */ = {
+		A12A28421EA075C700F7A36D /* Pin Options Animation */ = {
 			isa = PBXGroup;
 			children = (
+				A12A28431EA07ADB00F7A36D /* AHOptionsHandler.swift */,
 				A15C0B581E9369F600B35BE1 /* AHOptionsAnimator.swift */,
 				A15C0B5A1E9372B900B35BE1 /* AHOptionsVC.swift */,
 			);
-			name = PinOptions;
+			name = "Pin Options Animation";
 			sourceTree = "<group>";
 		};
 		A1640C231EA4A65F000E6EB5 /* PinVC */ = {
 			isa = PBXGroup;
 			children = (
-				A173772A1E887F9600462EE1 /* AHPinVC.swift */,
-				A168BFE71E889B6400A87E03 /* AHPinLayout.swift */,
-				A168BFE31E88930200A87E03 /* AHPinDelegate.swift */,
-				A12A28401EA0527700F7A36D /* AHPinDataSource.swift */,
-				A1F70F111E9C57CB00FF2C91 /* AHLayoutHandler.swift */,
-				A12A28431EA07ADB00F7A36D /* AHOptionsHandler.swift */,
+				A12A28421EA075C700F7A36D /* Pin Options Animation */,
+				A17377451E88822E00462EE1 /* Views */,
+				A17377411E8881EF00462EE1 /* Models */,
+				A1E85D971EA6C94C000775FD /* RefreshLayout */,
+				A1E85D961EA6C79A000775FD /* PinLayout */,
+				A1E85D931EA6C787000775FD /* VCs */,
 			);
 			name = PinVC;
 			sourceTree = "<group>";
 		};
-		A1640C241EA4AD25000E6EB5 /* Refersh */ = {
+		A1640C311EA5A844000E6EB5 /* Pin Detail Layout */ = {
 			isa = PBXGroup;
 			children = (
-				A1640C251EA4BF13000E6EB5 /* AHRefreshLayout.swift */,
-				A1640C291EA4D3A5000E6EB5 /* AHRefreshLayoutHandler.swift */,
+				A1B115011EA2DAB7004D8601 /* AHPinDetailLayout.swift */,
+				A1B115031EA2DDB9004D8601 /* AHPinDetailLayoutHandler.swift */,
 			);
-			name = Refersh;
-			sourceTree = "<group>";
-		};
-		A1640C311EA5A844000E6EB5 /* PinContent */ = {
-			isa = PBXGroup;
-			children = (
-				A1B115011EA2DAB7004D8601 /* AHPinContentLayout.swift */,
-				A1B115031EA2DDB9004D8601 /* AHPinContentHandler.swift */,
-			);
-			name = PinContent;
+			name = "Pin Detail Layout";
 			sourceTree = "<group>";
 		};
 		A168BFD81E888DDD00A87E03 /* AHPinterestTests */ = {
@@ -204,15 +196,12 @@
 		A17377271E887F9600462EE1 /* AHPinterest */ = {
 			isa = PBXGroup;
 			children = (
-				A12A28421EA075C700F7A36D /* PinOptions */,
+				A1A227381EA48DC000527358 /* AHCollectionVC */,
+				A1640C231EA4A65F000E6EB5 /* PinVC */,
 				A12A283F1E9ECC0300F7A36D /* PinDetail */,
-				A17377451E88822E00462EE1 /* Views */,
 				A17377421E8881FD00462EE1 /* Other */,
-				A17377411E8881EF00462EE1 /* Models */,
-				A17377401E8881EA00462EE1 /* LayoutRouter */,
 				A173773F1E8881E000462EE1 /* Extensions */,
 				A17377431E88820800462EE1 /* Interfaces */,
-				A173773E1E8881D800462EE1 /* Controllers */,
 				A173773D1E8881C600462EE1 /* Assets */,
 			);
 			path = AHPinterest;
@@ -224,17 +213,6 @@
 				A173772F1E887F9600462EE1 /* Assets.xcassets */,
 			);
 			name = Assets;
-			sourceTree = "<group>";
-		};
-		A173773E1E8881D800462EE1 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				A1640C311EA5A844000E6EB5 /* PinContent */,
-				A1640C241EA4AD25000E6EB5 /* Refersh */,
-				A1640C231EA4A65F000E6EB5 /* PinVC */,
-				A1A227381EA48DC000527358 /* AHCollectionVC */,
-			);
-			name = Controllers;
 			sourceTree = "<group>";
 		};
 		A173773F1E8881E000462EE1 /* Extensions */ = {
@@ -309,11 +287,65 @@
 		A1A227381EA48DC000527358 /* AHCollectionVC */ = {
 			isa = PBXGroup;
 			children = (
+				A17377401E8881EA00462EE1 /* LayoutRouter */,
 				A1A227321EA48C3D00527358 /* AHCollectionVC.swift */,
 				A1A227341EA48DAC00527358 /* AHDelegatesCenter.swift */,
 				A1A227361EA48DBA00527358 /* AHDataSourceCenter.swift */,
 			);
 			name = AHCollectionVC;
+			sourceTree = "<group>";
+		};
+		A1E85D931EA6C787000775FD /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+				A173772A1E887F9600462EE1 /* AHPinVC.swift */,
+				A168BFE31E88930200A87E03 /* AHPinDelegate.swift */,
+				A12A28401EA0527700F7A36D /* AHPinDataSource.swift */,
+			);
+			name = VCs;
+			sourceTree = "<group>";
+		};
+		A1E85D961EA6C79A000775FD /* PinLayout */ = {
+			isa = PBXGroup;
+			children = (
+				A1F70F111E9C57CB00FF2C91 /* AHLayoutHandler.swift */,
+				A168BFE71E889B6400A87E03 /* AHPinLayout.swift */,
+			);
+			name = PinLayout;
+			sourceTree = "<group>";
+		};
+		A1E85D971EA6C94C000775FD /* RefreshLayout */ = {
+			isa = PBXGroup;
+			children = (
+				A1640C251EA4BF13000E6EB5 /* AHRefreshLayout.swift */,
+				A1640C291EA4D3A5000E6EB5 /* AHRefreshLayoutHandler.swift */,
+			);
+			name = RefreshLayout;
+			sourceTree = "<group>";
+		};
+		A1E85D981EA6CA06000775FD /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				A12A283D1E9ECBF800F7A36D /* AHDetailAnimator.swift */,
+			);
+			name = Animation;
+			sourceTree = "<group>";
+		};
+		A1E85D991EA6CA14000775FD /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A12A28391E9ECBAB00F7A36D /* AHDetailVC.swift */,
+				A12A283B1E9ECBE500F7A36D /* AHDetailVCLayout.swift */,
+			);
+			name = VC;
+			sourceTree = "<group>";
+		};
+		A1E85D9A1EA6CA1A000775FD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A12A28371E9ECBA500F7A36D /* AHDetailCell.swift */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -429,13 +461,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1B115021EA2DAB7004D8601 /* AHPinContentLayout.swift in Sources */,
+				A1B115021EA2DAB7004D8601 /* AHPinDetailLayout.swift in Sources */,
 				A1F70F121E9C57CB00FF2C91 /* AHLayoutHandler.swift in Sources */,
 				A168BFE41E88930200A87E03 /* AHPinDelegate.swift in Sources */,
 				A17377471E88825100462EE1 /* AHPinDataModel.swift in Sources */,
 				A19EC44B1E99DFBF00B6D7C4 /* AHNetowrkTool.swift in Sources */,
 				A168BFE21E8890E500A87E03 /* AHPinCell.swift in Sources */,
-				A12A283C1E9ECBE500F7A36D /* AHDetailLayout.swift in Sources */,
+				A12A283C1E9ECBE500F7A36D /* AHDetailVCLayout.swift in Sources */,
 				A15C0B5C1E9372B900B35BE1 /* AHOptionsVC.swift in Sources */,
 				A1B115001EA2B29F004D8601 /* AHLayoutRouter.swift in Sources */,
 				A1A227351EA48DAC00527358 /* AHDelegatesCenter.swift in Sources */,
@@ -456,7 +488,7 @@
 				A1640C2A1EA4D3A5000E6EB5 /* AHRefreshLayoutHandler.swift in Sources */,
 				A19EC4491E99D99700B6D7C4 /* AHPinDataGenerator.swift in Sources */,
 				A1CE93541E9A17A5002A8738 /* Constants.swift in Sources */,
-				A1B115041EA2DDB9004D8601 /* AHPinContentHandler.swift in Sources */,
+				A1B115041EA2DDB9004D8601 /* AHPinDetailLayoutHandler.swift in Sources */,
 				A173772B1E887F9600462EE1 /* AHPinVC.swift in Sources */,
 				A12A28441EA07ADB00F7A36D /* AHOptionsHandler.swift in Sources */,
 				A12A28361E9E137400F7A36D /* AHRefreshFooter.swift in Sources */,

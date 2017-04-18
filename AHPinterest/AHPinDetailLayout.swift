@@ -8,25 +8,25 @@
 
 import UIKit
 
-protocol AHPinContentDelegate: NSObjectProtocol {
-    func AHPinContentSize(index: IndexPath) -> CGSize
+protocol AHPinDetailLayoutDelegate: NSObjectProtocol {
+    func AHPinDetailLayoutSize(index: IndexPath) -> CGSize
 }
 
-class AHPinContentLayout: AHLayout {
-    weak var delegate: AHPinContentDelegate?
+class AHPinDetailLayout: AHLayout {
+    weak var delegate: AHPinDetailLayoutDelegate?
     
     fileprivate var attributes: UICollectionViewLayoutAttributes?
     fileprivate var contentSize = CGSize.zero
 }
 
 // MARK:- Layout Cycle
-extension AHPinContentLayout {
+extension AHPinDetailLayout {
     override func prepare() {
         guard let delegate = delegate else {
             return
         }
         let index = IndexPath(item: 0, section: layoutSection)
-        contentSize = delegate.AHPinContentSize(index: index)
+        contentSize = delegate.AHPinDetailLayoutSize(index: index)
         attributes = UICollectionViewLayoutAttributes(forCellWith: index)
         attributes?.frame.origin = CGPoint(x: 0, y: 0)
         attributes?.frame.size = CGSize(width: collectionView!.bounds.width, height: contentSize.height)

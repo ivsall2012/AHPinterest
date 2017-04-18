@@ -8,21 +8,21 @@
 
 import UIKit
 
-class AHPinContentHandler: NSObject {
+class AHPinDetailLayoutHandler: NSObject {
 
 }
 
-extension AHPinContentHandler: AHPinContentDelegate {
-    func AHPinContentSize(index: IndexPath) -> CGSize {
+extension AHPinDetailLayoutHandler: AHPinDetailLayoutDelegate {
+    func AHPinDetailLayoutSize(index: IndexPath) -> CGSize {
         return CGSize(width: 0.0, height: 200.0)
     }
 }
 
-extension AHPinContentHandler: UICollectionViewDelegate{
+extension AHPinDetailLayoutHandler: UICollectionViewDelegate{
     
 }
 
-extension AHPinContentHandler: UICollectionViewDataSource{
+extension AHPinDetailLayoutHandler: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
     }
