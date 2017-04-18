@@ -1,14 +1,14 @@
 //
-//  AHRefreshControl.swift
+//  AHRefreshLayoutHandler.swift
 //  AHPinterest
 //
-//  Created by Andy Hurricane on 4/11/17.
+//  Created by Andy Hurricane on 4/17/17.
 //  Copyright © 2017 AndyHurricane. All rights reserved.
 //
 
 import UIKit
 
-class AHRefreshControl: NSObject {
+class AHRefreshLayoutHandler: NSObject {
     var headerCell: AHRefreshHeader?{
         didSet {
             if let headerCell = headerCell {
@@ -24,19 +24,32 @@ class AHRefreshControl: NSObject {
         }
     }
     weak var pinVC: AHPinVC?
-    weak var layoutRouter: AHLayoutRouter?
     var isLoading = false
 }
 
-extension AHRefreshControl {
+// MARK:- Layout Delegate
+extension AHRefreshLayoutHandler: AHRefreshLayoutDelegate {
+    func AHRefreshLayoutHeaderSize(collectionView: UICollectionView, layout: AHLayout) -> CGSize {
+        return CGSize(width: 0.0, height: AHHeaderHeight)
+    }
+    
+    func AHRefreshLayoutFooterSize(collectionView: UICollectionView, layout: AHLayout) -> CGSize {
+        return CGSize(width: 0.0, height: AHFooterHeight)
+    }
+    
+}
+
+
+// MARK:- CollectionView Delegate
+extension AHRefreshLayoutHandler: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard let layoutRouter = layoutRouter else {
+        guard let refreshLayout = pinVC?.refreshLayout else {
             return
         }
-        if layoutRouter.enableHeaderRefresh {
+        if refreshLayout.enableHeaderRefresh {
             handlerPullToRefresh(scrollView, didEndDragging: false)
         }
-        if layoutRouter.enableFooterRefresh {
+        if refreshLayout.enableFooterRefresh {
             handleAutoLoading(scrollView, didEndDragging: false)
         }
         
@@ -44,20 +57,20 @@ extension AHRefreshControl {
     
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        guard let layoutRouter = layoutRouter else {
+        guard let refreshLayout = pinVC?.refreshLayout else {
             return
         }
-        if layoutRouter.enableHeaderRefresh {
+        if refreshLayout.enableHeaderRefresh {
             handlerPullToRefresh(scrollView, didEndDragging: true)
         }
-        if layoutRouter.enableFooterRefresh {
+        if refreshLayout.enableFooterRefresh {
             handleAutoLoading(scrollView, didEndDragging: true)
         }
     }
 }
 
 // MARK:- Auto loading for old pins
-extension AHRefreshControl {
+extension AHRefreshLayoutHandler {
     func handleAutoLoading(_ scrollView: UIScrollView, didEndDragging: Bool) {
         let contentSize = scrollView.contentSize
         let yOffset = scrollView.contentOffset.y
@@ -67,7 +80,7 @@ extension AHRefreshControl {
         // deltaLeft represents how long it's left to scroll
         let deltaLeft = contentSize.height - (yOffset + screenHeight)
         
-// the following confition will be satisfied first since scrollView reaches the bottom first. And we do networking first too before the user sees footerCell refreshes.
+        // the following confition will be satisfied first since scrollView reaches the bottom first. And we do networking first too before the user sees footerCell refreshes.
         if yOffset > 0.0 &&  deltaLeft > 0.0 {
             // we load older pins when there's only one screen height left to scroll
             if deltaLeft < screenHeight * 2{
@@ -75,7 +88,7 @@ extension AHRefreshControl {
                 if !isLoading {
                     // isLoading = true as an indicator for footerCell?.refresh() later
                     isLoading = true
-                    pinVC?.loadOlderData(completion: { (_) in
+                    pinVC?.pinDataSource.loadOlderData(completion: { (_) in
                         self.isLoading = false
                         self.footerCell?.endRefersh()
                     })
@@ -83,8 +96,8 @@ extension AHRefreshControl {
             }
         }
         
-// the following condition will be called if the scrolling is really fast cuasing collectionView being pulled up. Then the refreshControl will be shown here
-// deltaLeft being negative means the user is pulling up, no positive space left to scroll, but negative one
+        // the following condition will be called if the scrolling is really fast cuasing collectionView being pulled up. Then the refreshControl will be shown here
+        // deltaLeft being negative means the user is pulling up, no positive space left to scroll, but negative one
         if deltaLeft <= -AHCollectionViewInset.bottom {
             if isLoading {
                 // this block can be called mutiple times as user keeps pulling up
@@ -101,7 +114,7 @@ extension AHRefreshControl {
 
 
 // MARK:- Pull-to-Refresh stuff
-extension AHRefreshControl {
+extension AHRefreshLayoutHandler {
     func handlerPullToRefresh(_ scrollView: UIScrollView, didEndDragging: Bool) {
         guard let headerCell = headerCell else {
             return
@@ -117,7 +130,7 @@ extension AHRefreshControl {
                 UIView.animate(withDuration: 0.25, animations: {
                     scrollView.contentInset.top = headerCell.bounds.height
                     }, completion: { (_) in
-                        self.pinVC?.loadNewData(completion: { (_) in
+                        self.pinVC?.pinDataSource.loadNewData(completion: { (_) in
                             UIView.animate(withDuration: 0.25, animations: {
                                 scrollView.contentInset = AHCollectionViewInset
                             })
@@ -136,7 +149,7 @@ extension AHRefreshControl {
             }else{
                 headerCell.isHidden = true
             }
-
+            
         }
     }
     /// tell the header cell how much to pull down
@@ -151,5 +164,37 @@ extension AHRefreshControl {
     }
     
 }
+
+
+
+extension AHRefreshLayoutHandler: UICollectionViewDataSource {
+    
+    // Dummy method won't be called by dataSourceCenter
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    // Dummy method won't be called by dataSourceCenter
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == AHHeaderKind {
+            let cell = collectionView.dequeueReusableSupplementaryView(ofKind: AHHeaderKind, withReuseIdentifier: AHHeaderKind, for: indexPath) as! AHRefreshHeader
+            headerCell = cell
+            return cell
+        }else if kind == AHFooterKind{
+            let cell = collectionView.dequeueReusableSupplementaryView(ofKind: AHFooterKind, withReuseIdentifier: AHFooterKind, for: indexPath) as! AHRefreshFooter
+            footerCell = cell
+            return cell
+        }else{
+            // imposible!
+            return UICollectionReusableView()
+        }
+    }
+}
+
+
 
 

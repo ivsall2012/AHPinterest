@@ -9,25 +9,15 @@
 import UIKit
 
 class AHPinVC: AHCollectionVC {
-    let pinLayout = AHPinLayout()
     let pinContentLayout = AHPinContentLayout()
+    let pinLayout = AHPinLayout()
+    let refreshLayout = AHRefreshLayout()
+    
+    let pinDataSource = AHPinDataSource()
     
     
-    let dataSource = AHPinDataSource()
-    let refreshController = AHRefreshControl()
-    let pinDelegate = AHPinDelegate()
-    let detailVC = AHDetailVC()
-    let layoutHandler = AHLayoutHandler()
     let optionsHandler = AHOptionsHandler()
-    let detailHanlder = AHDetailHandler()
-    let pinContentHandler = AHPinContentHandler()
-    var pinVMs = [AHPinViewModel]() {
-        didSet {
-            self.layoutHandler.pinVMs = pinVMs
-            self.detailHanlder.pinVMs = pinVMs
-            self.dataSource.pinVMs = pinVMs
-        }
-    }
+
 }
 
 
@@ -36,15 +26,17 @@ extension AHPinVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.contentInset = AHCollectionViewInset
+        collectionView?.register(AHRefreshHeader.self, forSupplementaryViewOfKind: AHHeaderKind, withReuseIdentifier: AHHeaderKind)
         
-        // Call mainSetups first
-        mainSetups()
+        collectionView?.register(AHRefreshFooter.self, forSupplementaryViewOfKind: AHFooterKind, withReuseIdentifier: AHFooterKind)
         
-        setupDetailHandler()
-        setupRefreshControl()
-        setupOptionsHandler()
+        
+        
+        setupRefreshLayout()
+        setupPinContent()
+        setupPinLayout()
 
-        
+        setupOptionsHandler()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -54,7 +46,7 @@ extension AHPinVC {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         AHRefershUI.show()
-        loadNewData(completion: { (success) in
+        pinDataSource.loadNewData(completion: { (success) in
             AHRefershUI.dismiss()
             if success {
                 // dismiss refresh control
@@ -67,51 +59,29 @@ extension AHPinVC {
 
 // MARK:- Setups
 extension AHPinVC {
-    func mainSetups() {
-        setupPinDelegate()
-        setupDataSource()
-        setupLayoutHandler()
+    func setupPinContent() {
+        let contentHanlder = AHPinContentHandler()
+        pinContentLayout.delegate = contentHanlder
+        addLayout(layout: pinContentLayout, delegate: contentHanlder, dataSource: contentHanlder)
     }
     
-    func setupDetailHandler(){
-        detailHanlder.pinVC = self
+    func setupRefreshLayout() {
+        let layoutHanlder = AHRefreshLayoutHandler()
+        layoutHanlder.pinVC = self
+        refreshLayout.delegate = layoutHanlder
+        addGlobelSupplement(layout: refreshLayout, delegate: layoutHanlder, dataSource: layoutHanlder)
     }
     
-    func setupPinDelegate() {
-        collectionView?.delegate = pinDelegate
-        pinDelegate.pinVC = self
-        pinDelegate.refreshController = refreshController
-        pinDelegate.detailHandler = detailHanlder
-    }
-    
-    func setupDataSource() {
-        collectionView?.dataSource = dataSource
-        dataSource.refreshController = refreshController
-    }
-    
-    func setupRefreshControl() {
-        refreshController.pinVC = self
-        refreshController.layoutRouter = layoutRouter
-        layoutRouter.enableHeaderRefresh = true
-        layoutRouter.enableFooterRefresh = true
-    }
-    
-    func setupLayoutHandler() {
-        layoutRouter.delegate = layoutHandler
-        collectionView?.setCollectionViewLayout(layoutRouter, animated: false)
+    func setupPinLayout() {
+        pinDataSource.pinVC = self
         
+        let pinDelegate = AHPinDelegate()
         
-        layoutRouter.add(layout: pinContentLayout)
-        pinContentLayout.delegate = pinContentHandler
+        let layoutHanlder = AHLayoutHandler()
+        layoutHanlder.pinVC = self
+        pinLayout.delegate = layoutHanlder
         
-        layoutRouter.add(layout: pinLayout)
-        pinLayout.delegate = layoutHandler
-
-        collectionView?.register(AHRefreshHeader.self, forSupplementaryViewOfKind: AHHeaderKind, withReuseIdentifier: AHHeaderKind)
-        
-        collectionView?.register(AHRefreshFooter.self, forSupplementaryViewOfKind: AHFooterKind, withReuseIdentifier: AHFooterKind)
-        
-        
+        addLayout(layout: pinLayout, delegate: pinDelegate, dataSource: pinDataSource)
     }
     
     func setupOptionsHandler() {
@@ -124,40 +94,4 @@ extension AHPinVC {
 
 
 
-// MARK:- Data Netowrking Related
-extension AHPinVC {
-    func loadNewData(completion: ((_ success: Bool)->Swift.Void)? ){
-        AHNetowrkTool.tool.loadNewData { (newPinVMs) in
-            self.pinVMs.removeAll()
-            self.pinVMs.append(contentsOf: newPinVMs)
-            self.collectionView?.reloadData()
-            completion?(true)
-        }
-    }
-    
-    func loadOlderData(completion: ((_ success: Bool)->Swift.Void)? ){
-        AHNetowrkTool.tool.loadNewData { (newPinVMs) in
-            if self.pinVMs.count == 0 {
-                self.pinVMs.append(contentsOf: newPinVMs)
-                self.collectionView?.reloadData()
-                completion?(true)
-            }else{
-                var starter = self.pinVMs.count
-                var indexPaths = [IndexPath]()
-                
-                for _ in newPinVMs {
-                    let indexPath = IndexPath(item: starter, section: self.pinLayout.section)
-                    indexPaths.append(indexPath)
-                    starter += 1
-                }
-                self.pinVMs.append(contentsOf: newPinVMs)
-                self.collectionView?.performBatchUpdates({
-                    self.collectionView?.insertItems(at: indexPaths)
-                    }, completion: { (_) in
-                        completion?(true)
-                })
-            }
-            
-        }
-    }
-}
+

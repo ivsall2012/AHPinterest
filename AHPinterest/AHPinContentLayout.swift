@@ -12,21 +12,20 @@ protocol AHPinContentDelegate: NSObjectProtocol {
     func AHPinContentSize(index: IndexPath) -> CGSize
 }
 
-class AHPinContentLayout: UICollectionViewLayout {
+class AHPinContentLayout: AHLayout {
     weak var delegate: AHPinContentDelegate?
-    var section: Int = -1
     
     fileprivate var attributes: UICollectionViewLayoutAttributes?
     fileprivate var contentSize = CGSize.zero
 }
 
-
+// MARK:- Layout Cycle
 extension AHPinContentLayout {
     override func prepare() {
         guard let delegate = delegate else {
             return
         }
-        let index = IndexPath(item: 0, section: section)
+        let index = IndexPath(item: 0, section: layoutSection)
         contentSize = delegate.AHPinContentSize(index: index)
         attributes = UICollectionViewLayoutAttributes(forCellWith: index)
         attributes?.frame.origin = CGPoint(x: 0, y: 0)
@@ -41,14 +40,11 @@ extension AHPinContentLayout {
     }
     
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        guard indexPath.section == section else {
-            return nil
-        }
         return attributes
     }
 
     override func invalidateLayout() {
-        attributes = nil
+        attributes?.frame = .zero
     }
 
 }

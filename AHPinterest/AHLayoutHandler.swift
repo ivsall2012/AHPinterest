@@ -10,18 +10,9 @@ import UIKit
 import AVFoundation
 
 class AHLayoutHandler: NSObject {
-    var pinVMs: [AHPinViewModel]?
+    weak var pinVC: AHPinVC?
 }
-extension AHLayoutHandler: AHLayoutRouterDelegate {
-    internal func AHLayoutRouterHeaderSize(collectionView: UICollectionView, layoutRouter: AHLayoutRouter) -> CGSize {
-        return CGSize(width: 0.0, height: AHHeaderHeight)
-    }
 
-    func AHLayoutRouterFooterSize(collectionView: UICollectionView, layoutRouter: AHLayoutRouter) -> CGSize {
-        return CGSize(width: 0.0, height: AHFooterHeight)
-    }
-
-}
 
 
 extension AHLayoutHandler: AHPinLayoutDelegate {
@@ -30,7 +21,7 @@ extension AHLayoutHandler: AHPinLayoutDelegate {
     }
     
     func AHPinLayoutHeightForPhotoAt(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat {
-        guard let pinVM = pinVMs?[indexPath.item] else {
+        guard let pinVM = pinVC?.pinDataSource.pinVMs[indexPath.item] else {
             return 0.0
         }
         
@@ -41,7 +32,7 @@ extension AHLayoutHandler: AHPinLayoutDelegate {
     }
     
     func AHPinLayoutHeightForNote(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat {
-        guard let pinVM = pinVMs?[indexPath.item] else {
+        guard let pinVM = pinVC?.pinDataSource.pinVMs[indexPath.item] else {
             return 0.0
         }
         return pinVM.heightForNote(font: AHNoteFont, width: width)

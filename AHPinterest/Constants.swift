@@ -18,8 +18,6 @@ let AHPinCellIdentifier = "AHPinCell"
 // Header and Footer are the total height, not their subviews' sizes, i.e. AHRefreshHeader and AHRefreshFooterSize
 let AHHeaderKind: String = "AHHeaderKind"
 let AHFooterKind: String = "AHFooterKind"
-let AHHeaderIndexPath = IndexPath(item: 0, section: 0)
-let AHFooterIndexPath = IndexPath(item: 1, section: 0)
 
 
 let AHHeaderHeight: CGFloat = 80

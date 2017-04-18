@@ -41,9 +41,8 @@ protocol AHPinLayoutDelegate {
 }
 
 
-class AHPinLayout: UICollectionViewLayout {
+class AHPinLayout: AHLayout {
     var delegate: AHPinLayoutDelegate!
-    var section: Int = -1
     
     
     fileprivate var isRefreshSetup: Bool = false
@@ -94,8 +93,10 @@ class AHPinLayout: UICollectionViewLayout {
     
     
     fileprivate func prepareCell() {
-        for i in 0..<collectionView!.numberOfItems(inSection: section) {
-            let indexPath = IndexPath(item: i, section: section)
+        print("layoutSection:\(layoutSection)")
+        print("numberOfItems:\(collectionView!.numberOfItems(inSection: layoutSection))")
+        for i in 0..<collectionView!.numberOfItems(inSection: layoutSection) {
+            let indexPath = IndexPath(item: i, section: layoutSection)
             insertAttributeIntoCache(indexPath: indexPath)
             
         }

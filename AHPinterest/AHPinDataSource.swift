@@ -10,21 +10,20 @@ import UIKit
 
 class AHPinDataSource: NSObject {
     weak var pinVC: AHPinVC?
-    weak var refreshController: AHRefreshControl?
-    var pinVMs: [AHPinViewModel]?
+    var pinVMs = [AHPinViewModel]()
     
 }
 
 extension AHPinDataSource : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pinVMs?.count ?? 0
+        return pinVMs.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let pinCell = collectionView.dequeueReusableCell(withReuseIdentifier: AHPinCellIdentifier, for: indexPath) as! AHPinCell
-        guard let pinVMs = pinVMs else {
-            return pinCell
+        guard !pinVMs.isEmpty else {
+            fatalError("IndexPath:\(indexPath) out of bound")
         }
         
         let pinVM = pinVMs[indexPath.item]
@@ -33,19 +32,50 @@ extension AHPinDataSource : UICollectionViewDataSource {
         return pinCell
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == AHHeaderKind {
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: AHHeaderKind, withReuseIdentifier: AHHeaderKind, for: indexPath) as! AHRefreshHeader
-            refreshController?.headerCell = header
-            return header
-        }else if kind == AHFooterKind{
-            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: AHFooterKind, withReuseIdentifier: AHFooterKind, for: indexPath) as! AHRefreshFooter
-            refreshController?.footerCell = footer
-            return footer
-        }else{
-            return UICollectionReusableView()
+    
+}
+
+
+
+
+// MARK:- Data Netowrking Related
+extension AHPinDataSource {
+    func loadNewData(completion: ((_ success: Bool)->Swift.Void)? ){
+        AHNetowrkTool.tool.loadNewData { (newPinVMs) in
+            self.pinVMs.removeAll()
+            self.pinVMs.append(contentsOf: newPinVMs)
+            self.pinVC?.collectionView?.reloadData()
+            print("data back")
+            completion?(true)
         }
     }
     
-    
+    func loadOlderData(completion: ((_ success: Bool)->Swift.Void)? ){
+        guard let pinLayout = pinVC?.pinLayout else {
+            return
+        }
+        AHNetowrkTool.tool.loadNewData { (newPinVMs) in
+            if self.pinVMs.count == 0 {
+                self.pinVMs.append(contentsOf: newPinVMs)
+                self.pinVC?.collectionView?.reloadData()
+                completion?(true)
+            }else{
+                var starter = self.pinVMs.count
+                var indexPaths = [IndexPath]()
+                
+                for _ in newPinVMs {
+                    let indexPath = IndexPath(item: starter, section: pinLayout.layoutSection)
+                    indexPaths.append(indexPath)
+                    starter += 1
+                }
+                self.pinVMs.append(contentsOf: newPinVMs)
+                self.pinVC?.collectionView?.performBatchUpdates({
+                     self.pinVC?.collectionView?.insertItems(at: indexPaths)
+                    }, completion: { (_) in
+                        completion?(true)
+                })
+            }
+            
+        }
+    }
 }
