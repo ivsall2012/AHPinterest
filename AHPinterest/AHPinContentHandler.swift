@@ -28,7 +28,7 @@ extension AHPinContentHandler: UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DummyCell", for: indexPath)
         cell.backgroundColor = UIColor.red
         return cell
     }

@@ -10,7 +10,7 @@ import UIKit
 
 
 class AHPinDelegate: NSObject {
-    
+    weak var pinVC: AHPinVC?
 }
 
 
@@ -18,6 +18,10 @@ class AHPinDelegate: NSObject {
 extension AHPinDelegate: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("didSelect item at indexPath:\(indexPath)")
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "AHDetailVC") as! AHDetailVC
+        vc.pinVMs = pinVC?.pinDataSource.pinVMs
+        pinVC?.present(vc, animated: true, completion: nil)
     }
 }
 

@@ -19,13 +19,33 @@ class AHDetailVC: UIViewController {
 
     var pinVMs: [AHPinViewModel]?
     var currentIndexPath: IndexPath?
-
+    fileprivate var cellVCs = [AHPinVC]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        guard let pinVMs = pinVMs else {
+            return
+        }
+        
+        for _ in pinVMs {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "AHPinVC") as! AHPinVC
+            let pinContentLayout = AHPinContentLayout()
+            let contentHanlder = AHPinContentHandler()
+            pinContentLayout.delegate = contentHanlder
+            vc.addLayout(layout: pinContentLayout, delegate: contentHanlder, dataSource: contentHanlder)
+            vc.refreshLayout.enableFooterRefresh = true
+            vc.refreshLayout.enableHeaderRefresh = false
+            vc.willMove(toParentViewController: self)
+            self.addChildViewController(vc)
+            vc.didMove(toParentViewController: self)
+            
+            cellVCs.append(vc)
+        }
+        let layout = AHDetailLayout()
+        collectionView.setCollectionViewLayout(layout, animated: false)
         collectionView.reloadData()
         collectionView.decelerationRate = UIScrollViewDecelerationRateFast
-        let layout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.scrollDirection = .horizontal
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -56,6 +76,12 @@ class AHDetailVC: UIViewController {
         return newFrame
     }
     
+
+    
+    @IBAction func nextBtnTapped(_ sender: AnyObject) {
+//        let indexPath = IndexPath(item: 2, section: 0)
+//        collectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.right, animated: false)
+    }
     
     @IBAction func dismiss(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
@@ -83,6 +109,7 @@ extension AHDetailVC: UICollectionViewDelegateFlowLayout {
         // collectionView's frame and bounds are not accurate
         return screenSize
     }
+    
 }
 
 extension AHDetailVC: UICollectionViewDataSource {
@@ -90,7 +117,7 @@ extension AHDetailVC: UICollectionViewDataSource {
         guard let pinVMs = pinVMs else {
             return 0
         }
-
+        print("pinVMs.count:\(pinVMs.count)")
         return pinVMs.count
     }
     
@@ -100,12 +127,11 @@ extension AHDetailVC: UICollectionViewDataSource {
         guard let pinVMs = pinVMs else {
             return cell
         }
-        
-        cell.pinVM = pinVMs[indexPath.item]
+        let cellVC = cellVCs[indexPath.item]    
+        cell.pinVC = cellVC
         return cell
     }
 }
-
 
 
 

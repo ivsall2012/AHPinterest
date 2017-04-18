@@ -11,7 +11,19 @@ import UIKit
 
 class AHDetailCell: UICollectionViewCell {
     
-    weak var pinVC: AHPinVC?
+    weak var pinVC: AHPinVC? {
+        didSet {
+            if let pinVC = pinVC {
+                contentView.subviews.forEach({ (view) in
+                    view.removeFromSuperview()
+                })
+                pinVC.view.willMove(toSuperview: self)
+                contentView.addSubview(pinVC.view)
+                pinVC.view.didMoveToSuperview()
+                
+            }
+        }
+    }
     weak var pinVM: AHPinViewModel?
 
     override func awakeFromNib() {
@@ -21,7 +33,15 @@ class AHDetailCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
+        pinVC?.view.frame = self.bounds
+        print("prepareForReuse")
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        pinVC?.view.frame = self.bounds.insetBy(dx: 10, dy: 10)
+        print("layoutSubviews")
+    }
+    
 }
 

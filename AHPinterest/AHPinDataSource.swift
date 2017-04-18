@@ -45,7 +45,6 @@ extension AHPinDataSource {
             self.pinVMs.removeAll()
             self.pinVMs.append(contentsOf: newPinVMs)
             self.pinVC?.collectionView?.reloadData()
-            print("data back")
             completion?(true)
         }
     }

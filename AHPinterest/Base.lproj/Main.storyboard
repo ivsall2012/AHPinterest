@@ -10,7 +10,7 @@
         <!--PinVC-->
         <scene sceneID="enQ-85-2xx">
             <objects>
-                <collectionViewController id="XkY-Cr-uNs" customClass="AHPinVC" customModule="AHPinterest" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="AHPinVC" id="XkY-Cr-uNs" customClass="AHPinVC" customModule="AHPinterest" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" prefetchingEnabled="NO" id="SKe-Ye-ww8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -73,7 +73,7 @@
                                     <outlet property="userName" destination="6MT-gB-36v" id="2pW-zn-4S0"/>
                                 </connections>
                             </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="slx-Xe-fUB">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DummyCell" id="YAW-YT-7K3">
                                 <rect key="frame" x="163" y="321" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -91,7 +91,7 @@
         <!--DetailVC-->
         <scene sceneID="uOb-ve-J2M">
             <objects>
-                <viewController storyboardIdentifier="AHDetailBrowser" id="jQv-0d-pzv" customClass="AHDetailVC" customModule="AHPinterest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AHDetailVC" id="jQv-0d-pzv" customClass="AHDetailVC" customModule="AHPinterest" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6wS-ea-2GV"/>
                         <viewControllerLayoutGuide type="bottom" id="WWY-ep-Gwe"/>
@@ -104,13 +104,13 @@
                                 <collectionViewLayout key="collectionViewLayout" id="sAF-as-MHf"/>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AHDetailCell" id="GwG-2k-NWP" customClass="AHDetailCell" customModule="AHPinterest" customModuleProvider="target">
-                                        <rect key="frame" x="54" y="0.0" width="267" height="308"/>
+                                        <rect key="frame" x="51" y="0.0" width="273" height="260"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="267" height="308"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="273" height="260"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </view>
-                                        <size key="customSize" width="267" height="308"/>
+                                        <size key="customSize" width="273" height="260"/>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>

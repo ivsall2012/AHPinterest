@@ -37,7 +37,6 @@ class AHRefreshLayout: AHLayout {
         let AHFooterIndexPath = IndexPath(item: 1, section: layoutSection)
         headerAttr = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: AHHeaderKind, with: AHHeaderIndexPath)
         footerAttr = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: AHFooterKind, with: AHFooterIndexPath)
-        print("created...")
     }
 }
 
@@ -57,10 +56,10 @@ extension AHRefreshLayout {
     
     override func layoutAttributesForElements(in rect: CGRect) ->[UICollectionViewLayoutAttributes]? {
         var attributes = [UICollectionViewLayoutAttributes]()
-        if isIntercept(attr: headerAttr!, rect: rect) {
+        if self.enableHeaderRefresh && isIntercept(attr: headerAttr!, rect: rect) {
             attributes.append(headerAttr!)
         }
-        if isIntercept(attr: footerAttr!, rect: rect) {
+        if self.enableFooterRefresh && isIntercept(attr: footerAttr!, rect: rect) {
             attributes.append(footerAttr!)
         }
         return attributes
