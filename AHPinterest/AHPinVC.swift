@@ -37,6 +37,8 @@ class AHPinVC: AHCollectionVC {
 extension AHPinVC {
     override func viewDidLoad() {
         super.viewDidLoad()
+        let vc = AHCollectionVC()
+        print("vc.Router:\(vc.layoutRouter)")
         collectionView?.contentInset = AHCollectionViewInset
         collectionView?.register(AHRefreshHeader.self, forSupplementaryViewOfKind: AHHeaderKind, withReuseIdentifier: AHHeaderKind)
         

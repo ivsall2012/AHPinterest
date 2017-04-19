@@ -69,10 +69,6 @@ class AHPinCell: UICollectionViewCell {
 //    }
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
-        if let attr = layoutAttributes as? AHLayoutAttributes {
-            print("sectionFrame:\(attr.sectionFrame) frame:\(attr.frame)")
-        }
-        
         if let attr = layoutAttributes as? AHPinLayoutAttributes{
             imageViewHeightConstraint.constant = attr.imageHeight
             noteHeightConstraint.constant = attr.noteHeight

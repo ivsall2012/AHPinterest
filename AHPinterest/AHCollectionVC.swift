@@ -33,12 +33,30 @@ class AHCollectionVC: UICollectionViewController {
         return self.layoutRouter.layoutArray
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    override init(collectionViewLayout layout: UICollectionViewLayout) {
+        super.init(collectionViewLayout: layoutRouter)
+        collectionView?.delegate = delegateCenter
+        collectionView?.dataSource = dataSourceCenter
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    convenience init() {
+        self.init(collectionViewLayout: UICollectionViewLayout())
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
         collectionView?.setCollectionViewLayout(layoutRouter, animated: false)
         collectionView?.delegate = delegateCenter
         collectionView?.dataSource = dataSourceCenter
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
     }
 
     
