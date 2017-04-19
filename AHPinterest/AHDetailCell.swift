@@ -41,5 +41,10 @@ class AHDetailCell: UICollectionViewCell {
         pinVC?.view.frame = self.bounds
     }
     
+    override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+        super.apply(layoutAttributes)
+        
+    }
+    
 }
 

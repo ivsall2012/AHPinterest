@@ -40,9 +40,12 @@
 		A1A227351EA48DAC00527358 /* AHDelegatesCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A227341EA48DAC00527358 /* AHDelegatesCenter.swift */; };
 		A1A227371EA48DBA00527358 /* AHDataSourceCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A227361EA48DBA00527358 /* AHDataSourceCenter.swift */; };
 		A1B115001EA2B29F004D8601 /* AHLayoutRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B114FF1EA2B29F004D8601 /* AHLayoutRouter.swift */; };
-		A1B115021EA2DAB7004D8601 /* AHPinDetailLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B115011EA2DAB7004D8601 /* AHPinDetailLayout.swift */; };
-		A1B115041EA2DDB9004D8601 /* AHPinDetailLayoutHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B115031EA2DDB9004D8601 /* AHPinDetailLayoutHandler.swift */; };
+		A1B115021EA2DAB7004D8601 /* AHPinContentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B115011EA2DAB7004D8601 /* AHPinContentLayout.swift */; };
+		A1B115041EA2DDB9004D8601 /* AHPinContentLayoutHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B115031EA2DDB9004D8601 /* AHPinContentLayoutHandler.swift */; };
 		A1CE93541E9A17A5002A8738 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CE93531E9A17A5002A8738 /* Constants.swift */; };
+		A1E85D9C1EA6D153000775FD /* AHPinContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E85D9B1EA6D153000775FD /* AHPinContentCell.swift */; };
+		A1E85D9E1EA6D9E6000775FD /* AHPinLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E85D9D1EA6D9E6000775FD /* AHPinLayoutAttributes.swift */; };
+		A1E85DA01EA6E07C000775FD /* AHPinContentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E85D9F1EA6E07C000775FD /* AHPinContentVC.swift */; };
 		A1F70F0C1E9B54EB00FF2C91 /* AHRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F70F0B1E9B54EB00FF2C91 /* AHRefreshHeader.swift */; };
 		A1F70F121E9C57CB00FF2C91 /* AHLayoutHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F70F111E9C57CB00FF2C91 /* AHLayoutHandler.swift */; };
 		A1F70F161E9CC21A00FF2C91 /* AHRefershUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F70F151E9CC21A00FF2C91 /* AHRefershUI.swift */; };
@@ -96,9 +99,12 @@
 		A1A227341EA48DAC00527358 /* AHDelegatesCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDelegatesCenter.swift; sourceTree = "<group>"; };
 		A1A227361EA48DBA00527358 /* AHDataSourceCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDataSourceCenter.swift; sourceTree = "<group>"; };
 		A1B114FF1EA2B29F004D8601 /* AHLayoutRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHLayoutRouter.swift; sourceTree = "<group>"; };
-		A1B115011EA2DAB7004D8601 /* AHPinDetailLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinDetailLayout.swift; sourceTree = "<group>"; };
-		A1B115031EA2DDB9004D8601 /* AHPinDetailLayoutHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinDetailLayoutHandler.swift; sourceTree = "<group>"; };
+		A1B115011EA2DAB7004D8601 /* AHPinContentLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinContentLayout.swift; sourceTree = "<group>"; };
+		A1B115031EA2DDB9004D8601 /* AHPinContentLayoutHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinContentLayoutHandler.swift; sourceTree = "<group>"; };
 		A1CE93531E9A17A5002A8738 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A1E85D9B1EA6D153000775FD /* AHPinContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinContentCell.swift; sourceTree = "<group>"; };
+		A1E85D9D1EA6D9E6000775FD /* AHPinLayoutAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinLayoutAttributes.swift; sourceTree = "<group>"; };
+		A1E85D9F1EA6E07C000775FD /* AHPinContentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinContentVC.swift; sourceTree = "<group>"; };
 		A1F70F0B1E9B54EB00FF2C91 /* AHRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHRefreshHeader.swift; sourceTree = "<group>"; };
 		A1F70F111E9C57CB00FF2C91 /* AHLayoutHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHLayoutHandler.swift; sourceTree = "<group>"; };
 		A1F70F151E9CC21A00FF2C91 /* AHRefershUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHRefershUI.swift; sourceTree = "<group>"; };
@@ -159,8 +165,8 @@
 		A1640C311EA5A844000E6EB5 /* Pin Detail Layout */ = {
 			isa = PBXGroup;
 			children = (
-				A1B115011EA2DAB7004D8601 /* AHPinDetailLayout.swift */,
-				A1B115031EA2DDB9004D8601 /* AHPinDetailLayoutHandler.swift */,
+				A1B115011EA2DAB7004D8601 /* AHPinContentLayout.swift */,
+				A1B115031EA2DDB9004D8601 /* AHPinContentLayoutHandler.swift */,
 			);
 			name = "Pin Detail Layout";
 			sourceTree = "<group>";
@@ -310,6 +316,7 @@
 			children = (
 				A1F70F111E9C57CB00FF2C91 /* AHLayoutHandler.swift */,
 				A168BFE71E889B6400A87E03 /* AHPinLayout.swift */,
+				A1E85D9D1EA6D9E6000775FD /* AHPinLayoutAttributes.swift */,
 			);
 			name = PinLayout;
 			sourceTree = "<group>";
@@ -334,6 +341,7 @@
 		A1E85D991EA6CA14000775FD /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				A1E85D9F1EA6E07C000775FD /* AHPinContentVC.swift */,
 				A12A28391E9ECBAB00F7A36D /* AHDetailVC.swift */,
 				A12A283B1E9ECBE500F7A36D /* AHDetailVCLayout.swift */,
 			);
@@ -344,6 +352,7 @@
 			isa = PBXGroup;
 			children = (
 				A12A28371E9ECBA500F7A36D /* AHDetailCell.swift */,
+				A1E85D9B1EA6D153000775FD /* AHPinContentCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -461,7 +470,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1B115021EA2DAB7004D8601 /* AHPinDetailLayout.swift in Sources */,
+				A1B115021EA2DAB7004D8601 /* AHPinContentLayout.swift in Sources */,
 				A1F70F121E9C57CB00FF2C91 /* AHLayoutHandler.swift in Sources */,
 				A168BFE41E88930200A87E03 /* AHPinDelegate.swift in Sources */,
 				A17377471E88825100462EE1 /* AHPinDataModel.swift in Sources */,
@@ -472,6 +481,7 @@
 				A1B115001EA2B29F004D8601 /* AHLayoutRouter.swift in Sources */,
 				A1A227351EA48DAC00527358 /* AHDelegatesCenter.swift in Sources */,
 				A168BFE81E889B6400A87E03 /* AHPinLayout.swift in Sources */,
+				A1E85DA01EA6E07C000775FD /* AHPinContentVC.swift in Sources */,
 				A1F70F0C1E9B54EB00FF2C91 /* AHRefreshHeader.swift in Sources */,
 				A1A227311EA4247B00527358 /* UICollectionViewLayout+Extension.swift in Sources */,
 				A168BFE61E889ABB00A87E03 /* UIImage+Extension.swift in Sources */,
@@ -483,12 +493,14 @@
 				A1640C281EA4C4C6000E6EB5 /* AHLayout.swift in Sources */,
 				A12A283E1E9ECBF800F7A36D /* AHDetailAnimator.swift in Sources */,
 				A1A2272F1EA408FC00527358 /* NSIndexPath+Extension.swift in Sources */,
+				A1E85D9E1EA6D9E6000775FD /* AHPinLayoutAttributes.swift in Sources */,
 				A15C0B591E9369F600B35BE1 /* AHOptionsAnimator.swift in Sources */,
 				A1A074AB1E9A2AB600FEC153 /* UIImageView+extension.swift in Sources */,
 				A1640C2A1EA4D3A5000E6EB5 /* AHRefreshLayoutHandler.swift in Sources */,
 				A19EC4491E99D99700B6D7C4 /* AHPinDataGenerator.swift in Sources */,
 				A1CE93541E9A17A5002A8738 /* Constants.swift in Sources */,
-				A1B115041EA2DDB9004D8601 /* AHPinDetailLayoutHandler.swift in Sources */,
+				A1B115041EA2DDB9004D8601 /* AHPinContentLayoutHandler.swift in Sources */,
+				A1E85D9C1EA6D153000775FD /* AHPinContentCell.swift in Sources */,
 				A173772B1E887F9600462EE1 /* AHPinVC.swift in Sources */,
 				A12A28441EA07ADB00F7A36D /* AHOptionsHandler.swift in Sources */,
 				A12A28361E9E137400F7A36D /* AHRefreshFooter.swift in Sources */,

@@ -14,6 +14,7 @@ let AHNoteFont: UIFont = UIFont.boldSystemFont(ofSize: 15.0)
 let AHUserAvatarHeight: CGFloat = 50.0
 
 let AHPinCellIdentifier = "AHPinCell"
+let AHPinContentCellIdentifier = "AHPinContentCell"
 
 // Header and Footer are the total height, not their subviews' sizes, i.e. AHRefreshHeader and AHRefreshFooterSize
 let AHHeaderKind: String = "AHHeaderKind"

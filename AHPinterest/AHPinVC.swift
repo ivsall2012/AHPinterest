@@ -9,6 +9,18 @@
 import UIKit
 
 class AHPinVC: AHCollectionVC {
+    let pinContentLayout = AHPinContentLayout()
+    let pinContentLayoutHanlder = AHPinContentLayoutHandler()
+    weak var pinVM: AHPinViewModel? {
+        didSet {
+            if let pinVM = pinVM {
+                self.pinContentLayoutHanlder.pinVM = pinVM
+                self.collectionView?.reloadData()
+            }
+        }
+    }
+    
+    
     let pinLayout = AHPinLayout()
     let refreshLayout = AHRefreshLayout()
     let pinDataSource = AHPinDataSource()
@@ -16,6 +28,8 @@ class AHPinVC: AHCollectionVC {
     
     // should the VC refreshes data at first loading
     var initialAutoRefresh = false
+    
+    var showContentPin = false
 }
 
 
@@ -28,10 +42,8 @@ extension AHPinVC {
         
         collectionView?.register(AHRefreshFooter.self, forSupplementaryViewOfKind: AHFooterKind, withReuseIdentifier: AHFooterKind)
         
+        setup()
         
-        setupPinLayout()
-        setupRefreshLayout()
-        setupOptionsHandler()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -58,6 +70,17 @@ extension AHPinVC {
 
 // MARK:- Setups
 extension AHPinVC {
+    func setup() {
+        if showContentPin {
+            pinContentLayout.delegate = pinContentLayoutHanlder
+            addLayout(layout: pinContentLayout, delegate: pinContentLayoutHanlder, dataSource: pinContentLayoutHanlder)
+        }
+
+        setupPinLayout()
+        setupRefreshLayout()
+        setupOptionsHandler()
+    }
+    
     func setupRefreshLayout() {
         let layoutHanlder = AHRefreshLayoutHandler()
         layoutHanlder.pinVC = self

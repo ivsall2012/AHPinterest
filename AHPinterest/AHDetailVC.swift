@@ -42,6 +42,9 @@ class AHDetailVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.view.layoutIfNeeded()
+        currentIndexPath?.section = 1
+        collectionView.scrollToItem(at: currentIndexPath!, at: UICollectionViewScrollPosition.right, animated: false)
     }
     
     
@@ -62,41 +65,15 @@ extension AHDetailVC {
     func createPinVC() -> AHPinVC {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "AHPinVC") as! AHPinVC
-        
-        // setup layout
-        let pinDetailLayout = AHPinDetailLayout()
-        let pinDetailLayoutHanlder = AHPinDetailLayoutHandler()
-        pinDetailLayout.delegate = pinDetailLayoutHanlder
-        vc.addLayout(layout: pinDetailLayout, delegate: pinDetailLayoutHanlder, dataSource: pinDetailLayoutHanlder)
-        
+        vc.showContentPin = true
         // setup VC related
         vc.willMove(toParentViewController: self)
         self.addChildViewController(vc)
         vc.didMove(toParentViewController: self)
         
-        // other stuff
-        vc.refreshLayout.enableFooterRefresh = true
-        vc.refreshLayout.enableHeaderRefresh = false
-        
         return vc
     }
-    
-    class func calculateImageSize(image: UIImage) -> CGRect {
-        let imgSize = image.size
-        let newWidth = screenSize.width - 2 * AHDetailCellMargin
-        let newHeight = newWidth * imgSize.height / imgSize.width
-        let newX : CGFloat = AHDetailCellMargin
-        var newY: CGFloat
-        if newHeight > screenSize.height {
-            // log photo
-            newY = 0.0
-        }else{
-            // photo can fit in the screen
-            newY = (screenSize.height - newHeight) * 0.5
-        }
-        let newFrame = CGRect(x: newX, y: newY, width: newWidth, height: newHeight)
-        return newFrame
-    }
+
 }
 
 
@@ -121,7 +98,15 @@ extension AHDetailVC: UICollectionViewDelegateFlowLayout {
 }
 
 extension AHDetailVC: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if section == 0 {
+            return 1
+        }
+        
         guard let pinVMs = pinVMs else {
             return 0
         }
@@ -135,7 +120,9 @@ extension AHDetailVC: UICollectionViewDataSource {
         guard let pinVMs = pinVMs else {
             return cell
         }
-        let cellVC = cellVCs[indexPath.item]    
+        let pinVM = pinVMs[indexPath.item]
+        let cellVC = cellVCs[indexPath.item]
+        cellVC.pinVM = pinVM
         cell.pinVC = cellVC
         return cell
     }

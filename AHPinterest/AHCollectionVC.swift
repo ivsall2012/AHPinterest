@@ -32,13 +32,13 @@ class AHCollectionVC: UICollectionViewController {
     var layoutArray: [UICollectionViewLayout] {
         return self.layoutRouter.layoutArray
     }
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        collectionView?.setCollectionViewLayout(layoutRouter, animated: false)
         collectionView?.delegate = delegateCenter
         collectionView?.dataSource = dataSourceCenter
-        collectionView?.setCollectionViewLayout(layoutRouter, animated: false)
     }
 
     

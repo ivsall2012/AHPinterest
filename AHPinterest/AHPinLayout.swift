@@ -8,30 +8,6 @@
 
 import UIKit
 
-class AHLayoutAttributes: UICollectionViewLayoutAttributes {
-    var imageHeight: CGFloat = 0.0
-    var noteHeight: CGFloat = 0.0
-    
-    
-    override func copy(with zone: NSZone? = nil) -> Any {
-        let copy = super.copy(with: zone) as! AHLayoutAttributes
-        copy.imageHeight = self.imageHeight
-        copy.noteHeight = self.noteHeight
-        return copy
-    }
-    
-    override func isEqual(_ object: Any?) -> Bool {
-        if let otherObj = object as? AHLayoutAttributes{
-            if (otherObj.imageHeight - self.imageHeight) < 0.01 && (otherObj.noteHeight - self.noteHeight) < 0.01{
-                return super.isEqual(otherObj)
-            }
-        }else{
-            return false
-        }
-        return false
-    }
-}
-
 protocol AHPinLayoutDelegate {
     func AHPinLayoutHeightForPhotoAt(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat
     
@@ -46,9 +22,6 @@ class AHPinLayout: AHLayout {
     
     
     fileprivate var isRefreshSetup: Bool = false
-    
-    
-    fileprivate var currentMaxYOffset: CGFloat = 0.0
     
     fileprivate var currentColumn: Int = 0
     
@@ -65,7 +38,7 @@ class AHPinLayout: AHLayout {
     fileprivate var contentWidth: CGFloat = 0.0
     
     override class var layoutAttributesClass: AnyClass {
-        return AHLayoutAttributes.self
+        return AHPinLayoutAttributes.self
     }
     
     
@@ -74,7 +47,6 @@ class AHPinLayout: AHLayout {
             return
         }
         
-        currentMaxYOffset = 0.0
         currentColumn = 0
         contentHeight = 0.0
         let inset = collectionView.contentInset
@@ -123,7 +95,7 @@ class AHPinLayout: AHLayout {
         let totalH = AHCellPadding + imageHeight + noteHeight + AHCellPadding + userAvatarHeight + AHCellPadding + AHCellPadding
         
         
-        let attr = AHLayoutAttributes(forCellWith: indexPath)
+        let attr = AHPinLayoutAttributes(forCellWith: indexPath)
         let cellX = xOffSets[currentColumn]
         let cellY = yOffsets[currentColumn]
         
@@ -141,13 +113,8 @@ class AHPinLayout: AHLayout {
         
         // Only change the stacking column when currentYOffSet is greater than previsouHeight, then we switch to next available cloumn
         contentHeight = max(frame.maxY, contentHeight)
-        if currentMaxYOffset < currentYOffSet {
-            currentMaxYOffset = currentYOffSet
-            // update column for next round only when current column is taller than the other one. FYI: column values are only 0,1
-            currentColumn = (indexPath.item + 1) % AHNumberOfColumns
-        }
+        currentColumn = (indexPath.item) % AHNumberOfColumns
         
-        // TODO: if there are more than 2 column to display, new pins should be distributed to the shortest yOffset column in order to best even out the heights across all columns
         
     }
     override var collectionViewContentSize: CGSize {
