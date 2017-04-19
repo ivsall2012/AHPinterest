@@ -37,16 +37,23 @@ class AHDetailVC: UIViewController {
             let vc = createPinVC()
             cellVCs.append(vc)
         }
-        
+        self.view.layoutIfNeeded()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.view.layoutIfNeeded()
+        
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         currentIndexPath?.section = 1
         collectionView.scrollToItem(at: currentIndexPath!, at: UICollectionViewScrollPosition.right, animated: false)
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     
+        
+    }
     
    
     
