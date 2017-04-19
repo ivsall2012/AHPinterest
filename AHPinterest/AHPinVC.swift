@@ -66,6 +66,7 @@ extension AHPinVC {
 
 // MARK:- Setups
 extension AHPinVC {
+    
     func setup() {
 
         setupPinLayout()

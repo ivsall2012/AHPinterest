@@ -11,7 +11,7 @@
         <scene sceneID="fIo-pC-cHr">
             <objects>
                 <collectionViewController storyboardIdentifier="AHPinContentVC" id="nTs-zQ-HoZ" customClass="AHPinContentVC" customModule="AHPinterest" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="n9y-m8-sEq">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="n9y-m8-sEq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -148,7 +148,6 @@
         <!--Navigation Controller-->
         <scene sceneID="2KM-C2-mp7">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BMz-w7-D09" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="krf-AZ-9qg" customClass="AHNavigationController" customModule="AHPinterest" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8Cl-Rw-vqg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -158,6 +157,7 @@
                         <segue destination="XkY-Cr-uNs" kind="relationship" relationship="rootViewController" id="opQ-Qq-Z58"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BMz-w7-D09" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1542" y="45"/>
         </scene>
@@ -165,14 +165,14 @@
         <scene sceneID="enQ-85-2xx">
             <objects>
                 <collectionViewController storyboardIdentifier="AHPinVC" id="XkY-Cr-uNs" customClass="AHPinVC" customModule="AHPinterest" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" prefetchingEnabled="NO" id="SKe-Ye-ww8">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" prefetchingEnabled="NO" id="SKe-Ye-ww8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewLayout key="collectionViewLayout" id="lTY-Mv-pIN" customClass="AHPinLayout" customModule="AHPinterest" customModuleProvider="target"/>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AHPinCell" id="Ra4-ZS-FeX" customClass="AHPinCell" customModule="AHPinterest" customModuleProvider="target">
-                                <rect key="frame" x="5" y="0.0" width="366" height="311"/>
+                                <rect key="frame" x="4.5" y="0.0" width="366" height="311"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="366" height="311"/>
@@ -228,7 +228,7 @@
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AHPinContentCell" id="5zR-zu-o8M" customClass="AHPinContentCell" customModule="AHPinterest" customModuleProvider="target">
-                                <rect key="frame" x="39" y="321" width="298" height="321"/>
+                                <rect key="frame" x="38.5" y="321" width="298" height="321"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="298" height="321"/>
