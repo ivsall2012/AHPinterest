@@ -11,15 +11,15 @@ import UIKit
 
 class AHDetailCell: UICollectionViewCell {
     
-    weak var pinVC: AHPinVC? {
+    weak var pinContentVC: AHPinContentVC? {
         didSet {
-            if let pinVC = pinVC {
+            if let pinContentVC = pinContentVC {
                 contentView.subviews.forEach({ (view) in
                     view.removeFromSuperview()
                 })
-                pinVC.view.willMove(toSuperview: self)
-                contentView.addSubview(pinVC.view)
-                pinVC.view.didMoveToSuperview()
+                pinContentVC.view.willMove(toSuperview: self)
+                contentView.addSubview(pinContentVC.view)
+                pinContentVC.view.didMoveToSuperview()
                 
             }
         }
@@ -33,12 +33,12 @@ class AHDetailCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        pinVC?.view.frame = self.bounds
+        pinContentVC?.view.frame = self.bounds
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        pinVC?.view.frame = self.bounds
+        pinContentVC?.view.frame = self.bounds
     }
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {

@@ -8,10 +8,10 @@
 
 import UIKit
 
-class AHPinContentVC: AHCollectionVC {
+class AHPinContentVC: AHPinVC {
     let pinContentLayout = AHPinContentLayout()
     let pinContentLayoutHanlder = AHPinContentLayoutHandler()
-    weak var pinVM: AHPinViewModel? {
+    override weak var pinVM: AHPinViewModel? {
         didSet {
             if let pinVM = pinVM {
                 self.pinContentLayoutHanlder.pinVM = pinVM
@@ -20,12 +20,10 @@ class AHPinContentVC: AHCollectionVC {
         }
     }
     override func viewDidLoad() {
+        super.viewDidLoad()
         
         pinContentLayout.delegate = pinContentLayoutHanlder
-        addLayout(layout: pinContentLayout, delegate: pinContentLayoutHanlder, dataSource: pinContentLayoutHanlder)
-        
-        
-        super.viewDidLoad()
+        insertLayoutToFont(layout: pinContentLayout, delegate: pinContentLayoutHanlder, dataSource: pinContentLayoutHanlder)
 
     }
 

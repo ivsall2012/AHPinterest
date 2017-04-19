@@ -9,16 +9,9 @@
 import UIKit
 
 class AHPinVC: AHCollectionVC {
-    let pinContentLayout = AHPinContentLayout()
-    let pinContentLayoutHanlder = AHPinContentLayoutHandler()
-    weak var pinVM: AHPinViewModel? {
-        didSet {
-            if let pinVM = pinVM {
-                self.pinContentLayoutHanlder.pinVM = pinVM
-                self.collectionView?.reloadData()
-            }
-        }
-    }
+//    let pinContentLayout = AHPinContentLayout()
+//    let pinContentLayoutHanlder = AHPinContentLayoutHandler()
+    weak var pinVM: AHPinViewModel? 
     
     
     let pinLayout = AHPinLayout()
@@ -37,9 +30,10 @@ class AHPinVC: AHCollectionVC {
 extension AHPinVC {
     override func viewDidLoad() {
         super.viewDidLoad()
-        let vc = AHCollectionVC()
-        print("vc.Router:\(vc.layoutRouter)")
-        collectionView?.contentInset = AHCollectionViewInset
+        self.navigationController?.isNavigationBarHidden = true
+        collectionView?.backgroundColor = UIColor.white
+        self.automaticallyAdjustsScrollViewInsets = false
+
         collectionView?.register(AHRefreshHeader.self, forSupplementaryViewOfKind: AHHeaderKind, withReuseIdentifier: AHHeaderKind)
         
         collectionView?.register(AHRefreshFooter.self, forSupplementaryViewOfKind: AHFooterKind, withReuseIdentifier: AHFooterKind)
@@ -73,10 +67,6 @@ extension AHPinVC {
 // MARK:- Setups
 extension AHPinVC {
     func setup() {
-        if showContentPin {
-            pinContentLayout.delegate = pinContentLayoutHanlder
-            addLayout(layout: pinContentLayout, delegate: pinContentLayoutHanlder, dataSource: pinContentLayoutHanlder)
-        }
 
         setupPinLayout()
         setupRefreshLayout()

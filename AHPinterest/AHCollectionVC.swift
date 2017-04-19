@@ -75,6 +75,11 @@ extension AHCollectionVC {
         delegates.append(delegate)
         dataSources.append(dataSource)
     }
+    func insertLayoutToFont(layout: AHLayout, delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {
+        layoutRouter.insert(layout: layout, at: 0)
+        delegates.insert(delegate, at: 0)
+        dataSources.insert(dataSource, at: 0)
+    }
 }
 
 

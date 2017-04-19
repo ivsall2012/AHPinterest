@@ -19,10 +19,16 @@ class AHDetailVC: UIViewController {
 
     var pinVMs: [AHPinViewModel]?
     var currentIndexPath: IndexPath?
-    fileprivate var cellVCs = [AHPinVC]()
+    fileprivate var cellVCs = [AHPinContentVC]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.navigationController?.isNavigationBarHidden = true
+        collectionView?.backgroundColor = UIColor.white
+        self.automaticallyAdjustsScrollViewInsets = false
+        collectionView?.contentInset = .init(top: 20, left: 0, bottom: 0, right: 0)
+
         let layout = AHDetailVCLayout()
         collectionView.setCollectionViewLayout(layout, animated: false)
         collectionView.reloadData()
@@ -42,11 +48,12 @@ class AHDetailVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
     }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        currentIndexPath?.section = 1
+
+        currentIndexPath?.section = 0
         collectionView.scrollToItem(at: currentIndexPath!, at: UICollectionViewScrollPosition.right, animated: false)
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -69,15 +76,14 @@ class AHDetailVC: UIViewController {
 
 // MARK:- Helper Methods
 extension AHDetailVC {
-    func createPinVC() -> AHPinVC {
+    func createPinVC() -> AHPinContentVC {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "AHPinVC") as! AHPinVC
+        let vc = storyboard.instantiateViewController(withIdentifier: "AHPinContentVC") as! AHPinContentVC
         vc.showContentPin = true
         // setup VC related
         vc.willMove(toParentViewController: self)
         self.addChildViewController(vc)
         vc.didMove(toParentViewController: self)
-        
         return vc
     }
 
@@ -98,26 +104,21 @@ extension AHDetailVC {
 
 extension AHDetailVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // collectionView's frame and bounds are not accurate
-        return screenSize
+        let size = CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height - (collectionView.contentInset.top + collectionView.contentInset.bottom))
+        return CGSize(width: size.width, height: screenSize.height - 20)
     }
     
 }
 
 extension AHDetailVC: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        }
-        
         guard let pinVMs = pinVMs else {
             return 0
         }
-        print("pinVMs.count:\(pinVMs.count)")
         return pinVMs.count
     }
     
@@ -130,7 +131,7 @@ extension AHDetailVC: UICollectionViewDataSource {
         let pinVM = pinVMs[indexPath.item]
         let cellVC = cellVCs[indexPath.item]
         cellVC.pinVM = pinVM
-        cell.pinVC = cellVC
+        cell.pinContentVC = cellVC
         return cell
     }
 }

@@ -46,7 +46,11 @@ extension AHLayoutRouter {
         layout.setValue(self, forKey: "layoutRouter")
         invalidateLayout()
     }
-    
+    func insert(layout: AHLayout, at index: Int) {
+        layoutArray.insert(layout, at: index)
+        layout.setValue(self, forKey: "layoutRouter")
+        invalidateLayout()
+    }
     
     func addSupplementLayout(layout: AHLayout) {
         add(layout: layout)

@@ -19,6 +19,8 @@
 		A1640C261EA4BF13000E6EB5 /* AHRefreshLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1640C251EA4BF13000E6EB5 /* AHRefreshLayout.swift */; };
 		A1640C281EA4C4C6000E6EB5 /* AHLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1640C271EA4C4C6000E6EB5 /* AHLayout.swift */; };
 		A1640C2A1EA4D3A5000E6EB5 /* AHRefreshLayoutHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1640C291EA4D3A5000E6EB5 /* AHRefreshLayoutHandler.swift */; };
+		A164E1A61EA7989E00A8227D /* AHPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A164E1A51EA7989E00A8227D /* AHPin.swift */; };
+		A164E1A81EA79DB600A8227D /* AHNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A164E1A71EA79DB600A8227D /* AHNavigationController.swift */; };
 		A168BFDA1E888DDD00A87E03 /* AHPinterestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A168BFD91E888DDD00A87E03 /* AHPinterestTests.swift */; };
 		A168BFE21E8890E500A87E03 /* AHPinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A168BFE11E8890E500A87E03 /* AHPinCell.swift */; };
 		A168BFE41E88930200A87E03 /* AHPinDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A168BFE31E88930200A87E03 /* AHPinDelegate.swift */; };
@@ -74,6 +76,8 @@
 		A1640C251EA4BF13000E6EB5 /* AHRefreshLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHRefreshLayout.swift; sourceTree = "<group>"; };
 		A1640C271EA4C4C6000E6EB5 /* AHLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHLayout.swift; sourceTree = "<group>"; };
 		A1640C291EA4D3A5000E6EB5 /* AHRefreshLayoutHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHRefreshLayoutHandler.swift; sourceTree = "<group>"; };
+		A164E1A51EA7989E00A8227D /* AHPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPin.swift; sourceTree = "<group>"; };
+		A164E1A71EA79DB600A8227D /* AHNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHNavigationController.swift; sourceTree = "<group>"; };
 		A168BFD71E888DDD00A87E03 /* AHPinterestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AHPinterestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A168BFD91E888DDD00A87E03 /* AHPinterestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AHPinterestTests.swift; sourceTree = "<group>"; };
 		A168BFDB1E888DDD00A87E03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -257,6 +261,7 @@
 				A19EC4481E99D99700B6D7C4 /* AHPinDataGenerator.swift */,
 				A17377281E887F9600462EE1 /* AppDelegate.swift */,
 				A1CE93531E9A17A5002A8738 /* Constants.swift */,
+				A164E1A71EA79DB600A8227D /* AHNavigationController.swift */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -307,6 +312,7 @@
 				A173772A1E887F9600462EE1 /* AHPinVC.swift */,
 				A168BFE31E88930200A87E03 /* AHPinDelegate.swift */,
 				A12A28401EA0527700F7A36D /* AHPinDataSource.swift */,
+				A164E1A51EA7989E00A8227D /* AHPin.swift */,
 			);
 			name = VCs;
 			sourceTree = "<group>";
@@ -490,6 +496,7 @@
 				A12A283A1E9ECBAB00F7A36D /* AHDetailVC.swift in Sources */,
 				A12A28411EA0527700F7A36D /* AHPinDataSource.swift in Sources */,
 				A19EC44D1E99EC0000B6D7C4 /* AHPinViewModel.swift in Sources */,
+				A164E1A81EA79DB600A8227D /* AHNavigationController.swift in Sources */,
 				A1640C281EA4C4C6000E6EB5 /* AHLayout.swift in Sources */,
 				A12A283E1E9ECBF800F7A36D /* AHDetailAnimator.swift in Sources */,
 				A1A2272F1EA408FC00527358 /* NSIndexPath+Extension.swift in Sources */,
@@ -505,6 +512,7 @@
 				A12A28441EA07ADB00F7A36D /* AHOptionsHandler.swift in Sources */,
 				A12A28361E9E137400F7A36D /* AHRefreshFooter.swift in Sources */,
 				A1A227371EA48DBA00527358 /* AHDataSourceCenter.swift in Sources */,
+				A164E1A61EA7989E00A8227D /* AHPin.swift in Sources */,
 				A1A227331EA48C3D00527358 /* AHCollectionVC.swift in Sources */,
 				A1F70F161E9CC21A00FF2C91 /* AHRefershUI.swift in Sources */,
 				A17377291E887F9600462EE1 /* AppDelegate.swift in Sources */,
