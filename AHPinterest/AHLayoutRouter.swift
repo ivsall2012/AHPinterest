@@ -8,8 +8,28 @@
 
 import UIKit
 
-
-
+/// If you wannt use sectionFrame, one relative to your own section, you should use this class.
+class AHLayoutAttributes: UICollectionViewLayoutAttributes {
+    // the frame within your own section, will be assigned during normalization after you return your own attributes in your subclss. It can be used in cell's apply(_:) method.
+    var sectionFrame: CGRect = .zero
+    
+    override func copy(with zone: NSZone? = nil) -> Any {
+        let copy = super.copy(with: zone) as! AHPinLayoutAttributes
+        copy.sectionFrame = self.sectionFrame
+        return copy
+    }
+    
+    override func isEqual(_ object: Any?) -> Bool {
+        if let otherObj = object as? AHPinLayoutAttributes{
+            if sectionFrame.equalTo(self.sectionFrame){
+                return super.isEqual(otherObj)
+            }
+        }else{
+            return false
+        }
+        return false
+    }
+}
 
 class AHLayoutRouter: UICollectionViewLayout {
     // Contains cell and section supplement layouts
@@ -154,8 +174,11 @@ extension AHLayoutRouter {
 extension AHLayoutRouter {
     fileprivate func normalizeAttributes(offset: CGPoint, attributes array:[UICollectionViewLayoutAttributes]){
         for attr in array {
+            if attr.isKind(of: AHLayoutAttributes.self), let attr = attr as? AHLayoutAttributes {
+                attr.sectionFrame = attr.frame
+//                print("attr.sectionFrame:\(attr.sectionFrame )")
+            }
             attr.frame = normalizeAttributes(offset: offset, frame: attr.frame)
-            
         }
     }
     

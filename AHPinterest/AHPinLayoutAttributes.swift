@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AHPinLayoutAttributes: UICollectionViewLayoutAttributes {
+class AHPinLayoutAttributes: AHLayoutAttributes {
     var imageHeight: CGFloat = 0.0
     var noteHeight: CGFloat = 0.0
     
