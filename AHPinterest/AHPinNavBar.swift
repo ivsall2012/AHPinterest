@@ -13,6 +13,7 @@ class AHPinNavBar: UICollectionReusableView {
     @IBOutlet weak var optionContainer: UIView!
     
     weak var pinVM: AHPinViewModel?
+    weak var detailVC: AHDetailVC? 
     
     var showNavBar = true {
         didSet {
@@ -49,7 +50,10 @@ class AHPinNavBar: UICollectionReusableView {
     @IBAction func checkBtnTapped(_ sender: UIButton) {
     }
     @IBAction func backBtnTapped(_ sender: AnyObject) {
-        
+        guard let detailVC = detailVC, let navVC = detailVC.navigationController else {
+            return
+        }
+        navVC.popViewController(animated: true)
     }
     
 }

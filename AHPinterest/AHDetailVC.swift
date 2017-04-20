@@ -76,6 +76,7 @@ extension AHDetailVC {
         let vc = storyboard.instantiateViewController(withIdentifier: "AHPinContentVC") as! AHPinContentVC
         vc.refreshLayout.enableHeaderRefresh = false
         vc.showLayoutHeader = true
+        vc.detailVC = self
         // setup VC related
         vc.willMove(toParentViewController: self)
         self.addChildViewController(vc)
