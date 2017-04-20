@@ -66,7 +66,7 @@ class AHDetailVC: UIViewController {
     
     
     @IBAction func dismiss(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        navigationController!.popViewController(animated: true)
     }
     @IBAction func save(_ sender: UIButton) {
         print("saved photo")
@@ -105,8 +105,8 @@ extension AHDetailVC {
 
 extension AHDetailVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height - (collectionView.contentInset.top + collectionView.contentInset.bottom))
-        return CGSize(width: size.width, height: screenSize.height - 20)
+        // At first return, collecitonView.bounds.size is 1000.0 x 980.0
+        return CGSize(width: screenSize.width, height: screenSize.height - 20)
     }
     
 }
