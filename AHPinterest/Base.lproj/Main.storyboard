@@ -11,7 +11,7 @@
         <scene sceneID="fIo-pC-cHr">
             <objects>
                 <collectionViewController storyboardIdentifier="AHPinContentVC" id="nTs-zQ-HoZ" customClass="AHPinContentVC" customModule="AHPinterest" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="n9y-m8-sEq">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="n9y-m8-sEq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -23,10 +23,10 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AHPinContentCell" id="BlN-LK-V2v" customClass="AHPinContentCell" customModule="AHPinterest" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="50" width="168" height="164"/>
+                                <rect key="frame" x="0.0" y="50" width="202" height="253"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="168" height="164"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="202" height="253"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y6j-7Z-tov">
@@ -38,11 +38,12 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cAd-MD-Cmv">
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="150" id="mCY-7V-tiz"/>
                                             </constraints>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CYP-bW-iq2">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CYP-bW-iq2">
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="dR7-LY-YqO"/>
                                                 <constraint firstAttribute="width" constant="50" id="xte-ja-pyK"/>
@@ -59,8 +60,8 @@
                                     <constraint firstItem="cAd-MD-Cmv" firstAttribute="top" secondItem="Y6j-7Z-tov" secondAttribute="bottom" constant="8" id="2Jp-Gg-gUx"/>
                                     <constraint firstItem="CYP-bW-iq2" firstAttribute="leading" secondItem="cAd-MD-Cmv" secondAttribute="leading" id="3dn-s4-qiA"/>
                                     <constraint firstAttribute="trailing" secondItem="cAd-MD-Cmv" secondAttribute="trailing" constant="8" id="CWM-Yn-SiX"/>
-                                    <constraint firstAttribute="trailing" secondItem="Y6j-7Z-tov" secondAttribute="trailing" id="Jsc-ov-Uwh"/>
-                                    <constraint firstItem="Y6j-7Z-tov" firstAttribute="leading" secondItem="BlN-LK-V2v" secondAttribute="leading" id="Ttu-93-5sg"/>
+                                    <constraint firstAttribute="trailing" secondItem="Y6j-7Z-tov" secondAttribute="trailing" constant="8" id="Jsc-ov-Uwh"/>
+                                    <constraint firstItem="Y6j-7Z-tov" firstAttribute="leading" secondItem="BlN-LK-V2v" secondAttribute="leading" constant="8" id="Ttu-93-5sg"/>
                                     <constraint firstItem="cAd-MD-Cmv" firstAttribute="leading" secondItem="BlN-LK-V2v" secondAttribute="leading" constant="8" id="YBn-Az-kuB"/>
                                     <constraint firstItem="Y6j-7Z-tov" firstAttribute="top" secondItem="BlN-LK-V2v" secondAttribute="top" id="Ynt-uD-vUb"/>
                                     <constraint firstItem="CYP-bW-iq2" firstAttribute="top" secondItem="cAd-MD-Cmv" secondAttribute="bottom" constant="8" id="cAe-NR-qJs"/>
@@ -68,7 +69,7 @@
                                     <constraint firstItem="EJu-2f-Cyy" firstAttribute="trailing" secondItem="cAd-MD-Cmv" secondAttribute="trailing" id="wcF-Qe-S5a"/>
                                     <constraint firstItem="EJu-2f-Cyy" firstAttribute="leading" secondItem="CYP-bW-iq2" secondAttribute="trailing" constant="8" id="yaZ-ZN-EnX"/>
                                 </constraints>
-                                <size key="customSize" width="168" height="164"/>
+                                <size key="customSize" width="202" height="253"/>
                                 <connections>
                                     <outlet property="noteHeight" destination="Wxl-CA-SjE" id="tcK-H7-JNm"/>
                                     <outlet property="noteLabel" destination="Y6j-7Z-tov" id="q2g-yh-NI8"/>
@@ -79,7 +80,7 @@
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AHPinCell" id="7jj-O3-Lgl" customClass="AHPinCell" customModule="AHPinterest" customModuleProvider="target">
-                                <rect key="frame" x="178" y="64" width="155" height="136"/>
+                                <rect key="frame" x="212" y="109" width="155" height="136"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="155" height="136"/>
@@ -158,7 +159,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i99-dd-Meg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1543" y="-759"/>
+            <point key="canvasLocation" x="-1543.2" y="-759.67016491754134"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2KM-C2-mp7">
@@ -180,7 +181,7 @@
         <scene sceneID="enQ-85-2xx">
             <objects>
                 <collectionViewController storyboardIdentifier="AHPinVC" id="XkY-Cr-uNs" customClass="AHPinVC" customModule="AHPinterest" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" prefetchingEnabled="NO" id="SKe-Ye-ww8">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" prefetchingEnabled="NO" id="SKe-Ye-ww8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

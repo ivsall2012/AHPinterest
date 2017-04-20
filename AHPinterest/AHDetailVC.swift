@@ -23,11 +23,11 @@ class AHDetailVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.navigationController?.isNavigationBarHidden = true
         collectionView?.backgroundColor = UIColor.white
         self.automaticallyAdjustsScrollViewInsets = false
-        collectionView?.contentInset = .init(top: 20, left: 0, bottom: 0, right: 0)
+        collectionView?.contentInset = .init(top: 64, left: 0, bottom: 0, right: 0)
 
         let layout = AHDetailVCLayout()
         collectionView.setCollectionViewLayout(layout, animated: false)
@@ -106,7 +106,7 @@ extension AHDetailVC {
 extension AHDetailVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // At first return, collecitonView.bounds.size is 1000.0 x 980.0
-        return CGSize(width: screenSize.width, height: screenSize.height - 20)
+        return CGSize(width: screenSize.width, height: screenSize.height - 64)
     }
     
 }

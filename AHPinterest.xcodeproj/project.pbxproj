@@ -21,9 +21,10 @@
 		A1640C2A1EA4D3A5000E6EB5 /* AHRefreshLayoutHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1640C291EA4D3A5000E6EB5 /* AHRefreshLayoutHandler.swift */; };
 		A164E1A61EA7989E00A8227D /* AHPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A164E1A51EA7989E00A8227D /* AHPin.swift */; };
 		A164E1A81EA79DB600A8227D /* AHNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A164E1A71EA79DB600A8227D /* AHNavigationController.swift */; };
-		A164E1AD1EA8217A00A8227D /* AHPinContentStickyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A164E1AC1EA8217A00A8227D /* AHPinContentStickyHeader.swift */; };
 		A164E1B81EA8319C00A8227D /* AHPinLayoutHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A164E1B61EA8319C00A8227D /* AHPinLayoutHeader.swift */; };
 		A164E1B91EA8319C00A8227D /* AHPinLayoutHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = A164E1B71EA8319C00A8227D /* AHPinLayoutHeader.xib */; };
+		A164E1BC1EA8400B00A8227D /* AHDetailNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A164E1BA1EA8400B00A8227D /* AHDetailNavBar.swift */; };
+		A164E1BD1EA8400B00A8227D /* AHDetailNavBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = A164E1BB1EA8400B00A8227D /* AHDetailNavBar.xib */; };
 		A168BFDA1E888DDD00A87E03 /* AHPinterestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A168BFD91E888DDD00A87E03 /* AHPinterestTests.swift */; };
 		A168BFE21E8890E500A87E03 /* AHPinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A168BFE11E8890E500A87E03 /* AHPinCell.swift */; };
 		A168BFE41E88930200A87E03 /* AHPinDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A168BFE31E88930200A87E03 /* AHPinDelegate.swift */; };
@@ -81,9 +82,10 @@
 		A1640C291EA4D3A5000E6EB5 /* AHRefreshLayoutHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHRefreshLayoutHandler.swift; sourceTree = "<group>"; };
 		A164E1A51EA7989E00A8227D /* AHPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPin.swift; sourceTree = "<group>"; };
 		A164E1A71EA79DB600A8227D /* AHNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHNavigationController.swift; sourceTree = "<group>"; };
-		A164E1AC1EA8217A00A8227D /* AHPinContentStickyHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinContentStickyHeader.swift; sourceTree = "<group>"; };
 		A164E1B61EA8319C00A8227D /* AHPinLayoutHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinLayoutHeader.swift; sourceTree = "<group>"; };
 		A164E1B71EA8319C00A8227D /* AHPinLayoutHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AHPinLayoutHeader.xib; sourceTree = "<group>"; };
+		A164E1BA1EA8400B00A8227D /* AHDetailNavBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDetailNavBar.swift; sourceTree = "<group>"; };
+		A164E1BB1EA8400B00A8227D /* AHDetailNavBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AHDetailNavBar.xib; sourceTree = "<group>"; };
 		A168BFD71E888DDD00A87E03 /* AHPinterestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AHPinterestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A168BFD91E888DDD00A87E03 /* AHPinterestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AHPinterestTests.swift; sourceTree = "<group>"; };
 		A168BFDB1E888DDD00A87E03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -185,7 +187,8 @@
 		A164E1A91EA81BAC00A8227D /* Header */ = {
 			isa = PBXGroup;
 			children = (
-				A164E1AC1EA8217A00A8227D /* AHPinContentStickyHeader.swift */,
+				A164E1BA1EA8400B00A8227D /* AHDetailNavBar.swift */,
+				A164E1BB1EA8400B00A8227D /* AHDetailNavBar.xib */,
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				A17377331E887F9600462EE1 /* LaunchScreen.storyboard in Resources */,
 				A164E1B91EA8319C00A8227D /* AHPinLayoutHeader.xib in Resources */,
 				A17377301E887F9600462EE1 /* Assets.xcassets in Resources */,
+				A164E1BD1EA8400B00A8227D /* AHDetailNavBar.xib in Resources */,
 				A173772E1E887F9600462EE1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -503,8 +507,8 @@
 				A12A283C1E9ECBE500F7A36D /* AHDetailVCLayout.swift in Sources */,
 				A15C0B5C1E9372B900B35BE1 /* AHOptionsVC.swift in Sources */,
 				A1B115001EA2B29F004D8601 /* AHLayoutRouter.swift in Sources */,
-				A164E1AD1EA8217A00A8227D /* AHPinContentStickyHeader.swift in Sources */,
 				A1A227351EA48DAC00527358 /* AHDelegatesCenter.swift in Sources */,
+				A164E1BC1EA8400B00A8227D /* AHDetailNavBar.swift in Sources */,
 				A164E1B81EA8319C00A8227D /* AHPinLayoutHeader.swift in Sources */,
 				A168BFE81E889B6400A87E03 /* AHPinLayout.swift in Sources */,
 				A1E85DA01EA6E07C000775FD /* AHPinContentVC.swift in Sources */,

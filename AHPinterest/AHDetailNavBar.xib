@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="AHDetailNavBar" customModule="AHPinterest" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="419" height="68"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oV7-ut-XQ6">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="D6r-nf-rT1"/>
+                        <constraint firstAttribute="width" secondItem="oV7-ut-XQ6" secondAttribute="height" multiplier="1:1" id="qFJ-Cn-p7g"/>
+                    </constraints>
+                    <state key="normal" image="back"/>
+                    <connections>
+                        <action selector="backBtnTapped:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="rz6-uU-JTl"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More Like This" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s8h-df-sSt">
+                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xzJ-65-Gwl">
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5j1-lW-HSF">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="N7o-Uz-Iqu"/>
+                                <constraint firstAttribute="width" secondItem="5j1-lW-HSF" secondAttribute="height" multiplier="1:1" id="Zki-Z2-XF7"/>
+                            </constraints>
+                            <state key="normal" image="check"/>
+                            <connections>
+                                <action selector="checkBtnTapped:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="9DE-JF-5wn"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uiD-ZM-mZt">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="Oja-v6-Rkl"/>
+                                <constraint firstAttribute="width" secondItem="uiD-ZM-mZt" secondAttribute="height" multiplier="1:1" id="m0A-Fl-Ibs"/>
+                            </constraints>
+                            <state key="normal" image="plane"/>
+                            <connections>
+                                <action selector="planeBtnTapped:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="bPV-pZ-JNn"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0l-JQ-d7o">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="kYF-z4-g4v"/>
+                                <constraint firstAttribute="width" secondItem="B0l-JQ-d7o" secondAttribute="height" multiplier="1:1" id="xQW-Dd-TQ8"/>
+                            </constraints>
+                            <state key="normal" image="dot"/>
+                            <connections>
+                                <action selector="moreBtnTapped:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="fWD-2a-4XV"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JYW-0W-msp">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="MaL-JZ-ELM"/>
+                                <constraint firstAttribute="width" secondItem="JYW-0W-msp" secondAttribute="height" multiplier="95:53" id="agX-xC-ppR"/>
+                            </constraints>
+                            <state key="normal" image="save"/>
+                            <connections>
+                                <action selector="saveBtnTapped:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="Sl1-YZ-4rG"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="uiD-ZM-mZt" firstAttribute="leading" secondItem="5j1-lW-HSF" secondAttribute="trailing" id="6a5-KG-BLx"/>
+                        <constraint firstItem="B0l-JQ-d7o" firstAttribute="leading" secondItem="uiD-ZM-mZt" secondAttribute="trailing" id="DZy-fE-OwS"/>
+                        <constraint firstAttribute="trailing" secondItem="JYW-0W-msp" secondAttribute="trailing" constant="16" id="Nnz-vV-ouz"/>
+                        <constraint firstItem="5j1-lW-HSF" firstAttribute="leading" secondItem="xzJ-65-Gwl" secondAttribute="leading" id="SyO-0g-mdl"/>
+                        <constraint firstItem="uiD-ZM-mZt" firstAttribute="centerY" secondItem="xzJ-65-Gwl" secondAttribute="centerY" id="ZtS-Vz-YB1"/>
+                        <constraint firstItem="B0l-JQ-d7o" firstAttribute="centerY" secondItem="xzJ-65-Gwl" secondAttribute="centerY" id="abu-yS-ICq"/>
+                        <constraint firstItem="JYW-0W-msp" firstAttribute="centerY" secondItem="xzJ-65-Gwl" secondAttribute="centerY" id="dQB-TX-VPK"/>
+                        <constraint firstItem="5j1-lW-HSF" firstAttribute="centerY" secondItem="xzJ-65-Gwl" secondAttribute="centerY" id="ojw-Zp-xEl"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="xzJ-65-Gwl" secondAttribute="bottom" id="DZi-eh-ZTS"/>
+                <constraint firstItem="oV7-ut-XQ6" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="Dlh-Aj-CUd"/>
+                <constraint firstAttribute="trailing" secondItem="xzJ-65-Gwl" secondAttribute="trailing" id="Wh2-0E-6WB"/>
+                <constraint firstItem="xzJ-65-Gwl" firstAttribute="leading" secondItem="oV7-ut-XQ6" secondAttribute="trailing" id="Yah-H9-Fha"/>
+                <constraint firstItem="oV7-ut-XQ6" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="ltc-NW-YQd"/>
+                <constraint firstItem="s8h-df-sSt" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="mFx-Sx-kCd"/>
+                <constraint firstItem="s8h-df-sSt" firstAttribute="centerX" secondItem="U6b-Vx-4bR" secondAttribute="centerX" id="un9-37-J6r"/>
+                <constraint firstItem="xzJ-65-Gwl" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="zXu-OJ-yjt"/>
+            </constraints>
+            <connections>
+                <outlet property="moreLabel" destination="s8h-df-sSt" id="0VC-DF-EMz"/>
+                <outlet property="optionContainer" destination="xzJ-65-Gwl" id="O7b-1e-xpl"/>
+            </connections>
+            <point key="canvasLocation" x="83.5" y="63"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="back" width="52" height="52"/>
+        <image name="check" width="52" height="52"/>
+        <image name="dot" width="52" height="52"/>
+        <image name="plane" width="52" height="52"/>
+        <image name="save" width="95" height="53"/>
+    </resources>
+</document>
