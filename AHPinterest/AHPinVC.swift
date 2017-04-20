@@ -22,7 +22,7 @@ class AHPinVC: AHCollectionVC {
     // should the VC refreshes data at first loading
     var initialAutoRefresh = false
     
-    var showContentPin = false
+    var showLayoutHeader = false
 }
 
 
@@ -33,7 +33,10 @@ extension AHPinVC {
         self.navigationController?.isNavigationBarHidden = true
         collectionView?.backgroundColor = UIColor.white
         self.automaticallyAdjustsScrollViewInsets = false
-
+        
+        let headerNib = UINib(nibName: "AHPinLayoutHeader", bundle: nil)
+        collectionView?.register(headerNib, forSupplementaryViewOfKind: AHPinLayoutHeaderKind, withReuseIdentifier: AHPinLayoutHeaderKind)
+        
         collectionView?.register(AHRefreshHeader.self, forSupplementaryViewOfKind: AHHeaderKind, withReuseIdentifier: AHHeaderKind)
         
         collectionView?.register(AHRefreshFooter.self, forSupplementaryViewOfKind: AHFooterKind, withReuseIdentifier: AHFooterKind)

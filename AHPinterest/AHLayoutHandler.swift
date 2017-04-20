@@ -38,4 +38,16 @@ extension AHLayoutHandler: AHPinLayoutDelegate {
         return pinVM.heightForNote(font: AHNoteFont, width: width)
     }
     
+    func AHPinLayoutSizeForHeader(collectionView: UICollectionView) -> CGSize? {
+        guard let pinVC = pinVC else {
+            return nil
+        }
+        if pinVC.showLayoutHeader {
+            return CGSize(width: 0.0, height: AHPinLayoutHeaderHeight)
+        }else{
+            return nil
+        }
+        
+    }
+    
 }

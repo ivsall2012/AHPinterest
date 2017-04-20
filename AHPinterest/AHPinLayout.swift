@@ -14,14 +14,14 @@ protocol AHPinLayoutDelegate {
     func AHPinLayoutHeightForNote(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat
     
     func AHPinLayoutHeightForUserAvatar(indexPath: IndexPath, width: CGFloat, collectionView: UICollectionView) -> CGFloat
+    
+    func AHPinLayoutSizeForHeader(collectionView: UICollectionView) -> CGSize?
+
 }
 
 
 class AHPinLayout: AHLayout {
     var delegate: AHPinLayoutDelegate!
-    
-    
-    fileprivate var isRefreshSetup: Bool = false
     
     fileprivate var currentColumn: Int = 0
     
@@ -36,6 +36,8 @@ class AHPinLayout: AHLayout {
     fileprivate var contentHeight: CGFloat = 0.0
 
     fileprivate var contentWidth: CGFloat = 0.0
+    
+    fileprivate var headerAttributes : UICollectionViewLayoutAttributes?
     
     override class var layoutAttributesClass: AnyClass {
         return AHPinLayoutAttributes.self
@@ -59,7 +61,11 @@ class AHPinLayout: AHLayout {
             xOffSets.append(CGFloat(i) * columnWidth)
         }
         
-        yOffsets = [CGFloat](repeating: 0.0, count: AHNumberOfColumns)
+        var unitYoffSet: CGFloat = 0.0
+        if let headerSize = delegate.AHPinLayoutSizeForHeader(collectionView: collectionView) {
+            unitYoffSet = headerSize.height
+        }
+        yOffsets = [CGFloat](repeating: unitYoffSet, count: AHNumberOfColumns)
     }
     
     
@@ -71,7 +77,18 @@ class AHPinLayout: AHLayout {
             
         }
     }
-        
+    
+    fileprivate func prepareHeader() {
+        guard let headerSize = delegate.AHPinLayoutSizeForHeader(collectionView: collectionView!) else {
+            headerAttributes = nil
+            return
+        }
+        if headerAttributes == nil {
+            let index = IndexPath(item: 0, section: layoutSection)
+            headerAttributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: AHPinLayoutHeaderKind, with: index)
+            headerAttributes?.frame = .init(x: 0.0, y: 0.0, width: contentWidth, height: headerSize.height)
+        }
+    }
     
     override func prepare() {
 //        super.prepare()
@@ -80,6 +97,7 @@ class AHPinLayout: AHLayout {
         }
         reset()
         prepareCell()
+        prepareHeader()
         
     }
     fileprivate func insertAttributeIntoCache(indexPath: IndexPath) {
@@ -131,6 +149,9 @@ class AHPinLayout: AHLayout {
                 arr.append(attr)
             }
         }
+        if let headerAttributes = headerAttributes {
+            arr.append(headerAttributes)
+        }
         return arr
         
     }
@@ -142,12 +163,17 @@ class AHPinLayout: AHLayout {
         return attr
     }
     
+    override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        if elementKind == AHPinLayoutHeaderKind {
+            return headerAttributes
+        }
+        return nil
+    }
     
     
     override func invalidateLayout() {
 //        super.invalidateLayout()
         cache.removeAll()
-        isRefreshSetup = false
         reset()
     }
     

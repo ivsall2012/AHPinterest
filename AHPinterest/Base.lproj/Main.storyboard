@@ -17,19 +17,19 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="iOl-FS-oO4">
                             <size key="itemSize" width="50" height="50"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="headerReferenceSize" width="50" height="50"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AHPinContentCell" id="BlN-LK-V2v" customClass="AHPinContentCell" customModule="AHPinterest" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="168" height="164"/>
+                                <rect key="frame" x="0.0" y="50" width="168" height="164"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="168" height="164"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y6j-7Z-tov">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y6j-7Z-tov">
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="Wxl-CA-SjE"/>
                                             </constraints>
@@ -79,7 +79,7 @@
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AHPinCell" id="7jj-O3-Lgl" customClass="AHPinCell" customModule="AHPinterest" customModuleProvider="target">
-                                <rect key="frame" x="178" y="14" width="155" height="136"/>
+                                <rect key="frame" x="178" y="64" width="155" height="136"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="155" height="136"/>
@@ -135,6 +135,21 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AHPinLayoutHeaderKind" id="6CZ-Oa-EtM" customClass="AHPinLayoutHeader" customModule="AHPinterest" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More Like This" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9mV-M5-xaq">
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="9mV-M5-xaq" firstAttribute="leading" secondItem="6CZ-Oa-EtM" secondAttribute="leading" constant="20" id="GC2-VY-9RV"/>
+                                <constraint firstItem="9mV-M5-xaq" firstAttribute="centerY" secondItem="6CZ-Oa-EtM" secondAttribute="centerY" id="GG6-oj-TfX"/>
+                            </constraints>
+                        </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="nTs-zQ-HoZ" id="Y1g-Pq-7R7"/>
                             <outlet property="delegate" destination="nTs-zQ-HoZ" id="jEl-kj-Bfg"/>
@@ -143,7 +158,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i99-dd-Meg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-975.20000000000005" y="-758.77061469265368"/>
+            <point key="canvasLocation" x="-1543" y="-759"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2KM-C2-mp7">
@@ -169,13 +184,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewLayout key="collectionViewLayout" id="lTY-Mv-pIN" customClass="AHPinLayout" customModule="AHPinterest" customModuleProvider="target"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="F7y-ik-TTw">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="50" height="50"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AHPinCell" id="Ra4-ZS-FeX" customClass="AHPinCell" customModule="AHPinterest" customModuleProvider="target">
-                                <rect key="frame" x="4.5" y="0.0" width="366" height="311"/>
+                                <rect key="frame" x="0.0" y="71" width="141" height="127"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="366" height="311"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="141" height="127"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="note" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mV9-F5-arN" userLabel="Note">
@@ -217,7 +237,7 @@
                                     <constraint firstItem="OkX-e2-rxU" firstAttribute="top" secondItem="mV9-F5-arN" secondAttribute="bottom" constant="8" id="y5g-YA-qOZ"/>
                                     <constraint firstAttribute="trailing" secondItem="6MT-gB-36v" secondAttribute="trailing" id="yig-nK-n9h"/>
                                 </constraints>
-                                <size key="customSize" width="366" height="311"/>
+                                <size key="customSize" width="141" height="127"/>
                                 <connections>
                                     <outlet property="imageView" destination="njM-ub-3T6" id="uDD-AP-PaC"/>
                                     <outlet property="imageViewHeightConstraint" destination="2hp-Aj-Q1Z" id="RSk-Lk-Sf5"/>
@@ -228,10 +248,10 @@
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AHPinContentCell" id="5zR-zu-o8M" customClass="AHPinContentCell" customModule="AHPinterest" customModuleProvider="target">
-                                <rect key="frame" x="38.5" y="321" width="298" height="321"/>
+                                <rect key="frame" x="151" y="50" width="170" height="169"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="298" height="321"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="170" height="169"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vHL-Md-4kP">
@@ -273,7 +293,7 @@
                                     <constraint firstAttribute="trailing" secondItem="vHL-Md-4kP" secondAttribute="trailing" id="mjA-AM-ryl"/>
                                     <constraint firstItem="bwb-P8-JjI" firstAttribute="leading" secondItem="icc-si-cb4" secondAttribute="leading" id="sSe-eU-VBz"/>
                                 </constraints>
-                                <size key="customSize" width="298" height="321"/>
+                                <size key="customSize" width="170" height="169"/>
                                 <connections>
                                     <outlet property="noteHeight" destination="Zuc-j9-X4R" id="5wc-X9-Vx8"/>
                                     <outlet property="noteLabel" destination="vHL-Md-4kP" id="yQv-u8-fyz"/>
@@ -284,6 +304,21 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AHPinLayoutHeaderKind" id="LBR-Ca-YGm" customClass="AHPinLayoutHeader" customModule="AHPinterest" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More Like This" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I6H-rJ-Ohd">
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="I6H-rJ-Ohd" firstAttribute="centerY" secondItem="LBR-Ca-YGm" secondAttribute="centerY" id="OzV-6u-6ON"/>
+                                <constraint firstItem="I6H-rJ-Ohd" firstAttribute="leading" secondItem="LBR-Ca-YGm" secondAttribute="leading" constant="20" id="e74-6k-XWj"/>
+                            </constraints>
+                        </collectionReusableView>
                     </collectionView>
                     <navigationItem key="navigationItem" id="59F-PD-IpO"/>
                 </collectionViewController>

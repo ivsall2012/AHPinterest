@@ -32,6 +32,14 @@ extension AHPinDataSource : UICollectionViewDataSource {
         return pinCell
     }
     
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == AHPinLayoutHeaderKind {
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: AHPinLayoutHeaderKind, withReuseIdentifier: AHPinLayoutHeaderKind, for: indexPath) as! AHPinLayoutHeader
+            return header
+        }
+        
+        fatalError("no header cell")
+    }
     
 }
 
