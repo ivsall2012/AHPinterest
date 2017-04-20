@@ -27,7 +27,7 @@ class AHDetailVC: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         collectionView?.backgroundColor = UIColor.white
         self.automaticallyAdjustsScrollViewInsets = false
-        collectionView?.contentInset = .init(top: 64, left: 0, bottom: 0, right: 0)
+        collectionView?.contentInset = .init(top: 0, left: 0, bottom: 0, right: 0)
 
         let layout = AHDetailVCLayout()
         collectionView.setCollectionViewLayout(layout, animated: false)
@@ -47,30 +47,25 @@ class AHDetailVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        UIApplication.shared.isStatusBarHidden = true
     }
-
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIApplication.shared.isStatusBarHidden = false
+    }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
         currentIndexPath?.section = 0
         collectionView.scrollToItem(at: currentIndexPath!, at: UICollectionViewScrollPosition.right, animated: false)
     }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
     
-        
-    }
-    
-   
-    
-    
-    @IBAction func dismiss(_ sender: UIButton) {
-        navigationController!.popViewController(animated: true)
-    }
-    @IBAction func save(_ sender: UIButton) {
-        print("saved photo")
-    }
+//    override func deinit{
+//        NotificationCenter.default.removeObserver(AHNotificationDetailVCShouldDismiss)
+//    }
 
 }
 
@@ -106,7 +101,7 @@ extension AHDetailVC {
 extension AHDetailVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // At first return, collecitonView.bounds.size is 1000.0 x 980.0
-        return CGSize(width: screenSize.width, height: screenSize.height - 64)
+        return CGSize(width: screenSize.width, height: screenSize.height)
     }
     
 }

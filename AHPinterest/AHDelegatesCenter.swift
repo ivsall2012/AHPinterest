@@ -21,15 +21,24 @@ extension AHDelegatesCenter: UICollectionViewDelegate {
         guard let collectionVC = collectionVC else {
             return
         }
+        
+        for delegate in collectionVC.generalDelegates {
+            delegate.collectionView?(collectionView, didSelectItemAt: indexPath)
+        }
+        
         let delegate = collectionVC.delegates[indexPath.section]
         delegate.collectionView?(collectionView, didSelectItemAt: indexPath)
-
+        
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard let collectionVC = collectionVC else {
             return
         }
+        for delegate in collectionVC.generalDelegates {
+            delegate.scrollViewDidScroll?(scrollView)
+        }
+        
         for delegate in collectionVC.delegates {
             delegate.scrollViewDidScroll?(scrollView)
         }
@@ -39,6 +48,9 @@ extension AHDelegatesCenter: UICollectionViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         guard let collectionVC = collectionVC else {
             return
+        }
+        for delegate in collectionVC.generalDelegates {
+            delegate.scrollViewDidEndDragging?(scrollView, willDecelerate: decelerate)
         }
         for delegate in collectionVC.delegates {
             delegate.scrollViewDidEndDragging?(scrollView, willDecelerate: decelerate)

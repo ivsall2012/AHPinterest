@@ -22,6 +22,7 @@ extension AHPinDelegate: UICollectionViewDelegate {
         let vc = storyboard.instantiateViewController(withIdentifier: "AHDetailVC") as! AHDetailVC
         vc.pinVMs = pinVC?.pinDataSource.pinVMs
         vc.currentIndexPath = indexPath
+        print(pinVC?.navigationController)
         pinVC?.navigationController?.pushViewController(vc, animated: true)
     }
 }

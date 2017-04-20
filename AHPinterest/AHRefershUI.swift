@@ -50,13 +50,7 @@ class AHRefershUI: NSObject {
     }
     
     fileprivate class func stopAnimateRefresh() {
-        refreshControl.layer.removeAllAnimations()
-        
-        let rotaton = CABasicAnimation(keyPath: "transform.rotation.z")
-        rotaton.fromValue = 0.0
-        rotaton.toValue = 2 * CGFloat(M_PI)
-        rotaton.duration = 1.0;
-        rotaton.repeatCount = FLT_MAX;
+        refreshControl.layer.removeAnimation(forKey: "scale")
         
         let scale = CABasicAnimation(keyPath: "transform.scale")
         scale.fromValue = 1.0
@@ -64,7 +58,6 @@ class AHRefershUI: NSObject {
         scale.duration = 0.35;
         
         refreshControl.layer.add(scale, forKey: "scale")
-        refreshControl.layer.add(rotaton, forKey: "ratate")
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.35 ) {
             refreshControl.layer.removeAllAnimations()

@@ -22,6 +22,9 @@ let AHFooterKind: String = "AHFooterKind"
 let AHPinLayoutHeaderKind: String = "AHPinLayoutHeaderKind"
 let AHPinLayoutHeaderHeight: CGFloat = 44.0
 
+let AHPinNavBarKind: String = "AHPinNavBarKind"
+let AHPinNavBarHeight: CGFloat = 44.0
+
 
 let AHHeaderHeight: CGFloat = 80
 let AHFooterHeight: CGFloat = 50
@@ -35,4 +38,14 @@ let AHHeaderShouldRefreshRatio: CGFloat = 0.7
 
 
 // The collectionView within AHPinVC
-let AHCollectionViewInset: UIEdgeInsets = UIEdgeInsets(top: 23, left: 5, bottom: AHFooterHeight + 8, right: 5)
+let AHCollectionViewInset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: AHFooterHeight + 8, right: 5)
+
+
+
+
+
+
+
+
+
+

@@ -11,7 +11,7 @@
         <scene sceneID="fIo-pC-cHr">
             <objects>
                 <collectionViewController storyboardIdentifier="AHPinContentVC" id="nTs-zQ-HoZ" customClass="AHPinContentVC" customModule="AHPinterest" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="n9y-m8-sEq">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="n9y-m8-sEq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -156,6 +156,7 @@
                             <outlet property="delegate" destination="nTs-zQ-HoZ" id="jEl-kj-Bfg"/>
                         </connections>
                     </collectionView>
+                    <nil key="simulatedStatusBarMetrics"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i99-dd-Meg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -357,40 +358,13 @@
                                     <outlet property="delegate" destination="jQv-0d-pzv" id="gPo-Ss-Hns"/>
                                 </connections>
                             </collectionView>
-                            <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BmI-35-qmM" userLabel="Bottom Tool Bar">
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H2j-R7-8mk">
-                                        <frame key="frameInset" minX="9" minY="7" width="63" height="34"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Dismiss"/>
-                                        <connections>
-                                            <action selector="dismiss:" destination="jQv-0d-pzv" eventType="touchUpInside" id="Ujy-Ih-jw8"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hHQ-3I-lht">
-                                        <frame key="frameInset" minX="308" minY="7" width="40" height="34"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Save"/>
-                                        <connections>
-                                            <action selector="save:" destination="jQv-0d-pzv" eventType="touchUpInside" id="EvJ-F6-ZFs"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.2901960784" green="0.56078431370000004" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="49" id="qF0-2f-48z"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="WWY-ep-Gwe" firstAttribute="top" secondItem="BmI-35-qmM" secondAttribute="bottom" id="FzE-Cf-SES"/>
-                            <constraint firstAttribute="trailing" secondItem="BmI-35-qmM" secondAttribute="trailing" id="att-YM-SLS"/>
                             <constraint firstItem="4pF-nG-mhj" firstAttribute="leading" secondItem="7yU-D8-67r" secondAttribute="leading" id="ec2-QF-Pwx"/>
                             <constraint firstItem="4pF-nG-mhj" firstAttribute="top" secondItem="7yU-D8-67r" secondAttribute="top" id="i3U-rm-PtQ"/>
                             <constraint firstAttribute="bottom" secondItem="4pF-nG-mhj" secondAttribute="bottom" id="iad-B9-mSI"/>
                             <constraint firstAttribute="trailing" secondItem="4pF-nG-mhj" secondAttribute="trailing" id="mlp-sh-20k"/>
-                            <constraint firstItem="BmI-35-qmM" firstAttribute="leading" secondItem="7yU-D8-67r" secondAttribute="leading" id="qWY-nF-NtH"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>

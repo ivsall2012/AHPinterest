@@ -14,7 +14,7 @@ class AHLayoutAttributes: UICollectionViewLayoutAttributes {
     var sectionFrame: CGRect = .zero
     
     override func copy(with zone: NSZone? = nil) -> Any {
-        let copy = super.copy(with: zone) as! AHPinLayoutAttributes
+        let copy = super.copy(with: zone) as! AHLayoutAttributes
         copy.sectionFrame = self.sectionFrame
         return copy
     }
@@ -35,7 +35,7 @@ class AHLayoutRouter: UICollectionViewLayout {
     // Contains cell and section supplement layouts
     fileprivate(set) var layoutArray = [AHLayout]()
     // Contains each the y orgin layout in layoutArray
-    fileprivate var sectionYorigins = [CGFloat]()
+    fileprivate(set) var sectionYorigins = [CGFloat]()
     
 }
 

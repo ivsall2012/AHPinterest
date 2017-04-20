@@ -29,6 +29,9 @@ class AHCollectionVC: UICollectionViewController {
     
     fileprivate(set) var delegates = [UICollectionViewDelegate]()
     fileprivate(set) var dataSources = [UICollectionViewDataSource]()
+    
+    fileprivate(set) var generalDelegates = [UICollectionViewDelegate]()
+    
     var layoutArray: [UICollectionViewLayout] {
         return self.layoutRouter.layoutArray
     }
@@ -37,6 +40,7 @@ class AHCollectionVC: UICollectionViewController {
         super.init(collectionViewLayout: layoutRouter)
         collectionView?.delegate = delegateCenter
         collectionView?.dataSource = dataSourceCenter
+    
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -80,7 +84,17 @@ extension AHCollectionVC {
         delegates.insert(delegate, at: 0)
         dataSources.insert(dataSource, at: 0)
     }
+    func addDelegate(delegate: UICollectionViewDelegate) {
+        generalDelegates.append(delegate)
+    }
+
 }
+
+
+
+
+
+
 
 
 

@@ -8,29 +8,35 @@
 
 import UIKit
 
-class AHDetailNavBar: UICollectionReusableView {
+class AHPinNavBar: UICollectionReusableView {
     @IBOutlet weak var moreLabel: UILabel!
     @IBOutlet weak var optionContainer: UIView!
-
+    
+    weak var pinVM: AHPinViewModel?
+    
     var showNavBar = true {
         didSet {
             if showNavBar {
-                self.optionContainer.isHidden = false
-                self.moreLabel.isHidden = true
+                UIView.animate(withDuration: 0.25, animations: { 
+                    self.optionContainer.isHidden = false
+                    self.moreLabel.isHidden = true
+                })
             }else{
-                self.optionContainer.isHidden = true
-                self.moreLabel.isHidden = false
+                UIView.animate(withDuration: 0.25, animations: {
+                    self.optionContainer.isHidden = true
+                    self.moreLabel.isHidden = false
+                })
             }
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        backgroundColor = UIColor.white.withAlphaComponent(0.3)
+        backgroundColor = UIColor.white.withAlphaComponent(0.7)
     }
 
-    class func navBar() -> AHDetailNavBar {
-        return Bundle.main.loadNibNamed("AHDetailNavBar", owner: self, options: nil)!.first as! AHDetailNavBar
+    class func navBar() -> AHPinNavBar {
+        return Bundle.main.loadNibNamed("AHPinNavBar", owner: self, options: nil)!.first as! AHPinNavBar
     }
     
     @IBAction func saveBtnTapped(_ sender: AnyObject) {
@@ -43,6 +49,7 @@ class AHDetailNavBar: UICollectionReusableView {
     @IBAction func checkBtnTapped(_ sender: UIButton) {
     }
     @IBAction func backBtnTapped(_ sender: AnyObject) {
+        
     }
     
 }

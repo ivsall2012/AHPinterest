@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="AHDetailNavBar" customModule="AHPinterest" customModuleProvider="target">
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AHPinNavBarKind" id="U6b-Vx-4bR" customClass="AHPinNavBar" customModule="AHPinterest" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="419" height="68"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
@@ -62,7 +62,7 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JYW-0W-msp">
                             <constraints>
-                                <constraint firstAttribute="height" constant="44" id="MaL-JZ-ELM"/>
+                                <constraint firstAttribute="height" constant="38" id="MaL-JZ-ELM"/>
                                 <constraint firstAttribute="width" secondItem="JYW-0W-msp" secondAttribute="height" multiplier="95:53" id="agX-xC-ppR"/>
                             </constraints>
                             <state key="normal" image="save"/>
