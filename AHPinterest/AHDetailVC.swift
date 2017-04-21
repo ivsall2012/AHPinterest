@@ -48,7 +48,6 @@ class AHDetailVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.isStatusBarHidden = true
-        
     }
     
     
@@ -56,6 +55,9 @@ class AHDetailVC: UIViewController {
         super.viewDidAppear(animated)
         currentIndexPath?.section = 0
         collectionView.scrollToItem(at: currentIndexPath!, at: UICollectionViewScrollPosition.right, animated: false)
+        
+//        let vc = cellVCs[currentIndexPath!.item]
+//        vc.triggeredRefresh()
     }
     
     
@@ -65,10 +67,11 @@ class AHDetailVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         UIApplication.shared.isStatusBarHidden = false
+        
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
+        
     }
 
 }
@@ -80,6 +83,7 @@ extension AHDetailVC {
         let vc = storyboard.instantiateViewController(withIdentifier: "AHPinContentVC") as! AHPinContentVC
         vc.refreshLayout.enableHeaderRefresh = false
         vc.showLayoutHeader = true
+        vc.initialAutoRefresh = false
         vc.detailVC = self
         // setup VC related
         vc.willMove(toParentViewController: self)

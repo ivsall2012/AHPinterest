@@ -24,6 +24,7 @@ class AHRefreshLayoutHandler: NSObject {
         }
     }
     weak var pinVC: AHPinVC?
+    // for footer only
     var isLoading = false
 }
 
@@ -98,7 +99,7 @@ extension AHRefreshLayoutHandler {
         
         // the following condition will be called if the scrolling is really fast cuasing collectionView being pulled up. Then the refreshControl will be shown here
         // deltaLeft being negative means the user is pulling up, no positive space left to scroll, but negative one
-        if deltaLeft <= -AHCollectionViewInset.bottom {
+        if yOffset > 0.0 &&  deltaLeft > 0.0 && deltaLeft <= -AHCollectionViewInset.bottom {
             if isLoading {
                 // this block can be called mutiple times as user keeps pulling up
                 // but it's ok since footerCell?.refresh() only responses the first call
@@ -123,12 +124,12 @@ extension AHRefreshLayoutHandler {
         guard !headerCell.isSpinning else {
             return
         }
-        if didEndDragging {
+        if didEndDragging{
             // user lifted their touch, now check if refresh should be triggered or not
             if headerCell.ratio >= AHHeaderShouldRefreshRatio {
                 headerCell.refresh()
                 UIView.animate(withDuration: 0.25, animations: {
-                    scrollView.contentInset.top = headerCell.bounds.height
+                    scrollView.contentInset.top = AHRefreshHeaderSize.height * 2
                     }, completion: { (_) in
                         self.pinVC?.pinDataSource.loadNewData(completion: { (_) in
                             UIView.animate(withDuration: 0.25, animations: {
@@ -157,10 +158,20 @@ extension AHRefreshLayoutHandler {
         guard yOffset >= 0.0 else {
             return
         }
-        let ratio = yOffset / headerCell.bounds.height * 0.5
+        // relative to half height
+        let ratio = yOffset / AHHeaderHeight * 0.5
         if ratio <= 1.0 {
             headerCell.pulling(ratio: ratio)
         }
+    }
+    
+    func refreshManually(scrollView: UIScrollView) {
+        scrollView.setContentOffset(CGPoint(x:0, y:-100), animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.headerCell?.ratio = 1.0
+            self.handlerPullToRefresh(scrollView, didEndDragging: true)
+        }
+        
     }
     
 }

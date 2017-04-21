@@ -13,7 +13,13 @@ class AHPinContentVC: AHPinVC {
     let pinContentLayoutHanlder = AHPinContentLayoutHandler()
     
     var navBar: AHPinNavBar?
-    weak var detailVC: AHDetailVC?
+    weak var detailVC: AHDetailVC? {
+        didSet {
+            if let detailVC = detailVC {
+                navBar?.detailVC = detailVC
+            }
+        }
+    }
     
     override weak var pinVM: AHPinViewModel? {
         didSet {
@@ -41,12 +47,19 @@ class AHPinContentVC: AHPinVC {
         pinContentLayout.delegate = pinContentLayoutHanlder
         insertLayoutToFont(layout: pinContentLayout, delegate: pinContentLayoutHanlder, dataSource: pinContentLayoutHanlder)
         
-
+    }
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        print("viewWillLayoutSubviews")
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        print("viewDidLayoutSubviews")
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print("viewWillAppear")
         UIApplication.shared.isStatusBarHidden = true
-        navBar!.detailVC = detailVC
     }
     override var prefersStatusBarHidden: Bool {
         return true

@@ -15,14 +15,22 @@ class AHPinVC: AHCollectionVC {
     var detailVCAnimator = AHDetailVCAnimator()
     
     let pinLayout = AHPinLayout()
+    
     let refreshLayout = AHRefreshLayout()
+    fileprivate let refreshLayoutHanlder = AHRefreshLayoutHandler()
+    
     let pinDataSource = AHPinDataSource()
     let optionsHandler = AHOptionsHandler()
     
+    
     // should the VC refreshes data at first loading
-    var initialAutoRefresh = false
+    var initialAutoRefresh = true
     
     var showLayoutHeader = false
+    
+    func triggeredRefresh() {
+        refreshLayoutHanlder.refreshManually(scrollView: collectionView!)
+    }
 }
 
 
@@ -30,7 +38,7 @@ class AHPinVC: AHCollectionVC {
 extension AHPinVC {
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.delegate = self
+//        self.navigationController?.delegate = self
         self.navigationController?.isNavigationBarHidden = true
         collectionView?.backgroundColor = UIColor.white
         self.automaticallyAdjustsScrollViewInsets = false
@@ -44,12 +52,13 @@ extension AHPinVC {
         
         setup()
         
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if !initialAutoRefresh {
-            initialAutoRefresh = true
+        if initialAutoRefresh {
+            initialAutoRefresh = false
             AHRefershUI.show()
             pinDataSource.loadNewData(completion: { (success) in
                 AHRefershUI.dismiss()
@@ -62,6 +71,10 @@ extension AHPinVC {
         }
         
     }
+    
+
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.isStatusBarHidden = true
@@ -86,12 +99,11 @@ extension AHPinVC {
     }
     
     func setupRefreshLayout() {
-        let layoutHanlder = AHRefreshLayoutHandler()
-        layoutHanlder.pinVC = self
-        refreshLayout.delegate = layoutHanlder
+        refreshLayoutHanlder.pinVC = self
+        refreshLayout.delegate = refreshLayoutHanlder
         refreshLayout.enableFooterRefresh = true
         refreshLayout.enableHeaderRefresh = true
-        addGlobelSupplement(layout: refreshLayout, delegate: layoutHanlder, dataSource: layoutHanlder)
+        addGlobelSupplement(layout: refreshLayout, delegate: refreshLayoutHanlder, dataSource: refreshLayoutHanlder)
     }
     
     func setupPinLayout() {
@@ -116,10 +128,14 @@ extension AHPinVC {
 
 extension AHPinVC: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        if operation == .push {
-            return detailVCAnimator
+        if operation == .none {
+            return nil
         }
-        return nil
+        if operation == .pop {
+            return nil
+        }
+        detailVCAnimator.state = operation
+        return detailVCAnimator
     }
 }
 

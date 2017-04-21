@@ -30,7 +30,7 @@ class AHRefreshHeader: UICollectionReusableView {
     fileprivate func reset() {
         refreshControl.bounds.size = AHRefreshHeaderSize
         let x = self.bounds.width * 0.5
-        let y = self.bounds.height - AHRefreshHeaderSize.height * 0.5
+        let y: CGFloat = AHHeaderHeight * 0.5
         refreshControl.layer.anchorPoint = .init(x: 0.5, y: 0.5)
         refreshControl.center = .init(x: x, y: y)
         refreshControl.alpha = 0.3
@@ -39,11 +39,8 @@ class AHRefreshHeader: UICollectionReusableView {
     func refresh() {
         if !isSpinning{
             isSpinning = true
-            
-            let x = self.bounds.width * 0.5
-            let y = AHRefreshHeaderSize.height * 0.5
+            refreshControl.alpha = 1.0
             refreshControl.transform = .identity
-            refreshControl.center = .init(x: x, y: y)
             
             // need to do animation and networking
             let animation = CABasicAnimation(keyPath: "transform.rotation.z")
@@ -64,7 +61,7 @@ class AHRefreshHeader: UICollectionReusableView {
         let adjustedRatio = ratio + 0.3
         
         // using ratio because moving from bottom to centerY needs the ratio from 0.0 to 1.0
-        let delta = ratio * self.bounds.height * 0.5
+        let delta = ratio
         // an extra angle to make the end angle in transform, exactly faced-up
         let angleOffset = CGFloat(M_PI_4) * 0.1
         refreshControl.alpha = adjustedRatio

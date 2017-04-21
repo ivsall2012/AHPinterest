@@ -34,7 +34,7 @@ let AHRefreshHeaderSize: CGSize = CGSize(width: 40, height: 40)
 let AHRefreshFooterSize: CGSize = CGSize(width: 40, height: 40)
 
 // Refresh is triggerd by pulling down 70% or more of AHHeaderHeight
-let AHHeaderShouldRefreshRatio: CGFloat = 0.7
+let AHHeaderShouldRefreshRatio: CGFloat = 0.5
 
 
 // The collectionView within AHPinVC

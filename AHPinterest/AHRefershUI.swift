@@ -59,9 +59,9 @@ class AHRefershUI: NSObject {
         
         refreshControl.layer.add(scale, forKey: "scale")
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.35 ) {
-            refreshControl.layer.removeAllAnimations()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.32 ) {
             refreshControl.isHidden = true
+            refreshControl.layer.removeAllAnimations()
         }
         
     }

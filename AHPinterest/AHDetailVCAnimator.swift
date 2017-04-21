@@ -8,27 +8,10 @@
 
 import UIKit
 
-fileprivate enum AHDetailVCAnimatorState {
-    case none
-    case presenting
-    case dismissing
-}
+
 
 class AHDetailVCAnimator: NSObject {
-    fileprivate var state: AHDetailVCAnimatorState = .none
-}
-
-extension AHDetailVCAnimator : UIViewControllerTransitioningDelegate{
-    // callecd when presenting
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        state = .presenting
-        return self
-    }
-    // called when dismissing
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        state = .dismissing
-        return self
-    }
+    var state: UINavigationControllerOperation = .none
 }
 
 extension AHDetailVCAnimator : UIViewControllerAnimatedTransitioning {
@@ -37,30 +20,39 @@ extension AHDetailVCAnimator : UIViewControllerAnimatedTransitioning {
     }
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         switch state {
-        case .presenting:
-            animationTransitionForPresenting(using: transitionContext)
-        case .dismissing:
-            animationTransitionForDismissing(using: transitionContext)
+        case .push:
+            animationTransitionForPushing(using: transitionContext)
+        case .pop:
+            animationTransitionForPopping(using: transitionContext)
         default:
             break
         }
-        animationTransitionForPresenting(using: transitionContext)
     }
     // for presenting aniamtion, will be called just before viewWillAppear:
-    func animationTransitionForPresenting(using context: UIViewControllerContextTransitioning){
+    func animationTransitionForPushing(using context: UIViewControllerContextTransitioning){
         if let toVC  = context.viewController(forKey: UITransitionContextViewControllerKey.to) {
-            let view = UIView(frame: UIScreen.main.bounds)
-            view.backgroundColor = UIColor.white
+            
+            let mask = UIView(frame: toVC.view.bounds)
+            mask.backgroundColor = UIColor.white.withAlphaComponent(0.7)
+            context.containerView.addSubview(mask)
+            
             context.containerView.addSubview(toVC.view)
-            context.containerView.addSubview(view)
-            UIView.animate(withDuration: 0.25, animations: {
-                view.alpha = 1.0
-                view.backgroundColor = UIColor.red
+            toVC.view.transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
+
+            
+            // using asyncAfter is because by letting this method(animationTransitionForPushing) finish first, the toVC will then call viewDidLayoutSubviews which is the point the detailVC's collectionView.scrollToItem() finished scrolling and ready to display. After the viewDidLayoutSubviews, the following code then can access the correct view layouts.
+//            DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+//                
+//                
+//            })
+            UIView.animate(withDuration: 5, animations:{
+                toVC.view.transform = .identity
             }) { (_) in
-                
                 context.completeTransition(true)
-                view.removeFromSuperview()
+                mask.removeFromSuperview()
+                
             }
+            
         }
 
         
@@ -68,9 +60,11 @@ extension AHDetailVCAnimator : UIViewControllerAnimatedTransitioning {
     }
     
     /// For dismissing animation
-    func animationTransitionForDismissing(using context: UIViewControllerContextTransitioning){
-        
-        
+    func animationTransitionForPopping(using context: UIViewControllerContextTransitioning){
+        let fromVC  = context.viewController(forKey: UITransitionContextViewControllerKey.from)
+        fromVC!.view.removeFromSuperview()
+        fromVC?.removeFromParentViewController()
+        context.completeTransition(true)
         
     }
     

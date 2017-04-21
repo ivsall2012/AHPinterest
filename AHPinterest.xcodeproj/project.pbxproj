@@ -11,7 +11,6 @@
 		A12A28381E9ECBA500F7A36D /* AHDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A28371E9ECBA500F7A36D /* AHDetailCell.swift */; };
 		A12A283A1E9ECBAB00F7A36D /* AHDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A28391E9ECBAB00F7A36D /* AHDetailVC.swift */; };
 		A12A283C1E9ECBE500F7A36D /* AHDetailVCLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A283B1E9ECBE500F7A36D /* AHDetailVCLayout.swift */; };
-		A12A283E1E9ECBF800F7A36D /* AHDetailAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A283D1E9ECBF800F7A36D /* AHDetailAnimator.swift */; };
 		A12A28411EA0527700F7A36D /* AHPinDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A28401EA0527700F7A36D /* AHPinDataSource.swift */; };
 		A12A28441EA07ADB00F7A36D /* AHOptionsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A28431EA07ADB00F7A36D /* AHOptionsHandler.swift */; };
 		A15C0B591E9369F600B35BE1 /* AHOptionsAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C0B581E9369F600B35BE1 /* AHOptionsAnimator.swift */; };
@@ -74,7 +73,6 @@
 		A12A28371E9ECBA500F7A36D /* AHDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDetailCell.swift; sourceTree = "<group>"; };
 		A12A28391E9ECBAB00F7A36D /* AHDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDetailVC.swift; sourceTree = "<group>"; };
 		A12A283B1E9ECBE500F7A36D /* AHDetailVCLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDetailVCLayout.swift; sourceTree = "<group>"; };
-		A12A283D1E9ECBF800F7A36D /* AHDetailAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDetailAnimator.swift; sourceTree = "<group>"; };
 		A12A28401EA0527700F7A36D /* AHPinDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinDataSource.swift; sourceTree = "<group>"; };
 		A12A28431EA07ADB00F7A36D /* AHOptionsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHOptionsHandler.swift; sourceTree = "<group>"; };
 		A15C0B581E9369F600B35BE1 /* AHOptionsAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHOptionsAnimator.swift; sourceTree = "<group>"; };
@@ -365,7 +363,6 @@
 			isa = PBXGroup;
 			children = (
 				A164E1C41EA97D3800A8227D /* AHDetailVCAnimator.swift */,
-				A12A283D1E9ECBF800F7A36D /* AHDetailAnimator.swift */,
 			);
 			name = Animation;
 			sourceTree = "<group>";
@@ -529,7 +526,6 @@
 				A19EC44D1E99EC0000B6D7C4 /* AHPinViewModel.swift in Sources */,
 				A164E1A81EA79DB600A8227D /* AHNavigationController.swift in Sources */,
 				A1640C281EA4C4C6000E6EB5 /* AHLayout.swift in Sources */,
-				A12A283E1E9ECBF800F7A36D /* AHDetailAnimator.swift in Sources */,
 				A1A2272F1EA408FC00527358 /* NSIndexPath+Extension.swift in Sources */,
 				A1E85D9E1EA6D9E6000775FD /* AHPinLayoutAttributes.swift in Sources */,
 				A15C0B591E9369F600B35BE1 /* AHOptionsAnimator.swift in Sources */,
