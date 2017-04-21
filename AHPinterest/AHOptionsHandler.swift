@@ -52,7 +52,7 @@ extension AHOptionsHandler {
         if !cell.isSelected {
             optionsVC.transitioningDelegate = optionsAnimator
             optionsAnimator.delegate = optionsVC
-            optionsAnimator.preparePresenting(fromView: cell)
+            optionsAnimator.preparePresenting(fromCell: cell)
             optionsVC.startingPoint = collectionView?.convert(startingPoint, to: optionsVC.view)
             optionsVC.modalPresentationStyle = .custom
             pinVC?.present(optionsVC, animated: true, completion: nil)

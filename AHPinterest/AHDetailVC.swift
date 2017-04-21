@@ -134,13 +134,7 @@ extension AHDetailVC: UICollectionViewDataSource {
         let pinVM = pinVMs[indexPath.item]
         let cellVC = cellVCs[indexPath.item]
         cellVC.pinVM = pinVM
-        cellVC.item = indexPath.item
-        
         cell.pinContentVC = cellVC
-        if indexPath.item == 5 {
-            cellVC.item = 5
-            print("cellVC:\(cellVC)")
-        }
         return cell
     }
 }

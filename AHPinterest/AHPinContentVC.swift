@@ -13,7 +13,6 @@ class AHPinContentVC: AHPinVC {
     let pinContentLayoutHanlder = AHPinContentLayoutHandler()
     
     var navBar: AHPinNavBar?
-    var item: Int = -1
     weak var detailVC: AHDetailVC?
     
     override weak var pinVM: AHPinViewModel? {

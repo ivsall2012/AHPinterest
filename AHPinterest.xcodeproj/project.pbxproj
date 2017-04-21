@@ -338,7 +338,6 @@
 				A168BFE31E88930200A87E03 /* AHPinDelegate.swift */,
 				A12A28401EA0527700F7A36D /* AHPinDataSource.swift */,
 				A164E1A51EA7989E00A8227D /* AHPin.swift */,
-				A164E1C41EA97D3800A8227D /* AHDetailVCAnimator.swift */,
 			);
 			name = VCs;
 			sourceTree = "<group>";
@@ -365,6 +364,7 @@
 		A1E85D981EA6CA06000775FD /* Animation */ = {
 			isa = PBXGroup;
 			children = (
+				A164E1C41EA97D3800A8227D /* AHDetailVCAnimator.swift */,
 				A12A283D1E9ECBF800F7A36D /* AHDetailAnimator.swift */,
 			);
 			name = Animation;

@@ -21,13 +21,13 @@ protocol AHOptionsAnimatorDelegate: NSObjectProtocol {
 
 class AHOptionsAnimator: NSObject {
     weak var delegate: AHOptionsAnimatorDelegate?
-    weak var fromView: UIView?
+    weak var fromCell: UIView?
     fileprivate var state: AHOptionsAnimatorState = .none
     fileprivate var fromViewSnapshot: UIView?
 
     // You should pass the long pressed cell into this function
-    func preparePresenting(fromView: UIView) {
-        self.fromView = fromView
+    func preparePresenting(fromCell: UIView) {
+        self.fromCell = fromCell
     }
 }
 
@@ -68,13 +68,13 @@ extension AHOptionsAnimator : UIViewControllerAnimatedTransitioning {
         
         guard
             let toView = context.view(forKey: UITransitionContextViewKey.to),
-            let fromView = fromView
+            let fromCell = fromCell
         else { return}
 
         
         // setup the snapshot and put it on the bottom of the toView
-        fromViewSnapshot = fromView.snapshotView(afterScreenUpdates: true)
-        fromViewSnapshot?.frame = fromView.convert(fromViewSnapshot!.frame, to: toView)
+        fromViewSnapshot = fromCell.snapshotView(afterScreenUpdates: true)
+        fromViewSnapshot?.frame = fromCell.convert(fromViewSnapshot!.frame, to: toView)
         fromViewSnapshot?.alpha = 0.6
         context.containerView.addSubview(toView)
         toView.insertSubview(fromViewSnapshot!, at: 0)
