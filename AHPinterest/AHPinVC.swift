@@ -12,7 +12,7 @@ class AHPinVC: AHCollectionVC {
 //    let pinContentLayout = AHPinContentLayout()
 //    let pinContentLayoutHanlder = AHPinContentLayoutHandler()
     weak var pinVM: AHPinViewModel? 
-    
+    var detailVCAnimator = AHDetailVCAnimator()
     
     let pinLayout = AHPinLayout()
     let refreshLayout = AHRefreshLayout()
@@ -30,6 +30,7 @@ class AHPinVC: AHCollectionVC {
 extension AHPinVC {
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.delegate = self
         self.navigationController?.isNavigationBarHidden = true
         collectionView?.backgroundColor = UIColor.white
         self.automaticallyAdjustsScrollViewInsets = false
@@ -113,7 +114,14 @@ extension AHPinVC {
     
 }
 
-
+extension AHPinVC: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        if operation == .push {
+            return detailVCAnimator
+        }
+        return nil
+    }
+}
 
 
 

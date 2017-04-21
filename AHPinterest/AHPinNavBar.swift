@@ -13,7 +13,13 @@ class AHPinNavBar: UICollectionReusableView {
     @IBOutlet weak var optionContainer: UIView!
     
     weak var pinVM: AHPinViewModel?
-    weak var detailVC: AHDetailVC? 
+    weak var detailVC: AHDetailVC? {
+        didSet {
+            if let detailVC = detailVC {
+//                print("self:\(self) didSet:\(detailVC) navVC:\(detailVC.navigationController)")
+            }
+        }
+    }
     
     var showNavBar = true {
         didSet {

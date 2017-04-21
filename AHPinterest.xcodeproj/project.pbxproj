@@ -26,6 +26,7 @@
 		A164E1BC1EA8400B00A8227D /* AHPinNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A164E1BA1EA8400B00A8227D /* AHPinNavBar.swift */; };
 		A164E1BD1EA8400B00A8227D /* AHPinNavBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = A164E1BB1EA8400B00A8227D /* AHPinNavBar.xib */; };
 		A164E1C31EA88D7200A8227D /* AHPinNavBarHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A164E1C21EA88D7200A8227D /* AHPinNavBarHandler.swift */; };
+		A164E1C51EA97D3800A8227D /* AHDetailVCAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A164E1C41EA97D3800A8227D /* AHDetailVCAnimator.swift */; };
 		A168BFDA1E888DDD00A87E03 /* AHPinterestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A168BFD91E888DDD00A87E03 /* AHPinterestTests.swift */; };
 		A168BFE21E8890E500A87E03 /* AHPinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A168BFE11E8890E500A87E03 /* AHPinCell.swift */; };
 		A168BFE41E88930200A87E03 /* AHPinDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A168BFE31E88930200A87E03 /* AHPinDelegate.swift */; };
@@ -88,6 +89,7 @@
 		A164E1BA1EA8400B00A8227D /* AHPinNavBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinNavBar.swift; sourceTree = "<group>"; };
 		A164E1BB1EA8400B00A8227D /* AHPinNavBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AHPinNavBar.xib; sourceTree = "<group>"; };
 		A164E1C21EA88D7200A8227D /* AHPinNavBarHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinNavBarHandler.swift; sourceTree = "<group>"; };
+		A164E1C41EA97D3800A8227D /* AHDetailVCAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDetailVCAnimator.swift; sourceTree = "<group>"; };
 		A168BFD71E888DDD00A87E03 /* AHPinterestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AHPinterestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A168BFD91E888DDD00A87E03 /* AHPinterestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AHPinterestTests.swift; sourceTree = "<group>"; };
 		A168BFDB1E888DDD00A87E03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 				A168BFE31E88930200A87E03 /* AHPinDelegate.swift */,
 				A12A28401EA0527700F7A36D /* AHPinDataSource.swift */,
 				A164E1A51EA7989E00A8227D /* AHPin.swift */,
+				A164E1C41EA97D3800A8227D /* AHDetailVCAnimator.swift */,
 			);
 			name = VCs;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 				A15C0B591E9369F600B35BE1 /* AHOptionsAnimator.swift in Sources */,
 				A1A074AB1E9A2AB600FEC153 /* UIImageView+extension.swift in Sources */,
 				A1640C2A1EA4D3A5000E6EB5 /* AHRefreshLayoutHandler.swift in Sources */,
+				A164E1C51EA97D3800A8227D /* AHDetailVCAnimator.swift in Sources */,
 				A19EC4491E99D99700B6D7C4 /* AHPinDataGenerator.swift in Sources */,
 				A1CE93541E9A17A5002A8738 /* Constants.swift in Sources */,
 				A1B115041EA2DDB9004D8601 /* AHPinContentLayoutHandler.swift in Sources */,

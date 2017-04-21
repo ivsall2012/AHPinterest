@@ -13,8 +13,6 @@ class AHPinDelegate: NSObject {
     weak var pinVC: AHPinVC?
 }
 
-
-
 extension AHPinDelegate: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

@@ -17,6 +17,7 @@ class AHDetailCell: UICollectionViewCell {
                 contentView.subviews.forEach({ (view) in
                     view.removeFromSuperview()
                 })
+                
                 pinContentVC.view.willMove(toSuperview: self)
                 contentView.addSubview(pinContentVC.view)
                 pinContentVC.view.didMoveToSuperview()

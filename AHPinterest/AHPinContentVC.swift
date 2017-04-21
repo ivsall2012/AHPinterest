@@ -12,8 +12,8 @@ class AHPinContentVC: AHPinVC {
     let pinContentLayout = AHPinContentLayout()
     let pinContentLayoutHanlder = AHPinContentLayoutHandler()
     
-    let navBar = AHPinNavBar.navBar()
-    
+    var navBar: AHPinNavBar?
+    var item: Int = -1
     weak var detailVC: AHDetailVC?
     
     override weak var pinVM: AHPinViewModel? {
@@ -26,11 +26,11 @@ class AHPinContentVC: AHPinVC {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        navBar = AHPinNavBar.navBar()
+        navBar!.frame = CGRect(x: 0, y: 0, width: collectionView!.bounds.width, height: AHPinNavBarHeight)
+        self.view.addSubview(navBar!)
         
-        navBar.frame = CGRect(x: 0, y: 0, width: collectionView!.bounds.width, height: AHPinNavBarHeight)
-        self.view.addSubview(navBar)
-        
-        navBar.pinVM = pinVM
+        navBar!.pinVM = pinVM
         let navBarHandler = AHPinNavBarHandler()
         navBarHandler.contentVC = self
         addDelegate(delegate: navBarHandler)
@@ -47,7 +47,7 @@ class AHPinContentVC: AHPinVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.isStatusBarHidden = true
-        navBar.detailVC = detailVC
+        navBar!.detailVC = detailVC
     }
     override var prefersStatusBarHidden: Bool {
         return true
