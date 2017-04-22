@@ -48,13 +48,13 @@ class AHPinContentVC: AHPinVC {
         insertLayoutToFont(layout: pinContentLayout, delegate: pinContentLayoutHanlder, dataSource: pinContentLayoutHanlder)
         
     }
-    func animateNavBar() {
-        print("animateNavBar")
-        navBar?.alpha = 0.0
-        UIView.animate(withDuration: 0.25, delay: 0.0, options: [UIViewAnimationOptions.curveLinear], animations: {
-            self.navBar?.alpha = 1.0
-            }, completion: nil)
-    }
+//    func animateNavBar() {
+//        print("animateNavBar")
+//        navBar?.alpha = 0.0
+//        UIView.animate(withDuration: 0.25, delay: 0.0, options: [UIViewAnimationOptions.curveLinear], animations: {
+//            self.navBar?.alpha = 1.0
+//            }, completion: nil)
+//    }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 

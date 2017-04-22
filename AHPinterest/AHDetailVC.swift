@@ -78,7 +78,7 @@ class AHDetailVC: UIViewController {
             print("viewDidLayoutSubviews")
             
             let cellVC = cellVCs[currentIndexPath!.item]
-            cellVC.animateNavBar()
+//            cellVC.animateNavBar()
             initialScroll = true
         }
         

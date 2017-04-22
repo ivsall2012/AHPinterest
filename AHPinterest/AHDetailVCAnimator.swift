@@ -93,9 +93,10 @@ extension AHDetailVCAnimator : UIViewControllerAnimatedTransitioning {
         
         
         toVC.view.transform = transformB.concatenating(transformA)
-        
+        toVC.view.alpha = 0.0
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: [], animations: {
             toVC.view.transform = .identity
+            toVC.view.alpha = 1.0
             imageView!.frame = contentCell.convert(contentCell.pinImageView.frame, to: toVC.view)
             }) { (_) in
                 imageView!.removeFromSuperview()
