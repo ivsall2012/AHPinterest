@@ -22,7 +22,9 @@ class AHDetailVC: UIViewController {
     var pinVMs: [AHPinViewModel]?
     var currentIndexPath: IndexPath?
     fileprivate var cellVCs = [AHPinContentVC]()
-
+    // the scrollToItem when transitioning from pinVC to detailVC, which does only once
+    fileprivate var initialScroll = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -70,12 +72,15 @@ class AHDetailVC: UIViewController {
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        currentIndexPath?.section = 0
-        collectionView.scrollToItem(at: currentIndexPath!, at: UICollectionViewScrollPosition.right, animated: false)
-        print("viewDidLayoutSubviews")
-        
-        let cellVC = cellVCs[currentIndexPath!.item] as! AHPinContentVC
-        cellVC.animateNavBar()
+        if !initialScroll {
+            currentIndexPath?.section = 0
+            collectionView.scrollToItem(at: currentIndexPath!, at: UICollectionViewScrollPosition.right, animated: false)
+            print("viewDidLayoutSubviews")
+            
+            let cellVC = cellVCs[currentIndexPath!.item]
+            cellVC.animateNavBar()
+            initialScroll = true
+        }
         
     }
 
