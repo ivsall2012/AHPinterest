@@ -50,15 +50,14 @@ class AHPinContentVC: AHPinVC {
     }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        print("viewWillLayoutSubviews")
+
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        print("viewDidLayoutSubviews")
+
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("viewWillAppear")
         UIApplication.shared.isStatusBarHidden = true
     }
     override var prefersStatusBarHidden: Bool {

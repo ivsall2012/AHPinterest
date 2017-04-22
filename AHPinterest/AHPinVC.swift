@@ -8,9 +8,13 @@
 
 import UIKit
 
+protocol AHPinVCDelegate: NSObjectProtocol {
+    func pinVCForContentCell(indexPath: IndexPath) -> AHPinContentCell?
+}
+
+
 class AHPinVC: AHCollectionVC {
-//    let pinContentLayout = AHPinContentLayout()
-//    let pinContentLayoutHanlder = AHPinContentLayoutHandler()
+    weak var delegate: AHPinVCDelegate?
     weak var pinVM: AHPinViewModel? 
     var detailVCAnimator = AHDetailVCAnimator()
     
@@ -20,6 +24,8 @@ class AHPinVC: AHCollectionVC {
     fileprivate let refreshLayoutHanlder = AHRefreshLayoutHandler()
     
     let pinDataSource = AHPinDataSource()
+    let pinDelegate = AHPinDelegate()
+    
     let optionsHandler = AHOptionsHandler()
     
     
@@ -38,7 +44,7 @@ class AHPinVC: AHCollectionVC {
 extension AHPinVC {
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.navigationController?.delegate = self
+        self.navigationController?.delegate = self
         self.navigationController?.isNavigationBarHidden = true
         collectionView?.backgroundColor = UIColor.white
         self.automaticallyAdjustsScrollViewInsets = false
@@ -109,7 +115,6 @@ extension AHPinVC {
     func setupPinLayout() {
         pinDataSource.pinVC = self
         
-        let pinDelegate = AHPinDelegate()
         pinDelegate.pinVC = self
 
         let layoutHanlder = AHLayoutHandler()
@@ -134,10 +139,38 @@ extension AHPinVC: UINavigationControllerDelegate {
         if operation == .pop {
             return nil
         }
+        let detailVC = toVC as! AHDetailVC
+        self.delegate = detailVC
+        detailVCAnimator.delegate = self
         detailVCAnimator.state = operation
         return detailVCAnimator
     }
 }
+
+extension AHPinVC: AHDetailVCAnimatorDelegate {
+    func detailVCAnimatorForSelectedCell() -> AHPinCell? {
+        return pinDelegate.selectedCell
+    }
+    
+    func detailVCAnimatorForContentCell() -> AHPinContentCell? {
+        if let selectedPath = pinDelegate.selectedPath {
+            return delegate?.pinVCForContentCell(indexPath: selectedPath)
+        }
+        return nil
+    }
+    
+    func calculateImageHeight(imageSize: CGSize, newWidth: CGFloat) -> CGFloat {
+        let newHeight = newWidth * imageSize.height / imageSize.width
+        return newHeight
+    }
+}
+
+
+
+
+
+
+
 
 
 

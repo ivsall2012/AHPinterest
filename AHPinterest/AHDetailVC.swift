@@ -14,9 +14,11 @@ let screenSize: CGSize = UIScreen.main.bounds.size
 
 private let reuseIdentifier = "AHDetailCell"
 
+
+
 class AHDetailVC: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
-//    var detailVCAnimator = AHDetailVCAnimator()
+
     var pinVMs: [AHPinViewModel]?
     var currentIndexPath: IndexPath?
     fileprivate var cellVCs = [AHPinContentVC]()
@@ -48,16 +50,13 @@ class AHDetailVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.isStatusBarHidden = true
+
     }
     
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        currentIndexPath?.section = 0
-        collectionView.scrollToItem(at: currentIndexPath!, at: UICollectionViewScrollPosition.right, animated: false)
-        
-//        let vc = cellVCs[currentIndexPath!.item]
-//        vc.triggeredRefresh()
+
     }
     
     
@@ -71,7 +70,9 @@ class AHDetailVC: UIViewController {
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+        currentIndexPath?.section = 0
+        collectionView.scrollToItem(at: currentIndexPath!, at: UICollectionViewScrollPosition.right, animated: false)
+
     }
 
 }
@@ -143,15 +144,18 @@ extension AHDetailVC: UICollectionViewDataSource {
     }
 }
 
-//extension AHDetailVC: UINavigationControllerDelegate {
-//    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        if operation == .push {
-//            return detailVCAnimator
-//        }
-//        return nil
-//    }
-//}
 
+extension AHDetailVC: AHPinVCDelegate {
+    func pinVCForContentCell(indexPath: IndexPath) -> AHPinContentCell? {
+        let cellVC = cellVCs[indexPath.item]
+        let i = IndexPath(item: 0, section: indexPath.section)
+        let cell = cellVC.collectionView?.cellForItem(at: i) as! AHPinContentCell?
+        if cell == nil {
+            print("contentCell is nil")
+        }
+        return cell
+    }
+}
 
 
 
