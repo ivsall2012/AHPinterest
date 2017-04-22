@@ -50,13 +50,13 @@ class AHDetailVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.isStatusBarHidden = true
-
+        print("viewWillAppear")
     }
     
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
+        print("viewDidAppear")
     }
     
     
@@ -72,8 +72,13 @@ class AHDetailVC: UIViewController {
         super.viewDidLayoutSubviews()
         currentIndexPath?.section = 0
         collectionView.scrollToItem(at: currentIndexPath!, at: UICollectionViewScrollPosition.right, animated: false)
-
+        print("viewDidLayoutSubviews")
+        
+        let cellVC = cellVCs[currentIndexPath!.item] as! AHPinContentVC
+        cellVC.animateNavBar()
+        
     }
+
 
 }
 

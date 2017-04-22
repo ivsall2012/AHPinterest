@@ -40,67 +40,71 @@ extension AHDetailVCAnimator : UIViewControllerAnimatedTransitioning {
         else {
             return
         }
+        
+        print("toVC.view.layoutIfNeeded()")
+        
+        
+        print("about to animate")
+        
+//        let snap = fromVC.view.snapshotView(afterScreenUpdates: true)
+//        context.containerView.addSubview(snap!)
+        context.containerView.addSubview(toVC.view)
         toVC.view.layoutIfNeeded()
         
         guard let contentCell = delegate.detailVCAnimatorForContentCell(),
             let pinCell = delegate.detailVCAnimatorForSelectedCell()
-        else {
-            return
+            else {
+                return
         }
         
-        let mask = UIView(frame: toVC.view.bounds)
-        mask.backgroundColor = UIColor.white.withAlphaComponent(0.7)
-        context.containerView.addSubview(mask)
-
-
-        let smallImageFrame = pinCell.convert(pinCell.imageView.frame, to: fromVC.view)
-
-        let view1 = UIView(frame: smallImageFrame)
-        view1.backgroundColor = UIColor.red
-        view1.alpha = 0.7
         
-
+        let imageView = pinCell.imageView.snapshotView(afterScreenUpdates: true)
+        let smallImageFrame = pinCell.convert(pinCell.imageView.frame, to: fromVC.view)
+        imageView!.frame = smallImageFrame
+        context.containerView.addSubview(imageView!)
+        
 
         let fullImageSize = contentCell.pinImageView.bounds.size
         let xRatio = pinCell.imageView.bounds.size.width / fullImageSize.width
         let yRatio = pinCell.imageView.bounds.size.height / fullImageSize.height
-
+        
         let imgFrame = contentCell.pinImageView.frame
         let newImgOrigin = contentCell.convert(imgFrame, to: fromVC.view).origin
         let dy = newImgOrigin.y
         let dy_ = dy * yRatio
-
+        
         
         let dx = newImgOrigin.x
         let dx_ = dx * xRatio
-
+        
         let newY = (smallImageFrame.origin.y - dy_)
         let newX = (smallImageFrame.origin.x - dx_)
-
         
-        let snapshot = toVC.view.snapshotView(afterScreenUpdates: true)
         
-//******* CHANGE layer.position FIRST to match anchorPoint  **************
-        snapshot?.layer.position = .init(x: snapshot!.frame.origin.x + 0, y: snapshot!.frame.origin.y + 0)
-        snapshot?.layer.anchorPoint = .init(x: 0, y: 0)
-//******* CHANGE layer.position FIRST to match anchorPoint  **************
+        let anchorPoint = CGPoint(x: 0, y: 0)
+        //******* CHANGE layer.position FIRST to match anchorPoint  **************
+        toVC.view.layer.position = .init(x: toVC.view.frame.origin.x + anchorPoint.x, y: toVC.view.frame.origin.y + anchorPoint.y)
+        toVC.view.layer.anchorPoint = .init(x: 0, y: 0)
+        //******* CHANGE layer.position FIRST to match anchorPoint  **************
         
         
         let transformA = CGAffineTransform(translationX: newX, y: newY)
         let transformB = CGAffineTransform(scaleX: xRatio, y: yRatio)
         
-
-        context.containerView.addSubview(snapshot!)
-
-        snapshot!.transform = transformB.concatenating(transformA)
         
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, options: [], animations: { 
-            snapshot!.transform = .identity
+        toVC.view.transform = transformB.concatenating(transformA)
+        
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: [], animations: {
+            toVC.view.transform = .identity
+            imageView!.frame = contentCell.convert(contentCell.pinImageView.frame, to: toVC.view)
             }) { (_) in
-                context.containerView.addSubview(toVC.view)
-                snapshot?.removeFromSuperview()
+                imageView!.removeFromSuperview()
+                print("finished animating")
                 context.completeTransition(true)
+                print("traisiton ended")
         }
+        
+        
 
         
     }
