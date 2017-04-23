@@ -41,13 +41,16 @@ extension AHDetailVCAnimator : UIViewControllerAnimatedTransitioning {
             return
         }
         
-        print("toVC.view.layoutIfNeeded()")
+        guard let fromSnap = fromVC.view.snapshotView(afterScreenUpdates: true) else {
+            return
+        }
         
+        let mask = UIView()
+        mask.frame = toVC.view.bounds
+        mask.backgroundColor = UIColor.white
+        context.containerView.addSubview(mask)
         
-        print("about to animate")
-        
-//        let snap = fromVC.view.snapshotView(afterScreenUpdates: true)
-//        context.containerView.addSubview(snap!)
+        context.containerView.addSubview(fromSnap)
         context.containerView.addSubview(toVC.view)
         toVC.view.layoutIfNeeded()
         
@@ -56,8 +59,7 @@ extension AHDetailVCAnimator : UIViewControllerAnimatedTransitioning {
             else {
                 return
         }
-        
-        
+
         let imageView = pinCell.imageView.snapshotView(afterScreenUpdates: true)
         let smallImageFrame = pinCell.convert(pinCell.imageView.frame, to: fromVC.view)
         imageView!.frame = smallImageFrame
@@ -65,44 +67,25 @@ extension AHDetailVCAnimator : UIViewControllerAnimatedTransitioning {
         
 
         let fullImageSize = contentCell.pinImageView.bounds.size
-        let xRatio = pinCell.imageView.bounds.size.width / fullImageSize.width
-        let yRatio = pinCell.imageView.bounds.size.height / fullImageSize.height
+        let xRatio = fullImageSize.width / pinCell.imageView.bounds.size.width
+        let yRatio = fullImageSize.height / pinCell.imageView.bounds.size.height
         
         let imgFrame = contentCell.pinImageView.frame
-        let newImgOrigin = contentCell.convert(imgFrame, to: fromVC.view).origin
-        let dy = newImgOrigin.y
-        let dy_ = dy * yRatio
+        let newImgFrame = contentCell.convert(imgFrame, to: fromVC.view)
+
         
-        
-        let dx = newImgOrigin.x
-        let dx_ = dx * xRatio
-        
-        let newY = (smallImageFrame.origin.y - dy_)
-        let newX = (smallImageFrame.origin.x - dx_)
-        
-        
-        let anchorPoint = CGPoint(x: 0, y: 0)
-        //******* CHANGE layer.position FIRST to match anchorPoint  **************
-        toVC.view.layer.position = .init(x: toVC.view.frame.origin.x + anchorPoint.x, y: toVC.view.frame.origin.y + anchorPoint.y)
-        toVC.view.layer.anchorPoint = .init(x: 0, y: 0)
-        //******* CHANGE layer.position FIRST to match anchorPoint  **************
-        
-        
-        let transformA = CGAffineTransform(translationX: newX, y: newY)
-        let transformB = CGAffineTransform(scaleX: xRatio, y: yRatio)
-        
-        
-        toVC.view.transform = transformB.concatenating(transformA)
-        toVC.view.alpha = 0.0
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: [], animations: {
-            toVC.view.transform = .identity
-            toVC.view.alpha = 1.0
-            imageView!.frame = contentCell.convert(contentCell.pinImageView.frame, to: toVC.view)
+        let originOffsetX = -(smallImageFrame.origin.x) * xRatio
+        let originOffsetY = -(smallImageFrame.origin.y) * yRatio
+        toVC.view.isHidden = true
+        UIView.animate(withDuration: 0.75, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: [], animations: {
+            imageView?.frame = newImgFrame
+            fromSnap.transform = CGAffineTransform(scaleX: xRatio, y: yRatio)
+            fromSnap.frame.origin = CGPoint(x: originOffsetX + AHCellPadding, y:  originOffsetY + newImgFrame.origin.y)
             }) { (_) in
-                imageView!.removeFromSuperview()
-                print("finished animating")
+                toVC.view.isHidden = false
+                fromSnap.removeFromSuperview()
                 context.completeTransition(true)
-                print("traisiton ended")
+
         }
         
         
@@ -115,61 +98,7 @@ extension AHDetailVCAnimator : UIViewControllerAnimatedTransitioning {
     
     /// For dismissing animation
     func animationTransitionForPopping(using context: UIViewControllerContextTransitioning){
-        let fromVC  = context.viewController(forKey: UITransitionContextViewControllerKey.from)
-        fromVC!.view.removeFromSuperview()
-        fromVC?.removeFromParentViewController()
-        context.completeTransition(true)
         
     }
 }
 
-
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//            if
-//                let fromCell = delegate.detailVCAnimatorForSelectedCell(){
-//
-//                let mask = UIView(frame: toVC.view.bounds)
-//                mask.backgroundColor = UIColor.white.withAlphaComponent(0.7)
-//                context.containerView.addSubview(mask)
-//
-//
-//                let newFrame = fromCell.convert(fromCell.imageView.frame, to: fromVC.view)
-//                context.containerView.addSubview(toVC.view)
-//
-//                let view1 = UIView(frame: newFrame)
-//                view1.backgroundColor = UIColor.red
-//                context.containerView.addSubview(view1)
-
-
-//                let fullImageSize = contentCell.pinImageView.bounds.size
-//                let xRatio = fromCell.imageView.bounds.size.width / fullImageSize.width
-//                let yRatio = fromCell.imageView.bounds.size.height / fullImageSize.height
-//
-//
-//                let dy = contentCell.pinImageView.frame.origin.y
-//                let dy_ = dy / yRatio
-//                print("dy:\(dy) dy_:\(dy_) yRatio:\(yRatio)")
-//                let dx = contentCell.pinImageView.frame.origin.x
-//                let dx_ = dx / xRatio
-//
-//                let newY = newFrame.origin.y - dy_
-//                let newX = newFrame.origin.x - dx_
-//
-//                let transformA = CGAffineTransform(translationX: newX, y: newY)
-//                let transformB = CGAffineTransform(scaleX: xRatio, y: yRatio)
-//                toVC.view.frame.origin = CGPoint(x: newX, y: newY)
-//                print("newFrame:\(newFrame)")
-//                print("newX:\(newX) newY:\(newY)")
-//                UIView.animate(withDuration: 5, animations:{
-//                    print("animating...")
-//                    //                toVC.view.transform = .identity
-//                    toVC.view.frame.origin = CGPoint.zero
-//                }) { (_) in
-//                    print("finished animating")
-//                    context.completeTransition(true)
-//                    mask.removeFromSuperview()
-//
-//                }
-//
-//            }
-//        }
