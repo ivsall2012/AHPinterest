@@ -23,8 +23,8 @@ extension AHPinDelegate: UICollectionViewDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "AHDetailVC") as! AHDetailVC
         vc.pinVMs = pinVC?.pinDataSource.pinVMs
-        vc.currentIndexPath = indexPath
-        pinVC?.navigationController?.pushViewController(vc, animated: true)
+        vc.currentIndexPath = IndexPath(item: indexPath.item, section: pinVC!.pinLayout.layoutSection)
+        AHPublicObjects.shared.navigatonController?.pushViewController(vc, animated: true)
     }
 }
 

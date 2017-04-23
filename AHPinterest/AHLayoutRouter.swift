@@ -180,7 +180,6 @@ extension AHLayoutRouter {
         for attr in array {
             if attr.isKind(of: AHLayoutAttributes.self), let attr = attr as? AHLayoutAttributes {
                 attr.sectionFrame = attr.frame
-//                print("attr.sectionFrame:\(attr.sectionFrame )")
             }
             attr.frame = normalizeAttributes(offset: offset, frame: attr.frame)
         }

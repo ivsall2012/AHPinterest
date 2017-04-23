@@ -8,17 +8,28 @@
 
 import UIKit
 
-protocol AHDetailVCAnimatorDelegate: NSObjectProtocol {
-    func detailVCAnimatorForSelectedCell() -> AHPinCell?
-    func detailVCAnimatorForContentCell() -> AHPinContentCell?
+
+protocol AHTransitionPushFromDelegate: NSObjectProtocol {
+    func transitionPushFromSelectedCell() -> AHPinCell?
 }
 
-class AHDetailVCAnimator: NSObject {
-    weak var delegate: AHDetailVCAnimatorDelegate?
+protocol AHTransitionPushToDelegate: NSObjectProtocol {
+    func transitionPushToPresentingCell() -> AHPinContentCell?
+}
+
+
+
+
+
+
+class AHTransitionAnimator: NSObject {
+    weak var pushFromDelegate: AHTransitionPushFromDelegate?
+    weak var pushToDelegate: AHTransitionPushToDelegate?
+    
     var state: UINavigationControllerOperation = .none
 }
 
-extension AHDetailVCAnimator : UIViewControllerAnimatedTransitioning {
+extension AHTransitionAnimator : UIViewControllerAnimatedTransitioning {
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.5
     }
@@ -34,7 +45,8 @@ extension AHDetailVCAnimator : UIViewControllerAnimatedTransitioning {
     }
     // for presenting aniamtion, will be called just before viewWillAppear:
     func animationTransitionForPushing(using context: UIViewControllerContextTransitioning){
-        guard let delegate = delegate,
+        guard let pushFromDelegate = pushFromDelegate,
+            let pushToDelegate = pushToDelegate,
             let toVC  = context.viewController(forKey: UITransitionContextViewControllerKey.to),
             let fromVC = context.viewController(forKey: UITransitionContextViewControllerKey.from)
         else {
@@ -49,9 +61,16 @@ extension AHDetailVCAnimator : UIViewControllerAnimatedTransitioning {
 
         toVC.view.layoutIfNeeded()
         
-        guard let contentCell = delegate.detailVCAnimatorForContentCell(),
-            let pinCell = delegate.detailVCAnimatorForSelectedCell()
+        guard let pinCell = pushFromDelegate.transitionPushFromSelectedCell() else
+        {
+            print("pushFromCell nil")
+            return
+        }
+        
+        
+        guard let contentCell = pushToDelegate.transitionPushToPresentingCell()
             else {
+                print("pushToCell is nil")
                 return
         }
 
@@ -118,7 +137,8 @@ extension AHDetailVCAnimator : UIViewControllerAnimatedTransitioning {
     
     
     func processToView(context: UIViewControllerContextTransitioning) {
-        guard let delegate = delegate,
+        guard let pushFromDelegate = pushFromDelegate,
+            let pushToDelegate = pushToDelegate,
             let toVC  = context.viewController(forKey: UITransitionContextViewControllerKey.to),
             let fromVC = context.viewController(forKey: UITransitionContextViewControllerKey.from)
             else {
@@ -126,8 +146,8 @@ extension AHDetailVCAnimator : UIViewControllerAnimatedTransitioning {
         }
         
         
-        guard let contentCell = delegate.detailVCAnimatorForContentCell(),
-            let pinCell = delegate.detailVCAnimatorForSelectedCell()
+        guard let pinCell = pushFromDelegate.transitionPushFromSelectedCell(),
+            let contentCell = pushToDelegate.transitionPushToPresentingCell()
             else {
                 return
         }

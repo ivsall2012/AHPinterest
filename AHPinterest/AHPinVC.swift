@@ -8,15 +8,15 @@
 
 import UIKit
 
-protocol AHPinVCDelegate: NSObjectProtocol {
-    func pinVCForContentCell(indexPath: IndexPath) -> AHPinContentCell?
-}
-
 
 class AHPinVC: AHCollectionVC {
-    weak var delegate: AHPinVCDelegate?
-    weak var pinVM: AHPinViewModel? 
-    var detailVCAnimator = AHDetailVCAnimator()
+    
+    weak var pinVM: AHPinViewModel?
+    weak var selectedCell: AHPinCell? {
+        return pinDelegate.selectedCell
+    }
+    
+    var transitionAnimator = AHTransitionAnimator()
     
     let pinLayout = AHPinLayout()
     
@@ -44,7 +44,6 @@ class AHPinVC: AHCollectionVC {
 extension AHPinVC {
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.delegate = self
         self.navigationController?.isNavigationBarHidden = true
         collectionView?.backgroundColor = UIColor.white
         self.automaticallyAdjustsScrollViewInsets = false
@@ -84,6 +83,7 @@ extension AHPinVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.isStatusBarHidden = true
+        AHPublicObjects.shared.navigatonController?.delegate = self
     }
     override var prefersStatusBarHidden: Bool {
         return true
@@ -139,29 +139,17 @@ extension AHPinVC: UINavigationControllerDelegate {
         if operation == .pop {
             return nil
         }
-        let detailVC = toVC as! AHDetailVC
-        self.delegate = detailVC
-        detailVCAnimator.delegate = self
-        detailVCAnimator.state = operation
-        return detailVCAnimator
+        let toVC = toVC as! AHDetailVC
+        transitionAnimator.pushFromDelegate = self
+        transitionAnimator.pushToDelegate = toVC
+        transitionAnimator.state = operation
+        return transitionAnimator
     }
 }
 
-extension AHPinVC: AHDetailVCAnimatorDelegate {
-    func detailVCAnimatorForSelectedCell() -> AHPinCell? {
+extension AHPinVC: AHTransitionPushFromDelegate {
+    func transitionPushFromSelectedCell() -> AHPinCell? {
         return pinDelegate.selectedCell
-    }
-    
-    func detailVCAnimatorForContentCell() -> AHPinContentCell? {
-        if let selectedPath = pinDelegate.selectedPath {
-            return delegate?.pinVCForContentCell(indexPath: selectedPath)
-        }
-        return nil
-    }
-    
-    func calculateImageHeight(imageSize: CGSize, newWidth: CGFloat) -> CGFloat {
-        let newHeight = newWidth * imageSize.height / imageSize.width
-        return newHeight
     }
 }
 

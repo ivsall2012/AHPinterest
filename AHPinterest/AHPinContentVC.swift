@@ -13,14 +13,9 @@ class AHPinContentVC: AHPinVC {
     let pinContentLayoutHanlder = AHPinContentLayoutHandler()
     
     var navBar: AHPinNavBar?
-    weak var detailVC: AHDetailVC? {
-        didSet {
-            if let detailVC = detailVC {
-                navBar?.detailVC = detailVC
-            }
-        }
+    var presentingCell: AHPinContentCell? {
+        return self.pinContentLayoutHanlder.presentingCell
     }
-    
     override weak var pinVM: AHPinViewModel? {
         didSet {
             if let pinVM = pinVM {
@@ -43,18 +38,11 @@ class AHPinContentVC: AHPinVC {
         
         
         collectionView?.contentInset = .init(top: AHPinNavBarHeight, left: 0, bottom: 0, right: 0)
-        
+        pinContentLayoutHanlder.pinContentVC = self
         pinContentLayout.delegate = pinContentLayoutHanlder
         insertLayoutToFont(layout: pinContentLayout, delegate: pinContentLayoutHanlder, dataSource: pinContentLayoutHanlder)
         
     }
-//    func animateNavBar() {
-//        print("animateNavBar")
-//        navBar?.alpha = 0.0
-//        UIView.animate(withDuration: 0.25, delay: 0.0, options: [UIViewAnimationOptions.curveLinear], animations: {
-//            self.navBar?.alpha = 1.0
-//            }, completion: nil)
-//    }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 

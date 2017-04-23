@@ -18,24 +18,47 @@ private let reuseIdentifier = "AHDetailCell"
 
 class AHDetailVC: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
-
+    var transitionAnimator = AHTransitionAnimator()
+    
     var pinVMs: [AHPinViewModel]?
     var currentIndexPath: IndexPath?
+    
+    weak var selectedCell: AHPinCell?{
+        guard let currentIndexPath = currentIndexPath else { return nil }
+        
+        let contentVC = cellVCs[currentIndexPath.item]
+        return contentVC.selectedCell
+    }
+    
+    weak var presentingCell: AHPinContentCell?{
+        guard let currentIndexPath = currentIndexPath else { return nil }
+        
+        let contentVC = cellVCs[currentIndexPath.item]
+        return contentVC.presentingCell
+    }
+    
     fileprivate var cellVCs = [AHPinContentVC]()
     // the scrollToItem when transitioning from pinVC to detailVC, which does only once
     fileprivate var initialScroll = false
     
+    
+
+
+}
+
+// MARK:- VC Cycles
+extension AHDetailVC {
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        AHPublicObjects.shared.navigatonController?.delegate = self
         self.navigationController?.isNavigationBarHidden = true
         collectionView?.backgroundColor = UIColor.white
         self.automaticallyAdjustsScrollViewInsets = false
         collectionView?.contentInset = .init(top: 0, left: 0, bottom: 0, right: 0)
-
+        
         let layout = AHDetailVCLayout()
         collectionView.setCollectionViewLayout(layout, animated: false)
-
+        
         collectionView.decelerationRate = UIScrollViewDecelerationRateFast
         layout.scrollDirection = .horizontal
         
@@ -52,13 +75,12 @@ class AHDetailVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.isStatusBarHidden = true
-        print("viewWillAppear")
+        AHPublicObjects.shared.navigatonController?.delegate = self
     }
     
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print("viewDidAppear")
     }
     
     
@@ -75,17 +97,16 @@ class AHDetailVC: UIViewController {
         if !initialScroll {
             currentIndexPath?.section = 0
             collectionView.scrollToItem(at: currentIndexPath!, at: UICollectionViewScrollPosition.right, animated: false)
-            print("viewDidLayoutSubviews")
             
-            let cellVC = cellVCs[currentIndexPath!.item]
-//            cellVC.animateNavBar()
+            
+            //            cellVC.animateNavBar()
             initialScroll = true
         }
         
     }
-
-
 }
+
+
 
 // MARK:- Helper Methods
 extension AHDetailVC {
@@ -94,8 +115,8 @@ extension AHDetailVC {
         let vc = storyboard.instantiateViewController(withIdentifier: "AHPinContentVC") as! AHPinContentVC
         vc.refreshLayout.enableHeaderRefresh = false
         vc.showLayoutHeader = true
-        vc.initialAutoRefresh = false
-        vc.detailVC = self
+//        vc.initialAutoRefresh = false
+        
         // setup VC related
         vc.willMove(toParentViewController: self)
         self.addChildViewController(vc)
@@ -154,19 +175,49 @@ extension AHDetailVC: UICollectionViewDataSource {
     }
 }
 
+// MARK:- Transition Stuff
 
-extension AHDetailVC: AHPinVCDelegate {
-    func pinVCForContentCell(indexPath: IndexPath) -> AHPinContentCell? {
-        let cellVC = cellVCs[indexPath.item]
-        let i = IndexPath(item: 0, section: indexPath.section)
-        let cell = cellVC.collectionView?.cellForItem(at: i) as! AHPinContentCell?
-        if cell == nil {
-            print("contentCell is nil")
+
+extension AHDetailVC: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        if operation == .none {
+            return nil
         }
-        return cell
+        if operation == .pop {
+            return nil
+        }
+        let toVC = toVC as! AHDetailVC
+        
+        transitionAnimator.pushFromDelegate = self
+        transitionAnimator.pushToDelegate = toVC
+        
+        transitionAnimator.state = operation
+        return transitionAnimator
     }
 }
 
 
 
+extension AHDetailVC: AHTransitionPushFromDelegate {
+    func transitionPushFromSelectedCell() -> AHPinCell? {
+        return self.selectedCell
+    }
+    
+}
+
+
+extension AHDetailVC: AHTransitionPushToDelegate {
+
+    func transitionPushToPresentingCell() -> AHPinContentCell? {
+        return self.presentingCell
+    }
+
+}
+
+extension AHDetailVC {
+    func calculateImageHeight(imageSize: CGSize, newWidth: CGFloat) -> CGFloat {
+        let newHeight = newWidth * imageSize.height / imageSize.width
+        return newHeight
+    }
+}
 

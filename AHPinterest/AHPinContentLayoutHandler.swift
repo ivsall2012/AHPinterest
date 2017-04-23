@@ -11,6 +11,8 @@ import UIKit
 class AHPinContentLayoutHandler: NSObject {
     var contentSize = CGSize.zero
     weak var pinVM: AHPinViewModel?
+    var presentingCell: AHPinContentCell?
+    weak var pinContentVC: AHPinContentVC?
 }
 
 extension AHPinContentLayoutHandler: AHPinContentLayoutDelegate {
@@ -40,6 +42,7 @@ extension AHPinContentLayoutHandler: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AHPinContentCellIdentifier, for: indexPath) as! AHPinContentCell
         cell.pinVM = pinVM
+        presentingCell = cell
         return cell
     }
 }
