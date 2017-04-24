@@ -69,7 +69,7 @@ class AHOptionsVC: UIViewController {
     
 }
 
-// MARK: Setup Functions
+// MARK: Setup Methods
 extension AHOptionsVC {
     func setupButtons() {
         btnLeft.setImage(#imageLiteral(resourceName: "pin-btn-normal"), for: .normal)
@@ -154,7 +154,7 @@ extension AHOptionsVC {
 
 // MARK:- Animations
 extension AHOptionsVC: AHOptionsAnimatorDelegate {
-    func AHOptionsAnimatorDidFinishTransition() {
+    func optionsAnimatorDidFinishTransition() {
         buttonAnimation()
     }
     
@@ -286,7 +286,7 @@ fileprivate struct ButtonsPositions {
         self.radius = radius
     }
     
-    /// This function devides the total width of the scree into 7 columns
+    /// This method devides the total width of the screen into 7 columns
     //    0 1 2 3 4 5 6
     //  | - - - - - - - |
     //  | - - - - - - - |
@@ -296,7 +296,7 @@ fileprivate struct ButtonsPositions {
     // column 1,5 use pi_radian_up_left. If it's 1, flip points based on anchor.y
     // column 0,6 use pi_4_up_left. If it's 0, flip points based on anchor.y
     mutating func decide() {
-        // We first calculate 3,4,5,6,7 since all the functions above are based on scenarios on the right side, faced-up of the screen.
+        // We first calculate 3,4,5,6,7 since all the methods above are based on scenarios on the right side, faced-up of the screen.
         let unit = UIScreen.main.bounds.width / 7.0
         if anchor.x >= 2 * unit && anchor.x <= 5 * unit {
             zero_pi_up()

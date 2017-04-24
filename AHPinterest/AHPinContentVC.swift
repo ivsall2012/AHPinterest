@@ -65,3 +65,38 @@ class AHPinContentVC: AHPinVC {
 
 
 }
+
+extension AHPinContentVC {
+    override func optionsHandlerForFromCell(at point: CGPoint) -> UIView? {
+        let view = super.optionsHandlerForFromCell(at: point)
+        
+        if view == nil {
+            // super(AHPinVC) did return a cell, chekc if it's point within the presenting cell
+            if self.presentingCell?.frame.contains(point) ?? false {
+                return self.presentingCell
+            }else{
+                return nil
+            }
+        }else{
+            return view
+        }
+        
+    }
+    
+    override func optionsHandlerShouldAnimate(on cell: UIView) -> Bool {
+        let shouldAnimate = super.optionsHandlerShouldAnimate(on: cell)
+        if shouldAnimate == false {
+            if let cell = cell as? AHPinContentCell  {
+                return !cell.isSelected
+            }
+        }
+        return shouldAnimate
+        
+    }
+}
+
+
+
+
+
+

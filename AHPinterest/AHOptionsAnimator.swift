@@ -14,9 +14,10 @@ fileprivate enum AHOptionsAnimatorState {
     case dismissing
 }
 
+// This protocol is specifically for AHOptionVC
 protocol AHOptionsAnimatorDelegate: NSObjectProtocol {
-    // The presented VC should comfirm to this function. You should do the VC related animation here, such as the share buttons popping out after finishing transition.
-    func AHOptionsAnimatorDidFinishTransition()
+    // The presenting VC should comfirm to this method. You should do the VC related animation here, such as the share buttons popping out after finishing transition.
+    func optionsAnimatorDidFinishTransition()
 }
 
 class AHOptionsAnimator: NSObject {
@@ -25,8 +26,8 @@ class AHOptionsAnimator: NSObject {
     fileprivate var state: AHOptionsAnimatorState = .none
     fileprivate var fromViewSnapshot: UIView?
 
-    // You should pass the long pressed cell into this function
-    func preparePresenting(fromCell: UIView) {
+    // Called before optionHandler use presenterVC to do presentation
+    func start(fromCell: UIView) {
         self.fromCell = fromCell
     }
 }
@@ -87,7 +88,7 @@ extension AHOptionsAnimator : UIViewControllerAnimatedTransitioning {
                 context.completeTransition(true)
                 
                 // this animation has to be called after VC's viewDidAppear: in order to do VC related animation
-                self.delegate?.AHOptionsAnimatorDidFinishTransition()
+                self.delegate?.optionsAnimatorDidFinishTransition()
         })
 
     }

@@ -11,7 +11,7 @@ import UIKit
 class AHPinContentLayoutHandler: NSObject {
     var contentSize = CGSize.zero
     weak var pinVM: AHPinViewModel?
-    var presentingCell: AHPinContentCell?
+    weak var presentingCell: AHPinContentCell?
     weak var pinContentVC: AHPinContentVC?
 }
 

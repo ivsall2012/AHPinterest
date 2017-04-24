@@ -41,7 +41,7 @@ class AHPinVC: AHCollectionVC {
     let pinDataSource = AHPinDataSource()
     let pinDelegate = AHPinDelegate()
     
-    let optionsHandler = AHOptionsHandler()
+    var optionsHandler: AHOptionsHandler?
     
     
     // should the VC refreshes data at first loading
@@ -66,6 +66,8 @@ class AHPinVC: AHCollectionVC {
 extension AHPinVC {
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        
         self.navigationController?.isNavigationBarHidden = true
         collectionView?.backgroundColor = UIColor.white
         self.automaticallyAdjustsScrollViewInsets = false
@@ -148,10 +150,31 @@ extension AHPinVC {
     }
     
     func setupOptionsHandler() {
-        optionsHandler.pinVC = self
-        optionsHandler.collectionView = collectionView
+        optionsHandler = AHOptionsHandler(presenterVC: self, targetView: self.collectionView!, delegate: self)
     }
     
+}
+
+// MARK: - Delegates
+
+extension AHPinVC: AHOptionsHandlerDelegate {
+    func optionsHandlerForFromCell(at point: CGPoint) -> UIView? {
+        if let indexPath = collectionView?.indexPathForItem(at: point), let cell = collectionView?.cellForItem(at: indexPath) {
+            return cell
+        }else{
+            return nil
+        }
+    }
+    
+    func optionsHandlerShouldAnimate(on cell: UIView) -> Bool {
+        if let cell = cell as? AHPinCell {
+            // if not selected, then pop the animation
+            return !cell.isSelected
+        }else{
+            return false
+        }
+        
+    }
 }
 
 
