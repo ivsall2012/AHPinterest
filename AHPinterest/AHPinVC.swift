@@ -136,13 +136,20 @@ extension AHPinVC: UINavigationControllerDelegate {
         if operation == .none {
             return nil
         }
-        if operation == .pop {
-            return nil
+
+        if operation == .push {
+            let toVC = toVC as! AHDetailVC
+            transitionAnimator.pushFromDelegate = self
+            transitionAnimator.pushToDelegate = toVC
+        }else{
+            let fromVC = fromVC as! AHDetailVC
+            transitionAnimator.popToDelegate = self
+            transitionAnimator.popFromDelegate = fromVC
+
         }
-        let toVC = toVC as! AHDetailVC
-        transitionAnimator.pushFromDelegate = self
-        transitionAnimator.pushToDelegate = toVC
-        transitionAnimator.state = operation
+
+        
+                transitionAnimator.state = operation
         return transitionAnimator
     }
 }
@@ -150,6 +157,12 @@ extension AHPinVC: UINavigationControllerDelegate {
 extension AHPinVC: AHTransitionPushFromDelegate {
     func transitionPushFromSelectedCell() -> AHPinCell? {
         return pinDelegate.selectedCell
+    }
+}
+
+extension AHPinVC : AHTransitionPopToDelegate {
+    func transitionPopToSelectedCell() -> AHPinCell? {
+        return self.pinDelegate.selectedCell
     }
 }
 

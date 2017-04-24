@@ -50,7 +50,7 @@ class AHDetailVC: UIViewController {
 extension AHDetailVC {
     override func viewDidLoad() {
         super.viewDidLoad()
-        AHPublicObjects.shared.navigatonController?.delegate = self
+//        AHPublicObjects.shared.navigatonController?.delegate = self
         self.navigationController?.isNavigationBarHidden = true
         collectionView?.backgroundColor = UIColor.white
         self.automaticallyAdjustsScrollViewInsets = false
@@ -75,7 +75,7 @@ extension AHDetailVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.isStatusBarHidden = true
-        AHPublicObjects.shared.navigatonController?.delegate = self
+//        AHPublicObjects.shared.navigatonController?.delegate = self
     }
     
     
@@ -183,13 +183,14 @@ extension AHDetailVC: UINavigationControllerDelegate {
         if operation == .none {
             return nil
         }
-        if operation == .pop {
-            return nil
-        }
+
         let toVC = toVC as! AHDetailVC
-        
+
         transitionAnimator.pushFromDelegate = self
         transitionAnimator.pushToDelegate = toVC
+        
+        transitionAnimator.popFromDelegate = toVC
+        transitionAnimator.popToDelegate = self
         
         transitionAnimator.state = operation
         return transitionAnimator
@@ -205,7 +206,6 @@ extension AHDetailVC: AHTransitionPushFromDelegate {
     
 }
 
-
 extension AHDetailVC: AHTransitionPushToDelegate {
 
     func transitionPushToPresentingCell() -> AHPinContentCell? {
@@ -213,6 +213,19 @@ extension AHDetailVC: AHTransitionPushToDelegate {
     }
 
 }
+
+extension AHDetailVC: AHTransitionPopFromDelegate {
+    func transitionPopToSelectedCell() -> AHPinCell? {
+        return self.selectedCell
+    }
+}
+
+extension AHDetailVC: AHTransitionPopToDelegate {
+    func transitionPopFromPresentingCell() -> AHPinContentCell? {
+        return self.presentingCell
+    }
+}
+
 
 extension AHDetailVC {
     func calculateImageHeight(imageSize: CGSize, newWidth: CGFloat) -> CGFloat {

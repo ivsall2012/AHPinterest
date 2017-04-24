@@ -9,6 +9,11 @@
 import UIKit
 
 
+
+// SelectedCell is the one in AHPinVC
+// PresentingCell is the one in AHDetailVC
+
+// SelectedCell --> PresentingCell
 protocol AHTransitionPushFromDelegate: NSObjectProtocol {
     func transitionPushFromSelectedCell() -> AHPinCell?
 }
@@ -17,7 +22,14 @@ protocol AHTransitionPushToDelegate: NSObjectProtocol {
     func transitionPushToPresentingCell() -> AHPinContentCell?
 }
 
+// PresentingCell --> SelectedCell
+protocol AHTransitionPopToDelegate: NSObjectProtocol {
+    func transitionPopToSelectedCell() -> AHPinCell?
+}
 
+protocol AHTransitionPopFromDelegate: NSObjectProtocol {
+    func transitionPopFromPresentingCell() -> AHPinContentCell?
+}
 
 
 
@@ -25,6 +37,9 @@ protocol AHTransitionPushToDelegate: NSObjectProtocol {
 class AHTransitionAnimator: NSObject {
     weak var pushFromDelegate: AHTransitionPushFromDelegate?
     weak var pushToDelegate: AHTransitionPushToDelegate?
+    weak var popFromDelegate: AHTransitionPopFromDelegate?
+    weak var popToDelegate: AHTransitionPopToDelegate?
+    
     
     var state: UINavigationControllerOperation = .none
 }
@@ -55,8 +70,13 @@ extension AHTransitionAnimator : UIViewControllerAnimatedTransitioning {
         
         
         
+//        context.containerView automatically added fromVC.view when pushing
         
-        context.containerView.addSubview(fromVC.view)
+        let mask = UIView()
+        mask.frame = CGRect(x: -999, y: -999, width: 9999, height: 9999)
+        mask.backgroundColor = UIColor.white
+        context.containerView.insertSubview(mask, belowSubview: fromVC.view)
+        
         context.containerView.addSubview(toVC.view)
 
         toVC.view.layoutIfNeeded()
@@ -114,23 +134,12 @@ extension AHTransitionAnimator : UIViewControllerAnimatedTransitioning {
             
             }) { (_) in
                 context.containerView.addSubview(toVC.view)
+                mask.removeFromSuperview()
                 imageView?.removeFromSuperview()
-                fromVC.view.removeFromSuperview()
-                fromVC.view.frame = fromFrame
                 fromVC.view.transform = .identity
+                fromVC.view.frame = fromFrame
                 context.completeTransition(true)
         }
-        
-        
-//        UIView.animate(withDuration: 0.75, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: [], animations: {
-//            
-//            }) { (_) in
-//                
-//
-//        }
-        
-        
-
         
     }
     
@@ -152,15 +161,9 @@ extension AHTransitionAnimator : UIViewControllerAnimatedTransitioning {
                 return
         }
         
-        let mask = UIView()
-        mask.frame = toVC.view.bounds
-        mask.backgroundColor = UIColor.white
-        context.containerView.insertSubview(mask, belowSubview: fromVC.view)
         
-        
-        let imageView = pinCell.imageView.snapshotView(afterScreenUpdates: true)
         let smallImageFrame = pinCell.convert(pinCell.imageView.frame, to: fromVC.view)
-        imageView!.frame = smallImageFrame
+
         
         
         let fullImageSize = contentCell.pinImageView.bounds.size
@@ -199,6 +202,71 @@ extension AHTransitionAnimator : UIViewControllerAnimatedTransitioning {
     
     /// For dismissing animation
     func animationTransitionForPopping(using context: UIViewControllerContextTransitioning){
+        
+        guard let popFromDelegate = popFromDelegate,
+            let popToDelegate = popToDelegate,
+            let pinVC  = context.viewController(forKey: UITransitionContextViewControllerKey.to),
+            let detailVC = context.viewController(forKey: UITransitionContextViewControllerKey.from)
+            else {
+                return
+        }
+
+        
+
+        context.containerView.addSubview(pinVC.view)
+        pinVC.view.layoutIfNeeded()
+        
+        guard let pinCell = popToDelegate.transitionPopToSelectedCell() else
+        {
+            print("popToSelectedCell nil")
+            return
+        }
+        
+        
+        guard let contentCell = popFromDelegate.transitionPopFromPresentingCell()
+            else {
+                print("popFromPresentingCell is nil")
+                return
+        }
+        
+        let imageView = contentCell.pinImageView.snapshotView(afterScreenUpdates: true)
+        let fullFrame = contentCell.convert(contentCell.pinImageView.frame, to: pinVC.view)
+        imageView!.frame = fullFrame
+        context.containerView.addSubview(imageView!)
+        
+        
+        let fullImageSize = contentCell.pinImageView.bounds.size
+        let xRatio = (fullImageSize.width / pinCell.imageView.bounds.size.width)
+        let yRatio = (fullImageSize.height / pinCell.imageView.bounds.size.height)
+        
+        
+        
+        let imgFrame = pinCell.imageView.frame
+        let smallFrame = pinCell.convert(imgFrame, to: detailVC.view)
+        
+        let originOffsetX = -(smallFrame.origin.x) * xRatio
+        let originOffsetY = -(smallFrame.origin.y) * yRatio
+        
+        let pinVCFrame = pinVC.view.frame
+        pinVC.view.transform = CGAffineTransform(scaleX: xRatio, y: yRatio)
+        pinVC.view.frame.origin = CGPoint(x: originOffsetX + AHCellPadding, y:  originOffsetY + fullFrame.origin.y)
+
+        let mask = UIView()
+        mask.frame = CGRect(x: -999, y: -999, width: 9999, height: 9999)
+        mask.backgroundColor = UIColor.white
+        context.containerView.insertSubview(mask, belowSubview: detailVC.view)
+
+        UIView.animate(withDuration: 0.5, animations: {
+            detailVC.view.alpha = 0.0
+            pinVC.view.transform = .identity
+            pinVC.view.frame = pinVCFrame
+            imageView?.frame = smallFrame
+            }) { (_) in
+                mask.removeFromSuperview()
+                detailVC.view.removeFromSuperview()
+                imageView?.removeFromSuperview()
+                context.completeTransition(true)
+        }
         
 
     }
