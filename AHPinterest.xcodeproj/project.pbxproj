@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A123E6E51EAD576B00D7565E /* AHPublicObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123E6E41EAD576B00D7565E /* AHPublicObjects.swift */; };
+		A123E6E71EADD24E00D7565E /* AHNavigationVCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123E6E61EADD24E00D7565E /* AHNavigationVCDelegate.swift */; };
 		A12A28361E9E137400F7A36D /* AHRefreshFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A28351E9E137400F7A36D /* AHRefreshFooter.swift */; };
 		A12A28381E9ECBA500F7A36D /* AHDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A28371E9ECBA500F7A36D /* AHDetailCell.swift */; };
 		A12A283A1E9ECBAB00F7A36D /* AHDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A28391E9ECBAB00F7A36D /* AHDetailVC.swift */; };
@@ -71,6 +72,7 @@
 
 /* Begin PBXFileReference section */
 		A123E6E41EAD576B00D7565E /* AHPublicObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPublicObjects.swift; sourceTree = "<group>"; };
+		A123E6E61EADD24E00D7565E /* AHNavigationVCDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHNavigationVCDelegate.swift; sourceTree = "<group>"; };
 		A12A28351E9E137400F7A36D /* AHRefreshFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHRefreshFooter.swift; sourceTree = "<group>"; };
 		A12A28371E9ECBA500F7A36D /* AHDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDetailCell.swift; sourceTree = "<group>"; };
 		A12A28391E9ECBAB00F7A36D /* AHDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDetailVC.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 				A17377281E887F9600462EE1 /* AppDelegate.swift */,
 				A1CE93531E9A17A5002A8738 /* Constants.swift */,
 				A164E1A71EA79DB600A8227D /* AHNavigationController.swift */,
+				A123E6E61EADD24E00D7565E /* AHNavigationVCDelegate.swift */,
 				A123E6E41EAD576B00D7565E /* AHPublicObjects.swift */,
 			);
 			name = Other;
@@ -516,6 +519,7 @@
 				A1B115001EA2B29F004D8601 /* AHLayoutRouter.swift in Sources */,
 				A1A227351EA48DAC00527358 /* AHDelegatesCenter.swift in Sources */,
 				A164E1BC1EA8400B00A8227D /* AHPinNavBar.swift in Sources */,
+				A123E6E71EADD24E00D7565E /* AHNavigationVCDelegate.swift in Sources */,
 				A164E1B81EA8319C00A8227D /* AHPinLayoutHeader.swift in Sources */,
 				A168BFE81E889B6400A87E03 /* AHPinLayout.swift in Sources */,
 				A1E85DA01EA6E07C000775FD /* AHPinContentVC.swift in Sources */,

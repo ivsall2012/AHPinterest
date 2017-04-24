@@ -205,16 +205,16 @@ extension AHTransitionAnimator : UIViewControllerAnimatedTransitioning {
         
         guard let popFromDelegate = popFromDelegate,
             let popToDelegate = popToDelegate,
-            let pinVC  = context.viewController(forKey: UITransitionContextViewControllerKey.to),
-            let detailVC = context.viewController(forKey: UITransitionContextViewControllerKey.from)
+            let toVC  = context.viewController(forKey: UITransitionContextViewControllerKey.to),
+            let fromVC = context.viewController(forKey: UITransitionContextViewControllerKey.from)
             else {
                 return
         }
 
         
 
-        context.containerView.addSubview(pinVC.view)
-        pinVC.view.layoutIfNeeded()
+        context.containerView.addSubview(toVC.view)
+        toVC.view.layoutIfNeeded()
         
         guard let pinCell = popToDelegate.transitionPopToSelectedCell() else
         {
@@ -230,7 +230,7 @@ extension AHTransitionAnimator : UIViewControllerAnimatedTransitioning {
         }
         
         let imageView = contentCell.pinImageView.snapshotView(afterScreenUpdates: true)
-        let fullFrame = contentCell.convert(contentCell.pinImageView.frame, to: pinVC.view)
+        let fullFrame = contentCell.convert(contentCell.pinImageView.frame, to: toVC.view)
         imageView!.frame = fullFrame
         context.containerView.addSubview(imageView!)
         
@@ -242,28 +242,28 @@ extension AHTransitionAnimator : UIViewControllerAnimatedTransitioning {
         
         
         let imgFrame = pinCell.imageView.frame
-        let smallFrame = pinCell.convert(imgFrame, to: detailVC.view)
+        let smallFrame = pinCell.convert(imgFrame, to: fromVC.view)
         
         let originOffsetX = -(smallFrame.origin.x) * xRatio
         let originOffsetY = -(smallFrame.origin.y) * yRatio
         
-        let pinVCFrame = pinVC.view.frame
-        pinVC.view.transform = CGAffineTransform(scaleX: xRatio, y: yRatio)
-        pinVC.view.frame.origin = CGPoint(x: originOffsetX + AHCellPadding, y:  originOffsetY + fullFrame.origin.y)
+        let pinVCFrame = toVC.view.frame
+        toVC.view.transform = CGAffineTransform(scaleX: xRatio, y: yRatio)
+        toVC.view.frame.origin = CGPoint(x: originOffsetX + AHCellPadding, y:  originOffsetY + fullFrame.origin.y)
 
         let mask = UIView()
         mask.frame = CGRect(x: -999, y: -999, width: 9999, height: 9999)
         mask.backgroundColor = UIColor.white
-        context.containerView.insertSubview(mask, belowSubview: detailVC.view)
+        context.containerView.insertSubview(mask, belowSubview: fromVC.view)
 
         UIView.animate(withDuration: 0.5, animations: {
-            detailVC.view.alpha = 0.0
-            pinVC.view.transform = .identity
-            pinVC.view.frame = pinVCFrame
+            fromVC.view.alpha = 0.0
+            toVC.view.transform = .identity
+            toVC.view.frame = pinVCFrame
             imageView?.frame = smallFrame
             }) { (_) in
                 mask.removeFromSuperview()
-                detailVC.view.removeFromSuperview()
+                fromVC.view.removeFromSuperview()
                 imageView?.removeFromSuperview()
                 context.completeTransition(true)
         }

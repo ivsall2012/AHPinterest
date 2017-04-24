@@ -11,14 +11,12 @@ import UIKit
 
 class AHPinDelegate: NSObject {
     weak var pinVC: AHPinVC?
-    weak var selectedCell: AHPinCell?
-    var selectedPath: IndexPath?
 }
 
 extension AHPinDelegate: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedPath = indexPath
-        selectedCell = collectionView.cellForItem(at: indexPath) as? AHPinCell
+        // one of the two places that currentItem get modified
+        AHPublicObjects.shared.currentItem = indexPath.item
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "AHDetailVC") as! AHDetailVC

@@ -13,10 +13,15 @@ class AHPinVC: AHCollectionVC {
     
     weak var pinVM: AHPinViewModel?
     weak var selectedCell: AHPinCell? {
-        return pinDelegate.selectedCell
+        let currentItem = AHPublicObjects.shared.currentItem
+        let index = IndexPath(item: currentItem, section: self.pinLayout.layoutSection)
+        if AHNavigationVCDelegate.delegate.operation  == .pop {
+            self.collectionView?.scrollToItem(at: index, at: UICollectionViewScrollPosition.bottom, animated: false)
+            self.collectionView?.layoutIfNeeded()
+        }
+        let cell = self.collectionView!.cellForItem(at: index) as? AHPinCell
+        return cell
     }
-    
-    var transitionAnimator = AHTransitionAnimator()
     
     let pinLayout = AHPinLayout()
     
@@ -75,6 +80,8 @@ extension AHPinVC {
             })
         }
         
+        
+        
     }
     
 
@@ -83,7 +90,6 @@ extension AHPinVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.isStatusBarHidden = true
-        AHPublicObjects.shared.navigatonController?.delegate = self
     }
     override var prefersStatusBarHidden: Bool {
         return true
@@ -131,38 +137,17 @@ extension AHPinVC {
     
 }
 
-extension AHPinVC: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        if operation == .none {
-            return nil
-        }
 
-        if operation == .push {
-            let toVC = toVC as! AHDetailVC
-            transitionAnimator.pushFromDelegate = self
-            transitionAnimator.pushToDelegate = toVC
-        }else{
-            let fromVC = fromVC as! AHDetailVC
-            transitionAnimator.popToDelegate = self
-            transitionAnimator.popFromDelegate = fromVC
-
-        }
-
-        
-                transitionAnimator.state = operation
-        return transitionAnimator
-    }
-}
 
 extension AHPinVC: AHTransitionPushFromDelegate {
     func transitionPushFromSelectedCell() -> AHPinCell? {
-        return pinDelegate.selectedCell
+        return self.selectedCell
     }
 }
 
 extension AHPinVC : AHTransitionPopToDelegate {
     func transitionPopToSelectedCell() -> AHPinCell? {
-        return self.pinDelegate.selectedCell
+        return self.selectedCell
     }
 }
 

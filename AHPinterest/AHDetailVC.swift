@@ -21,7 +21,14 @@ class AHDetailVC: UIViewController {
     var transitionAnimator = AHTransitionAnimator()
     
     var pinVMs: [AHPinViewModel]?
-    var currentIndexPath: IndexPath?
+    var currentIndexPath: IndexPath? {
+        didSet {
+            if let currentIndexPath = currentIndexPath {
+                // one of the two places that currentItem get modified
+                AHPublicObjects.shared.currentItem = currentIndexPath.item
+            }
+        }
+    }
     
     weak var selectedCell: AHPinCell?{
         guard let currentIndexPath = currentIndexPath else { return nil }
@@ -132,6 +139,7 @@ extension AHDetailVC {
         let items = collectionView.visibleCells
         if items.count == 1 {
             currentIndexPath = collectionView.indexPath(for: items.first!)
+            print("current item:\(currentIndexPath?.item)")
         }else{
             print("visible items have more then 1, problem?!")
         }
@@ -176,26 +184,6 @@ extension AHDetailVC: UICollectionViewDataSource {
 }
 
 // MARK:- Transition Stuff
-
-
-extension AHDetailVC: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        if operation == .none {
-            return nil
-        }
-
-        let toVC = toVC as! AHDetailVC
-
-        transitionAnimator.pushFromDelegate = self
-        transitionAnimator.pushToDelegate = toVC
-        
-        transitionAnimator.popFromDelegate = toVC
-        transitionAnimator.popToDelegate = self
-        
-        transitionAnimator.state = operation
-        return transitionAnimator
-    }
-}
 
 
 

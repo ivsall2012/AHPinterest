@@ -9,10 +9,11 @@
 import UIKit
 
 class AHNavigationController: UINavigationController {
-
+    var navDelegate = AHNavigationVCDelegate.delegate
     override func viewDidLoad() {
         super.viewDidLoad()
         AHPublicObjects.shared.navigatonController = self
+        self.delegate = navDelegate
     }
 
     
