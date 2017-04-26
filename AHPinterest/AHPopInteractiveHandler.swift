@@ -73,9 +73,9 @@ extension AHPopInteractiveHandler: AHPopInteractiveDelegate {
             else {
             fatalError("No previous VC comfirming AHTransitionProperties")
         }
-        print("AApreviousIndex:\(previousIndex)")
+
         guard let selectedCell = vc.selectedCell else {
-            print("BBBpreviousIndex:\(previousIndex)")
+
             fatalError("No selectedCell")
         }
         

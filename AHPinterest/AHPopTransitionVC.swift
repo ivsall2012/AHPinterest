@@ -11,7 +11,14 @@ import UIKit
 class AHPopTransitionVC: UIViewController {
     var previousPoint: CGPoint?
     var subjectBg: UIView?
-    var subject: UIView?
+    var subject: UIView? {
+        didSet {
+            if let subject = subject {
+                subjectOriginalFrame = subject.frame
+            }
+        }
+    }
+    var subjectOriginalFrame = CGRect.zero
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,10 +66,42 @@ class AHPopTransitionVC: UIViewController {
         let dy = point.y - previousPoint!.y
         previousPoint = point
         
-        subjectBg.frame.origin.x = subjectBg.frame.origin.x + dx
-        subjectBg.frame.origin.y = subjectBg.frame.origin.y + dy
+        handleSubjectBg(subjectBg,dx, dy)
+        handlerSubject(subject, dx, dy)
+        
 
-        subject.frame.origin.x = subject.frame.origin.x + dx
-        subject.frame.origin.y = subject.frame.origin.y + dy
+        
     }
 }
+
+extension AHPopTransitionVC {
+    func handleSubjectBg(_ subjectBg: UIView, _ dx: CGFloat, _ dy: CGFloat) {
+        guard let subject = subject else { return }
+        
+        let newX = subjectBg.frame.origin.x + dx
+        var newY = subjectBg.frame.origin.y + dy
+        
+        if newY < 0.0 {
+            newY = subjectBg.frame.origin.y
+        }
+        
+        // won't Y position untill subject is being pulled down past to subjectOriginalFrame.origin.y
+        if subject.frame.origin.y < subjectOriginalFrame.origin.y {
+            newY = subjectBg.frame.origin.y
+        }
+        
+        subjectBg.frame.origin.x = newX
+        subjectBg.frame.origin.y = newY
+    }
+    func handlerSubject(_ subject: UIView, _ dx: CGFloat, _ dy: CGFloat) {
+        let newX = subject.frame.origin.x + dx
+        let newY = subject.frame.origin.y + dy
+        
+        subject.frame.origin.x = newX
+        subject.frame.origin.y = newY
+    }
+}
+
+
+
+

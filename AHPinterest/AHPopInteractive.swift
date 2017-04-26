@@ -52,7 +52,6 @@ extension AHPopInteractive: UIGestureRecognizerDelegate, UICollectionViewDelegat
     func panHanlder(_ sender: UIPanGestureRecognizer) {
         switch sender.state {
         case .began,.changed:
-            print("AAA")
             let pt = sender.location(in: popTransitionVC.view)
             let contentOffset = delegate.popInteractiveForContentOffset()
             let triggerYOffset = delegate.popInteractiveForTriggerYOffset()
@@ -69,7 +68,6 @@ extension AHPopInteractive: UIGestureRecognizerDelegate, UICollectionViewDelegat
                 popTransitionVC.touchMoved(to: pt)
             }
         case .cancelled, .ended:
-            print("BBB")
             isInPopTranstion = false
             popTransitionVC.dismiss(animated: false, completion: { 
                 // check and see if popTransitionVC already triggered popping this pinVC
