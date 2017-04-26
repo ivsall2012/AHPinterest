@@ -34,7 +34,7 @@ class AHPopInteractive: NSObject {
     weak var delegate: AHPopInteractiveDelegate!
     weak var vc: UIViewController!
     var isInPopTranstion = false
-    let popTransitionVC = AHPopTransitionVC()
+    let popInteractiveVC = AHPopInteractiveVC()
     var pan: UIPanGestureRecognizer?
 
 
@@ -52,25 +52,25 @@ extension AHPopInteractive: UIGestureRecognizerDelegate, UICollectionViewDelegat
     func panHanlder(_ sender: UIPanGestureRecognizer) {
         switch sender.state {
         case .began,.changed:
-            let pt = sender.location(in: popTransitionVC.view)
+            let pt = sender.location(in: popInteractiveVC.view)
             let contentOffset = delegate.popInteractiveForContentOffset()
             let triggerYOffset = delegate.popInteractiveForTriggerYOffset()
             
             if  contentOffset.y < triggerYOffset && !isInPopTranstion {
                 isInPopTranstion = true
-                setupTransitionVC()
+                setupPopInteractiveVC()
                 
-                popTransitionVC.modalPresentationStyle = .custom
-                vc.present(popTransitionVC, animated: false, completion: nil)
+                popInteractiveVC.modalPresentationStyle = .custom
+                vc.present(popInteractiveVC, animated: false, completion: nil)
                 return
             }
             if isInPopTranstion {
-                popTransitionVC.touchMoved(to: pt)
+                popInteractiveVC.touchMoved(to: pt)
             }
         case .cancelled, .ended:
             isInPopTranstion = false
-            popTransitionVC.dismiss(animated: false, completion: { 
-                // check and see if popTransitionVC already triggered popping this pinVC
+            popInteractiveVC.dismiss(animated: false, completion: { 
+                // check and see if popInteractiveVC already triggered popping this pinVC
                 
             })
         default:
@@ -78,15 +78,14 @@ extension AHPopInteractive: UIGestureRecognizerDelegate, UICollectionViewDelegat
         }
     }
     
-    func setupTransitionVC() {
+    func setupPopInteractiveVC() {
         
         let subjectBg = delegate.popInteractiveForAnimatingSubjectBackground()
-        popTransitionVC.subjectBg = subjectBg
+        popInteractiveVC.subjectBg = subjectBg
         
         let subject = delegate.popInteractiveForAnimatingSubject()
-        popTransitionVC.subject = subject
+        popInteractiveVC.subject = subject
         
-        let background = delegate.popInteractiveForAnimatingBackground()
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {

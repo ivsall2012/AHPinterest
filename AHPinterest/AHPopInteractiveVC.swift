@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AHPopTransitionVC: UIViewController {
+class AHPopInteractiveVC: UIViewController {
     var previousPoint: CGPoint?
     var subjectBg: UIView?
     var subject: UIView? {
@@ -74,7 +74,7 @@ class AHPopTransitionVC: UIViewController {
     }
 }
 
-extension AHPopTransitionVC {
+extension AHPopInteractiveVC {
     func handleSubjectBg(_ subjectBg: UIView, _ dx: CGFloat, _ dy: CGFloat) {
         guard let subject = subject else { return }
         

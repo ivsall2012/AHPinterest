@@ -11,7 +11,7 @@
 		A123E6E71EADD24E00D7565E /* AHDefaultTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123E6E61EADD24E00D7565E /* AHDefaultTransitionDelegate.swift */; };
 		A123E6EB1EAEB0B100D7565E /* AHPinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123E6EA1EAEB0B100D7565E /* AHPinCell.swift */; };
 		A123E6FC1EB0148700D7565E /* AHPopInteractive.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123E6FB1EB0148700D7565E /* AHPopInteractive.swift */; };
-		A123E7011EB054E900D7565E /* AHPopTransitionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123E7001EB054E900D7565E /* AHPopTransitionVC.swift */; };
+		A123E7011EB054E900D7565E /* AHPopInteractiveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123E7001EB054E900D7565E /* AHPopInteractiveVC.swift */; };
 		A123E7031EB0842800D7565E /* AHPopInteractiveHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123E7021EB0842800D7565E /* AHPopInteractiveHandler.swift */; };
 		A12A28361E9E137400F7A36D /* AHRefreshFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A28351E9E137400F7A36D /* AHRefreshFooter.swift */; };
 		A12A28381E9ECBA500F7A36D /* AHDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A28371E9ECBA500F7A36D /* AHDetailCell.swift */; };
@@ -78,7 +78,7 @@
 		A123E6E61EADD24E00D7565E /* AHDefaultTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDefaultTransitionDelegate.swift; sourceTree = "<group>"; };
 		A123E6EA1EAEB0B100D7565E /* AHPinCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinCell.swift; sourceTree = "<group>"; };
 		A123E6FB1EB0148700D7565E /* AHPopInteractive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPopInteractive.swift; sourceTree = "<group>"; };
-		A123E7001EB054E900D7565E /* AHPopTransitionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPopTransitionVC.swift; sourceTree = "<group>"; };
+		A123E7001EB054E900D7565E /* AHPopInteractiveVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPopInteractiveVC.swift; sourceTree = "<group>"; };
 		A123E7021EB0842800D7565E /* AHPopInteractiveHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPopInteractiveHandler.swift; sourceTree = "<group>"; };
 		A12A28351E9E137400F7A36D /* AHRefreshFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHRefreshFooter.swift; sourceTree = "<group>"; };
 		A12A28371E9ECBA500F7A36D /* AHDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDetailCell.swift; sourceTree = "<group>"; };
@@ -156,7 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				A123E6FB1EB0148700D7565E /* AHPopInteractive.swift */,
-				A123E7001EB054E900D7565E /* AHPopTransitionVC.swift */,
+				A123E7001EB054E900D7565E /* AHPopInteractiveVC.swift */,
 				A123E7021EB0842800D7565E /* AHPopInteractiveHandler.swift */,
 			);
 			name = "Pop Transition";
@@ -578,7 +578,7 @@
 				A1A227331EA48C3D00527358 /* AHCollectionVC.swift in Sources */,
 				A123E7031EB0842800D7565E /* AHPopInteractiveHandler.swift in Sources */,
 				A1F70F161E9CC21A00FF2C91 /* AHRefershUI.swift in Sources */,
-				A123E7011EB054E900D7565E /* AHPopTransitionVC.swift in Sources */,
+				A123E7011EB054E900D7565E /* AHPopInteractiveVC.swift in Sources */,
 				A17377291E887F9600462EE1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
