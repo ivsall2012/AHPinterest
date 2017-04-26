@@ -9,39 +9,75 @@
 import UIKit
 
 class AHPopTransitionHandler: NSObject {
-    weak var pinVC: AHPinContentVC?
+    weak var pinVC: AHPinContentVC!
     var isInPopTranstion = false
     let popTransitionVC = AHPopTransitionVC()
-    let pan = UIPanGestureRecognizer(target: self, action: #selector(panHanlder(_:)))
+    var pan: UIPanGestureRecognizer?
     let popTransitionAnimator = AHPopTransitionAnimator()
     let popInteractiveTransition = AHPopInteractiveTransition()
+    var contentOffset = CGPoint.zero
+    weak var targetView: UIView?
+    func attachView(view: UIView){
+        pan = UIPanGestureRecognizer(target: self, action: #selector(panHanlder(_:)))
+        pan?.delegate = self
+        view.addGestureRecognizer(pan!)
+        targetView = view
+        
+    }
+    
 }
 
-extension AHPopTransitionHandler: UICollectionViewDelegate {
+extension AHPopTransitionHandler: UIGestureRecognizerDelegate, UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y < 0.0 && !isInPopTranstion{
-            isInPopTranstion = true
-            scrollView.addGestureRecognizer(pan)
-//            pinVC?.present(popTransitionVC, animated: false, completion: nil)
-            
-            
-            
-//            AHPublicServices.shared.setTransition(delegate: self)
-//            AHPublicServices.shared.navigatonController!.popViewController(animated: true)
+        if scrollView.contentOffset.y < 0.0 {
+            contentOffset = scrollView.contentOffset
+        }else{
+            contentOffset = CGPoint.zero
         }
     }
     
     func panHanlder(_ sender: UIPanGestureRecognizer) {
         switch sender.state {
-        case .began:
-            print("began")
-        case .changed:
-            print("changed")
+        case .began,.changed:
+            let pt = sender.location(in: popTransitionVC.view)
+            if contentOffset.y < -44.0 && !isInPopTranstion {
+                isInPopTranstion = true
+                setupTransitionVC()
+                
+                popTransitionVC.modalPresentationStyle = .custom
+                pinVC.present(popTransitionVC, animated: false, completion: nil)
+                return
+            }
+            if contentOffset.y < -44.0 && isInPopTranstion {
+//                let translated = sender.translation(in: popTransitionVC.view)
+                popTransitionVC.touchMoved(to: pt)
+//                sender.setTranslation(CGPoint.zero, in: popTransitionVC.view)
+            }
         case .cancelled, .ended:
-            print("ended")
+            isInPopTranstion = false
+            popTransitionVC.dismiss(animated: false, completion: nil)
         default:
             break
         }
+    }
+    
+    func setupTransitionVC() {
+        guard let presentingCell = pinVC.presentingCell,
+            let bgSnap = pinVC.view.snapshotView(afterScreenUpdates: true)
+            else{
+            print("presentingCell or bgSnap is nil....")
+            return
+        }
+        let whiteAreaFrames = presentingCell.convert(presentingCell.pinImageView.frame, to: pinVC.view)
+        
+        let whiteArea = UIView(frame: whiteAreaFrames)
+        whiteArea.backgroundColor = UIColor.white
+        bgSnap.addSubview(whiteArea)
+        popTransitionVC.bgSnap = bgSnap
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }
 

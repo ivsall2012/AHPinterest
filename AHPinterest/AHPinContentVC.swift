@@ -68,6 +68,7 @@ extension AHPinContentVC {
 extension AHPinContentVC {
     func setupPopTransition() {
         popTransitionHanlder.pinVC = self
+        popTransitionHanlder.attachView(view: self.view)
         addDelegate(delegate: popTransitionHanlder)
     }
     

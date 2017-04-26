@@ -20,6 +20,12 @@ protocol AHOptionsAnimatorDelegate: NSObjectProtocol {
     func optionsAnimatorDidFinishTransition()
 }
 
+extension AHOptionsAnimatorDelegate {
+    func optionsAnimatorDidFinishTransition() {
+        // default behavior
+    }
+}
+
 class AHOptionsAnimator: NSObject {
     weak var delegate: AHOptionsAnimatorDelegate?
     weak var fromCell: UIView?
