@@ -13,9 +13,6 @@ class AHPublicServices: NSObject {
     
     // Default push/pop transition animations
     let defaultTransitionDelegate = AHDefaultTransitionDelegate.shared
-
-    // make it thread safe, for fun?
-    var currentItem:Int = -1
     
     // globel navVC
     weak var navigatonController: AHNavigationController?

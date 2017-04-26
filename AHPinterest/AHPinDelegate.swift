@@ -13,16 +13,20 @@ class AHPinDelegate: NSObject {
     weak var pinVC: AHPinVC?
 }
 
-extension AHPinDelegate: UICollectionViewDelegate {
+extension AHPinDelegate: UICollectionViewDelegate, AHDetailVCDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // one of the two places that currentItem get modified
-        AHPublicServices.shared.currentItem = indexPath.item
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "AHDetailVC") as! AHDetailVC
         vc.pinVMs = pinVC?.pinDataSource.pinVMs
-        vc.currentIndexPath = IndexPath(item: indexPath.item, section: pinVC!.pinLayout.layoutSection)
+        vc.delegate = self
+        vc.itemIndex = indexPath.item
+        pinVC?.itemIndex = indexPath.item
         AHPublicServices.shared.navigatonController?.pushViewController(vc, animated: true)
+    }
+    
+    func detailVCDidChangeTo(item: Int) {
+        pinVC?.itemIndex = item
     }
 }
 

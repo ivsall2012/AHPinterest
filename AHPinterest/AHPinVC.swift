@@ -14,10 +14,12 @@ class AHPinVC: AHCollectionVC, AHTransitionProperties {
     
     weak var pinVM: AHPinViewModel?
     
+    var itemIndex: Int = -1
+    
+    
     // This cell is the one already being selected which triggered the push, will be used by the next pushed VC(AHDetailVC) from this VC(AHPinVC or AHDetailVC).
     weak var selectedCell: AHPinCell? {
-        let currentItem = AHPublicServices.shared.currentItem
-        let index = IndexPath(item: currentItem, section: self.pinLayout.layoutSection)
+        let index = IndexPath(item: itemIndex, section: self.pinLayout.layoutSection)
         
         // scroll using system method to make the cell visible
         if AHDefaultTransitionDelegate.shared.operation  == .pop {

@@ -26,11 +26,15 @@ class AHRefershUI: NSObject {
         if !isSetup {
             setup()
         }
-        refreshControl.isHidden = false
         startAnimateRefresh()
     }
     
     fileprivate class func startAnimateRefresh() {
+        guard let window = UIApplication.shared.keyWindow else {
+            return
+        }
+        window.addSubview(refreshControl)
+        
         // need to do animation and networking
         let rotaton = CABasicAnimation(keyPath: "transform.rotation.z")
         rotaton.fromValue = 0.0
@@ -60,7 +64,7 @@ class AHRefershUI: NSObject {
         refreshControl.layer.add(scale, forKey: "scale")
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.32 ) {
-            refreshControl.isHidden = true
+            refreshControl.removeFromSuperview()
             refreshControl.layer.removeAllAnimations()
         }
         

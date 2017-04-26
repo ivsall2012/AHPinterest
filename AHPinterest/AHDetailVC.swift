@@ -9,6 +9,12 @@
 import UIKit
 
 
+protocol AHDetailVCDelegate: NSObjectProtocol {
+    func detailVCDidChangeTo(item: Int)
+}
+
+
+
 let AHDetailCellMargin: CGFloat = 5.0
 let screenSize: CGSize = UIScreen.main.bounds.size
 
@@ -18,31 +24,29 @@ private let reuseIdentifier = "AHDetailCell"
 
 class AHDetailVC: UIViewController, AHTransitionProperties {
     @IBOutlet weak var collectionView: UICollectionView!
-    var transitionAnimator = AHTransitionAnimator()
+    weak var delegate: AHDetailVCDelegate?
     
+    var transitionAnimator = AHTransitionAnimator()
     var pinVMs: [AHPinViewModel]?
-    var currentIndexPath: IndexPath? {
+    var itemIndex: Int = -1 {
         didSet {
-            if let currentIndexPath = currentIndexPath {
-                // one of the two places that currentItem get modified
-                AHPublicServices.shared.currentItem = currentIndexPath.item
-            }
+            self.delegate?.detailVCDidChangeTo(item: itemIndex)
         }
     }
     
     // This cell is the one already being selected which triggered the push, will be used by the next pushed VC(AHDetailVC) from this VC(AHPinVC or AHDetailVC).
     weak var selectedCell: AHPinCell?{
-        guard let currentIndexPath = currentIndexPath else { return nil }
+        guard itemIndex >= 0 else { return nil }
         
-        let contentVC = cellVCs[currentIndexPath.item]
+        let contentVC = cellVCs[itemIndex]
         return contentVC.selectedCell
     }
     
     // The current displaying main cell(the large size pin) lives within AHPinContentVC
     weak var presentingCell: AHPinContentCell?{
-        guard let currentIndexPath = currentIndexPath else { return nil }
+        guard itemIndex >= 0 else { return nil }
         
-        let contentVC = cellVCs[currentIndexPath.item]
+        let contentVC = cellVCs[itemIndex]
         return contentVC.presentingCell
     }
     
@@ -104,8 +108,8 @@ extension AHDetailVC {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if !initialScroll {
-            currentIndexPath?.section = 0
-            collectionView.scrollToItem(at: currentIndexPath!, at: UICollectionViewScrollPosition.right, animated: false)
+            let indexPath = IndexPath(item: itemIndex, section: 0)
+            collectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.right, animated: false)
             
             
             //            cellVC.animateNavBar()
@@ -140,8 +144,13 @@ extension AHDetailVC {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let items = collectionView.visibleCells
         if items.count == 1 {
-            currentIndexPath = collectionView.indexPath(for: items.first!)
-            print("current item:\(currentIndexPath?.item)")
+            if let indexPath = collectionView.indexPath(for: items.first!) {
+                self.itemIndex = indexPath.item
+                print("itemIndex:\(self.itemIndex)")
+            }else{
+                fatalError("It has an visible cell without indexPath??")
+            }
+            
         }else{
             print("visible items have more then 1, problem?!")
         }
@@ -186,8 +195,6 @@ extension AHDetailVC: UICollectionViewDataSource {
 }
 
 // MARK:- Transition Stuff
-
-
 
 extension AHDetailVC: AHTransitionPushFromDelegate {
     func transitionPushFromSelectedCell() -> AHPinCell? {
