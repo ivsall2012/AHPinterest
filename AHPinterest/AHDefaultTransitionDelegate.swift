@@ -8,14 +8,14 @@
 
 import UIKit
 
-class AHNavigationVCDelegate: NSObject {
-    static let delegate = AHNavigationVCDelegate()
+class AHDefaultTransitionDelegate: NSObject {
+    static let shared = AHDefaultTransitionDelegate()
     var transitionAnimator = AHTransitionAnimator()
     var operation: UINavigationControllerOperation {
         return transitionAnimator.state
     }
 }
-extension AHNavigationVCDelegate: UINavigationControllerDelegate {
+extension AHDefaultTransitionDelegate: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         if operation == .none {
             return nil

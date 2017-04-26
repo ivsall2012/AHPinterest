@@ -25,7 +25,7 @@ class AHDetailVC: UIViewController {
         didSet {
             if let currentIndexPath = currentIndexPath {
                 // one of the two places that currentItem get modified
-                AHPublicObjects.shared.currentItem = currentIndexPath.item
+                AHPublicServices.shared.currentItem = currentIndexPath.item
             }
         }
     }
@@ -57,7 +57,7 @@ class AHDetailVC: UIViewController {
 extension AHDetailVC {
     override func viewDidLoad() {
         super.viewDidLoad()
-//        AHPublicObjects.shared.navigatonController?.delegate = self
+//        AHPublicServices.shared.navigatonController?.delegate = self
         self.navigationController?.isNavigationBarHidden = true
         collectionView?.backgroundColor = UIColor.white
         self.automaticallyAdjustsScrollViewInsets = false
@@ -82,7 +82,7 @@ extension AHDetailVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.isStatusBarHidden = true
-//        AHPublicObjects.shared.navigatonController?.delegate = self
+//        AHPublicServices.shared.navigatonController?.delegate = self
     }
     
     

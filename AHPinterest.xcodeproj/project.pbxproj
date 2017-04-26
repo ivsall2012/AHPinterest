@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A123E6E51EAD576B00D7565E /* AHPublicObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123E6E41EAD576B00D7565E /* AHPublicObjects.swift */; };
-		A123E6E71EADD24E00D7565E /* AHNavigationVCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123E6E61EADD24E00D7565E /* AHNavigationVCDelegate.swift */; };
+		A123E6E51EAD576B00D7565E /* AHPublicServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123E6E41EAD576B00D7565E /* AHPublicServices.swift */; };
+		A123E6E71EADD24E00D7565E /* AHDefaultTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123E6E61EADD24E00D7565E /* AHDefaultTransitionDelegate.swift */; };
 		A123E6EB1EAEB0B100D7565E /* AHPinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123E6EA1EAEB0B100D7565E /* AHPinCell.swift */; };
+		A123E6FA1EB013D900D7565E /* AHPopTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123E6F91EB013D900D7565E /* AHPopTransitionAnimator.swift */; };
+		A123E6FC1EB0148700D7565E /* AHPopTransitionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123E6FB1EB0148700D7565E /* AHPopTransitionHandler.swift */; };
+		A123E6FF1EB01D8200D7565E /* AHPopInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123E6FE1EB01D8200D7565E /* AHPopInteractiveTransition.swift */; };
+		A123E7011EB054E900D7565E /* AHPopTransitionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123E7001EB054E900D7565E /* AHPopTransitionVC.swift */; };
 		A12A28361E9E137400F7A36D /* AHRefreshFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A28351E9E137400F7A36D /* AHRefreshFooter.swift */; };
 		A12A28381E9ECBA500F7A36D /* AHDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A28371E9ECBA500F7A36D /* AHDetailCell.swift */; };
 		A12A283A1E9ECBAB00F7A36D /* AHDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A28391E9ECBAB00F7A36D /* AHDetailVC.swift */; };
@@ -71,9 +75,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A123E6E41EAD576B00D7565E /* AHPublicObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPublicObjects.swift; sourceTree = "<group>"; };
-		A123E6E61EADD24E00D7565E /* AHNavigationVCDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHNavigationVCDelegate.swift; sourceTree = "<group>"; };
+		A123E6E41EAD576B00D7565E /* AHPublicServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPublicServices.swift; sourceTree = "<group>"; };
+		A123E6E61EADD24E00D7565E /* AHDefaultTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDefaultTransitionDelegate.swift; sourceTree = "<group>"; };
 		A123E6EA1EAEB0B100D7565E /* AHPinCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinCell.swift; sourceTree = "<group>"; };
+		A123E6F91EB013D900D7565E /* AHPopTransitionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPopTransitionAnimator.swift; sourceTree = "<group>"; };
+		A123E6FB1EB0148700D7565E /* AHPopTransitionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPopTransitionHandler.swift; sourceTree = "<group>"; };
+		A123E6FE1EB01D8200D7565E /* AHPopInteractiveTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPopInteractiveTransition.swift; sourceTree = "<group>"; };
+		A123E7001EB054E900D7565E /* AHPopTransitionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPopTransitionVC.swift; sourceTree = "<group>"; };
 		A12A28351E9E137400F7A36D /* AHRefreshFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHRefreshFooter.swift; sourceTree = "<group>"; };
 		A12A28371E9ECBA500F7A36D /* AHDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDetailCell.swift; sourceTree = "<group>"; };
 		A12A28391E9ECBAB00F7A36D /* AHDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDetailVC.swift; sourceTree = "<group>"; };
@@ -146,10 +154,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A123E6F21EB0092B00D7565E /* Pop Transition */ = {
+			isa = PBXGroup;
+			children = (
+				A123E6F91EB013D900D7565E /* AHPopTransitionAnimator.swift */,
+				A123E6FB1EB0148700D7565E /* AHPopTransitionHandler.swift */,
+				A123E6FE1EB01D8200D7565E /* AHPopInteractiveTransition.swift */,
+				A123E7001EB054E900D7565E /* AHPopTransitionVC.swift */,
+			);
+			name = "Pop Transition";
+			sourceTree = "<group>";
+		};
+		A123E6FD1EB0194300D7565E /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				A164E1A71EA79DB600A8227D /* AHNavigationController.swift */,
+				A123E6E61EADD24E00D7565E /* AHDefaultTransitionDelegate.swift */,
+			);
+			name = Navigation;
+			sourceTree = "<group>";
+		};
 		A12A283F1E9ECC0300F7A36D /* PinDetail */ = {
 			isa = PBXGroup;
 			children = (
-				A164E1A91EA81BAC00A8227D /* Header */,
+				A123E6F21EB0092B00D7565E /* Pop Transition */,
+				A164E1A91EA81BAC00A8227D /* NavHeader */,
 				A1E85D9A1EA6CA1A000775FD /* View */,
 				A1E85D991EA6CA14000775FD /* VC */,
 				A1E85D981EA6CA06000775FD /* Animation */,
@@ -190,14 +219,14 @@
 			name = "Pin Detail Layout";
 			sourceTree = "<group>";
 		};
-		A164E1A91EA81BAC00A8227D /* Header */ = {
+		A164E1A91EA81BAC00A8227D /* NavHeader */ = {
 			isa = PBXGroup;
 			children = (
 				A164E1BA1EA8400B00A8227D /* AHPinNavBar.swift */,
 				A164E1BB1EA8400B00A8227D /* AHPinNavBar.xib */,
 				A164E1C21EA88D7200A8227D /* AHPinNavBarHandler.swift */,
 			);
-			name = Header;
+			name = NavHeader;
 			sourceTree = "<group>";
 		};
 		A168BFD81E888DDD00A87E03 /* AHPinterestTests */ = {
@@ -235,6 +264,7 @@
 				A1640C231EA4A65F000E6EB5 /* PinVC */,
 				A12A283F1E9ECC0300F7A36D /* PinDetail */,
 				A17377421E8881FD00462EE1 /* Other */,
+				A123E6FD1EB0194300D7565E /* Navigation */,
 				A173773F1E8881E000462EE1 /* Extensions */,
 				A17377431E88820800462EE1 /* Interfaces */,
 				A173773D1E8881C600462EE1 /* Assets */,
@@ -286,9 +316,7 @@
 				A19EC4481E99D99700B6D7C4 /* AHPinDataGenerator.swift */,
 				A17377281E887F9600462EE1 /* AppDelegate.swift */,
 				A1CE93531E9A17A5002A8738 /* Constants.swift */,
-				A164E1A71EA79DB600A8227D /* AHNavigationController.swift */,
-				A123E6E61EADD24E00D7565E /* AHNavigationVCDelegate.swift */,
-				A123E6E41EAD576B00D7565E /* AHPublicObjects.swift */,
+				A123E6E41EAD576B00D7565E /* AHPublicServices.swift */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -509,16 +537,18 @@
 			files = (
 				A1B115021EA2DAB7004D8601 /* AHPinContentLayout.swift in Sources */,
 				A1F70F121E9C57CB00FF2C91 /* AHLayoutHandler.swift in Sources */,
-				A123E6E51EAD576B00D7565E /* AHPublicObjects.swift in Sources */,
+				A123E6FC1EB0148700D7565E /* AHPopTransitionHandler.swift in Sources */,
+				A123E6E51EAD576B00D7565E /* AHPublicServices.swift in Sources */,
 				A168BFE41E88930200A87E03 /* AHPinDelegate.swift in Sources */,
 				A17377471E88825100462EE1 /* AHPinDataModel.swift in Sources */,
 				A19EC44B1E99DFBF00B6D7C4 /* AHNetowrkTool.swift in Sources */,
 				A12A283C1E9ECBE500F7A36D /* AHDetailVCLayout.swift in Sources */,
+				A123E6FF1EB01D8200D7565E /* AHPopInteractiveTransition.swift in Sources */,
 				A15C0B5C1E9372B900B35BE1 /* AHOptionsVC.swift in Sources */,
 				A1B115001EA2B29F004D8601 /* AHLayoutRouter.swift in Sources */,
 				A1A227351EA48DAC00527358 /* AHDelegatesCenter.swift in Sources */,
 				A164E1BC1EA8400B00A8227D /* AHPinNavBar.swift in Sources */,
-				A123E6E71EADD24E00D7565E /* AHNavigationVCDelegate.swift in Sources */,
+				A123E6E71EADD24E00D7565E /* AHDefaultTransitionDelegate.swift in Sources */,
 				A164E1B81EA8319C00A8227D /* AHPinLayoutHeader.swift in Sources */,
 				A168BFE81E889B6400A87E03 /* AHPinLayout.swift in Sources */,
 				A1E85DA01EA6E07C000775FD /* AHPinContentVC.swift in Sources */,
@@ -543,6 +573,7 @@
 				A1CE93541E9A17A5002A8738 /* Constants.swift in Sources */,
 				A1B115041EA2DDB9004D8601 /* AHPinContentLayoutHandler.swift in Sources */,
 				A123E6EB1EAEB0B100D7565E /* AHPinCell.swift in Sources */,
+				A123E6FA1EB013D900D7565E /* AHPopTransitionAnimator.swift in Sources */,
 				A1E85D9C1EA6D153000775FD /* AHPinContentCell.swift in Sources */,
 				A173772B1E887F9600462EE1 /* AHPinVC.swift in Sources */,
 				A12A28441EA07ADB00F7A36D /* AHOptionsHandler.swift in Sources */,
@@ -551,6 +582,7 @@
 				A164E1A61EA7989E00A8227D /* AHPin.swift in Sources */,
 				A1A227331EA48C3D00527358 /* AHCollectionVC.swift in Sources */,
 				A1F70F161E9CC21A00FF2C91 /* AHRefershUI.swift in Sources */,
+				A123E7011EB054E900D7565E /* AHPopTransitionVC.swift in Sources */,
 				A17377291E887F9600462EE1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

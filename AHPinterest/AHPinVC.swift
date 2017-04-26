@@ -13,11 +13,11 @@ class AHPinVC: AHCollectionVC {
     
     weak var pinVM: AHPinViewModel?
     weak var selectedCell: AHPinCell? {
-        let currentItem = AHPublicObjects.shared.currentItem
+        let currentItem = AHPublicServices.shared.currentItem
         let index = IndexPath(item: currentItem, section: self.pinLayout.layoutSection)
         
         // scroll using system method to make the cell visible
-        if AHNavigationVCDelegate.delegate.operation  == .pop {
+        if AHDefaultTransitionDelegate.shared.operation  == .pop {
             self.collectionView?.scrollToItem(at: index, at: UICollectionViewScrollPosition.bottom, animated: false)
             self.collectionView?.layoutIfNeeded()
         }
@@ -26,7 +26,7 @@ class AHPinVC: AHCollectionVC {
         let cell = self.collectionView!.cellForItem(at: index) as? AHPinCell
         
         // custom scroll to make cell center
-        if AHNavigationVCDelegate.delegate.operation == .pop {
+        if AHDefaultTransitionDelegate.shared.operation == .pop {
             self.scrollToItem(cell: cell!)
             self.collectionView?.layoutIfNeeded()
         }

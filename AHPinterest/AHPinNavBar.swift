@@ -49,7 +49,7 @@ class AHPinNavBar: UICollectionReusableView {
     @IBAction func checkBtnTapped(_ sender: UIButton) {
     }
     @IBAction func backBtnTapped(_ sender: AnyObject) {
-        guard let navVC = AHPublicObjects.shared.navigatonController else { return }
+        guard let navVC = AHPublicServices.shared.navigatonController else { return }
         navVC.popViewController(animated: true)
     }
     

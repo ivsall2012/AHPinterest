@@ -9,6 +9,8 @@
 import UIKit
 
 class AHPinContentVC: AHPinVC {
+    let popTransitionHanlder = AHPopTransitionHandler()
+    
     let pinContentLayout = AHPinContentLayout()
     let pinContentLayoutHanlder = AHPinContentLayoutHandler()
     
@@ -24,32 +26,29 @@ class AHPinContentVC: AHPinVC {
             }
         }
     }
+    
+
+
+}
+
+
+// MARK:- VC Life Cycles
+extension AHPinContentVC {
     override func viewDidLoad() {
         super.viewDidLoad()
-        navBar = AHPinNavBar.navBar()
-        navBar!.frame = CGRect(x: 0, y: 0, width: collectionView!.bounds.width, height: AHPinNavBarHeight)
-        self.view.addSubview(navBar!)
         
-        navBar!.pinVM = pinVM
-        let navBarHandler = AHPinNavBarHandler()
-        navBarHandler.contentVC = self
-        addDelegate(delegate: navBarHandler)
-        navBarHandler.navBar = navBar
-        
-        
-        collectionView?.contentInset = .init(top: AHPinNavBarHeight, left: 0, bottom: 0, right: 0)
-        pinContentLayoutHanlder.pinContentVC = self
-        pinContentLayout.delegate = pinContentLayoutHanlder
-        insertLayoutToFont(layout: pinContentLayout, delegate: pinContentLayoutHanlder, dataSource: pinContentLayoutHanlder)
+        setupNavBar()
+        setupContentLayout()
+        setupPopTransition()
         
     }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-
+        
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -62,9 +61,38 @@ class AHPinContentVC: AHPinVC {
         super.viewWillDisappear(animated)
         UIApplication.shared.isStatusBarHidden = false
     }
-
-
 }
+
+
+// MARK:- Setups
+extension AHPinContentVC {
+    func setupPopTransition() {
+        popTransitionHanlder.pinVC = self
+        addDelegate(delegate: popTransitionHanlder)
+    }
+    
+    func setupContentLayout() {
+        collectionView?.contentInset = .init(top: AHPinNavBarHeight, left: 0, bottom: 0, right: 0)
+        pinContentLayoutHanlder.pinContentVC = self
+        pinContentLayout.delegate = pinContentLayoutHanlder
+        insertLayoutToFont(layout: pinContentLayout, delegate: pinContentLayoutHanlder, dataSource: pinContentLayoutHanlder)
+    }
+    
+    func setupNavBar(){
+        navBar = AHPinNavBar.navBar()
+        navBar!.frame = CGRect(x: 0, y: 0, width: collectionView!.bounds.width, height: AHPinNavBarHeight)
+        self.view.addSubview(navBar!)
+        
+        navBar!.pinVM = pinVM
+        let navBarHandler = AHPinNavBarHandler()
+        navBarHandler.contentVC = self
+        addDelegate(delegate: navBarHandler)
+        navBarHandler.navBar = navBar
+    }
+}
+
+
+// MARK:- Overrides for option animation from super classs
 
 extension AHPinContentVC {
     override func optionsHandlerForFromCell(at point: CGPoint) -> UIView? {
