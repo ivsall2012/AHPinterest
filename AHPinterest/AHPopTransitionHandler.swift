@@ -49,9 +49,7 @@ extension AHPopTransitionHandler: UIGestureRecognizerDelegate, UICollectionViewD
                 return
             }
             if contentOffset.y < -44.0 && isInPopTranstion {
-//                let translated = sender.translation(in: popTransitionVC.view)
                 popTransitionVC.touchMoved(to: pt)
-//                sender.setTranslation(CGPoint.zero, in: popTransitionVC.view)
             }
         case .cancelled, .ended:
             isInPopTranstion = false
@@ -63,17 +61,21 @@ extension AHPopTransitionHandler: UIGestureRecognizerDelegate, UICollectionViewD
     
     func setupTransitionVC() {
         guard let presentingCell = pinVC.presentingCell,
-            let bgSnap = pinVC.view.snapshotView(afterScreenUpdates: true)
+            let bgSnap = pinVC.view.snapshotView(afterScreenUpdates: true),
+        let presentingView = presentingCell.pinImageView.snapshotView(afterScreenUpdates: true)
             else{
             print("presentingCell or bgSnap is nil....")
             return
         }
+        
         let whiteAreaFrames = presentingCell.convert(presentingCell.pinImageView.frame, to: pinVC.view)
         
         let whiteArea = UIView(frame: whiteAreaFrames)
+        presentingView.frame = whiteAreaFrames
         whiteArea.backgroundColor = UIColor.white
         bgSnap.addSubview(whiteArea)
         popTransitionVC.bgSnap = bgSnap
+        popTransitionVC.presentingView = presentingView
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
