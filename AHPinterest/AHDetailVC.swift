@@ -16,7 +16,7 @@ private let reuseIdentifier = "AHDetailCell"
 
 
 
-class AHDetailVC: UIViewController {
+class AHDetailVC: UIViewController, AHTransitionProperties {
     @IBOutlet weak var collectionView: UICollectionView!
     var transitionAnimator = AHTransitionAnimator()
     
@@ -30,6 +30,7 @@ class AHDetailVC: UIViewController {
         }
     }
     
+    // This cell is the one already being selected which triggered the push, will be used by the next pushed VC(AHDetailVC) from this VC(AHPinVC or AHDetailVC).
     weak var selectedCell: AHPinCell?{
         guard let currentIndexPath = currentIndexPath else { return nil }
         
@@ -37,6 +38,7 @@ class AHDetailVC: UIViewController {
         return contentVC.selectedCell
     }
     
+    // The current displaying main cell(the large size pin) lives within AHPinContentVC
     weak var presentingCell: AHPinContentCell?{
         guard let currentIndexPath = currentIndexPath else { return nil }
         

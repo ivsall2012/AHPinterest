@@ -10,8 +10,8 @@ import UIKit
 
 class AHPopTransitionVC: UIViewController {
     var previousPoint: CGPoint?
-    var bgSnap: UIView?
-    var presentingView: UIView?
+    var subjectBg: UIView?
+    var subject: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,12 +21,12 @@ class AHPopTransitionVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let bgSnap = bgSnap{
+        if let bgSnap = subjectBg{
             self.view.addSubview(bgSnap)
         }
         
-        if let presentingView = presentingView {
-            self.view.addSubview(presentingView)
+        if let subject = subject {
+            self.view.addSubview(subject)
         }
         
     }
@@ -41,13 +41,13 @@ class AHPopTransitionVC: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        bgSnap?.removeFromSuperview()
-        presentingView?.removeFromSuperview()
+        subjectBg?.removeFromSuperview()
+        subject?.removeFromSuperview()
         previousPoint = nil
     }
     
     func touchMoved(to point:CGPoint) {
-        guard let bgSnap = bgSnap, let presentingView = presentingView else {
+        guard let subjectBg = subjectBg, let subject = subject else {
             return
         }
         
@@ -59,10 +59,10 @@ class AHPopTransitionVC: UIViewController {
         let dy = point.y - previousPoint!.y
         previousPoint = point
         
-        bgSnap.frame.origin.x = bgSnap.frame.origin.x + dx
-        bgSnap.frame.origin.y = bgSnap.frame.origin.y + dy
+        subjectBg.frame.origin.x = subjectBg.frame.origin.x + dx
+        subjectBg.frame.origin.y = subjectBg.frame.origin.y + dy
 
-        presentingView.frame.origin.x = presentingView.frame.origin.x + dx
-        presentingView.frame.origin.y = presentingView.frame.origin.y + dy
+        subject.frame.origin.x = subject.frame.origin.x + dx
+        subject.frame.origin.y = subject.frame.origin.y + dy
     }
 }

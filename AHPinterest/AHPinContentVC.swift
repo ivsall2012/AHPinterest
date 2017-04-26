@@ -9,12 +9,14 @@
 import UIKit
 
 class AHPinContentVC: AHPinVC {
-    let popTransitionHanlder = AHPopTransitionHandler()
+    let popInteractiveHandler = AHPopInteractiveHandler()
     
     let pinContentLayout = AHPinContentLayout()
     let pinContentLayoutHanlder = AHPinContentLayoutHandler()
     
     var navBar: AHPinNavBar?
+    
+    // The current displaying main cell
     var presentingCell: AHPinContentCell? {
         return self.pinContentLayoutHanlder.presentingCell
     }
@@ -67,9 +69,8 @@ extension AHPinContentVC {
 // MARK:- Setups
 extension AHPinContentVC {
     func setupPopTransition() {
-        popTransitionHanlder.pinVC = self
-        popTransitionHanlder.attachView(view: self.view)
-        addDelegate(delegate: popTransitionHanlder)
+        popInteractiveHandler.pinContentVC = self
+        addDelegate(delegate: popInteractiveHandler)
     }
     
     func setupContentLayout() {

@@ -8,7 +8,21 @@
 
 import UIKit
 
+protocol AHTransitionProperties {
+    // This cell is the one already being selected which triggered the push, will be used by the next pushed VC(AHDetailVC) from this VC(AHPinVC or AHDetailVC).
+    weak var selectedCell: AHPinCell? {get}
+    
+    // The current displaying main cell(the large size pin) lives within AHPinContentVC
+    // AHPinVC doesn't have to implement this property because it's the root VC.
+    weak var presentingCell: AHPinContentCell? {get}
+    
+}
 
+extension AHTransitionProperties {
+    weak var presentingCell: AHPinContentCell? {
+        return nil
+    }
+}
 
 // SelectedCell is the one in AHPinVC
 // PresentingCell is the one in AHDetailVC

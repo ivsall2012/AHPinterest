@@ -9,9 +9,12 @@
 import UIKit
 
 
-class AHPinVC: AHCollectionVC {
+
+class AHPinVC: AHCollectionVC, AHTransitionProperties {
     
     weak var pinVM: AHPinViewModel?
+    
+    // This cell is the one already being selected which triggered the push, will be used by the next pushed VC(AHDetailVC) from this VC(AHPinVC or AHDetailVC).
     weak var selectedCell: AHPinCell? {
         let currentItem = AHPublicServices.shared.currentItem
         let index = IndexPath(item: currentItem, section: self.pinLayout.layoutSection)
