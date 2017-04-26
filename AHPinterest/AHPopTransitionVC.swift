@@ -15,7 +15,7 @@ class AHPopTransitionVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.orange
+        self.view.backgroundColor = UIColor.orange.withAlphaComponent(0.3)
         // Do any additional setup after loading the view.
     }
     
