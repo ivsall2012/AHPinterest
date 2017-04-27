@@ -105,13 +105,14 @@ extension AHPopInteractiveHandler: AHPopInteractiveDelegate {
         // the second last vc is count - 2
         let previousIndex = childViewControllers.count - 2
         
-        
-        
-        let vc = childViewControllers[previousIndex]
-        
-        let snapshot = vc.view.snapshotView(afterScreenUpdates: true)
         let finalFrame = self.popInteractiveForAnimatingSubjectFinalFrame()
-        let whiteArea = UIView(frame: finalFrame)
+        let vc = childViewControllers[previousIndex]
+        vc.view.layoutIfNeeded()
+        let snapshot = vc.view.snapshotView(afterScreenUpdates: true)
+
+        
+        let newFrame = finalFrame.insetBy(dx: -2, dy: -2)
+        let whiteArea = UIView(frame: newFrame)
         whiteArea.backgroundColor = UIColor.white
         snapshot?.addSubview(whiteArea)
         return snapshot!

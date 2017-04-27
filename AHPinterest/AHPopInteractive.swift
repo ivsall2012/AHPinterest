@@ -68,17 +68,17 @@ extension AHPopInteractive: UIGestureRecognizerDelegate, UICollectionViewDelegat
                 popInteractiveVC.touchMoved(to: pt)
             }
         case .cancelled, .ended:
-            isInPopTranstion = false
-            popInteractiveVC.dismiss(animated: false, completion: { 
-                // check and see if popInteractiveVC already triggered popping this pinVC
-                
-            })
+            if isInPopTranstion {
+                isInPopTranstion = false
+                popInteractiveVC.touchEnded()
+            }
         default:
             break
         }
     }
-    
+
     func setupPopInteractiveVC() {
+        popInteractiveVC.delegate = self
         
         let subjectBg = delegate.popInteractiveForAnimatingSubjectBackground()
         popInteractiveVC.subjectBg = subjectBg
@@ -89,9 +89,24 @@ extension AHPopInteractive: UIGestureRecognizerDelegate, UICollectionViewDelegat
         let background = delegate.popInteractiveForAnimatingBackground()
         popInteractiveVC.background = background
         
+        let finalFrame = delegate.popInteractiveForAnimatingSubjectFinalFrame()
+        popInteractiveVC.subjectFinalFrame = finalFrame
+        
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
 }
+
+extension AHPopInteractive: AHPopInteractiveVCDelegate {
+    func popInteractiveVCShouldPopController(bool: Bool) {
+        if bool {
+            AHPublicServices.shared.navigatonController!.popViewController(animated: false)
+        }
+    }
+}
+
+
+
+

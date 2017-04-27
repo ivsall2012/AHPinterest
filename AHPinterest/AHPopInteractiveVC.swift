@@ -8,7 +8,14 @@
 
 import UIKit
 
+protocol AHPopInteractiveVCDelegate: NSObjectProtocol {
+    func popInteractiveVCShouldPopController(bool: Bool)
+}
+
+
 class AHPopInteractiveVC: UIViewController {
+    weak var delegate: AHPopInteractiveVCDelegate?
+    
     var previousPoint: CGPoint?
     var subjectBg: UIView? {
         didSet {
@@ -32,10 +39,13 @@ class AHPopInteractiveVC: UIViewController {
                 backgroundMask?.backgroundColor = UIColor.white
                 background.addSubview(backgroundMask!)
                 self.view.insertSubview(background, at: 0)
+                background.transform = CGAffineTransform(scaleX: 1.5, y: 1.6)
             }
         }
     }
     var backgroundMask: UIView?
+    
+    var subjectFinalFrame = CGRect.zero
     
     var subjectOriginalFrame = CGRect.zero
     var subjectBgOriginalFrame = CGRect.zero
@@ -70,6 +80,7 @@ class AHPopInteractiveVC: UIViewController {
         super.viewDidAppear(animated)
         subjectBg?.removeFromSuperview()
         subject?.removeFromSuperview()
+        background?.removeFromSuperview()
         previousPoint = nil
     }
     
@@ -97,6 +108,26 @@ class AHPopInteractiveVC: UIViewController {
         handleBackground(background, backgroundMask, dx, dy, ratio)
 
         
+    }
+    
+    func touchEnded() {
+        let delta = subject!.frame.origin.y - subjectBgOriginalFrame.origin.y
+        if delta < 50 {
+            self.dismiss(animated: false, completion: nil)
+            delegate?.popInteractiveVCShouldPopController(bool: false)
+        }else{
+            print("delta:\(delta)")
+            self.subjectBg?.removeFromSuperview()
+            UIView.animate(withDuration: 0.5, animations: {
+                self.backgroundMask?.alpha = 0.0
+                self.subject?.frame = self.subjectFinalFrame
+                self.background?.transform = .identity
+                }, completion: { (_) in
+                    self.backgroundMask = nil
+                    self.dismiss(animated: false, completion: nil)
+                    self.delegate?.popInteractiveVCShouldPopController(bool: true)
+            })
+        }
     }
 }
 
@@ -147,6 +178,7 @@ extension AHPopInteractiveVC {
     }
     func handleBackground(_ background: UIView, _ mask: UIView, _ dx: CGFloat, _ dy: CGFloat, _ ratio: CGFloat){
         mask.alpha = ratio
+        background.transform = CGAffineTransform(scaleX: 1.5 * ratio, y: 1.5 * ratio)
     }
 }
 

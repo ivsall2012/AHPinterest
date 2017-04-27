@@ -29,7 +29,7 @@ class AHPinVC: AHCollectionVC, AHTransitionProperties {
         
         // now the cell is not nil
         let cell = self.collectionView!.cellForItem(at: index) as? AHPinCell
-        
+        print("selectedCell")
         // custom scroll to make cell center
         if AHDefaultTransitionDelegate.shared.operation == .pop {
             self.scrollToItem(cell: cell!)
