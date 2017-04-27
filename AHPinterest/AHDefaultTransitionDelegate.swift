@@ -38,4 +38,8 @@ extension AHDefaultTransitionDelegate: UINavigationControllerDelegate {
         transitionAnimator.state = operation
         return transitionAnimator
     }
+    
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        transitionAnimator.state = .none
+    }
 }

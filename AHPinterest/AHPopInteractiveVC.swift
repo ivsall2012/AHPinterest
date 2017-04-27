@@ -112,7 +112,7 @@ class AHPopInteractiveVC: UIViewController {
     
     func touchEnded() {
         let delta = subject!.frame.origin.y - subjectBgOriginalFrame.origin.y
-        if delta < 50 {
+        if delta < 150 {
             self.dismiss(animated: false, completion: nil)
             delegate?.popInteractiveVCShouldPopController(bool: false)
         }else{

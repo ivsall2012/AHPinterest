@@ -20,20 +20,17 @@ class AHPinVC: AHCollectionVC, AHTransitionProperties {
     // This cell is the one already being selected which triggered the push, will be used by the next pushed VC(AHDetailVC) from this VC(AHPinVC or AHDetailVC).
     weak var selectedCell: AHPinCell? {
         let index = IndexPath(item: itemIndex, section: self.pinLayout.layoutSection)
-        
         // scroll using system method to make the cell visible
-        if AHDefaultTransitionDelegate.shared.operation  == .pop {
-            self.collectionView?.scrollToItem(at: index, at: UICollectionViewScrollPosition.bottom, animated: false)
-            self.collectionView?.layoutIfNeeded()
+        if AHDefaultTransitionDelegate.shared.operation  == .push {
+            return self.collectionView!.cellForItem(at: index) as? AHPinCell
         }
-        
+        self.collectionView?.scrollToItem(at: index, at: UICollectionViewScrollPosition.bottom, animated: false)
+        self.collectionView?.layoutIfNeeded()
         // now the cell is not nil
         let cell = self.collectionView!.cellForItem(at: index) as? AHPinCell
         // custom scroll to make cell center
-        if AHDefaultTransitionDelegate.shared.operation == .pop {
-            self.scrollToItem(cell: cell!)
-            self.collectionView?.layoutIfNeeded()
-        }
+        self.scrollToItem(cell: cell!)
+        self.collectionView?.layoutIfNeeded()
         return cell
     }
     
