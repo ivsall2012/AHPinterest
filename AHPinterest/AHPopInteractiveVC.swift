@@ -116,7 +116,6 @@ class AHPopInteractiveVC: UIViewController {
             self.dismiss(animated: false, completion: nil)
             delegate?.popInteractiveVCShouldPopController(bool: false)
         }else{
-            print("delta:\(delta)")
             self.subjectBg?.removeFromSuperview()
             UIView.animate(withDuration: 0.5, animations: {
                 self.backgroundMask?.alpha = 0.0

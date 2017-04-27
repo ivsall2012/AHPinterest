@@ -64,7 +64,7 @@ class AHDetailVC: UIViewController, AHTransitionProperties {
 extension AHDetailVC {
     override func viewDidLoad() {
         super.viewDidLoad()
-//        AHPublicServices.shared.navigatonController?.delegate = self
+
         self.navigationController?.isNavigationBarHidden = true
         collectionView?.backgroundColor = UIColor.white
         self.automaticallyAdjustsScrollViewInsets = false
@@ -89,7 +89,7 @@ extension AHDetailVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.isStatusBarHidden = true
-//        AHPublicServices.shared.navigatonController?.delegate = self
+
     }
     
     
@@ -126,7 +126,16 @@ extension AHDetailVC {
         let vc = storyboard.instantiateViewController(withIdentifier: "AHPinContentVC") as! AHPinContentVC
         vc.refreshLayout.enableHeaderRefresh = false
         vc.showLayoutHeader = true
-//        vc.initialAutoRefresh = false
+        
+        let navBarCallback = { (showTransitionAnimation: Bool) -> () in
+            print("popping itemIndex:\(self.itemIndex)")
+            if !showTransitionAnimation {
+                AHDefaultTransitionDelegate.shared.turnOffTransitionAnimationTemporally()
+            }
+            self.navigationController!.popViewController(animated: true)
+        }
+        
+        vc.navBarDismissCallback = navBarCallback
         
         // setup VC related
         vc.willMove(toParentViewController: self)

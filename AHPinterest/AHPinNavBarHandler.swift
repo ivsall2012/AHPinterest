@@ -27,9 +27,9 @@ class AHPinNavBarHandler: NSObject {
 extension AHPinNavBarHandler: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y >= triggeredYposition {
-            navBar?.showNavBar = false
+            navBar?.showNavBarOptions = false
         }else{
-            navBar?.showNavBar = true
+            navBar?.showNavBarOptions = true
         }
     }
 }

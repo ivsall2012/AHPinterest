@@ -14,12 +14,27 @@ class AHPinContentVC: AHPinVC {
     let pinContentLayout = AHPinContentLayout()
     let pinContentLayoutHanlder = AHPinContentLayoutHandler()
     
+    let navBarHandler = AHPinNavBarHandler()
+    
     var navBar: AHPinNavBar?
     
     // The current displaying main cell
     var presentingCell: AHPinContentCell? {
         return self.pinContentLayoutHanlder.presentingCell
     }
+    
+    var navBarDismissCallback: ((_ showTransitionAnimation: Bool) -> ())? {
+        didSet {
+            if let navBarDismissCallback = navBarDismissCallback {
+                
+                self.navBar!.dismissCallback = { () -> () in
+                    let showTransitionAnimation = self.navBar!.showNavBarOptions
+                    navBarDismissCallback(showTransitionAnimation)
+                }
+            }
+        }
+    }
+    
     override weak var pinVM: AHPinViewModel? {
         didSet {
             if let pinVM = pinVM {
@@ -86,7 +101,7 @@ extension AHPinContentVC {
         self.view.addSubview(navBar!)
         
         navBar!.pinVM = pinVM
-        let navBarHandler = AHPinNavBarHandler()
+
         navBarHandler.contentVC = self
         addDelegate(delegate: navBarHandler)
         navBarHandler.navBar = navBar

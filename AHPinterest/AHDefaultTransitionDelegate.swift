@@ -14,10 +14,22 @@ class AHDefaultTransitionDelegate: NSObject {
     var operation: UINavigationControllerOperation {
         return transitionAnimator.state
     }
+    
+    fileprivate var showTransitionAnimation = true
+    
+    func turnOffTransitionAnimationTemporally() {
+        showTransitionAnimation = false
+    }
+    
 }
 extension AHDefaultTransitionDelegate: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         if operation == .none {
+            return nil
+        }
+        
+        if !showTransitionAnimation {
+            showTransitionAnimation = true
             return nil
         }
         
@@ -33,7 +45,6 @@ extension AHDefaultTransitionDelegate: UINavigationControllerDelegate {
             transitionAnimator.popFromDelegate = fromVC
             
         }
-        
         
         transitionAnimator.state = operation
         return transitionAnimator

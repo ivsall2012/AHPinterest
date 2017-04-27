@@ -12,11 +12,14 @@ class AHPinNavBar: UICollectionReusableView {
     @IBOutlet weak var moreLabel: UILabel!
     @IBOutlet weak var optionContainer: UIView!
     
+    var dismissCallback: (() -> ())?
+    
     weak var pinVM: AHPinViewModel?
     
-    var showNavBar = true {
+    // Should show navBar options
+    var showNavBarOptions = true {
         didSet {
-            if showNavBar {
+            if showNavBarOptions {
                 UIView.animate(withDuration: 0.25, animations: { 
                     self.optionContainer.isHidden = false
                     self.moreLabel.isHidden = true
@@ -49,8 +52,7 @@ class AHPinNavBar: UICollectionReusableView {
     @IBAction func checkBtnTapped(_ sender: UIButton) {
     }
     @IBAction func backBtnTapped(_ sender: AnyObject) {
-        guard let navVC = AHPublicServices.shared.navigatonController else { return }
-        navVC.popViewController(animated: true)
+        dismissCallback?()
     }
     
 }

@@ -23,6 +23,8 @@ extension AHPinDelegate: UICollectionViewDelegate, AHDetailVCDelegate {
         vc.itemIndex = indexPath.item
         pinVC?.itemIndex = indexPath.item
         AHPublicServices.shared.navigatonController?.pushViewController(vc, animated: true)
+        print("pushing indexItem:\(pinVC!.itemIndex)")
+        
         // FIXME: Need an efficent way to tell pinVC that the custom push transition animation is finished and then scrollToCell()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.pinVC?.scrollToCell()
