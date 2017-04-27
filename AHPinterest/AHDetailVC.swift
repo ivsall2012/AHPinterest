@@ -31,6 +31,7 @@ class AHDetailVC: UIViewController, AHTransitionProperties {
     var itemIndex: Int = -1 {
         didSet {
             self.delegate?.detailVCDidChangeTo(item: itemIndex)
+
         }
     }
     
@@ -110,9 +111,6 @@ extension AHDetailVC {
         if !initialScroll {
             let indexPath = IndexPath(item: itemIndex, section: 0)
             collectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.right, animated: false)
-            
-            
-            //            cellVC.animateNavBar()
             initialScroll = true
         }
         
@@ -137,6 +135,7 @@ extension AHDetailVC {
         return vc
     }
 
+    
 }
 
 

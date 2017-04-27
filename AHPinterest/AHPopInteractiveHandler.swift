@@ -107,9 +107,9 @@ extension AHPopInteractiveHandler: AHPopInteractiveDelegate {
         
         let finalFrame = self.popInteractiveForAnimatingSubjectFinalFrame()
         let vc = childViewControllers[previousIndex]
-        vc.view.layoutIfNeeded()
+        
         let snapshot = vc.view.snapshotView(afterScreenUpdates: true)
-
+        vc.view.layoutIfNeeded()
         
         let newFrame = finalFrame.insetBy(dx: -2, dy: -2)
         let whiteArea = UIView(frame: newFrame)

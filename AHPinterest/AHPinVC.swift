@@ -29,7 +29,6 @@ class AHPinVC: AHCollectionVC, AHTransitionProperties {
         
         // now the cell is not nil
         let cell = self.collectionView!.cellForItem(at: index) as? AHPinCell
-        print("selectedCell")
         // custom scroll to make cell center
         if AHDefaultTransitionDelegate.shared.operation == .pop {
             self.scrollToItem(cell: cell!)
@@ -54,16 +53,7 @@ class AHPinVC: AHCollectionVC, AHTransitionProperties {
     
     var showLayoutHeader = false
     
-    func scrollToItem(cell: AHPinCell) {
-        let relativeP = cell.convert(cell.center, to: collectionView)
-        if relativeP.y < collectionView!.frame.size.height * 0.5 {
-            // the cell is on the upper half of the screen
-            return
-        }
-        // scroll to make the cell center
-        let pt = CGPoint(x: 0, y: cell.center.y - collectionView!.frame.size.height * 0.5)
-        collectionView?.setContentOffset(pt, animated: false)
-    }
+    
 }
 
 
@@ -156,6 +146,30 @@ extension AHPinVC {
     
     func setupOptionsHandler() {
         optionsHandler = AHOptionsHandler(presenterVC: self, targetView: self.collectionView!, delegate: self)
+    }
+    
+    func scrollToCell() {
+        let index = IndexPath(item: itemIndex, section: self.pinLayout.layoutSection)
+        
+        // scroll using system method to make the cell visible
+        self.collectionView?.scrollToItem(at: index, at: UICollectionViewScrollPosition.bottom, animated: false)
+        self.collectionView?.layoutIfNeeded()
+        
+        // now the cell is not nil
+        let cell = self.collectionView!.cellForItem(at: index) as? AHPinCell
+        self.scrollToItem(cell: cell!)
+        self.collectionView?.layoutIfNeeded()
+    }
+    
+    func scrollToItem(cell: AHPinCell) {
+        let relativeP = cell.convert(cell.center, to: collectionView)
+        if relativeP.y < collectionView!.frame.size.height * 0.5 {
+            // the cell is on the upper half of the screen
+            return
+        }
+        // scroll to make the cell center
+        let pt = CGPoint(x: 0, y: cell.center.y - collectionView!.frame.size.height * 0.5)
+        collectionView?.setContentOffset(pt, animated: false)
     }
     
 }
