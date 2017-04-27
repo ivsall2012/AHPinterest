@@ -89,7 +89,9 @@ extension AHPopInteractiveHandler: AHPopInteractiveDelegate {
     
     func popInteractiveForAnimatingSubjectBackground() -> UIView {
         let bgSnap = pinContentVC.view.snapshotView(afterScreenUpdates: true)
-        let whiteArea = UIView(frame: whiteAreaFrame)
+        // give the frame extra 2 points on all sides to cover up fully
+        let newFrame = whiteAreaFrame.insetBy(dx: -2, dy: -2)
+        let whiteArea = UIView(frame: newFrame)
         whiteArea.backgroundColor = UIColor.white
         bgSnap!.addSubview(whiteArea)
         return bgSnap!
