@@ -98,13 +98,18 @@ extension AHPopInteractiveHandler: AHPopInteractiveDelegate {
     }
     
     func popInteractiveForAnimatingBackground() -> UIView {
-        guard let vc = AHPublicServices.shared.navigatonController?.childViewControllers.last
-            else {
-                fatalError("No previous VC comfirming AHTransitionProperties")
+        guard let childViewControllers = AHPublicServices.shared.navigatonController?.childViewControllers else {
+            fatalError("NO childViewControllers?")
         }
+        // the last vc the current one, count -1
+        // the second last vc is count - 2
+        let previousIndex = childViewControllers.count - 2
+        
+        
+        
+        let vc = childViewControllers[previousIndex]
         
         let snapshot = vc.view.snapshotView(afterScreenUpdates: true)
-        
         let finalFrame = self.popInteractiveForAnimatingSubjectFinalFrame()
         let whiteArea = UIView(frame: finalFrame)
         whiteArea.backgroundColor = UIColor.white

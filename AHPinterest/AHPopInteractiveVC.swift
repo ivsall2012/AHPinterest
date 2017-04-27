@@ -24,13 +24,25 @@ class AHPopInteractiveVC: UIViewController {
             }
         }
     }
+    var background: UIView? {
+        didSet {
+            if let background = background {
+                backgroundMask = UIView(frame: background.bounds)
+                backgroundMask?.alpha = 1.0
+                backgroundMask?.backgroundColor = UIColor.white
+                background.addSubview(backgroundMask!)
+                self.view.insertSubview(background, at: 0)
+            }
+        }
+    }
+    var backgroundMask: UIView?
     
     var subjectOriginalFrame = CGRect.zero
     var subjectBgOriginalFrame = CGRect.zero
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.orange.withAlphaComponent(0.3)
+        self.view.backgroundColor = UIColor.white
         // Do any additional setup after loading the view.
     }
     
@@ -62,7 +74,7 @@ class AHPopInteractiveVC: UIViewController {
     }
     
     func touchMoved(to point:CGPoint) {
-        guard let subjectBg = subjectBg, let subject = subject else {
+        guard let subjectBg = subjectBg, let subject = subject, let backgroundMask = backgroundMask, let background = background else {
             return
         }
         
@@ -81,8 +93,8 @@ class AHPopInteractiveVC: UIViewController {
         
         
         handleSubjectBg(subjectBg,dx, dy, ratio)
-        handlerSubject(subject, dx, dy, ratio)
-        
+        handleSubject(subject, dx, dy, ratio)
+        handleBackground(background, backgroundMask, dx, dy, ratio)
 
         
     }
@@ -108,25 +120,22 @@ extension AHPopInteractiveVC {
             let scale = CGAffineTransform(scaleX: ratio, y: ratio)
 
             subjectBg.transform = scale
-            subjectBg.frame.origin.x = newX - dx * (1 - ratio)
-            subjectBg.frame.origin.y = newY - dy * (1 - ratio)
+            subjectBg.frame.origin.x = newX
+            subjectBg.frame.origin.y = newY
+            subjectBg.alpha = ratio * 0.5
         }
         
         
     }
-    func handlerSubject(_ subject: UIView, _ dx: CGFloat, _ dy: CGFloat, _ ratio: CGFloat) {
-        
+    func handleSubject(_ subject: UIView, _ dx: CGFloat, _ dy: CGFloat, _ ratio: CGFloat) {
+        let newX = subject.frame.origin.x + dx
+        let newY = subject.frame.origin.y + dy
         
         if subject.frame.origin.y < subjectOriginalFrame.origin.y {
-            let newX = subject.frame.origin.x + dx
-            let newY = subject.frame.origin.y + dy
+            
             subject.frame.origin.x = newX
             subject.frame.origin.y = newY
         }else{
-            
-            
-            let newX = subject.frame.origin.x + dx * ratio
-            let newY = subject.frame.origin.y + dy * ratio
             
             let scale = CGAffineTransform(scaleX: ratio, y: ratio)
             
@@ -135,6 +144,9 @@ extension AHPopInteractiveVC {
             subject.frame.origin.y = newY
         }
         
+    }
+    func handleBackground(_ background: UIView, _ mask: UIView, _ dx: CGFloat, _ dy: CGFloat, _ ratio: CGFloat){
+        mask.alpha = ratio
     }
 }
 

@@ -86,6 +86,9 @@ extension AHPopInteractive: UIGestureRecognizerDelegate, UICollectionViewDelegat
         let subject = delegate.popInteractiveForAnimatingSubject()
         popInteractiveVC.subject = subject
         
+        let background = delegate.popInteractiveForAnimatingBackground()
+        popInteractiveVC.background = background
+        
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
