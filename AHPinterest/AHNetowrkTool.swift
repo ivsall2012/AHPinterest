@@ -24,8 +24,11 @@ extension AHNetowrkTool {
         
         // this is so fake.....
         DispatchQueue.global().async {
-            let categoryArr = AHPinDataGenerator.generator.generateCatefories()
-            comletion?(categoryArr)
+//            sleep(5)
+            DispatchQueue.main.async {
+                let categoryArr = AHPinDataGenerator.generator.generateCatefories()
+                comletion?(categoryArr)
+            }
         }
     }
 }

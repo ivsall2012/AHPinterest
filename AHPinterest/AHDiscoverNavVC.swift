@@ -22,7 +22,7 @@ class AHDiscoverNavVC: UICollectionViewController {
         collectionView?.delegate = navHandler
         collectionView?.dataSource = navHandler
         collectionView?.contentInset = .zero
-        let layout = collectionView?.collectionViewLayout as! AHDiscoverNavLayout
+        let layout = collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
         layout.minimumLineSpacing = AHDiscoverNavCellPadding
 //        layout.minimumInteritemSpacing = AHDiscoverNavCellPadding
         navHandler.discoverNavVC = self

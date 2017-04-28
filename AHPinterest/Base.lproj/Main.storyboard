@@ -381,7 +381,7 @@
                                     <constraint firstAttribute="height" constant="49" id="qdZ-pz-N5U"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="WZQ-cK-kOi" kind="embed" id="w2H-em-qzM"/>
+                                    <segue destination="WZQ-cK-kOi" kind="embed" identifier="AHDiscoverNavVC" id="w2H-em-qzM"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -406,7 +406,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Cba-aT-dhc" customClass="AHDiscoverNavLayout" customModule="AHPinterest" customModuleProvider="target">
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Cba-aT-dhc">
                             <size key="itemSize" width="100" height="48"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>

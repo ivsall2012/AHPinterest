@@ -26,9 +26,13 @@ class AHDiscoverNavHandler: NSObject {
         return view
     }()
     
+    var isInitialSelection = false
+    
     func reload() {
         AHNetowrkTool.tool.reloadCategories { (categoryArr: [String]) -> () in
             self.categoryArr.append(contentsOf: categoryArr)
+            self.isInitialSelection = true
+            self.background.frame = CGRect.zero
             self.discoverNavVC.collectionView?.reloadData()
         }
     }
@@ -67,7 +71,12 @@ extension AHDiscoverNavHandler: UICollectionViewDelegateFlowLayout {
         background.isHidden = false
         collectionView.insertSubview(background, belowSubview: cell)
         
-        UIView.animate(withDuration: 0.25) { 
+        if background.frame != CGRect.zero {
+            UIView.animate(withDuration: 0.25) {
+                self.background.frame = bgFrame.insetBy(dx: 0.0, dy: 8)
+                self.background.layer.cornerRadius = self.background.frame.size.height * 0.5
+            }
+        }else{
             self.background.frame = bgFrame.insetBy(dx: 0.0, dy: 8)
             self.background.layer.cornerRadius = self.background.frame.size.height * 0.5
         }
@@ -106,8 +115,9 @@ extension AHDiscoverNavHandler: UICollectionViewDataSource {
         
         let categoryStr = categoryArr[indexPath.item]
         cell.categoryLabel.text = categoryStr
-        if !categoryArr.isEmpty && indexPath.item == 0 {
+        if !categoryArr.isEmpty && isInitialSelection && indexPath.item == 0 {
             // by unblocking this method cellForItemAt, the cell will be returned and then we scrollToItem
+            isInitialSelection = false
             DispatchQueue.main.async {
                 self.scrollToItem(at: self.initialIndexPath, collectionView: collectionView)
             }
