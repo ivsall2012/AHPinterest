@@ -33,6 +33,12 @@ public class AHPinDataGenerator: NSObject {
 
 
 extension AHPinDataGenerator{
+    func generateCatefories() -> [String] {
+        let stringArr = ["Trending", "Everything", "DIY", "Women's Style", "Home", "Beauty", "Food", "Men's style", "Humor", "TRavel"]
+        return stringArr
+    }
+    
+    
     func randomData() -> [AHPinViewModel] {
         let pinModels = randomCardBatch()
         var viewModelArr = [AHPinViewModel]()

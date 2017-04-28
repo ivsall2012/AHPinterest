@@ -19,6 +19,12 @@
 		A12A283C1E9ECBE500F7A36D /* AHDetailVCLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A283B1E9ECBE500F7A36D /* AHDetailVCLayout.swift */; };
 		A12A28411EA0527700F7A36D /* AHPinDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A28401EA0527700F7A36D /* AHPinDataSource.swift */; };
 		A12A28441EA07ADB00F7A36D /* AHOptionsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A28431EA07ADB00F7A36D /* AHOptionsHandler.swift */; };
+		A151E2111EB2F1F9004D6EB8 /* AHDiscoverNavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A151E2101EB2F1F9004D6EB8 /* AHDiscoverNavVC.swift */; };
+		A151E2141EB2F571004D6EB8 /* AHDiscoverNavCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A151E2131EB2F571004D6EB8 /* AHDiscoverNavCell.swift */; };
+		A151E2181EB2F5DA004D6EB8 /* AHDiscoverNavHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A151E2171EB2F5DA004D6EB8 /* AHDiscoverNavHandler.swift */; };
+		A151E21A1EB2F6D6004D6EB8 /* AHDiscoverNavLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A151E2191EB2F6D6004D6EB8 /* AHDiscoverNavLayout.swift */; };
+		A151E21D1EB2F7C7004D6EB8 /* AHDiscoverNavBgCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A151E21B1EB2F7C7004D6EB8 /* AHDiscoverNavBgCell.swift */; };
+		A151E21E1EB2F7C7004D6EB8 /* AHDiscoverNavBgCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A151E21C1EB2F7C7004D6EB8 /* AHDiscoverNavBgCell.xib */; };
 		A15C0B591E9369F600B35BE1 /* AHOptionsAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C0B581E9369F600B35BE1 /* AHOptionsAnimator.swift */; };
 		A15C0B5C1E9372B900B35BE1 /* AHOptionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C0B5A1E9372B900B35BE1 /* AHOptionsVC.swift */; };
 		A1640C261EA4BF13000E6EB5 /* AHRefreshLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1640C251EA4BF13000E6EB5 /* AHRefreshLayout.swift */; };
@@ -54,6 +60,7 @@
 		A1B115001EA2B29F004D8601 /* AHLayoutRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B114FF1EA2B29F004D8601 /* AHLayoutRouter.swift */; };
 		A1B115021EA2DAB7004D8601 /* AHPinContentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B115011EA2DAB7004D8601 /* AHPinContentLayout.swift */; };
 		A1B115041EA2DDB9004D8601 /* AHPinContentLayoutHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B115031EA2DDB9004D8601 /* AHPinContentLayoutHandler.swift */; };
+		A1C7CC521EB30EBB00244ED9 /* AHDiscoverContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C7CC511EB30EBB00244ED9 /* AHDiscoverContainer.swift */; };
 		A1CE93541E9A17A5002A8738 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CE93531E9A17A5002A8738 /* Constants.swift */; };
 		A1E85D9C1EA6D153000775FD /* AHPinContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E85D9B1EA6D153000775FD /* AHPinContentCell.swift */; };
 		A1E85D9E1EA6D9E6000775FD /* AHPinLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E85D9D1EA6D9E6000775FD /* AHPinLayoutAttributes.swift */; };
@@ -86,6 +93,12 @@
 		A12A283B1E9ECBE500F7A36D /* AHDetailVCLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDetailVCLayout.swift; sourceTree = "<group>"; };
 		A12A28401EA0527700F7A36D /* AHPinDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinDataSource.swift; sourceTree = "<group>"; };
 		A12A28431EA07ADB00F7A36D /* AHOptionsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHOptionsHandler.swift; sourceTree = "<group>"; };
+		A151E2101EB2F1F9004D6EB8 /* AHDiscoverNavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDiscoverNavVC.swift; sourceTree = "<group>"; };
+		A151E2131EB2F571004D6EB8 /* AHDiscoverNavCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDiscoverNavCell.swift; sourceTree = "<group>"; };
+		A151E2171EB2F5DA004D6EB8 /* AHDiscoverNavHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDiscoverNavHandler.swift; sourceTree = "<group>"; };
+		A151E2191EB2F6D6004D6EB8 /* AHDiscoverNavLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDiscoverNavLayout.swift; sourceTree = "<group>"; };
+		A151E21B1EB2F7C7004D6EB8 /* AHDiscoverNavBgCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDiscoverNavBgCell.swift; sourceTree = "<group>"; };
+		A151E21C1EB2F7C7004D6EB8 /* AHDiscoverNavBgCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AHDiscoverNavBgCell.xib; sourceTree = "<group>"; };
 		A15C0B581E9369F600B35BE1 /* AHOptionsAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHOptionsAnimator.swift; sourceTree = "<group>"; };
 		A15C0B5A1E9372B900B35BE1 /* AHOptionsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHOptionsVC.swift; sourceTree = "<group>"; };
 		A1640C251EA4BF13000E6EB5 /* AHRefreshLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHRefreshLayout.swift; sourceTree = "<group>"; };
@@ -125,6 +138,7 @@
 		A1B114FF1EA2B29F004D8601 /* AHLayoutRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHLayoutRouter.swift; sourceTree = "<group>"; };
 		A1B115011EA2DAB7004D8601 /* AHPinContentLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinContentLayout.swift; sourceTree = "<group>"; };
 		A1B115031EA2DDB9004D8601 /* AHPinContentLayoutHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinContentLayoutHandler.swift; sourceTree = "<group>"; };
+		A1C7CC511EB30EBB00244ED9 /* AHDiscoverContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDiscoverContainer.swift; sourceTree = "<group>"; };
 		A1CE93531E9A17A5002A8738 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A1E85D9B1EA6D153000775FD /* AHPinContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinContentCell.swift; sourceTree = "<group>"; };
 		A1E85D9D1EA6D9E6000775FD /* AHPinLayoutAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinLayoutAttributes.swift; sourceTree = "<group>"; };
@@ -194,6 +208,36 @@
 			name = "Pin Options Animation";
 			sourceTree = "<group>";
 		};
+		A151E20F1EB2BDBE004D6EB8 /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				A1C7CC501EB30EA900244ED9 /* Container */,
+				A151E2151EB2F5C0004D6EB8 /* Nav */,
+				A151E2121EB2F55C004D6EB8 /* View */,
+			);
+			name = Discover;
+			sourceTree = "<group>";
+		};
+		A151E2121EB2F55C004D6EB8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A151E2131EB2F571004D6EB8 /* AHDiscoverNavCell.swift */,
+				A151E21B1EB2F7C7004D6EB8 /* AHDiscoverNavBgCell.swift */,
+				A151E21C1EB2F7C7004D6EB8 /* AHDiscoverNavBgCell.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		A151E2151EB2F5C0004D6EB8 /* Nav */ = {
+			isa = PBXGroup;
+			children = (
+				A151E2101EB2F1F9004D6EB8 /* AHDiscoverNavVC.swift */,
+				A151E2171EB2F5DA004D6EB8 /* AHDiscoverNavHandler.swift */,
+				A151E2191EB2F6D6004D6EB8 /* AHDiscoverNavLayout.swift */,
+			);
+			name = Nav;
+			sourceTree = "<group>";
+		};
 		A1640C231EA4A65F000E6EB5 /* PinVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +301,7 @@
 		A17377271E887F9600462EE1 /* AHPinterest */ = {
 			isa = PBXGroup;
 			children = (
+				A151E20F1EB2BDBE004D6EB8 /* Discover */,
 				A1A227381EA48DC000527358 /* AHCollectionVC */,
 				A1640C231EA4A65F000E6EB5 /* PinVC */,
 				A12A283F1E9ECC0300F7A36D /* PinDetail */,
@@ -358,6 +403,14 @@
 				A1A227361EA48DBA00527358 /* AHDataSourceCenter.swift */,
 			);
 			name = AHCollectionVC;
+			sourceTree = "<group>";
+		};
+		A1C7CC501EB30EA900244ED9 /* Container */ = {
+			isa = PBXGroup;
+			children = (
+				A1C7CC511EB30EBB00244ED9 /* AHDiscoverContainer.swift */,
+			);
+			name = Container;
 			sourceTree = "<group>";
 		};
 		A1E85D931EA6C787000775FD /* VCs */ = {
@@ -511,6 +564,7 @@
 			files = (
 				A17377331E887F9600462EE1 /* LaunchScreen.storyboard in Resources */,
 				A164E1B91EA8319C00A8227D /* AHPinLayoutHeader.xib in Resources */,
+				A151E21E1EB2F7C7004D6EB8 /* AHDiscoverNavBgCell.xib in Resources */,
 				A17377301E887F9600462EE1 /* Assets.xcassets in Resources */,
 				A164E1BD1EA8400B00A8227D /* AHPinNavBar.xib in Resources */,
 				A173772E1E887F9600462EE1 /* Main.storyboard in Resources */,
@@ -534,6 +588,9 @@
 			files = (
 				A1B115021EA2DAB7004D8601 /* AHPinContentLayout.swift in Sources */,
 				A1F70F121E9C57CB00FF2C91 /* AHLayoutHandler.swift in Sources */,
+				A151E2181EB2F5DA004D6EB8 /* AHDiscoverNavHandler.swift in Sources */,
+				A151E21D1EB2F7C7004D6EB8 /* AHDiscoverNavBgCell.swift in Sources */,
+				A151E21A1EB2F6D6004D6EB8 /* AHDiscoverNavLayout.swift in Sources */,
 				A123E6FC1EB0148700D7565E /* AHPopInteractive.swift in Sources */,
 				A123E6E51EAD576B00D7565E /* AHPublicServices.swift in Sources */,
 				A168BFE41E88930200A87E03 /* AHPinDelegate.swift in Sources */,
@@ -545,6 +602,7 @@
 				A1A227351EA48DAC00527358 /* AHDelegatesCenter.swift in Sources */,
 				A164E1BC1EA8400B00A8227D /* AHPinNavBar.swift in Sources */,
 				A123E6E71EADD24E00D7565E /* AHDefaultTransitionDelegate.swift in Sources */,
+				A151E2111EB2F1F9004D6EB8 /* AHDiscoverNavVC.swift in Sources */,
 				A164E1B81EA8319C00A8227D /* AHPinLayoutHeader.swift in Sources */,
 				A168BFE81E889B6400A87E03 /* AHPinLayout.swift in Sources */,
 				A1E85DA01EA6E07C000775FD /* AHPinContentVC.swift in Sources */,
@@ -559,6 +617,7 @@
 				A19EC44D1E99EC0000B6D7C4 /* AHPinViewModel.swift in Sources */,
 				A164E1A81EA79DB600A8227D /* AHNavigationController.swift in Sources */,
 				A1640C281EA4C4C6000E6EB5 /* AHLayout.swift in Sources */,
+				A1C7CC521EB30EBB00244ED9 /* AHDiscoverContainer.swift in Sources */,
 				A1A2272F1EA408FC00527358 /* NSIndexPath+Extension.swift in Sources */,
 				A1E85D9E1EA6D9E6000775FD /* AHPinLayoutAttributes.swift in Sources */,
 				A15C0B591E9369F600B35BE1 /* AHOptionsAnimator.swift in Sources */,
@@ -578,6 +637,7 @@
 				A1A227331EA48C3D00527358 /* AHCollectionVC.swift in Sources */,
 				A123E7031EB0842800D7565E /* AHPopInteractiveHandler.swift in Sources */,
 				A1F70F161E9CC21A00FF2C91 /* AHRefershUI.swift in Sources */,
+				A151E2141EB2F571004D6EB8 /* AHDiscoverNavCell.swift in Sources */,
 				A123E7011EB054E900D7565E /* AHPopInteractiveVC.swift in Sources */,
 				A17377291E887F9600462EE1 /* AppDelegate.swift in Sources */,
 			);

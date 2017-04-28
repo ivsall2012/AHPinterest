@@ -18,6 +18,19 @@ class AHNetowrkTool: NSObject {
     
 }
 
+// MARK:- For Discover Stuff
+extension AHNetowrkTool {
+    func reloadCategories(comletion: (([String])->())? ) {
+        
+        // this is so fake.....
+        DispatchQueue.global().async {
+            let categoryArr = AHPinDataGenerator.generator.generateCatefories()
+            comletion?(categoryArr)
+        }
+    }
+}
+
+
 // MARK:- Pin Data Related
 extension AHNetowrkTool {
     func loadNewData(completion: @escaping ([AHPinViewModel]) -> Swift.Void) {
