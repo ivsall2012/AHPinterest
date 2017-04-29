@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A123E6E51EAD576B00D7565E /* AHPublicServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123E6E41EAD576B00D7565E /* AHPublicServices.swift */; };
-		A123E6E71EADD24E00D7565E /* AHDefaultTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123E6E61EADD24E00D7565E /* AHDefaultTransitionDelegate.swift */; };
+		A123E6E71EADD24E00D7565E /* AHTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123E6E61EADD24E00D7565E /* AHTransitionDelegate.swift */; };
 		A123E6EB1EAEB0B100D7565E /* AHPinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123E6EA1EAEB0B100D7565E /* AHPinCell.swift */; };
 		A123E6FC1EB0148700D7565E /* AHPopInteractive.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123E6FB1EB0148700D7565E /* AHPopInteractive.swift */; };
 		A123E7011EB054E900D7565E /* AHPopInteractiveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123E7001EB054E900D7565E /* AHPopInteractiveVC.swift */; };
@@ -79,8 +78,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A123E6E41EAD576B00D7565E /* AHPublicServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPublicServices.swift; sourceTree = "<group>"; };
-		A123E6E61EADD24E00D7565E /* AHDefaultTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHDefaultTransitionDelegate.swift; sourceTree = "<group>"; };
+		A123E6E61EADD24E00D7565E /* AHTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHTransitionDelegate.swift; sourceTree = "<group>"; };
 		A123E6EA1EAEB0B100D7565E /* AHPinCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinCell.swift; sourceTree = "<group>"; };
 		A123E6FB1EB0148700D7565E /* AHPopInteractive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPopInteractive.swift; sourceTree = "<group>"; };
 		A123E7001EB054E900D7565E /* AHPopInteractiveVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPopInteractiveVC.swift; sourceTree = "<group>"; };
@@ -176,7 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				A164E1A71EA79DB600A8227D /* AHNavigationController.swift */,
-				A123E6E61EADD24E00D7565E /* AHDefaultTransitionDelegate.swift */,
+				A123E6E61EADD24E00D7565E /* AHTransitionDelegate.swift */,
 			);
 			name = Navigation;
 			sourceTree = "<group>";
@@ -361,7 +359,6 @@
 				A19EC4481E99D99700B6D7C4 /* AHPinDataGenerator.swift */,
 				A17377281E887F9600462EE1 /* AppDelegate.swift */,
 				A1CE93531E9A17A5002A8738 /* Constants.swift */,
-				A123E6E41EAD576B00D7565E /* AHPublicServices.swift */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -591,7 +588,6 @@
 				A1F70F121E9C57CB00FF2C91 /* AHLayoutHandler.swift in Sources */,
 				A151E2181EB2F5DA004D6EB8 /* AHDiscoverNavHandler.swift in Sources */,
 				A123E6FC1EB0148700D7565E /* AHPopInteractive.swift in Sources */,
-				A123E6E51EAD576B00D7565E /* AHPublicServices.swift in Sources */,
 				A168BFE41E88930200A87E03 /* AHPinDelegate.swift in Sources */,
 				A17377471E88825100462EE1 /* AHPinDataModel.swift in Sources */,
 				A19EC44B1E99DFBF00B6D7C4 /* AHNetowrkTool.swift in Sources */,
@@ -600,7 +596,7 @@
 				A1B115001EA2B29F004D8601 /* AHLayoutRouter.swift in Sources */,
 				A1A227351EA48DAC00527358 /* AHDelegatesCenter.swift in Sources */,
 				A164E1BC1EA8400B00A8227D /* AHPinNavBar.swift in Sources */,
-				A123E6E71EADD24E00D7565E /* AHDefaultTransitionDelegate.swift in Sources */,
+				A123E6E71EADD24E00D7565E /* AHTransitionDelegate.swift in Sources */,
 				A151E2111EB2F1F9004D6EB8 /* AHDiscoverNavVC.swift in Sources */,
 				A164E1B81EA8319C00A8227D /* AHPinLayoutHeader.swift in Sources */,
 				A168BFE81E889B6400A87E03 /* AHPinLayout.swift in Sources */,

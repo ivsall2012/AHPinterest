@@ -9,12 +9,19 @@
 import UIKit
 
 class AHNavigationController: UINavigationController {
+    let transitionDelegate = AHTransitionDelegate()
+    
+    var operation: UINavigationControllerOperation {
+        return transitionDelegate.operation
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        AHPublicServices.shared.navigatonController = self
-        AHPublicServices.shared.setDefaultTransition()
+        self.delegate = transitionDelegate
     }
 
+    func turnOffTransitionOnce() {
+        transitionDelegate.turnOffTransitionAnimationTemporally()
+    }
     
 }
 

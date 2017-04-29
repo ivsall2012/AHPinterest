@@ -102,7 +102,9 @@ extension AHPopInteractive: UIGestureRecognizerDelegate, UICollectionViewDelegat
 extension AHPopInteractive: AHPopInteractiveVCDelegate {
     func popInteractiveVCShouldPopController(bool: Bool) {
         if bool {
-            AHPublicServices.shared.navigatonController!.popViewController(animated: false)
+            if let navVC = vc.navigationController as? AHNavigationController {
+                navVC.popViewController(animated: false)
+            }
         }
     }
 }

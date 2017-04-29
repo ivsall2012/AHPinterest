@@ -21,7 +21,8 @@ class AHPinVC: AHCollectionVC, AHTransitionProperties {
     weak var selectedCell: AHPinCell? {
         let index = IndexPath(item: itemIndex, section: self.pinLayout.layoutSection)
         // scroll using system method to make the cell visible
-        if AHDefaultTransitionDelegate.shared.operation  == .push {
+        
+        if let navVC = self.navigationController as? AHNavigationController, navVC.operation  == .push {
             return self.collectionView!.cellForItem(at: index) as? AHPinCell
         }
         self.collectionView?.scrollToItem(at: index, at: UICollectionViewScrollPosition.bottom, animated: false)

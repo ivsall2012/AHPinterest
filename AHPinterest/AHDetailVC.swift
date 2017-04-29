@@ -130,7 +130,9 @@ extension AHDetailVC {
         let navBarCallback = { (showTransitionAnimation: Bool) -> () in
             print("popping itemIndex:\(self.itemIndex)")
             if !showTransitionAnimation {
-                AHDefaultTransitionDelegate.shared.turnOffTransitionAnimationTemporally()
+                if let navVC = self.navigationController as? AHNavigationController {
+                    navVC.turnOffTransitionOnce()
+                }
             }
             self.navigationController!.popViewController(animated: true)
         }

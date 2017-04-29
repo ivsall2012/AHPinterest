@@ -62,7 +62,7 @@ extension AHPopInteractiveHandler: AHPopInteractiveDelegate {
     }
     
     func popInteractiveForAnimatingSubjectFinalFrame() -> CGRect {
-        guard let childViewControllers = AHPublicServices.shared.navigatonController?.childViewControllers else {
+        guard let childViewControllers = pinContentVC.navigationController?.childViewControllers else {
             fatalError("NO childViewControllers?")
         }
         // the last vc the current one, count -1
@@ -98,7 +98,7 @@ extension AHPopInteractiveHandler: AHPopInteractiveDelegate {
     }
     
     func popInteractiveForAnimatingBackground() -> UIView {
-        guard let childViewControllers = AHPublicServices.shared.navigatonController?.childViewControllers else {
+        guard let childViewControllers = pinContentVC.navigationController?.childViewControllers else {
             fatalError("NO childViewControllers?")
         }
         // the last vc the current one, count -1
