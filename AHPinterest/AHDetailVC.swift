@@ -65,6 +65,10 @@ extension AHDetailVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let detailCellNIb = UINib(nibName: AHDetailCellID, bundle: nil)
+        collectionView.register(detailCellNIb, forCellWithReuseIdentifier: AHDetailCellID)
+        
+        
         self.navigationController?.isNavigationBarHidden = true
         collectionView?.backgroundColor = UIColor.white
         self.automaticallyAdjustsScrollViewInsets = false

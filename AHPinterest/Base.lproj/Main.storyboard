@@ -153,7 +153,7 @@
         <scene sceneID="Lkq-ZN-q7r">
             <objects>
                 <collectionViewController storyboardIdentifier="AHDiscoverCategoryVC" id="WUe-Is-NXq" customClass="AHDiscoverCategoryVC" customModule="AHPinterest" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="ZfO-Z4-juf">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ZfO-Z4-juf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -187,7 +187,7 @@
         <scene sceneID="2sR-V1-wzy">
             <objects>
                 <collectionViewController id="WZQ-cK-kOi" customClass="AHDiscoverNavVC" customModule="AHPinterest" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" prefetchingEnabled="NO" id="Lgv-o3-WZ1">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" prefetchingEnabled="NO" id="Lgv-o3-WZ1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -218,17 +218,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4pF-nG-mhj">
                                 <collectionViewLayout key="collectionViewLayout" id="sAF-as-MHf"/>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AHDetailCell" id="GwG-2k-NWP" customClass="AHDetailCell" customModule="AHPinterest" customModuleProvider="target">
-                                        <rect key="frame" x="51" y="0.0" width="273" height="260"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="273" height="260"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </view>
-                                        <size key="customSize" width="273" height="260"/>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                                 <connections>
                                     <outlet property="dataSource" destination="jQv-0d-pzv" id="E98-mP-LfD"/>
                                     <outlet property="delegate" destination="jQv-0d-pzv" id="gPo-Ss-Hns"/>
