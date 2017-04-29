@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AHDiscoverNavCell" id="M6e-6a-t7n" customClass="AHDiscoverNavCell" customModule="AHPinterest" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="48"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="100" height="48"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trending" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fk7-y3-Cn0">
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="fk7-y3-Cn0" firstAttribute="leading" secondItem="M6e-6a-t7n" secondAttribute="leading" id="1Fv-8c-jLR"/>
+                <constraint firstAttribute="trailing" secondItem="fk7-y3-Cn0" secondAttribute="trailing" id="EH8-gg-zeu"/>
+                <constraint firstAttribute="bottom" secondItem="fk7-y3-Cn0" secondAttribute="bottom" id="KmI-NU-oBI"/>
+                <constraint firstItem="fk7-y3-Cn0" firstAttribute="top" secondItem="M6e-6a-t7n" secondAttribute="top" id="Wzg-GC-aSj"/>
+            </constraints>
+            <connections>
+                <outlet property="categoryLabel" destination="fk7-y3-Cn0" id="YVO-QT-Ogt"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+</document>

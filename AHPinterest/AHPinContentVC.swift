@@ -54,6 +54,7 @@ extension AHPinContentVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        registration()
         setupNavBar()
         setupContentLayout()
         setupPopTransition()
@@ -83,6 +84,14 @@ extension AHPinContentVC {
 
 // MARK:- Setups
 extension AHPinContentVC {
+    override func registration() {
+        super.registration()
+        
+        let pinContentCellNib = UINib(nibName: AHPinContentCellIdentifier, bundle: nil)
+        collectionView?.register(pinContentCellNib, forCellWithReuseIdentifier: AHPinContentCellIdentifier)
+    }
+    
+    
     func setupPopTransition() {
         popInteractiveHandler.pinContentVC = self
         addDelegate(delegate: popInteractiveHandler)

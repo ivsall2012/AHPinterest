@@ -8,7 +8,7 @@
 
 import UIKit
 
-let AHDiscoverNavBgCellID = "AHDiscoverNavBgCell"
+
 let AHDiscoverNavCellHeight: CGFloat = 49.0
 let AHDiscoverNavCellPadding: CGFloat = 20.0
 let AHDiscoverNavCellFontSize: CGFloat = 17.0
@@ -19,6 +19,10 @@ class AHDiscoverNavVC: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let navCell = UINib(nibName: AHDiscoverNavCellID, bundle: nil)
+        collectionView?.register(navCell, forCellWithReuseIdentifier: AHDiscoverNavCellID)
+        
         collectionView?.delegate = navHandler
         collectionView?.dataSource = navHandler
         collectionView?.contentInset = .zero

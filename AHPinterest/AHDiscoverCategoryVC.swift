@@ -9,7 +9,7 @@
 import UIKit
 
 
-class AHDiscoverCategoryVC: UICollectionViewController {
+class AHDiscoverCategoryVC: AHPinVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()

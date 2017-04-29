@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let AHDiscoverNavCellID = "AHDiscoverNavCell"
+
 
 class AHDiscoverNavHandler: NSObject {
     var categoryArr = [String]()

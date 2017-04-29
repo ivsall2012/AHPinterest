@@ -65,12 +65,7 @@ extension AHPinVC {
         collectionView?.backgroundColor = UIColor.white
         self.automaticallyAdjustsScrollViewInsets = false
         
-        let headerNib = UINib(nibName: "AHPinLayoutHeader", bundle: nil)
-        collectionView?.register(headerNib, forSupplementaryViewOfKind: AHPinLayoutHeaderKind, withReuseIdentifier: AHPinLayoutHeaderKind)
-        
-        collectionView?.register(AHRefreshHeader.self, forSupplementaryViewOfKind: AHHeaderKind, withReuseIdentifier: AHHeaderKind)
-        
-        collectionView?.register(AHRefreshFooter.self, forSupplementaryViewOfKind: AHFooterKind, withReuseIdentifier: AHFooterKind)
+        registration()
         
         setup()
         
@@ -114,6 +109,18 @@ extension AHPinVC {
 
 // MARK:- Setups
 extension AHPinVC {
+    func registration() {
+        let headerNib = UINib(nibName: "AHPinLayoutHeader", bundle: nil)
+        collectionView?.register(headerNib, forSupplementaryViewOfKind: AHPinLayoutHeaderKind, withReuseIdentifier: AHPinLayoutHeaderKind)
+        
+        collectionView?.register(AHRefreshHeader.self, forSupplementaryViewOfKind: AHHeaderKind, withReuseIdentifier: AHHeaderKind)
+        
+        collectionView?.register(AHRefreshFooter.self, forSupplementaryViewOfKind: AHFooterKind, withReuseIdentifier: AHFooterKind)
+        
+        let pinCellNib = UINib(nibName: AHPinCellIdentifier, bundle: nil)
+        collectionView?.register(pinCellNib, forCellWithReuseIdentifier: AHPinCellIdentifier)
+        
+    }
     
     func setup() {
 

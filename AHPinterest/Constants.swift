@@ -15,6 +15,7 @@ let AHUserAvatarHeight: CGFloat = 50.0
 
 let AHPinCellIdentifier = "AHPinCell"
 let AHPinContentCellIdentifier = "AHPinContentCell"
+let AHDiscoverNavCellID = "AHDiscoverNavCell"
 
 // Header and Footer are the total height, not their subviews' sizes, i.e. AHRefreshHeader and AHRefreshFooterSize
 let AHHeaderKind: String = "AHHeaderKind"
