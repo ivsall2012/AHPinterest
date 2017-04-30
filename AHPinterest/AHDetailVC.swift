@@ -74,7 +74,7 @@ extension AHDetailVC {
         self.automaticallyAdjustsScrollViewInsets = false
         collectionView?.contentInset = .init(top: 0, left: 0, bottom: 0, right: 0)
         
-        let layout = AHDetailVCLayout()
+        let layout = AHPageLayout()
         collectionView.setCollectionViewLayout(layout, animated: false)
         
         collectionView.decelerationRate = UIScrollViewDecelerationRateFast

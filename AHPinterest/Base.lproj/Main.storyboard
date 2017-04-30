@@ -99,72 +99,29 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="gPy-F4-Zrj" kind="relationship" relationship="rootViewController" id="gfA-th-BSe"/>
+                        <segue destination="IQY-N5-IIl" kind="relationship" relationship="rootViewController" id="8Pm-B1-Sg5"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fVX-Bk-Qhn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1593" y="813"/>
+            <point key="canvasLocation" x="-1433" y="850"/>
         </scene>
-        <!--Discover Container-->
-        <scene sceneID="WYX-gd-ezC">
+        <!--DiscoverVC-->
+        <scene sceneID="uSe-Qn-NEc">
             <objects>
-                <viewController id="gPy-F4-Zrj" customClass="AHDiscoverContainer" customModule="AHPinterest" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="OHI-nh-Yw9"/>
-                        <viewControllerLayoutGuide type="bottom" id="VdC-xr-JaM"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="VEP-cS-Kon">
+                <collectionViewController id="IQY-N5-IIl" customClass="AHDiscoverVC" customModule="AHPinterest" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="uf5-tz-fIK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qaS-dk-SoF">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="49" id="qdZ-pz-N5U"/>
-                                </constraints>
-                                <connections>
-                                    <segue destination="WZQ-cK-kOi" kind="embed" identifier="AHDiscoverNavVC" id="w2H-em-qzM"/>
-                                </connections>
-                            </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nOU-IY-EqB">
-                                <connections>
-                                    <segue destination="WUe-Is-NXq" kind="embed" identifier="AHDiscoverCategoryVC" id="rur-hj-Svc"/>
-                                </connections>
-                            </containerView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="qaS-dk-SoF" firstAttribute="top" secondItem="OHI-nh-Yw9" secondAttribute="bottom" id="8qI-lU-FlU"/>
-                            <constraint firstItem="nOU-IY-EqB" firstAttribute="leading" secondItem="VEP-cS-Kon" secondAttribute="leading" id="EZz-dV-JKL"/>
-                            <constraint firstAttribute="trailing" secondItem="qaS-dk-SoF" secondAttribute="trailing" id="NiS-Qc-4Yi"/>
-                            <constraint firstAttribute="bottom" secondItem="nOU-IY-EqB" secondAttribute="bottom" id="OqE-Lg-ykX"/>
-                            <constraint firstItem="nOU-IY-EqB" firstAttribute="top" secondItem="qaS-dk-SoF" secondAttribute="bottom" id="YlZ-VY-9Dh"/>
-                            <constraint firstItem="qaS-dk-SoF" firstAttribute="leading" secondItem="VEP-cS-Kon" secondAttribute="leading" id="gOe-Qe-ODB"/>
-                            <constraint firstAttribute="trailing" secondItem="nOU-IY-EqB" secondAttribute="trailing" id="uCk-iw-yS7"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="yKg-fX-KIU"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Bap-Qq-E4r" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-177" y="884"/>
-        </scene>
-        <!--Discover CategoryVC-->
-        <scene sceneID="Lkq-ZN-q7r">
-            <objects>
-                <collectionViewController storyboardIdentifier="AHDiscoverCategoryVC" id="WUe-Is-NXq" customClass="AHDiscoverCategoryVC" customModule="AHPinterest" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ZfO-Z4-juf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gEr-Xv-SUK">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kVn-2M-peX">
                             <size key="itemSize" width="50" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="jlE-RA-H26">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="x2I-Nd-541">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -174,35 +131,15 @@
                             </collectionViewCell>
                         </cells>
                         <connections>
-                            <outlet property="dataSource" destination="WUe-Is-NXq" id="v1g-Nx-GAI"/>
-                            <outlet property="delegate" destination="WUe-Is-NXq" id="1FJ-Cg-aGz"/>
+                            <outlet property="dataSource" destination="IQY-N5-IIl" id="0E9-rI-Fyn"/>
+                            <outlet property="delegate" destination="IQY-N5-IIl" id="4yx-Co-j1O"/>
                         </connections>
                     </collectionView>
+                    <navigationItem key="navigationItem" id="3hI-bP-Lka"/>
                 </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zKq-HG-jID" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a5A-SA-hCp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="684" y="955"/>
-        </scene>
-        <!--Discover NavVC-->
-        <scene sceneID="2sR-V1-wzy">
-            <objects>
-                <collectionViewController id="WZQ-cK-kOi" customClass="AHDiscoverNavVC" customModule="AHPinterest" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" prefetchingEnabled="NO" id="Lgv-o3-WZ1">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Cba-aT-dhc">
-                            <size key="itemSize" width="100" height="48"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <cells/>
-                    </collectionView>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Gyx-fz-uYB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-713" y="1424"/>
+            <point key="canvasLocation" x="-593" y="868"/>
         </scene>
         <!--DetailVC-->
         <scene sceneID="uOb-ve-J2M">

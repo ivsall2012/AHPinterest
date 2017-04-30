@@ -1,14 +1,14 @@
 //
-//  AHPhotoBrowserLayout.swift
-//  AHDataGenerator
+//  AHPageLayout.swift
+//  AHPinterest
 //
-//  Created by Andy Hurricane on 3/31/17.
-//  Copyright © 2017 Andy Hurricane. All rights reserved.
+//  Created by Andy Hurricane on 4/29/17.
+//  Copyright © 2017 AndyHurricane. All rights reserved.
 //
 
 import UIKit
 
-class AHDetailVCLayout: UICollectionViewFlowLayout {
+class AHPageLayout: UICollectionViewFlowLayout {
     
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true

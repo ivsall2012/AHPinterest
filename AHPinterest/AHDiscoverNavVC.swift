@@ -16,6 +16,15 @@ let AHDiscoverNavCellFontSize: CGFloat = 17.0
 class AHDiscoverNavVC: UICollectionViewController {
     
     let navHandler = AHDiscoverNavHandler()
+    let layout = UICollectionViewFlowLayout()
+    init() {
+        super.init(collectionViewLayout: layout)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        collectionView?.setCollectionViewLayout(layout, animated: false)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +34,8 @@ class AHDiscoverNavVC: UICollectionViewController {
         
         collectionView?.delegate = navHandler
         collectionView?.dataSource = navHandler
-        collectionView?.contentInset = .zero
-        let layout = collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
+        collectionView?.backgroundColor = UIColor.white
+        layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = AHDiscoverNavCellPadding
         navHandler.discoverNavVC = self
         
