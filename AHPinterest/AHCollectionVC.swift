@@ -70,6 +70,7 @@ class AHCollectionVC: UICollectionViewController {
 // MARK:- Public API
 extension AHCollectionVC {
     func addLayout(layout: AHLayout, delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource){
+        layout.scrollDirection = .vertical
         layoutRouter.add(layout: layout)
         delegates.append(delegate)
         dataSources.append(dataSource)
@@ -79,12 +80,15 @@ extension AHCollectionVC {
         delegates.append(delegate)
         dataSources.append(dataSource)
     }
-    func insertLayoutToFont(layout: AHLayout, delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {
+    func insertLayoutToFront(layout: AHLayout, delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {
+        layout.scrollDirection = .vertical
         layoutRouter.insert(layout: layout, at: 0)
         delegates.insert(delegate, at: 0)
         dataSources.insert(dataSource, at: 0)
     }
-    func addDelegate(delegate: UICollectionViewDelegate) {
+    
+    // This delegate will receive all collectionViewDelegate's events, can act as a globel listener.
+    func addGlobelDelegate(delegate: UICollectionViewDelegate) {
         generalDelegates.append(delegate)
     }
 

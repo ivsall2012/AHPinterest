@@ -94,14 +94,14 @@ extension AHPinContentVC {
     
     func setupPopTransition() {
         popInteractiveHandler.pinContentVC = self
-        addDelegate(delegate: popInteractiveHandler)
+        addGlobelDelegate(delegate: popInteractiveHandler)
     }
     
     func setupContentLayout() {
         collectionView?.contentInset = .init(top: AHPinNavBarHeight, left: 0, bottom: 0, right: 0)
         pinContentLayoutHanlder.pinContentVC = self
         pinContentLayout.delegate = pinContentLayoutHanlder
-        insertLayoutToFont(layout: pinContentLayout, delegate: pinContentLayoutHanlder, dataSource: pinContentLayoutHanlder)
+        insertLayoutToFront(layout: pinContentLayout, delegate: pinContentLayoutHanlder, dataSource: pinContentLayoutHanlder)
     }
     
     func setupNavBar(){
@@ -112,7 +112,7 @@ extension AHPinContentVC {
         navBar!.pinVM = pinVM
 
         navBarHandler.contentVC = self
-        addDelegate(delegate: navBarHandler)
+        addGlobelDelegate(delegate: navBarHandler)
         navBarHandler.navBar = navBar
     }
 }

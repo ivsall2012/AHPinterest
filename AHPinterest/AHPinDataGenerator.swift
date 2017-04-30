@@ -33,9 +33,25 @@ public class AHPinDataGenerator: NSObject {
 
 
 extension AHPinDataGenerator{
-    func generateCatefories() -> [String] {
+    func generateCategories() -> [String] {
         let stringArr = ["Trending", "Everything", "DIY", "Women's Style", "Home", "Beauty", "Food", "Men's style", "Humor", "TRavel"]
         return stringArr
+    }
+    
+    func generateCategoryData(for categoryName: String) {
+        var data = [String: Any]()
+        
+        let width = 100 * random(4, 8)
+        let height = 100 * random(3, 8)
+        let imageUrlA = "http://lorempixel.com/\(width)/\(height)"
+        let imageUrlC = "https://placeimg.com/\(width)/\(height)/any"
+        let images = [imageUrlA,imageUrlC]
+        let imageUrl = images[random(images.count)]
+        data["imageSize"] = ["width": CGFloat(width), "height": CGFloat(height)]
+        data["imageURL"] = imageUrl
+        
+        data["isTrending"] = randomBool() ? true : false
+        data["categoryName"] = categoryName
     }
     
     

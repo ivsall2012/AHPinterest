@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AHLayout: UICollectionViewLayout {
+class AHLayout: UICollectionViewFlowLayout {
     private(set) weak var layoutRouter: AHLayoutRouter?
     var isGlobel = false
     override var collectionView: UICollectionView? {
@@ -16,5 +16,9 @@ class AHLayout: UICollectionViewLayout {
     }
     var layoutSection: Int {
         return layoutRouter?.layoutSection(layout: self) ?? -1
+    }
+    
+    override func invalidateLayout(with context: UICollectionViewLayoutInvalidationContext) {
+        // do nothing. In your subclass, do any nessesary cleanup, and invalidate layout through collectionView or layoutRouter!
     }
 }

@@ -26,7 +26,7 @@ extension AHNetowrkTool {
         DispatchQueue.global().async {
 //            sleep(5)
             DispatchQueue.main.async {
-                let categoryArr = AHPinDataGenerator.generator.generateCatefories()
+                let categoryArr = AHPinDataGenerator.generator.generateCategories()
                 comletion?(categoryArr)
             }
         }
