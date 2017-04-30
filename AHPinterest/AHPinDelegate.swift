@@ -31,6 +31,7 @@ extension AHPinDelegate: UICollectionViewDelegate, AHDetailVCDelegate {
         }
     }
     
+    
     func detailVCDidChangeTo(item: Int) {
         pinVC?.itemIndex = item
     }

@@ -63,7 +63,7 @@ class AHPinLayout: AHLayout {
         
         var unitYoffSet: CGFloat = 0.0
         if let headerSize = delegate.AHPinLayoutSizeForHeader(collectionView: collectionView) {
-            unitYoffSet = headerSize.height
+            unitYoffSet = headerSize.height + collectionView.contentInset.top
         }
         yOffsets = [CGFloat](repeating: unitYoffSet, count: AHNumberOfColumns)
     }
@@ -86,7 +86,8 @@ class AHPinLayout: AHLayout {
         if headerAttributes == nil {
             let index = IndexPath(item: 0, section: layoutSection)
             headerAttributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: AHPinLayoutHeaderKind, with: index)
-            headerAttributes?.frame = .init(x: 0.0, y: 0.0, width: contentWidth, height: headerSize.height)
+            let insetTop: CGFloat = collectionView!.contentInset.top
+            headerAttributes!.frame = CGRect(x: 0.0, y: insetTop, width: contentWidth, height: headerSize.height)
         }
     }
     

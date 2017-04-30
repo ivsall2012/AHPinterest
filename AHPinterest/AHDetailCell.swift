@@ -11,9 +11,9 @@ import UIKit
 
 class AHDetailCell: UICollectionViewCell {
     
-    weak var pinContentVC: AHPinContentVC? {
+    weak var pageVC: AHPinVC? {
         didSet {
-            if let pinContentVC = pinContentVC {
+            if let pinContentVC = pageVC {
                 contentView.subviews.forEach({ (view) in
                     view.removeFromSuperview()
                 })
@@ -25,7 +25,6 @@ class AHDetailCell: UICollectionViewCell {
             }
         }
     }
-    weak var pinVM: AHPinViewModel?
 
     override func awakeFromNib() {
         self.backgroundColor = UIColor.blue
@@ -34,12 +33,12 @@ class AHDetailCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        pinContentVC?.view.frame = self.bounds
+        pageVC?.view.frame = self.bounds
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        pinContentVC?.view.frame = self.bounds
+        pageVC?.view.frame = self.bounds
     }
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {

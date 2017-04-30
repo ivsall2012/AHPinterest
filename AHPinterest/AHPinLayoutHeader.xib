@@ -22,6 +22,9 @@
                 <constraint firstItem="RIS-jN-Ujn" firstAttribute="centerY" secondItem="qMW-tc-lhR" secondAttribute="centerY" id="IfV-4x-1uL"/>
                 <constraint firstItem="RIS-jN-Ujn" firstAttribute="leading" secondItem="qMW-tc-lhR" secondAttribute="leading" constant="20" id="Os4-6d-zqY"/>
             </constraints>
+            <connections>
+                <outlet property="headerLabel" destination="RIS-jN-Ujn" id="7gR-Li-JQO"/>
+            </connections>
         </collectionReusableView>
     </objects>
 </document>

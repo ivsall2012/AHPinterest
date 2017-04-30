@@ -13,7 +13,7 @@ import UIKit
 class AHPinVC: AHCollectionVC, AHTransitionProperties {
     
     weak var pinVM: AHPinViewModel?
-    
+    var sectionTitle = "MOOOO"
     var itemIndex: Int = -1
     
     
@@ -139,7 +139,7 @@ extension AHPinVC {
     
     func setupPinLayout() {
         pinDataSource.pinVC = self
-        
+        pinDataSource.sectionTitle = sectionTitle
         pinDelegate.pinVC = self
 
         let layoutHanlder = AHLayoutHandler()

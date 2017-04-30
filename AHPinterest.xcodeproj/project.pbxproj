@@ -474,9 +474,9 @@
 			isa = PBXGroup;
 			children = (
 				A12A28371E9ECBA500F7A36D /* AHDetailCell.swift */,
+				A134AC631EB46423009BDBD5 /* AHDetailCell.xib */,
 				A1E85D9B1EA6D153000775FD /* AHPinContentCell.swift */,
 				A167FD0C1EB42A0E00A9E12B /* AHPinContentCell.xib */,
-				A134AC631EB46423009BDBD5 /* AHDetailCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";

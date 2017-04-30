@@ -42,6 +42,7 @@ extension AHLayoutHandler: AHPinLayoutDelegate {
         guard let pinVC = pinVC else {
             return nil
         }
+        
         if pinVC.showLayoutHeader {
             return CGSize(width: 0.0, height: AHPinLayoutHeaderHeight)
         }else{

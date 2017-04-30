@@ -10,6 +10,7 @@ import UIKit
 
 class AHPinLayoutHeader: UICollectionReusableView {
 
+    @IBOutlet weak var headerLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

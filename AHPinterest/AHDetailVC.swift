@@ -203,7 +203,7 @@ extension AHDetailVC: UICollectionViewDataSource {
         let pinVM = pinVMs[indexPath.item]
         let cellVC = cellVCs[indexPath.item]
         cellVC.pinVM = pinVM
-        cell.pinContentVC = cellVC
+        cell.pageVC = cellVC
         return cell
     }
 }

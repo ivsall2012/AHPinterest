@@ -10,6 +10,7 @@ import UIKit
 
 class AHPinDataSource: NSObject {
     weak var pinVC: AHPinVC?
+    var sectionTitle: String?
     var pinVMs = [AHPinViewModel]()
     
 }
@@ -35,6 +36,9 @@ extension AHPinDataSource : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == AHPinLayoutHeaderKind {
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: AHPinLayoutHeaderKind, withReuseIdentifier: AHPinLayoutHeaderKind, for: indexPath) as! AHPinLayoutHeader
+            if let sectionTitle = sectionTitle {
+                header.headerLabel.text = sectionTitle
+            }
             return header
         }
         
