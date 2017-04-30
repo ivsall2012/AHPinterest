@@ -11,8 +11,17 @@ import UIKit
 
 
 class AHDiscoverNavHandler: NSObject {
-    var categoryArr = [String]()
+    var categoryArr: [String]? {
+        didSet {
+            if categoryArr != nil {
+                self.isInitialSelection = true
+                self.background.frame = CGRect.zero
+                self.discoverNavVC.collectionView?.reloadData()
+            }
+        }
+    }
     let initialIndexPath = IndexPath(item: 0, section: 0)
+    
     weak var discoverNavVC: AHDiscoverNavVC! {
         didSet {
             self.background.isHidden = true
@@ -28,19 +37,13 @@ class AHDiscoverNavHandler: NSObject {
     
     var isInitialSelection = false
     
-    func reload() {
-        AHNetowrkTool.tool.reloadCategories { (categoryArr: [String]) -> () in
-            self.categoryArr.append(contentsOf: categoryArr)
-            self.isInitialSelection = true
-            self.background.frame = CGRect.zero
-            self.discoverNavVC.collectionView?.reloadData()
-        }
-    }
 }
 
 extension AHDiscoverNavHandler: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let categoryStr = self.categoryArr[indexPath.item]
+        guard let categoryArr = categoryArr else { return CGSize.zero }
+        
+        let categoryStr = categoryArr[indexPath.item]
         let font = UIFont.systemFont(ofSize: AHDiscoverNavCellFontSize)
         let size = CGSize(width: CGFloat(DBL_MAX), height: AHDiscoverNavCellHeight)
         let rect =  (categoryStr as NSString).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
@@ -62,6 +65,10 @@ extension AHDiscoverNavHandler: UICollectionViewDelegateFlowLayout {
         return true
     }
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.discoverNavVC.delegate?.discoverNavDidSelect(at: indexPath.item)
+    }
+    
     func scrollToItem(at indexPath:IndexPath, collectionView: UICollectionView) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? AHDiscoverNavCell else {
             return
@@ -107,10 +114,13 @@ extension AHDiscoverNavHandler: UICollectionViewDelegateFlowLayout {
 extension AHDiscoverNavHandler: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard let categoryArr = categoryArr else { return 0 }
         return categoryArr.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let categoryArr = categoryArr else { return UICollectionViewCell() }
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AHDiscoverNavCellID, for: indexPath) as! AHDiscoverNavCell
         
         let categoryStr = categoryArr[indexPath.item]
@@ -119,6 +129,7 @@ extension AHDiscoverNavHandler: UICollectionViewDataSource {
             // by unblocking this method cellForItemAt, the cell will be returned and then we scrollToItem
             isInitialSelection = false
             DispatchQueue.main.async {
+                self.discoverNavVC.delegate?.discoverNavDidSelect(at: indexPath.item)
                 self.scrollToItem(at: self.initialIndexPath, collectionView: collectionView)
             }
         }

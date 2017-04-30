@@ -9,12 +9,26 @@
 import UIKit
 
 
+protocol AHDiscoverNavDelegate: NSObjectProtocol {
+    func discoverNavDidSelect(at index: Int)
+}
+
+
+
 let AHDiscoverNavCellHeight: CGFloat = 49.0
 let AHDiscoverNavCellPadding: CGFloat = 20.0
 let AHDiscoverNavCellFontSize: CGFloat = 17.0
 
 class AHDiscoverNavVC: UICollectionViewController {
+    weak var delegate: AHDiscoverNavDelegate?
     
+    var categoryArr: [String]? {
+        didSet {
+            if categoryArr != nil {
+                self.navHandler.categoryArr = categoryArr
+            }
+        }
+    }
     let navHandler = AHDiscoverNavHandler()
     let layout = UICollectionViewFlowLayout()
     init() {
@@ -42,7 +56,6 @@ class AHDiscoverNavVC: UICollectionViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navHandler.reload()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
