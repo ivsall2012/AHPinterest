@@ -53,6 +53,7 @@
 		A19DE02C1EB5AE1B00C9CB6D /* AHCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19DE02B1EB5AE1B00C9CB6D /* AHCategoryCell.swift */; };
 		A19DE02E1EB5AE2D00C9CB6D /* AHCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A19DE02D1EB5AE2D00C9CB6D /* AHCategoryCell.xib */; };
 		A19DE0301EB5AFFD00C9CB6D /* AHCategoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19DE02F1EB5AFFD00C9CB6D /* AHCategoryDataModel.swift */; };
+		A19DE0341EB5D25D00C9CB6D /* AHCategoryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19DE0331EB5D25D00C9CB6D /* AHCategoryHandler.swift */; };
 		A19EC4491E99D99700B6D7C4 /* AHPinDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19EC4481E99D99700B6D7C4 /* AHPinDataGenerator.swift */; };
 		A19EC44B1E99DFBF00B6D7C4 /* AHNetowrkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19EC44A1E99DFBF00B6D7C4 /* AHNetowrkTool.swift */; };
 		A19EC44D1E99EC0000B6D7C4 /* AHPinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19EC44C1E99EC0000B6D7C4 /* AHPinViewModel.swift */; };
@@ -136,6 +137,7 @@
 		A19DE02B1EB5AE1B00C9CB6D /* AHCategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHCategoryCell.swift; sourceTree = "<group>"; };
 		A19DE02D1EB5AE2D00C9CB6D /* AHCategoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AHCategoryCell.xib; sourceTree = "<group>"; };
 		A19DE02F1EB5AFFD00C9CB6D /* AHCategoryDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHCategoryDataModel.swift; sourceTree = "<group>"; };
+		A19DE0331EB5D25D00C9CB6D /* AHCategoryHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHCategoryHandler.swift; sourceTree = "<group>"; };
 		A19EC4481E99D99700B6D7C4 /* AHPinDataGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinDataGenerator.swift; sourceTree = "<group>"; };
 		A19EC44A1E99DFBF00B6D7C4 /* AHNetowrkTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHNetowrkTool.swift; sourceTree = "<group>"; };
 		A19EC44C1E99EC0000B6D7C4 /* AHPinViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHPinViewModel.swift; sourceTree = "<group>"; };
@@ -427,6 +429,7 @@
 			children = (
 				A19DE0241EB5AD6900C9CB6D /* AHDiscoverCategoryVC.swift */,
 				A19DE0261EB5ADD500C9CB6D /* AHCategoryLayout.swift */,
+				A19DE0331EB5D25D00C9CB6D /* AHCategoryHandler.swift */,
 			);
 			name = VC;
 			sourceTree = "<group>";
@@ -652,6 +655,7 @@
 				A164E1BC1EA8400B00A8227D /* AHPinNavBar.swift in Sources */,
 				A123E6E71EADD24E00D7565E /* AHTransitionDelegate.swift in Sources */,
 				A151E2111EB2F1F9004D6EB8 /* AHDiscoverNavVC.swift in Sources */,
+				A19DE0341EB5D25D00C9CB6D /* AHCategoryHandler.swift in Sources */,
 				A164E1B81EA8319C00A8227D /* AHPinLayoutHeader.swift in Sources */,
 				A168BFE81E889B6400A87E03 /* AHPinLayout.swift in Sources */,
 				A1E85DA01EA6E07C000775FD /* AHPinContentVC.swift in Sources */,

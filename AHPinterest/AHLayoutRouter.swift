@@ -20,7 +20,7 @@ class AHLayoutAttributes: UICollectionViewLayoutAttributes {
     }
     
     override func isEqual(_ object: Any?) -> Bool {
-        if let otherObj = object as? AHPinLayoutAttributes{
+        if let otherObj = object as? AHLayoutAttributes{
             if sectionFrame.equalTo(self.sectionFrame){
                 return super.isEqual(otherObj)
             }

@@ -11,7 +11,7 @@ import UIKit
 
 class AHDetailCell: UICollectionViewCell {
     
-    weak var pageVC: AHPinVC? {
+    weak var pageVC: UICollectionViewController? {
         didSet {
             if let pinContentVC = pageVC {
                 contentView.subviews.forEach({ (view) in

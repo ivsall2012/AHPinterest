@@ -38,7 +38,16 @@ extension AHPinDataGenerator{
         return stringArr
     }
     
-    func generateCategoryData(for categoryName: String) {
+    func loadCategories(categoryName: String) -> [AHCategoryDataModel] {
+        var data = [AHCategoryDataModel]()
+        for _ in 0..<random(5) {
+            let model = generateCategoryData(categoryName)
+            data.append(model)
+        }
+        return data
+    }
+    
+    func generateCategoryData(_ categoryName: String) -> AHCategoryDataModel {
         var data = [String: Any]()
         
         let width = 100 * random(4, 8)
@@ -52,6 +61,8 @@ extension AHPinDataGenerator{
         
         data["isTrending"] = randomBool() ? true : false
         data["categoryName"] = categoryName
+        
+        return AHCategoryDataModel(data: data)
     }
     
     

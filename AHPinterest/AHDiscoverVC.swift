@@ -12,7 +12,7 @@ class AHDiscoverVC: UICollectionViewController {
     let navVC = AHDiscoverNavVC()
     let pageLayout = AHPageLayout()
     
-    var pageVCs = [UIViewController]()
+    var pageVCs = [AHDiscoverCategoryVC]()
     
     var categoryArr = [String]()
     
@@ -34,28 +34,9 @@ class AHDiscoverVC: UICollectionViewController {
         
         setupNavVC()
         
-        setupPinVCs()
     }
 
-    func setupPinVCs(){
-        for _ in 0..<5 {
-            let vc = createPinVC()
-            pageVCs.append(vc)
-        }
-    }
-    func createPinVC() -> AHPinVC {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "AHPinVC") as! AHPinVC
-        vc.refreshLayout.enableHeaderRefresh = false
-        vc.showLayoutHeader = true
-        
-        // setup VC related
-        vc.willMove(toParentViewController: self)
-        self.addChildViewController(vc)
-        vc.didMove(toParentViewController: self)
-        
-        return vc
-    }
+    
     
     func setupCollecitonView() {
         
@@ -80,14 +61,34 @@ class AHDiscoverVC: UICollectionViewController {
         navVC.view.didMoveToSuperview()
         
         
-        AHNetowrkTool.tool.reloadCategories { (categoryArr: [String]?) in
+        AHNetowrkTool.tool.loadCategoryNames { (categoryArr) in
             if let categoryArr = categoryArr, !categoryArr.isEmpty {
                 self.categoryArr.append(contentsOf: categoryArr)
                 self.navVC.categoryArr = self.categoryArr
-                self.collectionView?.reloadData()
+                self.setupPageVCs()
             }
-            
         }
+    }
+    
+    func setupPageVCs(){
+        for _ in categoryArr {
+            let vc = createPageVC()
+            pageVCs.append(vc)
+        }
+        self.collectionView?.reloadData()
+    }
+    
+    func createPageVC() -> AHDiscoverCategoryVC {
+        let vc = AHDiscoverCategoryVC(collectionViewLayout: UICollectionViewFlowLayout())
+//        vc.refreshLayout.enableHeaderRefresh = false
+//        vc.showLayoutHeader = true
+        
+        // setup VC related
+        vc.willMove(toParentViewController: self)
+        self.addChildViewController(vc)
+        vc.didMove(toParentViewController: self)
+        
+        return vc
     }
 
 
@@ -137,8 +138,9 @@ extension AHDiscoverVC {
             return cell
         }
         
-        let category = categoryArr[indexPath.item]
-        let pageVC = pageVCs[indexPath.item] as! AHPinVC
+        let categoryName = categoryArr[indexPath.item]
+        let pageVC = pageVCs[indexPath.item]
+        pageVC.categoryName = categoryName
         cell.pageVC = pageVC
         return cell
     }

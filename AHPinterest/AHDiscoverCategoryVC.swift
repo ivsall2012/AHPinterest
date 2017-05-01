@@ -8,30 +8,46 @@
 
 import UIKit
 
-class AHDiscoverCategoryVC: AHPinVC {
-
+class AHDiscoverCategoryVC: UICollectionViewController {
+    var categoryDataModels = [AHCategoryDataModel]()
+    var categoryHandler = AHCategoryHandler()
+    var categoryName: String? {
+        didSet {
+            if let categoryName = categoryName {
+                
+                AHNetowrkTool.tool.loadCategoryData(forCategoryName: categoryName, completion: { (dataModels) in
+                    
+                    if let dataModels = dataModels {
+                        self.categoryDataModels.removeAll()
+                        self.categoryDataModels.append(contentsOf: dataModels)
+                        self.categoryHandler.categoryDataModels = self.categoryDataModels
+                        self.collectionView?.reloadData()
+                    }
+                    
+                })
+            }
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let flowLayout = AHLayout()
-        addLayout(layout: flowLayout, delegate: self, dataSource: self)
-        
+        collectionView?.backgroundColor = UIColor.orange
+//        let nib = UINib(nibName: AHCategoryCellID, bundle: nil)
+//        collectionView?.register(nib, forCellWithReuseIdentifier: AHCategoryCellID)
+//        collectionView?.delegate = categoryHandler
+//        collectionView?.dataSource = categoryHandler
+//        let flowLayout = AHCategoryLayout()
+//        collectionView?.setCollectionViewLayout(flowLayout, animated: false)
+//        insertLayoutToFront(layout: flowLayout, delegate: categoryHandler, dataSource: categoryHandler)
+//        flowLayout.itemSize = CGSize(width: 300, height: 100)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+
+
+
+
+
+
+
+
+

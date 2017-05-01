@@ -10,6 +10,12 @@ import UIKit
 
 
 class AHCategoryLayout: AHLayout {
-    
+    override func prepare() {
+        super.prepare()
+    }
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        let attrs = super.layoutAttributesForElements(in: rect)
+        return attrs
+    }
 }
 

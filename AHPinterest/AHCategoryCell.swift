@@ -13,4 +13,21 @@ class AHCategoryCell: UICollectionViewCell {
     @IBOutlet weak var categoryName: UILabel!
     @IBOutlet weak var trending: UILabel!
 
+    var dataModel: AHCategoryDataModel? {
+        didSet {
+            if let dataModel = dataModel {
+                trending.isEnabled = dataModel.isTrending
+                categoryName.text = dataModel.categoryName
+                imageView.AH_setImage(urlStr: dataModel.coverURL, completion: {[weak self] (image) in
+                    // cell being resued already, return. Image is already in cache.
+                    if self?.dataModel !== dataModel {
+                        return
+                    }
+                    if image != nil {
+                        self?.imageView.image = image
+                    }
+                })
+            }
+        }
+    }
 }

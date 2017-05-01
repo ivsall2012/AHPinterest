@@ -20,7 +20,16 @@ class AHNetowrkTool: NSObject {
 
 // MARK:- For Discover Stuff
 extension AHNetowrkTool {
-    func reloadCategories(comletion: (([String])->())? ) {
+    func loadCategoryData(forCategoryName name: String, completion: ((_ dataModels:[AHCategoryDataModel]? )-> ())? ) {
+        DispatchQueue.global().async {
+            let dataModels = AHPinDataGenerator.generator.loadCategories(categoryName: name)
+            DispatchQueue.main.async {
+                completion?(dataModels)
+            }
+        }
+    }
+    
+    func loadCategoryNames(comletion: (([String]?)->())? ) {
         
         // this is so fake.....
         DispatchQueue.global().async {

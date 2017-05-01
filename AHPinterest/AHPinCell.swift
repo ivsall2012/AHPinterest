@@ -32,13 +32,13 @@ class AHPinCell: UICollectionViewCell {
                 self.note.text = model.note
                 self.userName.text = model.userName
                 self.userAvatar.AH_setImage(urlStr: model.avatarURL)
-                self.imageView.AH_setImage(urlStr: model.imageURL, completion: { (image) in
-                    if self.pinVM != nil && self.pinVM! !== pinVM {
+                self.imageView.AH_setImage(urlStr: model.imageURL, completion: {[weak self] (image) in
+                    if self?.pinVM != nil && self?.pinVM! !== pinVM {
                         // this cell is already being reused, not gonna use the image yet. Use it next time when didSet pinVM and that image is already cached by its URL through AHNetworkTool
                         return
                     }
                     if image != nil {
-                        self.imageView.image = image
+                        self?.imageView.image = image
                     }
                     
                 })
