@@ -65,8 +65,8 @@ extension AHDetailVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let detailCellNIb = UINib(nibName: AHDetailCellID, bundle: nil)
-        collectionView.register(detailCellNIb, forCellWithReuseIdentifier: AHDetailCellID)
+        let pageCellNIb = UINib(nibName: AHPageCellID, bundle: nil)
+        collectionView.register(pageCellNIb, forCellWithReuseIdentifier: AHPageCellID)
         
         
         self.navigationController?.isNavigationBarHidden = true
@@ -194,7 +194,7 @@ extension AHDetailVC: UICollectionViewDataSource {
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! AHDetailCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! AHPageCell
         
         guard let pinVMs = pinVMs else {
             return cell

@@ -70,7 +70,6 @@ class AHCollectionVC: UICollectionViewController {
 // MARK:- Public API
 extension AHCollectionVC {
     func addLayout(layout: AHLayout, delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource){
-        layout.scrollDirection = .vertical
         layoutRouter.add(layout: layout)
         delegates.append(delegate)
         dataSources.append(dataSource)
@@ -81,7 +80,6 @@ extension AHCollectionVC {
         dataSources.append(dataSource)
     }
     func insertLayoutToFront(layout: AHLayout, delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {
-        layout.scrollDirection = .vertical
         layoutRouter.insert(layout: layout, at: 0)
         delegates.insert(delegate, at: 0)
         dataSources.insert(dataSource, at: 0)

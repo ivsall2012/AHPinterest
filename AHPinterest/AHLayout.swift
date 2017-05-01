@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AHLayout: UICollectionViewFlowLayout {
+class AHLayout: UICollectionViewLayout {
     private(set) weak var layoutRouter: AHLayoutRouter?
     var isGlobel = false
     override var collectionView: UICollectionView? {

@@ -13,11 +13,12 @@ class AHCategoryDataModel: NSObject {
     var isTrending: Bool
     var categoryName: String
     var imageSize: CGSize
-    
+    var isFullWidth: Bool
     init(data: [String: Any]) {
         self.coverURL = data["imageURL"] as! String
         self.isTrending = data["isTrending"] as! Bool
         self.categoryName = data["categoryName"] as! String
+        self.isFullWidth = data["isFullWidth"] as! Bool
         
         var imageSize: CGSize = .zero
         if let imageSizeDict = data["imageSize"] as? [String: CGFloat] {

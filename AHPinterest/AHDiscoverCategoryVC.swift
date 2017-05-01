@@ -8,39 +8,67 @@
 
 import UIKit
 
-class AHDiscoverCategoryVC: UICollectionViewController {
-    var categoryDataModels = [AHCategoryDataModel]()
-    var categoryHandler = AHCategoryHandler()
+class AHDiscoverCategoryVC: AHPinVC {
+    let contentLayout = AHDiscoverContentLayout()
+    
+    var contentVC: AHDiscoverContentVC?
+    let group = DispatchGroup()
     var categoryName: String? {
         didSet {
             if let categoryName = categoryName {
-                
-                AHNetowrkTool.tool.loadCategoryData(forCategoryName: categoryName, completion: { (dataModels) in
-                    
-                    if let dataModels = dataModels {
-                        self.categoryDataModels.removeAll()
-                        self.categoryDataModels.append(contentsOf: dataModels)
-                        self.categoryHandler.categoryDataModels = self.categoryDataModels
-                        self.collectionView?.reloadData()
-                    }
-                    
-                })
+                contentVC?.categoryName = categoryName
             }
         }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView?.backgroundColor = UIColor.orange
-//        let nib = UINib(nibName: AHCategoryCellID, bundle: nil)
-//        collectionView?.register(nib, forCellWithReuseIdentifier: AHCategoryCellID)
-//        collectionView?.delegate = categoryHandler
-//        collectionView?.dataSource = categoryHandler
-//        let flowLayout = AHCategoryLayout()
-//        collectionView?.setCollectionViewLayout(flowLayout, animated: false)
-//        insertLayoutToFront(layout: flowLayout, delegate: categoryHandler, dataSource: categoryHandler)
-//        flowLayout.itemSize = CGSize(width: 300, height: 100)
+        let pageNib = UINib(nibName: AHPageCellID, bundle: nil)
+        collectionView?.register(pageNib, forCellWithReuseIdentifier: AHPageCellID)
+        
+        contentVC = AHDiscoverContentVC(collectionViewLayout: UICollectionViewFlowLayout())
+        contentLayout.delegate = self
+        insertLayoutToFront(layout: contentLayout, delegate: self, dataSource: self)
+        
+        contentVC?.willMove(toParentViewController: self)
+        self.addChildViewController(contentVC!)
+        contentVC?.didMove(toParentViewController: self)
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.collectionView?.reloadData()
+    }
+
+}
+
+extension AHDiscoverCategoryVC: AHDiscoverContentLayoutDelegate {
+    func discoverContentLayoutForContentHeight(layout: AHDiscoverContentLayout) -> CGFloat {
+        let height = contentVC!.collectionViewLayout.collectionViewContentSize.height
+
+        if height > 0.0 {
+            return height
+        }else{
+            return 300.0
+        }
     }
 }
+
+extension AHDiscoverCategoryVC {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AHPageCellID, for: indexPath) as! AHPageCell
+        contentVC?.categoryName = self.categoryName
+        cell.pageVC = contentVC
+        return cell
+    }
+}
+
+
+
+
 
 
 

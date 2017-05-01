@@ -13,9 +13,14 @@ import UIKit
 class AHPinVC: AHCollectionVC, AHTransitionProperties {
     
     weak var pinVM: AHPinViewModel?
-    var sectionTitle = "MOOOO"
+    var sectionTitle = "MOOOO" {
+        didSet {
+            self.pinDataSource.sectionTitle = sectionTitle
+        }
+    }
     var itemIndex: Int = -1
     
+    var finishedLoadingCallback: ( () -> ())?
     
     // This cell is the one already being selected which triggered the push, will be used by the next pushed VC(AHDetailVC) from this VC(AHPinVC or AHDetailVC).
     weak var selectedCell: AHPinCell? {
@@ -51,6 +56,9 @@ class AHPinVC: AHCollectionVC, AHTransitionProperties {
     
     var showLayoutHeader = false
     
+    deinit {
+        self.removeObserver(self, forKeyPath: "contentSize")
+    }
     
 }
 
@@ -69,9 +77,21 @@ extension AHPinVC {
         
         setup()
         
+        collectionView?.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
+    }
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "contentSize", let change = change as? [NSKeyValueChangeKey: NSValue] {
+            if let size = change[NSKeyValueChangeKey.newKey] {
+                if size.cgSizeValue.height > 0.0 {
+                    self.contentSieDidUpdate()
+                }
+            }
+        }
+    }
+
+    func contentSieDidUpdate() {
         
     }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if initialAutoRefresh {
@@ -79,6 +99,7 @@ extension AHPinVC {
             AHRefershUI.show()
             pinDataSource.loadNewData(completion: { (success) in
                 AHRefershUI.dismiss()
+                self.finishedLoadingCallback?()
                 if success {
                     // dismiss refresh control
                 }else{
@@ -125,7 +146,7 @@ extension AHPinVC {
     func setup() {
 
         setupPinLayout()
-        setupRefreshLayout()
+//        setupRefreshLayout()
         setupOptionsHandler()
     }
     
@@ -139,7 +160,6 @@ extension AHPinVC {
     
     func setupPinLayout() {
         pinDataSource.pinVC = self
-        pinDataSource.sectionTitle = sectionTitle
         pinDelegate.pinVC = self
 
         let layoutHanlder = AHLayoutHandler()

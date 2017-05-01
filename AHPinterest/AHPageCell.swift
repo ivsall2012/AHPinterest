@@ -9,18 +9,18 @@
 import UIKit
 
 
-class AHDetailCell: UICollectionViewCell {
+class AHPageCell: UICollectionViewCell {
     
-    weak var pageVC: UICollectionViewController? {
+    weak var pageVC: UIViewController? {
         didSet {
-            if let pinContentVC = pageVC {
+            if let pageVC = pageVC {
                 contentView.subviews.forEach({ (view) in
                     view.removeFromSuperview()
                 })
                 
-                pinContentVC.view.willMove(toSuperview: self)
-                contentView.addSubview(pinContentVC.view)
-                pinContentVC.view.didMoveToSuperview()
+                pageVC.view.willMove(toSuperview: contentView)
+                contentView.addSubview(pageVC.view)
+                pageVC.view.didMoveToSuperview()
                 
             }
         }

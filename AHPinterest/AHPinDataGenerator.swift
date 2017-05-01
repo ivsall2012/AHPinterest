@@ -58,7 +58,7 @@ extension AHPinDataGenerator{
         let imageUrl = images[random(images.count)]
         data["imageSize"] = ["width": CGFloat(width), "height": CGFloat(height)]
         data["imageURL"] = imageUrl
-        
+        data["isFullWidth"] = randomBool() ? true : false
         data["isTrending"] = randomBool() ? true : false
         data["categoryName"] = categoryName
         

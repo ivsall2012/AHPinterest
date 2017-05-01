@@ -40,8 +40,8 @@ class AHDiscoverVC: UICollectionViewController {
     
     func setupCollecitonView() {
         
-        let detailCellNIb = UINib(nibName: AHDetailCellID, bundle: nil)
-        collectionView?.register(detailCellNIb, forCellWithReuseIdentifier: AHDetailCellID)
+        let pageCellNIb = UINib(nibName: AHPageCellID, bundle: nil)
+        collectionView?.register(pageCellNIb, forCellWithReuseIdentifier: AHPageCellID)
         
         pageLayout.scrollDirection = .horizontal
         collectionView?.setCollectionViewLayout(pageLayout, animated: false)
@@ -79,10 +79,8 @@ class AHDiscoverVC: UICollectionViewController {
     }
     
     func createPageVC() -> AHDiscoverCategoryVC {
-        let vc = AHDiscoverCategoryVC(collectionViewLayout: UICollectionViewFlowLayout())
-//        vc.refreshLayout.enableHeaderRefresh = false
-//        vc.showLayoutHeader = true
-        
+        let vc = AHDiscoverCategoryVC()
+        vc.showLayoutHeader = true
         // setup VC related
         vc.willMove(toParentViewController: self)
         self.addChildViewController(vc)
@@ -132,7 +130,7 @@ extension AHDiscoverVC {
     
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AHDetailCellID, for: indexPath) as! AHDetailCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AHPageCellID, for: indexPath) as! AHPageCell
         
         guard !categoryArr.isEmpty else {
             return cell
@@ -140,7 +138,9 @@ extension AHDiscoverVC {
         
         let categoryName = categoryArr[indexPath.item]
         let pageVC = pageVCs[indexPath.item]
+        pageVC.refreshLayout.enableHeaderRefresh = false
         pageVC.categoryName = categoryName
+        pageVC.sectionTitle = categoryName
         cell.pageVC = pageVC
         return cell
     }
