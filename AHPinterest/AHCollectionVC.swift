@@ -53,7 +53,7 @@ class AHCollectionVC: UICollectionViewController {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        collectionView?.setCollectionViewLayout(UICollectionViewFlowLayout(), animated: false)
+        collectionView?.setCollectionViewLayout(layoutRouter, animated: false)
         collectionView?.delegate = delegateCenter
         collectionView?.dataSource = dataSourceCenter
     }

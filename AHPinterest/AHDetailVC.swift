@@ -18,8 +18,6 @@ protocol AHDetailVCDelegate: NSObjectProtocol {
 let AHDetailCellMargin: CGFloat = 5.0
 let screenSize: CGSize = UIScreen.main.bounds.size
 
-private let reuseIdentifier = "AHDetailCell"
-
 
 
 class AHDetailVC: UIViewController, AHTransitionProperties {
@@ -193,7 +191,7 @@ extension AHDetailVC: UICollectionViewDataSource {
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! AHPageCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AHPageCellID, for: indexPath) as! AHPageCell
         
         guard let pinVMs = pinVMs else {
             return cell
@@ -236,11 +234,4 @@ extension AHDetailVC: AHTransitionPopToDelegate {
     }
 }
 
-
-extension AHDetailVC {
-    func calculateImageHeight(imageSize: CGSize, newWidth: CGFloat) -> CGFloat {
-        let newHeight = newWidth * imageSize.height / imageSize.width
-        return newHeight
-    }
-}
 

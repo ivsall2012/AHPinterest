@@ -16,14 +16,26 @@ class AHDiscoverVC: UICollectionViewController {
     
     var categoryArr = [String]()
     
-    var itemIndex: Int = -1 {
+    var itemIndex: Int = 0 {
         didSet {
-            print("should scroll navVC")
             self.navVC.scrollToItemIndex(index: itemIndex)
         }
     }
     
+    weak var selectedCell: AHPinCell?{
+        guard itemIndex >= 0 else { return nil }
+        
+        let pageVC = pageVCs[itemIndex]
+        return pageVC.selectedCell
+    }
     
+    // The current displaying main cell(the large size pin) lives within AHPinContentVC
+    weak var presentingCell: AHPinContentCell?{
+        guard itemIndex >= 0 else { return nil }
+        
+         let pageVC = pageVCs[itemIndex]
+        return pageVC.presentingCell
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +49,10 @@ class AHDiscoverVC: UICollectionViewController {
         
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = false
+    }
     
     
     func setupCollecitonView() {
@@ -112,7 +128,7 @@ extension AHDiscoverVC {
 
 extension AHDiscoverVC: AHDiscoverNavDelegate {
     func discoverNavDidSelect(at index: Int) {
-        print("should scroll main vc")
+        self.itemIndex = index
         let indexPath = IndexPath(item: index, section: 0)
         self.collectionView?.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.right, animated: true)
     }
@@ -150,3 +166,31 @@ extension AHDiscoverVC {
 
 
 
+// MARK:- Transition Stuff
+
+extension AHDiscoverVC: AHTransitionPushFromDelegate {
+    func transitionPushFromSelectedCell() -> AHPinCell? {
+        return self.selectedCell
+    }
+    
+}
+
+extension AHDiscoverVC: AHTransitionPushToDelegate {
+    
+    func transitionPushToPresentingCell() -> AHPinContentCell? {
+        return self.presentingCell
+    }
+    
+}
+
+extension AHDiscoverVC: AHTransitionPopFromDelegate {
+    func transitionPopToSelectedCell() -> AHPinCell? {
+        return self.selectedCell
+    }
+}
+
+extension AHDiscoverVC: AHTransitionPopToDelegate {
+    func transitionPopFromPresentingCell() -> AHPinContentCell? {
+        return self.presentingCell
+    }
+}

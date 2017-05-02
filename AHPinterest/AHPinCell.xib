@@ -10,10 +10,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AHPinCell" id="0XA-TN-Lqm" customClass="AHPinCell" customModule="AHPinterest" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="141" height="127"/>
+            <rect key="frame" x="0.0" y="0.0" width="302" height="300"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="141" height="127"/>
+                <rect key="frame" x="0.0" y="0.0" width="302" height="300"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="note" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IGw-Ml-dY5" userLabel="Note">
@@ -55,7 +55,7 @@
                 <constraint firstItem="GiG-HA-rlV" firstAttribute="top" secondItem="IGw-Ml-dY5" secondAttribute="bottom" constant="8" id="v6u-Go-HzL"/>
                 <constraint firstItem="Gs0-fQ-9Gn" firstAttribute="leading" secondItem="0XA-TN-Lqm" secondAttribute="leading" id="zDX-99-hLp"/>
             </constraints>
-            <size key="customSize" width="141" height="127"/>
+            <size key="customSize" width="302" height="300"/>
             <connections>
                 <outlet property="imageView" destination="Gs0-fQ-9Gn" id="QZn-Pi-lhd"/>
                 <outlet property="imageViewHeightConstraint" destination="RXC-2q-l8m" id="O1w-uY-3Eu"/>
@@ -64,6 +64,7 @@
                 <outlet property="userAvatar" destination="GiG-HA-rlV" id="fsV-xR-MG5"/>
                 <outlet property="userName" destination="GGX-Aw-gkl" id="IVO-RB-7S5"/>
             </connections>
+            <point key="canvasLocation" x="114" y="170"/>
         </collectionViewCell>
     </objects>
 </document>

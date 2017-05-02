@@ -409,11 +409,11 @@
 			isa = PBXGroup;
 			children = (
 				A123E6EA1EAEB0B100D7565E /* AHPinCell.swift */,
+				A167FD0A1EB429D000A9E12B /* AHPinCell.xib */,
 				A1F70F0B1E9B54EB00FF2C91 /* AHRefreshHeader.swift */,
 				A12A28351E9E137400F7A36D /* AHRefreshFooter.swift */,
 				A164E1B61EA8319C00A8227D /* AHPinLayoutHeader.swift */,
 				A164E1B71EA8319C00A8227D /* AHPinLayoutHeader.xib */,
-				A167FD0A1EB429D000A9E12B /* AHPinCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
