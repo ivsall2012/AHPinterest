@@ -19,7 +19,6 @@ class AHDiscoverContentLayoutHandler: NSObject {
                     self.dataModels.removeAll()
                     self.dataModels.append(contentsOf: dataModels)
                     self.categoryVC.collectionView?.reloadData()
-                    print("name:\(self.categoryVC.categoryName) dataModels.count:\(dataModels.count)")
                 }
             }
         }else{

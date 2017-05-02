@@ -18,7 +18,7 @@ class AHDiscoverVC: UICollectionViewController {
     
     var itemIndex: Int = -1 {
         didSet {
-            let indexPath = IndexPath(item: itemIndex, section: 0)
+            print("should scroll navVC")
             self.navVC.scrollToItemIndex(index: itemIndex)
         }
     }
@@ -28,6 +28,7 @@ class AHDiscoverVC: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
+        collectionView?.decelerationRate = UIScrollViewDecelerationRateFast
         collectionView?.frame.origin.y = 64 + AHDiscoverNavCellHeight
         collectionView?.contentInset = .init(top: 0, left: 0, bottom: 0, right: 0 )
         setupCollecitonView()
@@ -111,6 +112,7 @@ extension AHDiscoverVC {
 
 extension AHDiscoverVC: AHDiscoverNavDelegate {
     func discoverNavDidSelect(at index: Int) {
+        print("should scroll main vc")
         let indexPath = IndexPath(item: index, section: 0)
         self.collectionView?.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.right, animated: true)
     }

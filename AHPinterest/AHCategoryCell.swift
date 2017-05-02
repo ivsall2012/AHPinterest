@@ -35,4 +35,10 @@ class AHCategoryCell: UICollectionViewCell {
         self.imageView.layer.masksToBounds = true
         self.imageView.layer.cornerRadius = 10
     }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+        categoryName.text = ""
+        trending.isHidden = true
+    }
 }
