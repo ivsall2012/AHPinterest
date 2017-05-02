@@ -40,6 +40,11 @@ class AHDiscoverNavVC: UICollectionViewController {
         collectionView?.setCollectionViewLayout(layout, animated: false)
     }
     
+    func scrollToItemIndex(index: Int) {
+        let indexPath = IndexPath(item: index, section: 0)
+        navHandler.scrollToItem(at: indexPath, collectionView: self.collectionView!)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

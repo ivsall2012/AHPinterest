@@ -18,8 +18,8 @@ class AHDiscoverVC: UICollectionViewController {
     
     var itemIndex: Int = -1 {
         didSet {
-            self.discoverNavDidSelect(at: itemIndex)
-            
+            let indexPath = IndexPath(item: itemIndex, section: 0)
+            self.navVC.scrollToItemIndex(index: itemIndex)
         }
     }
     
@@ -111,7 +111,8 @@ extension AHDiscoverVC {
 
 extension AHDiscoverVC: AHDiscoverNavDelegate {
     func discoverNavDidSelect(at index: Int) {
-
+        let indexPath = IndexPath(item: index, section: 0)
+        self.collectionView?.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.right, animated: true)
     }
 }
 
