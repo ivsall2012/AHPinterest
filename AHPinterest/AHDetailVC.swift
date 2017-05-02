@@ -160,7 +160,6 @@ extension AHDetailVC {
         if items.count == 1 {
             if let indexPath = collectionView.indexPath(for: items.first!) {
                 self.itemIndex = indexPath.item
-                print("itemIndex:\(self.itemIndex)")
             }else{
                 fatalError("It has an visible cell without indexPath??")
             }

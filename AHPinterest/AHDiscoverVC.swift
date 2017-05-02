@@ -71,16 +71,17 @@ class AHDiscoverVC: UICollectionViewController {
     }
     
     func setupPageVCs(){
-        for _ in categoryArr {
-            let vc = createPageVC()
+        for i in 0..<categoryArr.count {
+            let vc = createPageVC(i)
             pageVCs.append(vc)
         }
         self.collectionView?.reloadData()
     }
     
-    func createPageVC() -> AHDiscoverCategoryVC {
+    func createPageVC(_ index:Int) -> AHDiscoverCategoryVC {
         let vc = AHDiscoverCategoryVC()
         vc.showLayoutHeader = true
+        vc.categoryName = categoryArr[index]
         // setup VC related
         vc.willMove(toParentViewController: self)
         self.addChildViewController(vc)
@@ -98,7 +99,6 @@ extension AHDiscoverVC {
         if let items = items, items.count == 1 {
             if let indexPath = collectionView?.indexPath(for: items.first!) {
                 self.itemIndex = indexPath.item
-                print("itemIndex:\(self.itemIndex)")
             }else{
                 fatalError("It has an visible cell without indexPath??")
             }
@@ -111,7 +111,7 @@ extension AHDiscoverVC {
 
 extension AHDiscoverVC: AHDiscoverNavDelegate {
     func discoverNavDidSelect(at index: Int) {
-        print("didSelecte category:\(self.categoryArr[index]) at index:\(index)")
+
     }
 }
 
@@ -139,7 +139,6 @@ extension AHDiscoverVC {
         let categoryName = categoryArr[indexPath.item]
         let pageVC = pageVCs[indexPath.item]
         pageVC.refreshLayout.enableHeaderRefresh = false
-        pageVC.categoryName = categoryName
         pageVC.sectionTitle = categoryName
         cell.pageVC = pageVC
         return cell

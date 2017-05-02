@@ -10,62 +10,33 @@ import UIKit
 
 class AHDiscoverCategoryVC: AHPinVC {
     let contentLayout = AHDiscoverContentLayout()
+    let contentLayoutHanlder = AHDiscoverContentLayoutHandler()
     
-    var contentVC: AHDiscoverContentVC?
-    let group = DispatchGroup()
-    var categoryName: String? {
-        didSet {
-            if let categoryName = categoryName {
-                contentVC?.categoryName = categoryName
-            }
-        }
-    }
+
+    var categoryName: String?
     override func viewDidLoad() {
         super.viewDidLoad()
-        let pageNib = UINib(nibName: AHPageCellID, bundle: nil)
-        collectionView?.register(pageNib, forCellWithReuseIdentifier: AHPageCellID)
         
-        contentVC = AHDiscoverContentVC(collectionViewLayout: UICollectionViewFlowLayout())
-        contentLayout.delegate = self
-        insertLayoutToFront(layout: contentLayout, delegate: self, dataSource: self)
+        let cellNib = UINib(nibName: AHCategoryCellID, bundle: nil)
+        collectionView?.register(cellNib, forCellWithReuseIdentifier: AHCategoryCellID)
         
-        contentVC?.willMove(toParentViewController: self)
-        self.addChildViewController(contentVC!)
-        contentVC?.didMove(toParentViewController: self)
+        contentLayoutHanlder.categoryVC = self
+        insertLayoutToFront(layout: contentLayout, delegate: contentLayoutHanlder, dataSource: contentLayoutHanlder)
         
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.collectionView?.reloadData()
-    }
-
-}
-
-extension AHDiscoverCategoryVC: AHDiscoverContentLayoutDelegate {
-    func discoverContentLayoutForContentHeight(layout: AHDiscoverContentLayout) -> CGFloat {
-        let height = contentVC!.collectionViewLayout.collectionViewContentSize.height
-
-        if height > 0.0 {
-            return height
-        }else{
-            return 300.0
-        }
-    }
-}
-
-extension AHDiscoverCategoryVC {
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AHPageCellID, for: indexPath) as! AHPageCell
-        contentVC?.categoryName = self.categoryName
-        cell.pageVC = contentVC
-        return cell
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        contentLayoutHanlder.reloadData()
     }
-}
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
 
+}
 
 
 

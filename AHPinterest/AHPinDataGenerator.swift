@@ -40,7 +40,7 @@ extension AHPinDataGenerator{
     
     func loadCategories(categoryName: String) -> [AHCategoryDataModel] {
         var data = [AHCategoryDataModel]()
-        for _ in 0..<random(5) {
+        for _ in 0..<random(1, 5) {
             let model = generateCategoryData(categoryName)
             data.append(model)
         }

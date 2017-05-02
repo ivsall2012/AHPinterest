@@ -8,41 +8,72 @@
 
 import UIKit
 
-protocol AHDiscoverContentLayoutDelegate: NSObjectProtocol {
-    func discoverContentLayoutForContentHeight(layout: AHDiscoverContentLayout) -> CGFloat
-}
+
+
+
+
+
 
 class AHDiscoverContentLayout: AHLayout {
-    weak var delegate: AHDiscoverContentLayoutDelegate?
-    
-    fileprivate var attributes: UICollectionViewLayoutAttributes?
+    var cache = [UICollectionViewLayoutAttributes]()
+    var totalHeight:CGFloat = 0.0
     override func prepare() {
-        let indexPath = IndexPath(item: 0, section: self.layoutSection)
-        attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+        cache.removeAll()
+        let layoutSection = self.layoutSection
+        if let numberOfItems = collectionView?.numberOfItems(inSection: layoutSection), numberOfItems > 0 {
+            let fixedColumn = 2
+            let totalWidth = collectionView!.bounds.width - (collectionView!.contentInset.left + collectionView!.contentInset.right)
+            let paddingSpace:CGFloat = 16
+            let cellWidth = (totalWidth - (CGFloat((fixedColumn + 1)) * paddingSpace)) / CGFloat(fixedColumn)
+            let cellSize = CGSize(width: cellWidth, height: 200)
+            
+            let unitWidth = paddingSpace + cellSize.width
+            let unitHeight = cellSize.height + paddingSpace
+            
+            
+            
+            for i in 0..<numberOfItems {
+                let indexPath = IndexPath(item: i, section: layoutSection)
+                let attr = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+                let column:Int = i % fixedColumn
+                let row:Int = i / fixedColumn
+                let x: CGFloat = paddingSpace + CGFloat(column) * unitWidth
+                let y:CGFloat = paddingSpace + CGFloat(row) * unitHeight
+                attr.frame = CGRect(x: x, y: y, width: cellSize.width, height: cellSize.height)
+
+                cache.append(attr)
+                
+            }
+            
+            totalHeight = CGFloat((numberOfItems - 1) / fixedColumn + 1) * unitHeight
+        }
+        
+        
+        
     }
     
     override var collectionViewContentSize: CGSize {
-        let height = delegate!.discoverContentLayoutForContentHeight(layout: self)
-        let size = CGSize(width: 0.0, height: height)
-        let width = collectionView!.bounds.width - (collectionView!.contentInset.left + collectionView!.contentInset.right)
-        attributes?.frame = CGRect(x: 0, y: 0, width: width, height: height)
-        return size
+        return CGSize(width: 0.0, height: totalHeight)
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        if isIntercept(attr: attributes!, rect: rect) {
-            return [attributes!]
-        }else{
-            return nil
+        let attrs = cache.filter { (attr) -> Bool in
+            return isIntercept(attr: attr, rect: rect)
         }
+        
+        return attrs
     }
     
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         if indexPath.section == self.layoutSection {
-            return attributes
+            return cache[indexPath.item]
         }else{
-            return nil
+            fatalError("Router error: received unmatch layoutSection")
         }
     }
 
+    override func invalidateLayout() {
+        cache.removeAll()
+        totalHeight = 0.0
+    }
 }

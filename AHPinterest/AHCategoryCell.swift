@@ -16,7 +16,7 @@ class AHCategoryCell: UICollectionViewCell {
     var dataModel: AHCategoryDataModel? {
         didSet {
             if let dataModel = dataModel {
-                trending.isEnabled = dataModel.isTrending
+                trending.isHidden = dataModel.isTrending
                 categoryName.text = dataModel.categoryName
                 imageView.AH_setImage(urlStr: dataModel.coverURL, completion: {[weak self] (image) in
                     // cell being resued already, return. Image is already in cache.
@@ -29,5 +29,10 @@ class AHCategoryCell: UICollectionViewCell {
                 })
             }
         }
+    }
+    
+    override func awakeFromNib() {
+        self.imageView.layer.masksToBounds = true
+        self.imageView.layer.cornerRadius = 10
     }
 }

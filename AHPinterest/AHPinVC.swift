@@ -55,10 +55,7 @@ class AHPinVC: AHCollectionVC, AHTransitionProperties {
     var initialAutoRefresh = true
     
     var showLayoutHeader = false
-    
-    deinit {
-        self.removeObserver(self, forKeyPath: "contentSize")
-    }
+
     
 }
 
@@ -76,18 +73,9 @@ extension AHPinVC {
         registration()
         
         setup()
-        
-        collectionView?.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
+
     }
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "contentSize", let change = change as? [NSKeyValueChangeKey: NSValue] {
-            if let size = change[NSKeyValueChangeKey.newKey] {
-                if size.cgSizeValue.height > 0.0 {
-                    self.contentSieDidUpdate()
-                }
-            }
-        }
-    }
+
 
     func contentSieDidUpdate() {
         
@@ -146,7 +134,7 @@ extension AHPinVC {
     func setup() {
 
         setupPinLayout()
-//        setupRefreshLayout()
+        setupRefreshLayout()
         setupOptionsHandler()
     }
     
