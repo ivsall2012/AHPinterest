@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AHDiscoverVC: UICollectionViewController {
+class AHDiscoverVC: UICollectionViewController, AHTransitionProperties {
     let navVC = AHDiscoverNavVC()
     let pageLayout = AHPageLayout()
     
