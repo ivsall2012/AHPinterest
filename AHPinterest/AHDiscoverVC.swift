@@ -12,7 +12,7 @@ class AHDiscoverVC: UICollectionViewController, AHTransitionProperties {
     let navVC = AHDiscoverNavVC()
     let pageLayout = AHPageLayout()
     
-    var pageVCs = [AHDiscoverCategoryVC]()
+    var dictVCs = [Int: AHDiscoverCategoryVC]()
     
     var categoryArr = [String]()
     
@@ -25,7 +25,7 @@ class AHDiscoverVC: UICollectionViewController, AHTransitionProperties {
     weak var selectedCell: AHPinCell?{
         guard itemIndex >= 0 else { return nil }
         
-        let pageVC = pageVCs[itemIndex]
+        let pageVC = self.getVC(itemIndex)
         return pageVC.selectedCell
     }
     
@@ -33,7 +33,7 @@ class AHDiscoverVC: UICollectionViewController, AHTransitionProperties {
     weak var presentingCell: AHPinContentCell?{
         guard itemIndex >= 0 else { return nil }
         
-         let pageVC = pageVCs[itemIndex]
+        let pageVC = self.getVC(itemIndex)
         return pageVC.presentingCell
     }
     
@@ -82,30 +82,37 @@ class AHDiscoverVC: UICollectionViewController, AHTransitionProperties {
             if let categoryArr = categoryArr, !categoryArr.isEmpty {
                 self.categoryArr.append(contentsOf: categoryArr)
                 self.navVC.categoryArr = self.categoryArr
-                self.setupPageVCs()
+                self.collectionView?.reloadData()
             }
         }
     }
     
-    func setupPageVCs(){
-        for i in 0..<categoryArr.count {
-            let vc = createPageVC(i)
-            pageVCs.append(vc)
+    func getVC(_ index:Int) -> AHDiscoverCategoryVC {
+        guard index < categoryArr.count else {
+            fatalError("index out of bound for categoryArr")
         }
-        self.collectionView?.reloadData()
-    }
-    
-    func createPageVC(_ index:Int) -> AHDiscoverCategoryVC {
-        print("createPageVCs")
-        let vc = AHDiscoverCategoryVC()
-        vc.showLayoutHeader = true
-        vc.categoryName = categoryArr[index]
-        // setup VC related
-        vc.willMove(toParentViewController: self)
-        self.addChildViewController(vc)
-        vc.didMove(toParentViewController: self)
         
-        return vc
+        if let vc = dictVCs[index] {
+            vc.willMove(toParentViewController: self)
+            self.addChildViewController(vc)
+            vc.didMove(toParentViewController: self)
+            return vc
+        }else{
+            print("created a AHDiscoverCategoryVC")
+            let vc = AHDiscoverCategoryVC()
+            vc.showLayoutHeader = true
+            vc.categoryName = categoryArr[index]
+            
+            dictVCs[index] = vc
+            
+            vc.willMove(toParentViewController: self)
+            self.addChildViewController(vc)
+            vc.didMove(toParentViewController: self)
+            
+            return vc
+        }
+        
+        
     }
 
 
@@ -129,6 +136,9 @@ extension AHDiscoverVC {
 
 extension AHDiscoverVC: AHDiscoverNavDelegate {
     func discoverNavDidSelect(at index: Int) {
+        guard !categoryArr.isEmpty else {
+            return
+        }
         self.itemIndex = index
         let indexPath = IndexPath(item: index, section: 0)
         self.collectionView?.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.right, animated: true)
@@ -150,14 +160,13 @@ extension AHDiscoverVC {
     
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard !categoryArr.isEmpty else {
+            return UICollectionViewCell()
+        }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AHPageCellID, for: indexPath) as! AHPageCell
         
-        guard !categoryArr.isEmpty else {
-            return cell
-        }
-        
         let categoryName = categoryArr[indexPath.item]
-        let pageVC = pageVCs[indexPath.item]
+        let pageVC = getVC(indexPath.item)
         pageVC.refreshLayout.enableHeaderRefresh = false
         pageVC.sectionTitle = categoryName
         cell.pageVC = pageVC
