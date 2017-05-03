@@ -42,7 +42,7 @@ class AHPinCell: UICollectionViewCell {
                     }
                     
                 })
-                layoutIfNeeded()
+//                layoutIfNeeded()
             }
         }
     }

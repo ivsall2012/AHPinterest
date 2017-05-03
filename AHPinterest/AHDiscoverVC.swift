@@ -39,6 +39,8 @@ class AHDiscoverVC: UICollectionViewController, AHTransitionProperties {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         self.automaticallyAdjustsScrollViewInsets = false
         collectionView?.decelerationRate = UIScrollViewDecelerationRateFast
         collectionView?.frame.origin.y = 64 + AHDiscoverNavCellHeight
@@ -151,6 +153,7 @@ extension AHDiscoverVC: UICollectionViewDelegateFlowLayout {
         return CGSize(width: screenSize.width, height: screenSize.height)
     }
     
+    
 }
 
 extension AHDiscoverVC {
@@ -158,6 +161,7 @@ extension AHDiscoverVC {
         return categoryArr.count
     }
     
+
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard !categoryArr.isEmpty else {

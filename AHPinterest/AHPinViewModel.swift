@@ -10,7 +10,7 @@ import UIKit
 
 class AHPinViewModel: NSObject {
     var pinModel: AHPinDataModel
-    
+    fileprivate var noteHeight:CGFloat?
     init(pinModel: AHPinDataModel) {
         self.pinModel = pinModel
     }
@@ -20,9 +20,14 @@ class AHPinViewModel: NSObject {
 // MARK:- Calculations
 extension AHPinViewModel {
     func heightForNote(font: UIFont, width: CGFloat) -> CGFloat{
-        let note = pinModel.note
-        let size = CGSize(width: width - 2 * AHCellPadding, height: CGFloat(DBL_MAX))
-        let rect =  (note as NSString).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
-        return ceil(rect.height)
+        if noteHeight == nil {
+            let note = pinModel.note
+            let size = CGSize(width: width - 2 * AHCellPadding, height: CGFloat(DBL_MAX))
+            let rect =  (note as NSString).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+            noteHeight = ceil(rect.height)
+            return noteHeight!
+        }else{
+            return noteHeight!
+        }
     }
 }
