@@ -34,7 +34,7 @@ public class AHPinDataGenerator: NSObject {
 
 extension AHPinDataGenerator{
     func generateCategories() -> [String] {
-        let stringArr = ["Trending", "Everything", "DIY", "Women's Style", "Home", "Beauty", "Food", "Men's style", "Humor", "TRavel"]
+        let stringArr = ["Trending", "Everything", "DIY", "Women's Style", "Home", "Beauty", "Food", "Men's style", "Humor", "Travel"]
         return stringArr
     }
     
@@ -79,7 +79,7 @@ extension AHPinDataGenerator{
     
     func randomCardBatch() -> [AHPinDataModel] {
         var data = [AHPinDataModel]()
-        for _ in 0..<20 {
+        for _ in 0..<1000 {
             let dict = randomPin()
             if let pinData = AHPinDataModel(dict: dict) {
                 data.append(pinData)

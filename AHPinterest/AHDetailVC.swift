@@ -37,7 +37,7 @@ class AHDetailVC: UIViewController, AHTransitionProperties {
     weak var selectedCell: AHPinCell?{
         guard itemIndex >= 0 else { return nil }
         
-        let contentVC = cellVCs[itemIndex]
+        let contentVC = self.getPinVC(index: itemIndex)
         return contentVC.selectedCell
     }
     
@@ -45,11 +45,11 @@ class AHDetailVC: UIViewController, AHTransitionProperties {
     weak var presentingCell: AHPinContentCell?{
         guard itemIndex >= 0 else { return nil }
         
-        let contentVC = cellVCs[itemIndex]
+        let contentVC = self.getPinVC(index: itemIndex)
         return contentVC.presentingCell
     }
     
-    fileprivate var cellVCs = [AHPinContentVC]()
+    fileprivate var dictVCs = [Int: AHPinContentVC]()
     // the scrollToItem when transitioning from pinVC to detailVC, which does only once
     fileprivate var initialScroll = false
     
@@ -62,7 +62,6 @@ class AHDetailVC: UIViewController, AHTransitionProperties {
 extension AHDetailVC {
     override func viewDidLoad() {
         super.viewDidLoad()
-
         let pageCellNIb = UINib(nibName: AHPageCellID, bundle: nil)
         collectionView.register(pageCellNIb, forCellWithReuseIdentifier: AHPageCellID)
         
@@ -77,15 +76,6 @@ extension AHDetailVC {
         
         collectionView.decelerationRate = UIScrollViewDecelerationRateFast
         layout.scrollDirection = .horizontal
-        
-        guard let pinVMs = pinVMs else {
-            return
-        }
-        
-        for _ in pinVMs {
-            let vc = createPinVC()
-            cellVCs.append(vc)
-        }
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -123,29 +113,44 @@ extension AHDetailVC {
 
 // MARK:- Helper Methods
 extension AHDetailVC {
-    func createPinVC() -> AHPinContentVC {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "AHPinContentVC") as! AHPinContentVC
-        vc.refreshLayout.enableHeaderRefresh = false
-        vc.showLayoutHeader = true
-        
-        let navBarCallback = { (showTransitionAnimation: Bool) -> () in
-            print("popping itemIndex:\(self.itemIndex)")
-            if !showTransitionAnimation {
-                if let navVC = self.navigationController as? AHNavigationController {
-                    navVC.turnOffTransitionOnce()
+    
+    func getPinVC(index: Int) -> AHPinContentVC {
+        guard index < pinVMs?.count ?? 0 else {
+            fatalError("index out of bound for pinVMs")
+        }
+        if let vc = dictVCs[index] {
+            // setup VC related
+            vc.willMove(toParentViewController: self)
+            self.addChildViewController(vc)
+            vc.didMove(toParentViewController: self)
+            return vc
+        }else{
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "AHPinContentVC") as! AHPinContentVC
+            vc.refreshLayout.enableHeaderRefresh = false
+            vc.showLayoutHeader = true
+            
+            let navBarCallback = { (showTransitionAnimation: Bool) -> () in
+                print("popping itemIndex:\(self.itemIndex)")
+                if !showTransitionAnimation {
+                    if let navVC = self.navigationController as? AHNavigationController {
+                        navVC.turnOffTransitionOnce()
+                    }
                 }
+                self.navigationController!.popViewController(animated: true)
             }
-            self.navigationController!.popViewController(animated: true)
+            
+            vc.navBarDismissCallback = navBarCallback
+
+            dictVCs[index] = vc
+            
+            // setup VC related
+            vc.willMove(toParentViewController: self)
+            self.addChildViewController(vc)
+            vc.didMove(toParentViewController: self)
+            return vc
         }
         
-        vc.navBarDismissCallback = navBarCallback
-        
-        // setup VC related
-        vc.willMove(toParentViewController: self)
-        self.addChildViewController(vc)
-        vc.didMove(toParentViewController: self)
-        return vc
     }
 
     
@@ -175,6 +180,14 @@ extension AHDetailVC: UICollectionViewDelegateFlowLayout {
         return CGSize(width: screenSize.width, height: screenSize.height)
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+
+    }
+    
 }
 
 extension AHDetailVC: UICollectionViewDataSource {
@@ -196,9 +209,8 @@ extension AHDetailVC: UICollectionViewDataSource {
         guard let pinVMs = pinVMs else {
             return cell
         }
-        
         let pinVM = pinVMs[indexPath.item]
-        let cellVC = cellVCs[indexPath.item]
+        let cellVC = getPinVC(index: indexPath.item)
         cellVC.pinVM = pinVM
         cell.pageVC = cellVC
         return cell

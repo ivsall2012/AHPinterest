@@ -44,7 +44,7 @@ class AHDiscoverVC: UICollectionViewController, AHTransitionProperties {
         collectionView?.frame.origin.y = 64 + AHDiscoverNavCellHeight
         collectionView?.contentInset = .init(top: 0, left: 0, bottom: 0, right: 0 )
         setupCollecitonView()
-        
+
         setupNavVC()
         
     }
@@ -96,6 +96,7 @@ class AHDiscoverVC: UICollectionViewController, AHTransitionProperties {
     }
     
     func createPageVC(_ index:Int) -> AHDiscoverCategoryVC {
+        print("createPageVCs")
         let vc = AHDiscoverCategoryVC()
         vc.showLayoutHeader = true
         vc.categoryName = categoryArr[index]
