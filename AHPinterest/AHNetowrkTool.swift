@@ -77,9 +77,7 @@ extension AHNetowrkTool {
                     completion(nil)
                 }
             }
-            DispatchQueue.global().async {
-                task.resume()
-            }
+            task.resume()
             
         }
     }
