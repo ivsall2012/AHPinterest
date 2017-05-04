@@ -45,7 +45,7 @@ extension AHDiscoverNavHandler: UICollectionViewDelegateFlowLayout {
         
         let categoryStr = categoryArr[indexPath.item]
         let font = UIFont.systemFont(ofSize: AHDiscoverNavCellFontSize)
-        let size = CGSize(width: CGFloat(DBL_MAX), height: AHDiscoverNavCellHeight)
+        let size = CGSize(width: CGFloat(Double.greatestFiniteMagnitude), height: AHDiscoverNavCellHeight)
         let rect =  (categoryStr as NSString).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
         let width = ceil(rect.width)
         return CGSize(width: width + 2 * AHDiscoverNavCellPadding, height: AHDiscoverNavCellHeight)

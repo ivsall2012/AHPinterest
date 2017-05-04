@@ -44,13 +44,7 @@ class AHPinContentVC: AHPinVC {
         }
     }
     
-
-
-}
-
-
-// MARK:- VC Life Cycles
-extension AHPinContentVC {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -79,7 +73,10 @@ extension AHPinContentVC {
         super.viewWillDisappear(animated)
         UIApplication.shared.isStatusBarHidden = false
     }
+
 }
+
+
 
 
 // MARK:- Setups

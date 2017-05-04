@@ -19,10 +19,10 @@ class AHOptionsHandler: NSObject {
     weak var delegate: AHOptionsHandlerDelegate?
     
     // The controller that does the presentation job
-    unowned var presenterVC: UIViewController
+    weak var presenterVC: UIViewController!
     
     // The view that is needed to add this option animation. (FYI, unowned objects don't have didSet listener)
-    unowned var targetView: UIView
+    weak var targetView: UIView!
     
     fileprivate var optionsAnimator = AHOptionsAnimator()
     fileprivate var optionsVC = AHOptionsVC()

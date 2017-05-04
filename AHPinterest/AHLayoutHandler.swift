@@ -26,7 +26,7 @@ extension AHLayoutHandler: AHPinLayoutDelegate {
         }
         
         let pin = pinVM.pinModel
-        let boundRect = CGRect(x: 0, y: 0, width: width, height: CGFloat(DBL_MAX))
+        let boundRect = CGRect(x: 0, y: 0, width: width, height: CGFloat(Double.greatestFiniteMagnitude))
         let rect = AVMakeRect(aspectRatio: pin.imageSize , insideRect: boundRect)
         return rect.height
     }

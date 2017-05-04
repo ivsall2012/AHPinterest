@@ -57,14 +57,9 @@ class AHPinVC: AHCollectionVC, AHTransitionProperties {
     var showLayoutHeader = false
 
     
-}
-
-
-// MARK:- VC Cycles
-extension AHPinVC {
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         
         self.navigationController?.isNavigationBarHidden = true
         collectionView?.backgroundColor = UIColor.white
@@ -73,8 +68,14 @@ extension AHPinVC {
         registration()
         
         setup()
-
+        
     }
+}
+
+
+// MARK:- VC Cycles
+extension AHPinVC {
+    
 
 
     func contentSieDidUpdate() {

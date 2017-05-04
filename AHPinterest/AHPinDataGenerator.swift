@@ -79,7 +79,7 @@ extension AHPinDataGenerator{
     
     func randomCardBatch() -> [AHPinDataModel] {
         var data = [AHPinDataModel]()
-        for _ in 0..<25 {
+        for _ in 0..<100 {
             let dict = randomPin()
             if let pinData = AHPinDataModel(dict: dict) {
                 data.append(pinData)

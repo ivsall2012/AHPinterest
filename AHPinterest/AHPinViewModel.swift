@@ -22,7 +22,7 @@ extension AHPinViewModel {
     func heightForNote(font: UIFont, width: CGFloat) -> CGFloat{
         if noteHeight == nil {
             let note = pinModel.note
-            let size = CGSize(width: width - 2 * AHCellPadding, height: CGFloat(DBL_MAX))
+            let size = CGSize(width: width - 2 * AHCellPadding, height: CGFloat(Double.greatestFiniteMagnitude))
             let rect =  (note as NSString).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
             noteHeight = ceil(rect.height)
             return noteHeight!

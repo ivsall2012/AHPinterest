@@ -45,9 +45,9 @@ class AHRefreshHeader: UICollectionReusableView {
             // need to do animation and networking
             let animation = CABasicAnimation(keyPath: "transform.rotation.z")
             animation.fromValue = 0.0
-            animation.toValue = 2 * CGFloat(M_PI)
+            animation.toValue = 2 * CGFloat(Double.pi)
             animation.duration = 1.0;
-            animation.repeatCount = FLT_MAX;
+            animation.repeatCount = Float.greatestFiniteMagnitude;
             refreshControl.layer.add(animation, forKey: "refreshSpinning")
             return
         }
@@ -63,11 +63,11 @@ class AHRefreshHeader: UICollectionReusableView {
         // using ratio because moving from bottom to centerY needs the ratio from 0.0 to 1.0
         let delta = ratio
         // an extra angle to make the end angle in transform, exactly faced-up
-        let angleOffset = CGFloat(M_PI_4) * 0.1
+        let angleOffset = CGFloat(Double.pi/4) * 0.1
         refreshControl.alpha = adjustedRatio
         let transformScale = CGAffineTransform(scaleX: adjustedRatio, y: adjustedRatio)
         let transformCenter = CGAffineTransform(translationX: 0.0, y: -delta)
-        let transformAngle = CGAffineTransform(rotationAngle: 2 * CGFloat(M_PI) * ratio + angleOffset)
+        let transformAngle = CGAffineTransform(rotationAngle: 2 * CGFloat(Double.pi) * ratio + angleOffset)
         
         // transformAngle has to come first!!
         refreshControl.transform = transformAngle.concatenating(transformCenter).concatenating(transformScale)

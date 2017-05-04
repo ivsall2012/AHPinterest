@@ -38,9 +38,9 @@ class AHRefershUI: NSObject {
         // need to do animation and networking
         let rotaton = CABasicAnimation(keyPath: "transform.rotation.z")
         rotaton.fromValue = 0.0
-        rotaton.toValue = 2 * CGFloat(M_PI)
+        rotaton.toValue = 2 * CGFloat(Double.pi)
         rotaton.duration = 1.0;
-        rotaton.repeatCount = FLT_MAX;
+        rotaton.repeatCount = Float.greatestFiniteMagnitude;
         
         let scale = CABasicAnimation(keyPath: "transform.scale")
         scale.fromValue = 0.3

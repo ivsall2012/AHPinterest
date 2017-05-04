@@ -47,9 +47,9 @@ class AHRefreshFooter: UICollectionReusableView {
             // need to do animation and networking
             let animation = CABasicAnimation(keyPath: "transform.rotation.z")
             animation.fromValue = 0.0
-            animation.toValue = 2 * CGFloat(M_PI)
+            animation.toValue = 2 * CGFloat(Double.pi)
             animation.duration = 1.0;
-            animation.repeatCount = FLT_MAX;
+            animation.repeatCount = Float.greatestFiniteMagnitude;
             refreshControl.layer.add(animation, forKey: "refreshSpinning")
             return
         }

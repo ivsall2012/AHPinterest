@@ -171,7 +171,7 @@ extension AHOptionsVC: AHOptionsAnimatorDelegate {
     }
     /// return if there's a(only) btn selected
     func buttonSelectionAnimations(_ point: CGPoint,_ allButtons: [UIButton]) -> UIButton? {
-        var min: CGFloat = CGFloat(FLT_MAX)
+        var min: CGFloat = CGFloat(Float.greatestFiniteMagnitude)
         var targetBtn: UIButton? = nil
         for btn in allButtons {
             // from touch point to btn, find min(closest one)
@@ -357,7 +357,7 @@ extension ButtonsPositions {
         let radius = self.radius
         let anchor = self.anchor
         
-        let r_cos_pi_4 = radius * CGFloat(cos(M_PI_4))
+        let r_cos_pi_4 = radius * CGFloat(cos(Double.pi/4))
         let left = CGPoint(x: anchor.x - r_cos_pi_4, y: anchor.y - r_cos_pi_4)
         let middle = CGPoint(x: anchor.x, y: anchor.y - radius)
         let right = CGPoint(x: anchor.x + r_cos_pi_4, y: anchor.y - r_cos_pi_4)
@@ -375,7 +375,7 @@ extension ButtonsPositions {
         let radius = self.radius
         let anchor = self.anchor
         
-        let radian = M_PI / 8
+        let radian = Double.pi / 8
         let r_sin_radian = radius * CGFloat(sin(radian))
         let r_cos_radian = radius * CGFloat(cos(radian))
         let r_sin_3_radian = radius * CGFloat(sin(3 * radian))
@@ -400,7 +400,7 @@ extension ButtonsPositions {
         let anchor = CGPoint(x: self.anchor.x - 10, y: self.anchor.y)
         
         
-        let r_cos_pi_4 = radius * CGFloat(cos(M_PI_4))
+        let r_cos_pi_4 = radius * CGFloat(cos(Double.pi/4))
         let left = CGPoint(x: anchor.x - radius, y: anchor.y)
         let middle = CGPoint(x: anchor.x - r_cos_pi_4, y: anchor.y - r_cos_pi_4)
         let right = CGPoint(x: anchor.x, y: anchor.y - radius)
