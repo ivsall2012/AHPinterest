@@ -20,6 +20,7 @@ class AHPinCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.layer.shouldRasterize = true
         self.contentView.backgroundColor = UIColor.orange
         self.contentView.layer.cornerRadius = 10
         self.contentView.layer.masksToBounds = true
@@ -42,7 +43,7 @@ class AHPinCell: UICollectionViewCell {
                     }
                     
                 })
-//                layoutIfNeeded()
+
             }
         }
     }
@@ -64,15 +65,11 @@ class AHPinCell: UICollectionViewCell {
         self.userAvatar.image = nil
     }
     
-//    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-//        return super.preferredLayoutAttributesFitting(layoutAttributes)
-//    }
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         if let attr = layoutAttributes as? AHPinLayoutAttributes{
             imageViewHeightConstraint.constant = attr.imageHeight
             noteHeightConstraint.constant = attr.noteHeight
-            layoutIfNeeded()
         }
         
     }
