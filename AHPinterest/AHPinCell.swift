@@ -65,7 +65,9 @@ class AHPinCell: UICollectionViewCell {
         self.userAvatar.image = nil
     }
     
-    
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        return layoutAttributes
+    }
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         if let attr = layoutAttributes as? AHPinLayoutAttributes{
             imageViewHeightConstraint.constant = attr.imageHeight
