@@ -50,9 +50,12 @@ class AHPinContentCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.layer.shouldRasterize = true
         self.contentView.layer.cornerRadius = 10
         self.contentView.layer.masksToBounds = true
     }
+    
+    
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -60,6 +63,10 @@ class AHPinContentCell: UICollectionViewCell {
         pinImageView.image = nil
         noteLabel.text = nil
         userAvatar.image = nil
+    }
+    
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        return layoutAttributes
     }
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
