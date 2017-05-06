@@ -15,9 +15,9 @@ class AHPinDelegate: NSObject {
 
 extension AHPinDelegate: UICollectionViewDelegate, AHDetailVCDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let layout = AHPageLayout()
+        let vc = AHDetailVC(collectionViewLayout: layout)
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "AHDetailVC") as! AHDetailVC
         vc.pinVMs = pinVC?.pinDataSource.pinVMs
         vc.delegate = self
         vc.itemIndex = indexPath.item

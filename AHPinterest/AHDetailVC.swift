@@ -20,8 +20,7 @@ let screenSize: CGSize = UIScreen.main.bounds.size
 
 
 
-class AHDetailVC: UIViewController, AHTransitionProperties {
-    @IBOutlet weak var collectionView: UICollectionView!
+class AHDetailVC: UICollectionViewController, AHTransitionProperties {
     weak var delegate: AHDetailVCDelegate?
     
     var transitionAnimator = AHTransitionAnimator()
@@ -63,7 +62,7 @@ extension AHDetailVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         let pageCellNIb = UINib(nibName: AHPageCellID, bundle: nil)
-        collectionView.register(pageCellNIb, forCellWithReuseIdentifier: AHPageCellID)
+        collectionView?.register(pageCellNIb, forCellWithReuseIdentifier: AHPageCellID)
         
         
         self.navigationController?.isNavigationBarHidden = true
@@ -71,10 +70,8 @@ extension AHDetailVC {
         self.automaticallyAdjustsScrollViewInsets = false
         collectionView?.contentInset = .init(top: 0, left: 0, bottom: 0, right: 0)
         
-        let layout = AHPageLayout()
-        collectionView.setCollectionViewLayout(layout, animated: false)
-        
-        collectionView.decelerationRate = UIScrollViewDecelerationRateFast
+        collectionView?.decelerationRate = UIScrollViewDecelerationRateFast
+        let layout = collectionViewLayout as! AHPageLayout
         layout.scrollDirection = .horizontal
         
     }
@@ -102,7 +99,7 @@ extension AHDetailVC {
         super.viewDidLayoutSubviews()
         if !initialScroll {
             let indexPath = IndexPath(item: itemIndex, section: 0)
-            collectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.right, animated: false)
+            collectionView?.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.right, animated: false)
             initialScroll = true
         }
         
@@ -158,10 +155,10 @@ extension AHDetailVC {
 
 
 extension AHDetailVC {
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let items = collectionView.visibleCells
+    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let items = collectionView!.visibleCells
         if items.count == 1 {
-            if let indexPath = collectionView.indexPath(for: items.first!) {
+            if let indexPath = collectionView!.indexPath(for: items.first!) {
                 self.itemIndex = indexPath.item
             }else{
                 fatalError("It has an visible cell without indexPath??")
@@ -180,22 +177,22 @@ extension AHDetailVC: UICollectionViewDelegateFlowLayout {
         return CGSize(width: screenSize.width, height: screenSize.height)
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
 
     }
     
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
 
     }
     
 }
 
-extension AHDetailVC: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+extension AHDetailVC {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let pinVMs = pinVMs else {
             return 0
         }
@@ -203,7 +200,7 @@ extension AHDetailVC: UICollectionViewDataSource {
     }
     
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AHPageCellID, for: indexPath) as! AHPageCell
         
         guard let pinVMs = pinVMs else {

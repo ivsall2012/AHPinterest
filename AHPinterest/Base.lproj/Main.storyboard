@@ -144,45 +144,6 @@
             </objects>
             <point key="canvasLocation" x="-593" y="868"/>
         </scene>
-        <!--DetailVC-->
-        <scene sceneID="uOb-ve-J2M">
-            <objects>
-                <viewController storyboardIdentifier="AHDetailVC" id="jQv-0d-pzv" customClass="AHDetailVC" customModule="AHPinterest" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="6wS-ea-2GV"/>
-                        <viewControllerLayoutGuide type="bottom" id="WWY-ep-Gwe"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="7yU-D8-67r">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4pF-nG-mhj">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <collectionViewLayout key="collectionViewLayout" id="sAF-as-MHf"/>
-                                <cells/>
-                                <connections>
-                                    <outlet property="dataSource" destination="jQv-0d-pzv" id="E98-mP-LfD"/>
-                                    <outlet property="delegate" destination="jQv-0d-pzv" id="gPo-Ss-Hns"/>
-                                </connections>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="4pF-nG-mhj" firstAttribute="leading" secondItem="7yU-D8-67r" secondAttribute="leading" id="ec2-QF-Pwx"/>
-                            <constraint firstItem="4pF-nG-mhj" firstAttribute="top" secondItem="7yU-D8-67r" secondAttribute="top" id="i3U-rm-PtQ"/>
-                            <constraint firstAttribute="bottom" secondItem="4pF-nG-mhj" secondAttribute="bottom" id="iad-B9-mSI"/>
-                            <constraint firstAttribute="trailing" secondItem="4pF-nG-mhj" secondAttribute="trailing" id="mlp-sh-20k"/>
-                        </constraints>
-                    </view>
-                    <nil key="simulatedStatusBarMetrics"/>
-                    <connections>
-                        <outlet property="collectionView" destination="4pF-nG-mhj" id="A4P-G9-LSt"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zXR-wX-v9z" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="725.60000000000002" y="33.733133433283363"/>
-        </scene>
     </scenes>
     <resources>
         <image name="logo-selected" width="68" height="51"/>
