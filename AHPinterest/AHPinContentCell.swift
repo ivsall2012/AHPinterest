@@ -50,7 +50,7 @@ class AHPinContentCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.layer.shouldRasterize = true
+//        self.layer.shouldRasterize = true
         self.contentView.layer.cornerRadius = 10
         self.contentView.layer.masksToBounds = true
     }

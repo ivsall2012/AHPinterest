@@ -20,7 +20,7 @@ class AHPinCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.layer.shouldRasterize = true
+//        self.layer.shouldRasterize = true
         self.contentView.backgroundColor = UIColor.orange
         self.contentView.layer.cornerRadius = 10
         self.contentView.layer.masksToBounds = true
