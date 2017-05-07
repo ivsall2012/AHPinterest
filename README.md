@@ -10,7 +10,7 @@ I use a random data generator for random size pictures because I want more contr
 In this article, all “layouts” are referred to UICollectionViewLayout or its subclass, NOT AutoLayout! 
 
 ### Demo
-The link below is a 2-minute demo of the project. The video was recorded in MOV format but when I uploaded to Youtube. Its video quality was significantly damaged. The app is actually quite smooth. You can download the zip file and do a build-and-run if you wanna feel about it.
+The link below is a 2-minute demo of the project. The video was recorded in MOV format but when I uploaded to Youtube. Its video quality was significantly damaged. I'll learn the whole web development soon.The app is actually quite smooth. You can download the zip file and do a build-and-run if you wanna feel about it.
 
 [Youtube Demo](https://youtu.be/CXQuMl_qBdI)
 ### Further Optimization
