@@ -12,7 +12,7 @@ In this article, all “layouts” are referred to UICollectionViewLayout or its
 ### Demo
 The link below is a 2-minute demo of the project. The video was recorded in MOV format but when I uploaded to Youtube. Its video quality was significantly damaged. I'll learn the whole web development soon.The app is actually quite smooth. You can download the zip file and do a build-and-run if you wanna feel about it.
 
-[Youtube Demo](https://youtu.be/CXQuMl_qBdI)
+[Youtube Demo](https://youtu.be/CXQuMl_qBdI) (2 minutes)
 ### Further Optimization
 I found there’s a little bit frame dropped when first load a AHDetailVC(after selecting a pin cell) then immediately scroll. 
 1. A more sophisticated networking tool and image rendering method are needed. I saw some developers literally draw their cell on a graphics image context asynchronously in order to reduce layers in the cell and loading speed, which is awesome. 
