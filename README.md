@@ -18,10 +18,14 @@ I found there’s a little bit frame dropped when first load a AHDetailVC(after 
 1. A more sophisticated networking tool and image rendering method are needed. I saw some developers literally draw their cell on a graphics image context asynchronously in order to reduce layers in the cell and loading speed, which is awesome. 
 2. Pinterest uses Texture(or AsyncDisplayKit) to render graphics.  I will dig into this monster framework later.
 3. Make all methods and properties have more specific access control in order to get the most out of the Whole Module Optimization under Swift
-4. Use Realm or Firebase for Discover search feature. But I think I did a good job to demonstrate Pinterest beautiful design and I should stop from here.
+4. Use Realm or Firebase for Discover search feature. But I think I did a good job demonstrating Pinterest beautiful design and I should stop from here.
 
 ### Final Words
-I give myself a B+ for this project because it doesn’t support media which could a bit challenge for performance and I cheated a little bit by caching images with the same sizes(I didn’t wanna get throttled by placeholder sites). And I like my layout router idea — one collectionView has multiple different layouts. If you have a more simple solution, let me know. I’ll buy you a lunch ;)
+I give myself a B+ for this project because it doesn’t support media which could a bit trickier for performance and I cheated a little bit by caching the same sizes' images (I didn’t wanna get throttled by placeholder sites) -- this makes the networking less busy. And in real app, most images are different and have to be downloaded first. 
+
+And I like my layout router idea — one collectionView has multiple different layouts. Each custom layout has its own section. And in each section, regular cell attributes, supplement attributes as well as decoration attributes are all relative to their custom layout. You can always start layout attributes from point(0,0) and the layoutRouter will normalized all those attributes later. This means each custom layout is relatively independent and plugabble. 
+
+If you have a more simple solution than this router one, let me know. I’ll buy you a lunch ;)
 
 ### Some Important Class Descriptions
 #### 1. Most important components for the Home view controller(AHPinVC):
