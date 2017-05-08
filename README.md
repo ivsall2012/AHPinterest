@@ -38,7 +38,7 @@ AHDetailVC: A page view controller acting as a detail pin gallery, written with 
 
 AHPinContentVC: A subclass of AHPinVC. It lives within a AHPageCell. It’s added a AHPinContentLayout before the inherited water fall layout, to show the large image of the pin cell which was selected then pushed from AHPinVC. The VC also has a drag-to-dismiss transition animation along with the long press popup animation.
 
-##### 2. Most important components for the Discover view controller:
+#### 2. Most important components for the Discover view controller:
 AHDiscoverVC: It’s also a page VC written in collectionView like AHDetailVC. And it has a category navBar and a AHDiscoverCategoryVC.
 AHDiscoverCategoryVC: A subclass of AHPinVC, added a flowLayout-liked layout before the water fall layout.
 
