@@ -1,16 +1,14 @@
-# AHPinterest
+### Demo
+[Demo](https://youtu.be/CXQuMl_qBdI) (2 minutes)
+The app is actually smoother than shown in the video. Download the zip file and do a build-and-run if you want:)
 
 ### Purpose
 This project copies Pinterest's Home and Discover modules, without any third-party library just for the purpose of practicing my iOS fundamentals. 
 
 I use a random data generator for random size pictures because I want more controls of the data and simplicity.
 
-In this article, all “layouts” are referred to UICollectionViewLayout or its subclass, NOT AutoLayout! 
+The "layout" I mentioned below is referred to UICollectionViewLayout or its subclass, not the "AutoLayout" haha.
 
-### Demo
-The link below is a 2-minute demo of the project. The video was recorded in MOV format but when I uploaded to Youtube. Its video quality was significantly damaged. I'll learn the whole web development soon.The app is actually quite smooth. You can download the zip file and do a build-and-run if you wanna feel about it.
-
-[Demo](https://youtu.be/CXQuMl_qBdI) (2 minutes)
 ### Further Optimization
 I found there’s a little bit frame dropped when first load a AHDetailVC(after selecting a pin cell) then immediately scroll. 
 
