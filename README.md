@@ -1,6 +1,9 @@
+![alt text](https://github.com/ivsall2012/AHPinterest/blob/master/AHPinterset.png)
+
+
 ### Demo
 [Demo](https://youtu.be/CXQuMl_qBdI) (2 minutes)
-The app is actually smoother than shown in the video. Download the zip file and do a build-and-run if you want:)
+The app is actually smoother than shown in the video. Download the zip file and do a build-and-run on real device. The simulator could get laggy sometimes.
 
 ### Purpose
 This project copies Pinterest's Home and Discover modules, without any third-party library just for the purpose of practicing my iOS fundamentals. 
