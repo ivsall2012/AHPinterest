@@ -15,7 +15,7 @@ The "layout" I mentioned below is referred to UICollectionViewLayout or its subc
 ### Further Optimization
 I found there’s a little bit frame dropped when first load a AHDetailVC(after selecting a pin cell) then immediately scroll. 
 
-1. A more sophisticated networking tool and an image rendering method are needed. I saw some developers literally draw their cell's content on a graphics image context asynchronously in order to reduce layers in the cell and loading speed, which is awesome. 
+1. A more sophisticated networking tool and an image rendering method are needed. I saw some developers literally draw their cell's content on a graphics image context asynchronously in order to reduce layers in the cell and increase rendering speed, which is awesome. 
 
 2. Pinterest uses Texture(or AsyncDisplayKit) to render graphics.  I will dig into this monster framework later.
 
@@ -43,7 +43,8 @@ AHPinContentVC: A subclass of AHPinVC. It lives within a AHPageCell. It’s adde
 
 #### 2. Most important components for the Discover view controller:
 AHDiscoverVC: It’s also a page VC written in collectionView like AHDetailVC. And it has a category navBar and a AHDiscoverCategoryVC.
-AHDiscoverCategoryVC: A subclass of AHPinVC, added a flowLayout-liked layout before the water fall layout.
+
+AHDiscoverCategoryVC: A subclass of AHPinVC, added a native UICollectionViewFlowLayout-liked layout before the water fall layout.
 
 
 
