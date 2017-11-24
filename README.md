@@ -2,7 +2,9 @@
 
 
 ### Demo
-[Demo](https://youtu.be/CXQuMl_qBdI) (2 minutes)
+YouTube: [Demo](https://youtu.be/CXQuMl_qBdI) (2 minutes)  
+优酷：http://v.youku.com/v_show/id_XMzE3OTc5NDY2MA==.html?spm=a2h3j.8428770.3416059.1   
+
 The app is actually smoother than shown in the video. Download the zip file and do a build-and-run on real device. The simulator could get laggy sometimes.
 
 ### Purpose
